@@ -17,6 +17,8 @@ async function hentData() {
         .from("Tjenestefolk")
         .select("*")
         .limit(10);
+console.log(data);
+console.log(error);
 
     if (error) {
         console.error(error);
