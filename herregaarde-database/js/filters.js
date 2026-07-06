@@ -28,6 +28,7 @@ export async function loadFilters() {
         koen.data,
         "Alle"
     );
+    console.log("loadFilters kører");
 }
 
 // Hjælpefunktion
