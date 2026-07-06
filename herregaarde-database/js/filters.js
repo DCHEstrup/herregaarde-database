@@ -1,34 +1,33 @@
-
-import {
-    getHerregaarde,
-    getFolketaellinger,
-    getKoen
-} from "./supabase.js";
+import { getFilters } from "./supabase.js";
 
 
 export async function loadFilters() {
 
-    const herregaarde = await getHerregaarde();
-    const aar = await getFolketaellinger();
-    const koen = await getKoen();
+    const { data, error } = await getFilters();
+
+    if (error) {
+        console.error(error);
+        return;
+    }
 
     fillSelect(
         "herregaard",
-        herregaarde.data,
+        data.herregaarde,
         "Alle herregårde"
     );
 
     fillSelect(
         "aar",
-        aar.data,
+        data.aar,
         "Alle år"
     );
+
     fillSelect(
         "koen",
-        koen.data,
+        data.koen,
         "Alle"
     );
-    console.log("loadFilters kører");
+
 }
 
 // Hjælpefunktion
