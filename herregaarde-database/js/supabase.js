@@ -7,7 +7,7 @@ const supabase = window.supabase.createClient(
 );
 
 
-async function getPersonCount() {
+export async function getPersonCount() {
 
     const { count, error } = await supabase
         .from("Tjenestefolk")
