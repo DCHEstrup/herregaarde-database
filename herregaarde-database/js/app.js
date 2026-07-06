@@ -1,15 +1,20 @@
 import { getPersonCount } from "./supabase.js";
 import { loadFilters } from "./filters.js";
-document.addEventListener("DOMContentLoaded", async () => {
+import { performSearch } from "./search.js";
+import { renderTable } from "./table.js";
 
+document.addEventListener("DOMContentLoaded", async () => {
     const { count } = await getPersonCount();
-
     console.log(count);
-
 });
 
 document.addEventListener("DOMContentLoaded", async () => {
-
     await loadFilters();
-
+    document
+        .getElementById("searchBtn")
+        .addEventListener("click", async () => {
+            const result = await performSearch();
+            renderTable(result);
+        });
 });
+
