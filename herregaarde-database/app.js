@@ -8,23 +8,107 @@ const db = window.supabase.createClient(
 );
 
 document
-    .getElementById("test")
-    .addEventListener("click", hentData);
+    .getElementById("soeg")
+    .addEventListener("click", soeg);
 
-async function hentData() {
 
-    const { data, error } = await db
+async function hentHerregaarde(){
+
+    const { data } = await db
         .from("Tjenestefolk")
-        .select("*")
-        .limit(10);
-console.log(data);
-console.log(error);
+        .select("Herregård_Clean");
 
-    if (error) {
-        console.error(error);
+    const liste =
+        [...new Set(data.map(x => x.Herregård_Clean))]
+        .filter(Boolean)
+        .sort();
+
+    const select =
+        document.getElementById("herregaard");
+
+    liste.forEach(h => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = h;
+        option.textContent = h;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+async function hentAar(){
+
+    const { data } = await db
+        .from("Tjenestefolk")
+        .select("Folketælling_Clean");
+
+    const liste =
+        [...new Set(data.map(x => x.Folketælling_Clean))]
+        .sort();
+
+    const select =
+        document.getElementById("aar");
+
+    liste.forEach(a => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = a;
+        option.textContent = a;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+async function soeg(){
+
+    let query = db
+        .from("Tjenestefolk")
+        .select("*");
+
+    const herregaard =
+        document.getElementById("herregaard").value;
+
+    const aar =
+        document.getElementById("aar").value;
+
+    const koen =
+        document.getElementById("koen").value;
+
+    if(herregaard)
+        query = query.eq("Herregård_Clean", herregaard);
+
+    if(aar)
+        query = query.eq("Folketælling_Clean", aar);
+
+    if(koen)
+        query = query.eq("Køn", koen);
+
+    const { data, error } = await query.limit(100);
+
+    if(error){
+        console.log(error);
         return;
     }
 
-    document.getElementById("output").textContent =
-        JSON.stringify(data, null, 2);
+    document.getElementById("antal").textContent =
+        `${data.length} personer fundet`;
+
+    document.getElementById("output").innerHTML =
+        `<pre>${JSON.stringify(data,null,2)}</pre>`;
+
 }
+
+
+window.onload = async () => {
+    await hentHerregaarde();
+    await hentAar();
+};
