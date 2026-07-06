@@ -1,31 +1,319 @@
+/* ===========================
+   HERREGÅRDSDATABASEN
+   =========================== */
+:root {
+    --primary: #355c4a;
+    --primary-hover: #294638;
+    --surface: #ffffff;
+    --border: #d9d9d9;
+    --text: #2b2b2b;
+    --muted: #666666;
+    --radius: 10px;
+    --shadow: 0 2px 8px rgba(0,0,0,.08);
+    --spacing: 1rem;
+}
+
+/* ===========================
+   GENERELT
+   =========================== */
+
+*{
+    box-sizing:border-box;
+}
+
 body{
-    font-family:Arial,sans-serif;
-    margin:40px;
+    margin:0;
+    font-family:
+        "Segoe UI",
+        Tahoma,
+        Geneva,
+        Verdana,
+        sans-serif;
+    color:var(--text);
+    line-height:1.5;
+    background:transparent;
 }
 
-.filters{
+/* ===========================
+   LAYOUT
+   =========================== */
+main{
+
+    max-width:1300px;
+    margin:auto;
+    padding:1rem;
+}
+
+header{
+
+    margin-bottom:2rem;
+}
+
+header h1{
+    margin:0;
+    font-size:2rem;
+    color:var(--primary);
+}
+
+header p{
+    margin-top:.3rem;
+    color:var(--muted);
+
+}
+
+/* ===========================
+   FILTERPANEL
+   =========================== */
+#filters{
     display:grid;
-    grid-template-columns:180px 250px;
-    gap:12px;
-    max-width:500px;
-    margin-bottom:30px;
+    grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+    gap:1rem;
+    padding:1.5rem;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    background:var(--surface);
+    box-shadow:var(--shadow);
+    margin-bottom:2rem;
+}
+#filters label{
+    display:flex;
+    flex-direction:column;
+    font-weight:600;
+    gap:.5rem;
 }
 
-select,
-button{
-    padding:8px;
+
+#filters select{
+    padding:.7rem;
+    border-radius:8px;
+    border:1px solid var(--border);
+    font-size:1rem;
 }
+
+
+#filters select:focus{
+    outline:none;
+    border-color:var(--primary);
+}
+
+
+/* ===========================
+   KNAPPER
+   =========================== */
+
+button{
+    cursor:pointer;
+    border:none;
+    border-radius:8px;
+    padding:.8rem 1.2rem;
+    background:var(--primary);
+    color:white;
+    font-size:1rem;
+    font-weight:600;
+    transition:.2s;
+}
+
+
+button:hover{
+  background:var(--primary-hover);
+}
+
+
+#searchBtn{
+    align-self:end;
+    height:44px;
+}
+
+
+#downloadBtn{
+    margin-top:1rem;
+}
+
+
+/* ===========================
+   RESULTATBOKS
+   =========================== */
+
+#results{
+    margin-top:2rem;
+}
+
+
+#resultCount{
+    font-weight:bold;
+    margin-bottom:1rem;
+}
+
+
+/* ===========================
+   TABEL
+   =========================== */
 
 table{
-    border-collapse:collapse;
     width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow);
 }
 
-th,td{
-    border:1px solid #ddd;
-    padding:6px;
+
+thead{
+    background:var(--primary);
+    color:white;
 }
+
 
 th{
-    background:#efefef;
+    padding:14px;
+    text-align:left;
+}
+
+
+td{
+    padding:12px;
+    border-bottom:1px solid #eeeeee;
+}
+
+
+tbody tr{
+    transition:.15s;
+}
+
+
+tbody tr:hover{
+    background:#f6f9f7;
+    cursor:pointer;
+}
+
+
+/* ===========================
+   DETALJEPANEL
+   =========================== */
+
+.person-details{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:1.5rem;
+    margin-top:1rem;
+    box-shadow:var(--shadow);
+}
+
+
+.person-details h2{
+    margin-top:0;
+    color:var(--primary);
+}
+
+
+.person-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(280px,1fr));
+    gap:.75rem 2rem;
+}
+
+
+.person-field{
+    display:flex;
+    flex-direction:column;
+}
+
+.person-field strong{
+    color:var(--primary);
+    font-size:.9rem;
+}
+
+
+/* ===========================
+   PAGINATION
+   =========================== */
+
+#pagination{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:.5rem;
+
+    margin-top:2rem;
+
+    flex-wrap:wrap;
+
+}
+
+
+.page-button{
+    background:white;
+    color:var(--primary);
+    border:1px solid var(--border);
+}
+
+
+.page-button.active{
+    background:var(--primary);
+    color:white;
+}
+
+
+.page-button:hover{
+    background:var(--primary);
+    color:white;
+}
+
+
+/* ===========================
+   DOWNLOAD
+   =========================== */
+
+.download-container{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:1rem;
+}
+
+
+/* ===========================
+   LOADING
+   =========================== */
+
+.loading{
+    text-align:center;
+    padding:2rem;
+    color:var(--muted);
+}
+
+
+/* ===========================
+   FEJLMEDDELELSER
+   =========================== */
+
+.error{
+    color:#a30000;
+    font-weight:bold;
+}
+
+
+/* ===========================
+   RESPONSIV
+   =========================== */
+
+@media (max-width:900px){
+
+    #filters{
+        grid-template-columns:1fr;
+    }
+
+    #searchBtn{
+        width:100%;
+    }
+
+    table{
+        font-size:.9rem;
+    }
+
 }
