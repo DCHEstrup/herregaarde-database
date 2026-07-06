@@ -5,3 +5,17 @@ const supabase = window.supabase.createClient(
     supabaseUrl,
     supabaseKey
 );
+
+
+async function getPersonCount() {
+
+    const { count, error } = await supabase
+        .from("Tjenestefolk")
+        .select("*", {
+            count: "exact",
+            head: true
+        });
+
+    return { count, error };
+
+}
