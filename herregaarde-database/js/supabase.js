@@ -21,52 +21,10 @@ export async function getPersonCount() {
 }
 
 
-export async function getHerregaarde() {
+export async function getFilters() {
 
-    const { data, error } = await supabase
-        .from("Tjenestefolk")
-        .select("Herregård_Clean")
-        .not("Herregård_Clean", "is", null);
+    const { data, error } = await supabase.rpc("get_filters");
 
-    if (error) return { data: [], error };
+    return { data, error };
 
-    const values = [...new Set(
-        data.map(row => row["Herregård_Clean"])
-    )].sort();
-
-    return { data: values, error: null };
-}
-
-
-export async function getFolketaellinger() {
-
-    const { data, error } = await supabase
-        .from("Tjenestefolk")
-        .select("Folketælling_Clean")
-        .not("Folketælling_Clean", "is", null);
-
-    if (error) return { data: [], error };
-
-    const values = [...new Set(
-        data.map(row => row["Folketælling_Clean"])
-    )].sort((a,b) => a-b);
-
-    return { data: values, error: null };
-}
-
-
-export async function getKoen() {
-
-    const { data, error } = await supabase
-        .from("Tjenestefolk")
-        .select("Køn_K.M")
-        .not("Køn_K.M", "is", null);
-
-    if (error) return { data: [], error };
-
-    const values = [...new Set(
-        data.map(row => row["Køn_K.M"])
-    )].sort();
-
-    return { data: values, error: null };
 }
