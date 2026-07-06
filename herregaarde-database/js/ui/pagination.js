@@ -1,1 +1,2 @@
-
+export function renderPagination(result){
+}
