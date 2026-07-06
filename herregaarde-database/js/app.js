@@ -5,7 +5,6 @@ import { renderTable } from "./table.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
     const { count } = await getPersonCount();
-    console.log(count);
 });
 
 document.addEventListener("DOMContentLoaded", async () => {
