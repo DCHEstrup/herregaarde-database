@@ -5,6 +5,7 @@ import {
     getKoen
 } from "./supabase.js";
 
+
 export async function loadFilters() {
 
     const herregaarde = await getHerregaarde();
@@ -22,11 +23,25 @@ export async function loadFilters() {
         aar.data,
         "Alle år"
     );
-
     fillSelect(
         "koen",
         koen.data,
         "Alle"
     );
+}
 
+// Hjælpefunktion
+function fillSelect(id, values, firstText) {
+    const select = document.getElementById(id);
+    select.innerHTML = "";
+    const firstOption = document.createElement("option");
+    firstOption.value = "";
+    firstOption.textContent = firstText;
+    select.appendChild(firstOption);
+    values.forEach(value => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
+    });
 }
