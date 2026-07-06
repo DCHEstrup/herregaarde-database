@@ -1,7 +1,7 @@
 import { getPersonCount } from "./supabase.js";
 import { loadFilters } from "./filters.js";
 import { performSearch } from "./search.js";
-import { renderTable } from "./table.js";
+import { renderTable } from "./ui/table.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
     const { count } = await getPersonCount();
