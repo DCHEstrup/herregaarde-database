@@ -2,46 +2,45 @@
 <html lang="da">
 <head>
     <meta charset="UTF-8">
-    <title>Herregårdsdatabase</title>
+    <title>Herregårdsdatabasen</title>
 
     <link rel="stylesheet" href="style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="js/supabase.js" defer></script>
+    <script src="js/filters.js" defer></script>
+    <script src="js/search.js" defer></script>
+    <script src="js/table.js" defer></script>
+    <script src="js/details.js" defer></script>
+    <script src="js/pagination.js" defer></script>
+    <script src="js/csv.js" defer></script>
+    <script src="js/app.js" defer></script>
+
 </head>
 <body>
 
-<h1>Herregårdsdatabase</h1>
+<header>
 
-<div class="filters">
+<h1>Herregårdsdatabasen</h1>
 
-    <label for="herregaard">Herregård</label>
-    <select id="herregaard">
-        <option value="">Alle herregårde</option>
-    </select>
+</header>
 
-    <label for="aar">Folketællingsår</label>
-    <select id="aar">
-        <option value="">Alle år</option>
-    </select>
+<main>
 
-    <label for="koen">Køn</label>
-    <select id="koen">
-        <option value="">Alle</option>
-        <option value="M">Mand</option>
-        <option value="K">Kvinde</option>
-    </select>
+<section id="filters">
 
-    <button id="soeg">
-        Søg
-    </button>
+</section>
 
-</div>
+<section id="results">
 
-<div id="antal"></div>
+</section>
 
-<div id="output"></div>
+<section id="pagination">
 
-    <script src="app.js"></script>
+</section>
 
-    </body>
+</main>
+
+</body>
 </html>
