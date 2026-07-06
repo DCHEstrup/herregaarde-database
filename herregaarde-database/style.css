@@ -20,300 +20,74 @@
 *{
     box-sizing:border-box;
 }
-
 body{
     margin:0;
-    font-family:
-        "Segoe UI",
-        Tahoma,
-        Geneva,
-        Verdana,
-        sans-serif;
-    color:var(--text);
-    line-height:1.5;
-    background:transparent;
+    font-family:Arial, Helvetica, sans-serif;
 }
-
-/* ===========================
-   LAYOUT
-   =========================== */
-main{
-
-    max-width:1300px;
+.app{
+    max-width:1600px;
     margin:auto;
-    padding:1rem;
-}
-
-header{
-
-    margin-bottom:2rem;
-}
-
-header h1{
-    margin:0;
-    font-size:2rem;
-    color:var(--primary);
-}
-
-header p{
-    margin-top:.3rem;
-    color:var(--muted);
-
-}
-
-/* ===========================
-   FILTERPANEL
-   =========================== */
-#filters{
     display:grid;
-    grid-template-columns:
-        repeat(auto-fit,minmax(220px,1fr));
-    gap:1rem;
-    padding:1.5rem;
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    background:var(--surface);
-    box-shadow:var(--shadow);
-    margin-bottom:2rem;
+    grid-template-rows:
+        auto
+        auto
+        1fr
+        auto;
+    gap:20px;
+    padding:20px;
+    min-height:100vh;
 }
-#filters label{
+.search-panel{
     display:flex;
     flex-direction:column;
-    font-weight:600;
-    gap:.5rem;
+    gap:20px;
 }
-
-
-#filters select{
-    padding:.7rem;
-    border-radius:8px;
-    border:1px solid var(--border);
-    font-size:1rem;
-}
-
-
-#filters select:focus{
-    outline:none;
-    border-color:var(--primary);
-}
-
-
-/* ===========================
-   KNAPPER
-   =========================== */
-
-button{
-    cursor:pointer;
-    border:none;
-    border-radius:8px;
-    padding:.8rem 1.2rem;
-    background:var(--primary);
-    color:white;
-    font-size:1rem;
-    font-weight:600;
-    transition:.2s;
-}
-
-
-button:hover{
-  background:var(--primary-hover);
-}
-
-
-#searchBtn{
-    align-self:end;
-    height:44px;
-}
-
-
-#downloadBtn{
-    margin-top:1rem;
-}
-
-
-/* ===========================
-   RESULTATBOKS
-   =========================== */
-
-#results{
-    margin-top:2rem;
-}
-
-
-#resultCount{
-    font-weight:bold;
-    margin-bottom:1rem;
-}
-
-
-/* ===========================
-   TABEL
-   =========================== */
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-    border-radius:var(--radius);
-    overflow:hidden;
-    box-shadow:var(--shadow);
-}
-
-
-thead{
-    background:var(--primary);
-    color:white;
-}
-
-
-th{
-    padding:14px;
-    text-align:left;
-}
-
-
-td{
-    padding:12px;
-    border-bottom:1px solid #eeeeee;
-}
-
-
-tbody tr{
-    transition:.15s;
-}
-
-
-tbody tr:hover{
-    background:#f6f9f7;
-    cursor:pointer;
-}
-
-
-/* ===========================
-   DETALJEPANEL
-   =========================== */
-
-.person-details{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:1.5rem;
-    margin-top:1rem;
-    box-shadow:var(--shadow);
-}
-
-
-.person-details h2{
-    margin-top:0;
-    color:var(--primary);
-}
-
-
-.person-grid{
-    display:grid;
-    grid-template-columns:
-        repeat(auto-fit,minmax(280px,1fr));
-    gap:.75rem 2rem;
-}
-
-
-.person-field{
+.filters{
     display:flex;
-    flex-direction:column;
-}
-
-.person-field strong{
-    color:var(--primary);
-    font-size:.9rem;
-}
-
-
-/* ===========================
-   PAGINATION
-   =========================== */
-
-#pagination{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:.5rem;
-
-    margin-top:2rem;
-
+    gap:15px;
     flex-wrap:wrap;
-
 }
-
-
-.page-button{
-    background:white;
-    color:var(--primary);
-    border:1px solid var(--border);
+.filters select{
+    min-width:220px;
+    padding:10px;
 }
-
-
-.page-button.active{
-    background:var(--primary);
-    color:white;
+.filters button{
+    padding:10px 30px;
+    cursor:pointer;
 }
-
-
-.page-button:hover{
-    background:var(--primary);
-    color:white;
-}
-
-
-/* ===========================
-   DOWNLOAD
-   =========================== */
-
-.download-container{
+.status-panel{
     display:flex;
-    justify-content:flex-end;
-    margin-top:1rem;
+    justify-content:space-between;
+    align-items:center;
 }
-
-
-/* ===========================
-   LOADING
-   =========================== */
-
-.loading{
+.content{
+    display:grid;
+    grid-template-columns:
+        40%
+        60%;
+    gap:20px;
+    min-height:600px;
+}
+#results{
+    border:1px solid #ddd;
+    overflow-y:auto;
+}
+#detail{
+    border:1px solid #ddd;
+    padding:20px;
+}
+.placeholder{
+    padding:40px;
     text-align:center;
-    padding:2rem;
-    color:var(--muted);
+    color:#777;
 }
-
-
-/* ===========================
-   FEJLMEDDELELSER
-   =========================== */
-
-.error{
-    color:#a30000;
-    font-weight:bold;
+#pagination{
+    display:flex;
+    justify-content:center;
+    gap:10px;
 }
-
-
-/* ===========================
-   RESPONSIV
-   =========================== */
-
-@media (max-width:900px){
-
-    #filters{
-        grid-template-columns:1fr;
-    }
-
-    #searchBtn{
-        width:100%;
-    }
-
-    table{
-        font-size:.9rem;
-    }
-
+@media(max-width:900px){
+.content{
+grid-template-columns:1fr;
+}
 }
