@@ -10,13 +10,36 @@
 </head>
 <body>
 
-    <h1>Herregårdsdatabase</h1>
+<h1>Herregårdsdatabase</h1>
 
-    <button id="test">
-        Hent 10 personer
+<div class="filters">
+
+    <label for="herregaard">Herregård</label>
+    <select id="herregaard">
+        <option value="">Alle herregårde</option>
+    </select>
+
+    <label for="aar">Folketællingsår</label>
+    <select id="aar">
+        <option value="">Alle år</option>
+    </select>
+
+    <label for="koen">Køn</label>
+    <select id="koen">
+        <option value="">Alle</option>
+        <option value="M">Mand</option>
+        <option value="K">Kvinde</option>
+    </select>
+
+    <button id="soeg">
+        Søg
     </button>
-    
-    <pre id="output"></pre>
+
+</div>
+
+<div id="antal"></div>
+
+<div id="output"></div>
 
     <script src="app.js"></script>
 
