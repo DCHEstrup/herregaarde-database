@@ -1,4 +1,31 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 2rem;
+body{
+    font-family:Arial,sans-serif;
+    margin:40px;
+}
+
+.filters{
+    display:grid;
+    grid-template-columns:180px 250px;
+    gap:12px;
+    max-width:500px;
+    margin-bottom:30px;
+}
+
+select,
+button{
+    padding:8px;
+}
+
+table{
+    border-collapse:collapse;
+    width:100%;
+}
+
+th,td{
+    border:1px solid #ddd;
+    padding:6px;
+}
+
+th{
+    background:#efefef;
 }
