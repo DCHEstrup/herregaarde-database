@@ -1,1 +1,2 @@
-
+export function showDetail(person){
+}
