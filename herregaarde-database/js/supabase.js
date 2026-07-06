@@ -28,3 +28,22 @@ export async function getFilters() {
     return { data, error };
 
 }
+
+
+export async function searchPeople(filters) {
+
+    return await supabase.rpc("search_people", {
+
+        p_herregaard: filters.herregaard || null,
+
+        p_aar: filters.aar || null,
+
+        p_koen: filters.koen || null,
+
+        p_page: filters.page,
+
+        p_page_size: filters.pageSize
+
+    });
+
+}
