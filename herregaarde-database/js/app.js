@@ -1,7 +1,9 @@
-document.addEventListener("DOMContentLoaded", () => {
+import { getPersonCount } from "./supabase.js";
 
-    console.log("App startet");
+document.addEventListener("DOMContentLoaded", async () => {
 
-    console.log(supabase);
+    const { count } = await getPersonCount();
+
+    console.log(count);
 
 });
