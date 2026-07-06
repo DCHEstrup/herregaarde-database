@@ -17,3 +17,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 });
 
+document
+    .getElementById("searchBtn")
+    .addEventListener("click", async () => {
+        const result = await performSearch();
+        if (!result) return;
+        renderTable(result);
+    });
+
