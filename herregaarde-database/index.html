@@ -12,50 +12,47 @@
 
 </head>
 <body>
-<header>
-<h1>Herregårdsdatabasen</h1>
-</header>
-<main>
-<section id="filters">
-    <label>
-        Herregård
-        <select id="herregaard">
-            <option value="">
-                Alle herregårde
-            </option>
-        </select>
-    </label>
-    <label>
-        Folketælling
-        <select id="aar">
-            <option value="">
-                Alle år
-            </option>
-        </select>
-    </label>
-    <label>
-        Køn
-        <select id="koen">
-            <option value="">
-                Alle
-            </option>
-        </select>
-    </label>
-    <button id="searchBtn">
-        Søg
-    </button>
-</section>
-<section id="resultsSection">
-    <div id="resultsHeader">
-        <div id="resultCount"></div>
+<main class="app">
+    <header class="search-panel">
+        <h1>Herregårdsdatabase</h1>
+        <div class="filters">
+            <select id="herregaard">
+                <option value="">Alle herregårde</option>
+            </select>
+            <select id="aar">
+                <option value="">Alle folketællinger</option>
+            </select>
+            <select id="koen">
+                <option value="">Alle køn</option>
+            </select>
+            <button id="searchBtn">
+                Søg
+            </button>
+        </div>
+    </header>
+    <section class="status-panel">
+        <div id="resultCount">
+            Vælg filtre og tryk "Søg"
+        </div>
         <button id="downloadBtn" disabled>
             Download CSV
         </button>
-    </div>
-    <div id="results"></div>
-    <div id="pagination"></div>
-</section>
+    </section>
+    <section class="content">
+        <aside id="results">
+            <div class="placeholder">
+                Ingen søgeresultater endnu
+            </div>
+        </aside>
+        <section id="detail">
+            <div class="placeholder">
+                Klik på en person for at se alle oplysninger
+            </div>
+        </section>
+    </section>
+    <footer id="pagination">
+    </footer>
 </main>
-
+<script type="module" src="js/app.js"></script>
 </body>
 </html>
