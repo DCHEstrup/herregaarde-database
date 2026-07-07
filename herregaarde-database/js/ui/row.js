@@ -7,7 +7,7 @@ export function createRow(person) {
         <strong>${person.navn}</strong><br>
         ${person.herregaard}
         ·
-        ${person.aar}
+        ${person.folketaelling_aar}
         ·
         ${person.alder ?? "-"} år
         ·
