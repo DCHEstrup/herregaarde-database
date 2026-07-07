@@ -85,11 +85,44 @@ body{
     border:1px solid #ddd;
     padding:20px;
 }
+#detail h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.detail-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.detail-table th {
+    width: 220px;
+    text-align: left;
+    vertical-align: top;
+    padding: .6rem;
+    background: #f7f7f7;
+    font-weight: 600;
+}
+
+.detail-table td {
+    padding: .6rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.detail-table tr:last-child td,
+.detail-table tr:last-child th {
+    border-bottom: none;
+}
+
+
+
 .placeholder{
     padding:40px;
     text-align:center;
     color:#777;
 }
+
+
 #pagination{
     display:flex;
     justify-content:center;
