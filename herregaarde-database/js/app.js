@@ -2,6 +2,8 @@ import { getStatistics  } from "./supabase.js";
 import { loadFilters } from "./filters.js";
 import { performSearch } from "./search.js";
 import { renderTable } from "./ui/table.js";
+import { downloadCSV } from "./download.js";
+import { getCurrentFilters } from "./filtersState.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
     const { data } = await getStatistics();
@@ -22,4 +24,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             renderTable(result);
         });
 });
+
+document
+    .getElementById("downloadBtn")
+    .addEventListener("click", () => {
+        downloadCSV(getCurrentFilters());
+    });
 
