@@ -9,24 +9,27 @@ export async function loadFilters() {
         console.error(error);
         return;
     }
+const filters = [
+    {
+        id: "herregaard",
+        values: data.herregaarde,
+        placeholder: "Alle herregårde"
+    },
+    {
+        id: "aar",
+        values: data.folketaellinger,
+        placeholder: "Alle år"
+    },
+    {
+        id: "koen",
+        values: data.koen,
+        placeholder: "Alle"
+    }
+];
 
-    fillSelect(
-        "herregaard",
-        data.herregaarde,
-        "Alle herregårde"
-    );
-
-    fillSelect(
-        "aar",
-        data.folketaellinger,
-        "Alle år"
-    );
-
-    fillSelect(
-        "koen",
-        data.koen,
-        "Alle"
-    );
+filters.forEach(filter =>
+    fillSelect(filter.id, filter.values, filter.placeholder)
+);
 
 }
 
