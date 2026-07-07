@@ -36,11 +36,7 @@ export async function searchPeople(filters) {
 }
 
 export async function getPerson(id) {
-    const { data, error } = await supabase.rpc(
-        "get_person",
-        {
-            p_id: id
-        }
-    );
-    return { data, error };
+    return await supabase.rpc("get_person", {
+        p_id: id
+    });
 }
