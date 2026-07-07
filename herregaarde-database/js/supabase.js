@@ -21,8 +21,7 @@ export async function getPersonCount() {
 
 
 export async function getFilters() {
-    const { data, error } = await supabase.rpc("get_filters");
-    return { data, error };
+    return await supabase.rpc("get_filters");
 }
 
 
