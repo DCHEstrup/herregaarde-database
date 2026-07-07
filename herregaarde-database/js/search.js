@@ -9,7 +9,7 @@ export async function performSearch(page = 1) {
         koen:
             document.getElementById("koen").value || null,
         page,
-        pageSize: 25
+        pageSize: 8
     };
     const { data, error } = await searchPeople(filters);
     if (error) {
