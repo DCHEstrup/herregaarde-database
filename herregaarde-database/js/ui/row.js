@@ -1,3 +1,4 @@
+import { showDetail } from "./detail.js";
 export function createRow(person) {
     const row = document.createElement("div");
     row.className = "result-row";
@@ -14,9 +15,7 @@ export function createRow(person) {
         ${person.arbejde ?? ""}
     `;
     row.addEventListener("click", () => {
-        console.log(person.id);
-        // Senere:
-        // showDetail(person.id);
+        showDetail(person.id);
     });
     return row;
 }
