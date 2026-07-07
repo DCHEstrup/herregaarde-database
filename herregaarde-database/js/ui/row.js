@@ -12,7 +12,7 @@ export function createRow(person) {
         ${person.alder ?? "-"} år
         ·
         ${person.koen ?? "-"}
-        <br>
+        ·
         ${person.arbejde_titel  ?? ""}
     `;
 row.addEventListener("click", () => {
