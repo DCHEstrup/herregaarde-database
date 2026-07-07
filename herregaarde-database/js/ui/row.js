@@ -1,6 +1,7 @@
 import { showDetail } from "./detail.js";
 export function createRow(person) {
     const row = document.createElement("div");
+    row.dataset.id = person.id;
     row.className = "result-row";
     row.innerHTML = `
         <strong>${person.navn}</strong><br>
