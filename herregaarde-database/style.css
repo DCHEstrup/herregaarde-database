@@ -113,16 +113,33 @@ body{
 .detail-table tr:last-child th {
     border-bottom: none;
 }
-
-
-
 .placeholder{
     padding:40px;
     text-align:center;
     color:#777;
 }
+/* Resultatrækker */
 
-
+.result-row {
+    padding: 0.9rem;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color .15s ease;
+}
+.result-row:hover {
+    background: #f5f5f5;
+}
+.result-row.selected {
+    background: #e6f0ff;
+    border-left: 4px solid #2d6cdf;
+    padding-left: calc(0.9rem - 4px);
+}
+.result-row strong {
+    font-size: 1rem;
+}
+.result-row:last-child {
+    border-bottom: none;
+}
 #pagination{
     display:flex;
     justify-content:center;
