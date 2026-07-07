@@ -22,6 +22,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         .addEventListener("click", async () => {
             const result = await performSearch();
             renderTable(result);
+            renderPagination(result, async (page) => {
+
+    const result = await performSearch(page);
+
+    renderTable(result);
+
+    renderPagination(result, arguments.callee);
+
+});
+            
         });
 });
 
