@@ -8,42 +8,38 @@ export const supabase = window.supabase.createClient(
 
 
 export async function getPersonCount() {
-
     const { count, error } = await supabase
         .from("Tjenestefolk")
         .select("*", {
             count: "exact",
             head: true
         });
-
     return { count, error };
-
 }
 
 
 export async function getFilters() {
-
     const { data, error } = await supabase.rpc("get_filters");
-
     return { data, error };
-
 }
 
 
 export async function searchPeople(filters) {
-
     return await supabase.rpc("search_people", {
-
         p_herregaard: filters.herregaard || null,
-
         p_aar: filters.aar || null,
-
         p_koen: filters.koen || null,
-
         p_page: filters.page,
-
         p_page_size: filters.pageSize
-
     });
+}
 
+export async function getPerson(id) {
+    const { data, error } = await supabase.rpc(
+        "get_person",
+        {
+            p_id: id
+        }
+    );
+    return { data, error };
 }
