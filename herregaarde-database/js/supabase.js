@@ -5,7 +5,9 @@ export const supabase = window.supabase.createClient(
     supabaseUrl,
     supabaseKey
 );
-
+export async function getStatistics() {
+    return await supabase.rpc("get_statistics");
+}
 
 export async function getPersonCount() {
     const { count, error } = await supabase
