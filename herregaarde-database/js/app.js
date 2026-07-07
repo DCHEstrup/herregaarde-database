@@ -4,6 +4,7 @@ import { performSearch } from "./search.js";
 import { renderTable } from "./ui/table.js";
 import { downloadCSV } from "./download.js";
 import { getCurrentFilters } from "./filtersState.js";
+import { renderPagination } from "./ui/pagination.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
     const { data } = await getStatistics();
