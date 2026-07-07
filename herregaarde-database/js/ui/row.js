@@ -13,7 +13,7 @@ export function createRow(person) {
         ·
         ${person.koen ?? "-"}
         <br>
-        ${person.arbejde_titel  ?? ""}
+        ${person.arbejde  ?? ""}
     `;
 row.addEventListener("click", () => {
     // Fjern tidligere markering
