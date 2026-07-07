@@ -6,13 +6,13 @@ export function createRow(person) {
         <strong>${person.navn}</strong><br>
         ${person.herregaard}
         ·
-        ${person.aar}
+        ${person.folketaelling_aar}
         ·
         ${person.alder ?? "-"} år
         ·
         ${person.koen ?? "-"}
         <br>
-        ${person.arbejde ?? ""}
+        ${person.arbejde_titel  ?? ""}
     `;
     row.addEventListener("click", () => {
         showDetail(person.id);
