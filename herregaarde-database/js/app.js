@@ -4,7 +4,13 @@ import { performSearch } from "./search.js";
 import { renderTable } from "./ui/table.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const { count } = await getPersonCount();
+    const { data } = await getStatistics();
+document.getElementById("personCount").textContent =
+    data.persons.toLocaleString("da-DK");
+document.getElementById("estateCount").textContent =
+    data.estates.toLocaleString("da-DK");
+document.getElementById("censusCount").textContent =
+    data.censusYears;
 });
 
 document.addEventListener("DOMContentLoaded", async () => {
