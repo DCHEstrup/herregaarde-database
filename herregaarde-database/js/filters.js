@@ -18,7 +18,7 @@ export async function loadFilters() {
 
     fillSelect(
         "aar",
-        data.aar,
+        data.folketaellinger,
         "Alle år"
     );
 
