@@ -40,3 +40,24 @@ export async function getPerson(id) {
         p_id: id
     });
 }
+
+
+
+export async function downloadPeople(filters = {}) {
+
+    return await supabase.rpc("download_people", {
+        p_herregaard: filters.herregaard || null,
+        p_aar: filters.aar
+            ? Number(filters.aar)
+            : null,
+        p_koen: filters.koen || null,
+        p_region: filters.region || null,
+        p_kommune: filters.kommune || null,
+        p_arbejde_titel: filters.arbejde_titel || null,
+        p_position_i_husstanden:
+            filters.position_i_husstanden || null,
+        p_civilstand:
+            filters.civilstand || null
+    });
+
+}
