@@ -1,5 +1,5 @@
 import { createRow } from "./row.js";
-
+import { showDetail } from "./detail.js";
 export function renderTable(result) {
     const container = document.getElementById("results");
     const resultCount = document.getElementById("resultCount");
