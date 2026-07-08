@@ -118,6 +118,29 @@ body{
     text-align:center;
     color:#777;
 }
+/* Autosøgning */
+
+.autosuggest-list {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,.15);
+}
+
+.autosuggest-item {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.autosuggest-item:hover {
+    background: #f4f4f4;
+}
+
 /* Resultatrækker */
 
 .result-row {
