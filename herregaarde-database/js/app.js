@@ -6,6 +6,7 @@ import { downloadCSV } from "./download.js";
 import { getCurrentFilters } from "./filtersState.js";
 import { renderPagination } from "./ui/pagination.js";
 
+/*
 document.addEventListener("DOMContentLoaded", async () => {
     const { data } = await getStatistics();
 document.getElementById("personCount").textContent =
@@ -15,6 +16,7 @@ document.getElementById("estateCount").textContent =
 document.getElementById("censusCount").textContent =
     data.censusYears;
 });
+*/
 
 document.addEventListener("DOMContentLoaded", async () => {
 
