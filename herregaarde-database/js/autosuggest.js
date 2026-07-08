@@ -65,7 +65,6 @@ export function enableAutosuggest(inputId, fetchSuggestions) {
         list.style.display = "block";
     }
     function updateSelection(items) {
-        console.log("Valgt:", selectedIndex);
     items.forEach(item =>
         item.classList.remove("selected")
     );
