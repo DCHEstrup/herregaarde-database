@@ -19,11 +19,6 @@ const filters = [
         id: "aar",
         values: data.folketaellinger,
         placeholder: "Alle år"
-    },
-    {
-        id: "koen",
-        values: data.koen,
-        placeholder: "Alle"
     }
 ];
 
@@ -36,6 +31,7 @@ filters.forEach(filter =>
 // Hjælpefunktion
 function fillSelect(id, values, firstText) {
     const select = document.getElementById(id);
+    if (!select) return;
     select.innerHTML = "";
     const firstOption = document.createElement("option");
     firstOption.value = "";
@@ -47,4 +43,5 @@ function fillSelect(id, values, firstText) {
         option.textContent = value;
         select.appendChild(option);
     });
+
 }
