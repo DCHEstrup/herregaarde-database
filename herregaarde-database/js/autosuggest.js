@@ -16,6 +16,7 @@ export function enableAutosuggest(inputId, fetchSuggestions) {
     //--------------------------------------------------
 
     let timeout;
+    let selectedIndex =-1;
     input.addEventListener("input", () => {
         clearTimeout(timeout);
         timeout = setTimeout(async () => {
@@ -41,6 +42,7 @@ export function enableAutosuggest(inputId, fetchSuggestions) {
 
     function renderSuggestions(data) {
         list.innerHTML = "";
+        selectedIndex = -1;
         if (!data || data.length === 0) {
             list.style.display = "none";
             return;
@@ -62,7 +64,78 @@ export function enableAutosuggest(inputId, fetchSuggestions) {
         });
         list.style.display = "block";
     }
+    function updateSelection(items) {
+    items.forEach(item =>
+        item.classList.remove("selected")
+    );
+    if (selectedIndex >= 0) {
+        items[selectedIndex]
+            .classList.add("selected");
+        items[selectedIndex]
+            .scrollIntoView({
+                block: "nearest"
+            });
+    }
+}
 
+//--------------------------------------------------
+// Tastaturstyring
+//--------------------------------------------------
+
+input.addEventListener("keydown", (e) => {
+    const items =
+        list.querySelectorAll(".autosuggest-item");
+    if (items.length === 0) return;
+
+    //--------------------------------------
+    // Pil ned
+    //--------------------------------------
+
+    if (e.key === "ArrowDown") {
+        e.preventDefault();
+        selectedIndex =
+            Math.min(
+                selectedIndex + 1,
+                items.length - 1
+            );
+        updateSelection(items);
+    }
+
+    //--------------------------------------
+    // Pil op
+    //--------------------------------------
+
+    else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        selectedIndex =
+            Math.max(
+                selectedIndex - 1,
+                0
+            );
+        updateSelection(items);
+    }
+
+    //--------------------------------------
+    // Enter
+    //--------------------------------------
+
+    else if (e.key === "Enter") {
+        if (selectedIndex >= 0) {
+            e.preventDefault();
+            items[selectedIndex].click();
+        }
+    }
+
+    //--------------------------------------
+    // Escape
+    //--------------------------------------
+
+    else if (e.key === "Escape") {
+        list.style.display = "none";
+    }
+
+});
+    
     //--------------------------------------------------
     // Luk ved klik udenfor
     //--------------------------------------------------
