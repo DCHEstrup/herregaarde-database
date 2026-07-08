@@ -19,16 +19,14 @@ document.getElementById("censusCount").textContent =
     data.censusYears;
 });
 */
-await loadFilters();
-enableAutosuggest(
-    "arbejde",
-    getJobSuggestions
-);
-
 
 document.addEventListener("DOMContentLoaded", async () => {
 
     await loadFilters();
+      enableAutosuggest(
+        "arbejde",
+        getJobSuggestions
+    );
     async function loadPage(page = 1) {
         const result = await performSearch(page);
         if (!result) return;
