@@ -24,6 +24,11 @@ export async function getFilters() {
     return await supabase.rpc("get_filters");
 }
 
+export async function getJobSuggestions(query) {
+    return await supabase.rpc("get_job_suggestions", {
+        p_query: query
+    });
+}
 
 export async function searchPeople(filters) {
     return await supabase.rpc("search_people", {
