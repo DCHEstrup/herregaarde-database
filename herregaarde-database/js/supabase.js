@@ -28,8 +28,9 @@ export async function getFilters() {
 export async function searchPeople(filters) {
     return await supabase.rpc("search_people", {
         p_herregaard: filters.herregaard || null,
-        p_aar: filters.aar || null,
+        p_aar: filters.aar ? Number(filters.aar) : null,
         p_koen: filters.koen || null,
+        p_arbejde: filters.arbejde || null,
         p_page: filters.page,
         p_page_size: filters.pageSize
     });
@@ -53,9 +54,7 @@ export async function downloadPeople(filters = {}) {
         p_koen: filters.koen || null,
         p_region: filters.region || null,
         p_kommune: filters.kommune || null,
-        p_arbejde_titel: filters.arbejde_titel || null,
-        p_position_i_husstanden:
-            filters.position_i_husstanden || null,
+        p_arbejde: filters.arbejde || null,
         p_civilstand:
             filters.civilstand || null
     });
