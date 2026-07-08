@@ -7,7 +7,9 @@ export async function performSearch(page = 1) {
         aar:
             document.getElementById("aar").value || null,
         koen:
-            document.getElementById("koen").value || null,
+            document.getElementById("koen")?.value || null,
+        arbejde:
+            document.getElementById("arbejde").value || null,
         page,
         pageSize: 8
     };
