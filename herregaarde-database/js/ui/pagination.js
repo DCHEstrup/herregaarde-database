@@ -5,8 +5,9 @@ export function renderPagination(
     const container =
         document.getElementById("pagination");
     container.innerHTML = "";
-    const totalPages = Math.ceil(
-        result.total / result.page_size
+    const totalPages = Math.max(
+    1,
+    Math.ceil(result.total / result.page_size)
     );
     if (totalPages <= 1) return;
     const current = result.page;
