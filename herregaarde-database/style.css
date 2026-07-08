@@ -119,16 +119,18 @@ body{
     color:#777;
 }
 /* label */
+
 .input-container {
     position: relative;
-    width: 300px;
+    width: 100%;
+   max-width: 300px;
 }
 
 .input-container input {
     width: 100%;
     padding: 12px 10px;
     font-size: 16px;
-    border: 1px solid #777;
+    border: none;
     border-radius: 5px;
     outline: none;
 }
