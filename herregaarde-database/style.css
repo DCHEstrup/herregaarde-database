@@ -55,6 +55,27 @@ body{
     padding:10px 30px;
     cursor:pointer;
 }
+.filter-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.filter-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #355c4a;
+}
+.filter-group select,
+.filter-group input {
+    width: 240px;
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid #9b9b9b;
+    border-radius: 2px;
+    font-size: 16px;
+    background: white;
+}
 .status-panel{
     display:flex;
     justify-content:space-between;
@@ -118,35 +139,6 @@ body{
     text-align:center;
     color:#777;
 }
-/* label */
-
-.input-container {
-    position: relative;
-    width: 100%;
-   max-width: 300px;
-}
-
-.input-container input {
-    width: 100%;
-    min-width: 220px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #d9d9d9;
-    border-radius: 0;
-    outline: none;
-    background: white;
-}
-
-.input-container label {
-    position: absolute;
-    left: 10px;
-    top: -7px;
-    padding: 0 6px;
-    font-size: 14px;
-    color: #2b2b2b;
-    background: #F2F1F0;
-}
-
 
 /* Autosøgning */
 .autosuggest {
