@@ -6,9 +6,10 @@ export function enableAutosuggest(inputId, fetchSuggestions) {
     // Opret dropdown
     //--------------------------------------------------
 
-    const list = document.createElement("div");
-    list.className = "autosuggest-list";
-    input.parentNode.appendChild(list);
+   const list =
+    document.getElementById(
+        inputId + "Suggestions"
+    );
 
     //--------------------------------------------------
     // Debounce
