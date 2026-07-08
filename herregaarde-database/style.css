@@ -44,7 +44,8 @@ body{
 }
 .filters{
     display:flex;
-    gap:15px;
+    align-items:flex-end;
+    gap:18px;
     flex-wrap:wrap;
 }
 .filters select{
