@@ -5,6 +5,8 @@ import { renderTable } from "./ui/table.js";
 import { downloadCSV } from "./download.js";
 import { getCurrentFilters } from "./filtersState.js";
 import { renderPagination } from "./ui/pagination.js";
+import { enableAutosuggest } from "./autosuggest.js";
+import { getJobSuggestions } from "./supabase.js";
 
 /*
 document.addEventListener("DOMContentLoaded", async () => {
@@ -17,6 +19,12 @@ document.getElementById("censusCount").textContent =
     data.censusYears;
 });
 */
+await loadFilters();
+enableAutosuggest(
+    "arbejde",
+    getJobSuggestions
+);
+
 
 document.addEventListener("DOMContentLoaded", async () => {
 
