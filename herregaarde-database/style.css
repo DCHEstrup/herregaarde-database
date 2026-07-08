@@ -137,7 +137,6 @@ body{
     position: absolute;
     left: 10px;
     top: -8px;
-    background: white;
     padding: 0 5px;
     font-size: 14px;
     color: #555;
@@ -145,7 +144,9 @@ body{
 
 
 /* Autosøgning */
-
+.autosuggest {
+    position: relative;
+}
 .autosuggest-list {
     position: absolute;
     background: white;
