@@ -140,8 +140,8 @@ body{
 .input-container label {
     position: absolute;
     left: 10px;
-    top: -9px;
-    padding: 0 5px;
+    top: -7px;
+    padding: 0 6px;
     font-size: 14px;
     color: #2b2b2b;
     background: #F2F1F0;
