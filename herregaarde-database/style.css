@@ -128,11 +128,13 @@ body{
 
 .input-container input {
     width: 100%;
-    padding: 12px 10px;
+    min-width: 220px;
+    padding: 10px;
     font-size: 16px;
-    border: 1px solid #C7C7C7;
-    border-radius: 5px;
+    border: 1px solid #d9d9d9;
+    border-radius: 0;
     outline: none;
+    background: white;
 }
 
 .input-container label {
@@ -142,6 +144,7 @@ body{
     padding: 0 5px;
     font-size: 14px;
     color: #2b2b2b;
+    background: white;
 }
 
 
