@@ -17,23 +17,17 @@ document.getElementById("censusCount").textContent =
 });
 
 document.addEventListener("DOMContentLoaded", async () => {
+
     await loadFilters();
+    async function loadPage(page = 1) {
+        const result = await performSearch(page);
+        if (!result) return;
+        renderTable(result);
+        renderPagination(result, loadPage);
+    }
     document
         .getElementById("searchBtn")
-        .addEventListener("click", async () => {
-            const result = await performSearch();
-            renderTable(result);
-            renderPagination(result, async (page) => {
-
-    const result = await performSearch(page);
-
-    renderTable(result);
-
-    renderPagination(result, arguments.callee);
-
-});
-            
-        });
+        .addEventListener("click", () => loadPage(1));
 });
 
 document
