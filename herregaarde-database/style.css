@@ -77,6 +77,29 @@ body{
     font-size: 16px;
     background: white;
 }
+#searchBtn {
+    height: 42px;
+    min-width: 90px;
+    padding: 0 24px;
+    border: none;
+    border-radius: 2px;
+    background: var(--primary);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+#searchBtn:hover {
+    background: var(--primary-hover);
+}
+#searchBtn:active {
+    transform: translateY(1px);
+}
+#searchBtn:disabled {
+    background: #c7c7c7;
+    cursor: not-allowed;
+}
 .status-panel{
     display:flex;
     justify-content:space-between;
