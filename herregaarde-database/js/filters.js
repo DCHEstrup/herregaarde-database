@@ -1,5 +1,5 @@
 import { getFilters } from "./supabase.js";
-
+import { createMultiSelect } from "./ui/multiselectV2.js";
 
 export async function loadFilters() {
 
@@ -9,23 +9,26 @@ export async function loadFilters() {
         console.error(error);
         return;
     }
-const filters = [
-    {
-        id: "herregaard",
+
+    //----------------------------------
+    // Herregårde
+    //----------------------------------
+
+    createMultiSelect({
+        containerId: "herregaard",
         values: data.herregaarde,
         placeholder: "Alle herregårde"
-    },
-    {
-        id: "aar",
+    });
+
+    //----------------------------------
+    // Folketællinger
+    //----------------------------------
+
+    createMultiSelect({
+        containerId: "aar",
         values: data.folketaellinger,
         placeholder: "Alle år"
-    }
-];
-
-filters.forEach(filter =>
-    fillSelect(filter.id, filter.values, filter.placeholder)
-);
-
+    });
 }
 
 // Hjælpefunktion
