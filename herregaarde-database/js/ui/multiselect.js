@@ -26,7 +26,7 @@ export function createMultiSelect({
     const dropdown =
         document.createElement("div");
     dropdown.className = "multiselect-dropdown";
-    //------------------------------------
+//------------------------------------
 // Søgefelt
 //------------------------------------
 
@@ -35,6 +35,9 @@ const search =
 search.type = "text";
 search.placeholder = "Søg...";
 search.className = "multiselect-search";
+search.addEventListener("click", e => {
+e.stopPropagation();
+});
 dropdown.appendChild(search);
     const options = [];
     values.forEach(value => {
