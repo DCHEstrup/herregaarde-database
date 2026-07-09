@@ -316,6 +316,15 @@ body{
     outline: none;
     border-color: var(--primary);
 }
+.multiselect-select-all{
+    font-weight:600;
+    border-bottom:1px solid #ececec;
+    background:#fafafa;
+    position:sticky;
+    top:44px;
+    z-index:2;
+}
+
 
 @media(max-width:900px){
 .content{
