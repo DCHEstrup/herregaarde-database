@@ -128,6 +128,35 @@ function updateHeader() {
         `;
         return;
     }
+    header.querySelectorAll(".chip-remove")
+.forEach(button => {
+    button.addEventListener("click", e => {
+        e.stopPropagation();
+        const value =
+            button.dataset.value;
+        //----------------------------------
+        // Fjern fra selected
+        //----------------------------------
+        selected.delete(value);
+        //----------------------------------
+        // Fjern flueben
+        //----------------------------------
+        options.forEach(option => {
+            if (option.dataset.value === value) {
+                option.querySelector("input").checked = false;
+            }
+        });
+        //----------------------------------
+        // Opdater Vælg alle
+        //----------------------------------
+        selectAllCheckbox.checked =
+            selected.size === values.length;
+        //----------------------------------
+        // Opdater header
+        //----------------------------------
+        updateHeader();
+    });
+});
     const values =
         [...selected];
     //----------------------------------
@@ -137,11 +166,21 @@ function updateHeader() {
     values
         .slice(0, 2)
         .forEach(value => {
-            html += `
-                <span class="multiselect-chip">
-                    ${value}
-                </span>
-            `;
+           html += `
+    <span
+        class="multiselect-chip"
+        data-value="${value}"
+    >
+        ${value}
+        <button
+            class="chip-remove"
+            data-value="${value}"
+            type="button"
+        >
+            ×
+        </button>
+    </span>
+`;
         });
     //----------------------------------
     // Flere valgt
