@@ -302,7 +302,20 @@ body{
 .multiselect-header.open {
     border-color: var(--primary);
 }
+.multiselect-search {
+    width: calc(100% - 16px);
+    margin: 8px;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
 
+.multiselect-search:focus {
+    outline: none;
+    border-color: var(--primary);
+}
 
 @media(max-width:900px){
 .content{
