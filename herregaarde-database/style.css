@@ -263,11 +263,7 @@ body{
 .multiselect-header:hover {
     border-color: var(--primary);
 }
-.multiselect-header::after {
-    content: "▾";
-    color: var(--primary);
-    font-size: 14px;
-}
+
 .multiselect-dropdown {
     position: absolute;
     top: calc(100% + 4px);
