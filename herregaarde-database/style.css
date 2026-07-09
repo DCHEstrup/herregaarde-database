@@ -242,12 +242,33 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap:10px;
     background: white;
     border: 1px solid #bdbdbd;
     border-radius: 2px;
     cursor: pointer;
     user-select: none;
     transition: border-color .2s ease;
+}
+.multiselect-header-content{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    overflow:hidden;
+    flex:1;
+}
+.multiselect-chip{
+    background:#edf4ef;
+    color:var(--primary);
+    padding:3px 8px;
+    border-radius:12px;
+    font-size:13px;
+    white-space:nowrap;
+}
+.multiselect-more{
+    color:#666;
+    font-size:13px;
+    white-space:nowrap;
 }
 .multiselect-header:hover {
     border-color: var(--primary);
@@ -311,7 +332,6 @@ body{
     box-sizing: border-box;
     font-size: 14px;
 }
-
 .multiselect-search:focus {
     outline: none;
     border-color: var(--primary);
