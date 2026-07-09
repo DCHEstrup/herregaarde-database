@@ -39,11 +39,47 @@ search.addEventListener("click", e => {
 e.stopPropagation();
 });
 dropdown.appendChild(search);
+//------------------------------------
+// Vælg alle
+//------------------------------------
+
+const selectAll =
+    document.createElement("div");
+selectAll.className =
+    "multiselect-option multiselect-select-all";
+selectAll.innerHTML = `
+    <input type="checkbox">
+    <span>Vælg alle</span>
+`;
+dropdown.appendChild(selectAll);
     const options = [];
+    const selectAllCheckbox =
+    selectAll.querySelector("input");
     values.forEach(value => {
+        selectAll.addEventListener("click", () => {
+    const checked =
+        !selectAllCheckbox.checked;
+    selectAllCheckbox.checked =
+        checked;
+    options.forEach(option => {
+        const checkbox =
+            option.querySelector("input");
+        checkbox.checked = checked;
+        const value =
+            option.dataset.value;
+        if (checked) {
+            selected.add(value);
+        }
+        else {
+            selected.delete(value);
+        }
+    });
+    updateHeader();
+})
         const option =
             document.createElement("div");
         option.className = "multiselect-option";
+        option.dataset.value = value;
         option.innerHTML = `
             <input type="checkbox">
             <span>${value}</span>
@@ -59,6 +95,8 @@ dropdown.appendChild(search);
                 selected.delete(value);
             }
             updateHeader();
+            selectAllCheckbox.checked =
+    selected.size === values.length;
         });
         dropdown.appendChild(option);
         options.push(option);
