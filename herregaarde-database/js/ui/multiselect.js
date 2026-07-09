@@ -121,91 +121,38 @@ search.addEventListener("input", () => {
     // Header tekst
     //------------------------------------
 function updateHeader() {
-    if (selected.size === 0) {
+    const values = [...selected];
+
+    //----------------------------------
+    // Ingen valgt
+    //----------------------------------
+
+    if (values.length === 0) {
         header.innerHTML = `
             <span>${placeholder}</span>
-            <span>▾</span>
+            <span class="multiselect-arrow">▾</span>
         `;
         return;
     }
-    header.querySelectorAll(".chip-remove")
-.forEach(button => {
-    button.addEventListener("click", e => {
-        e.stopPropagation();
-        const value =
-            button.dataset.value;
-        //----------------------------------
-        // Fjern fra selected
-        //----------------------------------
-        selected.delete(value);
-        //----------------------------------
-        // Fjern flueben
-        //----------------------------------
-        options.forEach(option => {
-            if (option.dataset.value === value) {
-                option.querySelector("input").checked = false;
-            }
-        });
-        //----------------------------------
-        // Opdater Vælg alle
-        //----------------------------------
-        selectAllCheckbox.checked =
-            selected.size === values.length;
-        //----------------------------------
-        // Opdater header
-        //----------------------------------
-        updateHeader();
-    });
-});
-    const values =
-        [...selected];
     //----------------------------------
-    // Maks 2 chips
+    // Tekst der skal vises
     //----------------------------------
-    let html = "";
-    values
-        .slice(0, 2)
-        .forEach(value => {
-           html += `
-    <span
-        class="multiselect-chip"
-        data-value="${value}"
-    >
-        ${value}
-        <button
-            class="chip-remove"
-            data-value="${value}"
-            type="button"
-        >
-            ×
-        </button>
-    </span>
-`;
-        });
-    //----------------------------------
-    // Flere valgt
-    //----------------------------------
-
-    if (values.length > 2) {
-
-        html += `
-            <span class="multiselect-more">
-                +${values.length - 2}
-            </span>
-        `;
-
+    let text = "";
+    if (values.length <= 2) {
+        text = values.join(", ");
     }
-
+    else {
+        text =
+            `${values[0]}, ${values[1]} +${values.length - 2}`;
+    }
     header.innerHTML = `
-        <div class="multiselect-header-content">
-
-            ${html}
-
-        </div>
-
-        <span>▾</span>
+        <span class="multiselect-text">
+            ${text}
+        </span>
+        <span class="multiselect-arrow">
+            ▾
+        </span>
     `;
-
 }
     //------------------------------------
     // Åbn/Luk
