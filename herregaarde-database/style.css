@@ -68,7 +68,7 @@ body{
     color: #355c4a;
 }
 .filter-group select,
-.filter-group input {
+.filter-group input:not([type="checkbox"]) {
     width: 240px;
     height: 42px;
     padding: 0 12px;
