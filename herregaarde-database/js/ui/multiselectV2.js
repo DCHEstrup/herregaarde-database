@@ -146,3 +146,180 @@ class MultiSelect {
             }
         );
     }
+        //--------------------------------------------------
+    // Header
+    //--------------------------------------------------
+
+    createHeader() {
+
+        const header =
+            document.createElement("div");
+
+        header.className =
+            "multiselect-header";
+
+        header.innerHTML = `
+            <span class="multiselect-text">
+                ${this.placeholder}
+            </span>
+            
+            <span class="multiselect-arrow">
+                ▾
+            </span>
+        `;
+        return header;
+    }
+
+    //--------------------------------------------------
+    // Søgefelt
+    //--------------------------------------------------
+
+    createSearch() {
+        const input =
+            document.createElement("input");
+        input.type = "text";
+        input.placeholder = "Søg...";
+        input.className =
+            "multiselect-search";
+        input.addEventListener("click", e => {
+            e.stopPropagation();
+        });
+        input.addEventListener("input", () => {
+            this.filterOptions(
+                input.value.trim().toLowerCase()
+            );
+        });
+        return input;
+    }
+
+    //--------------------------------------------------
+    // Vælg alle
+    //--------------------------------------------------
+
+    createSelectAll() {
+        const wrapper =
+            document.createElement("div");
+        wrapper.className =
+            "multiselect-option multiselect-select-all";
+        const checkbox =
+            document.createElement("input");
+        checkbox.type = "checkbox";
+        const label =
+            document.createElement("span");
+        label.textContent =
+            "Vælg alle";
+        wrapper.append(
+            checkbox,
+            label
+        );
+        wrapper.addEventListener("click", e => {
+
+            if (e.target !== checkbox) {
+                checkbox.checked =
+                    !checkbox.checked;
+            }
+            this.options.forEach(option => {
+                option.setChecked(
+                    checkbox.checked,
+                    false
+                );
+            });
+            this.updateHeader();
+            this.onChange(
+                this.getValues()
+            );
+        });
+        wrapper.checkbox =
+            checkbox;
+        return wrapper;
+    }
+
+    //--------------------------------------------------
+    // Byg alle muligheder
+    //--------------------------------------------------
+
+    createOptions() {
+        this.options = [];
+        this.values.forEach(value => {
+            const option =
+                this.createOption(value);
+            this.options.push(option);
+            this.optionsContainer.appendChild(
+                option.element
+            );
+        });
+    }
+
+    //--------------------------------------------------
+    // Én mulighed
+    //--------------------------------------------------
+
+    createOption(value) {
+        const element =
+            document.createElement("div");
+        element.className =
+            "multiselect-option";
+        element.dataset.value =
+            value;
+        const checkbox =
+            document.createElement("input");
+        checkbox.type = "checkbox";
+        const label =
+            document.createElement("span");
+        label.textContent =
+            value;
+        element.append(
+            checkbox,
+            label
+        );
+
+        const setChecked = (
+            checked,
+            notify = true
+        ) => {
+
+            checkbox.checked =
+                checked;
+            if (checked) {
+                this.selected.add(value);
+
+            }
+
+            else {
+
+                this.selected.delete(value);
+
+            }
+            this.updateSelectAll();
+            if (notify) {
+                this.updateHeader();
+                this.onChange(
+                    this.getValues()
+                );
+            }
+        };
+        element.addEventListener(
+            "click",
+            e => {
+                if (e.target !== checkbox) {
+                    checkbox.checked =
+                        !checkbox.checked;
+                }
+                setChecked(
+                    checkbox.checked
+                );
+            }
+        );
+        return {
+            value,
+            element,
+            checkbox,
+            setChecked,
+            setVisible(show) {
+                element.style.display =
+                    show ? "" : "none";
+            }
+        };
+
+    }
+    }
