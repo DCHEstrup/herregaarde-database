@@ -93,6 +93,8 @@ function createOption(value, state, updateHeader) {
         }
         setChecked(checkbox.checked);
         state.onChange([...state.selected]);
+        updateHeader();
+        state.onChange([...state.selected]);
     });
     return {
         value,
