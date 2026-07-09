@@ -32,8 +32,14 @@ export async function getJobSuggestions(query) {
 
 export async function searchPeople(filters) {
     return await supabase.rpc("search_people", {
-        p_herregaard: filters.herregaard || null,
-        p_aar: filters.aar ? Number(filters.aar) : null,
+p_herregaard:
+filters.herregaard.length
+    ? filters.herregaard
+    : null,
+    p_aar:
+filters.aar.length
+    ? filters.aar.map(Number)
+    : null,
         p_koen: filters.koen || null,
         p_arbejde: filters.arbejde || null,
         p_page: filters.page,
