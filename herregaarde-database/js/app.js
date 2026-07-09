@@ -7,7 +7,7 @@ import { getCurrentFilters } from "./filtersState.js";
 import { renderPagination } from "./ui/pagination.js";
 import { enableAutosuggest } from "./autosuggest.js";
 import { getJobSuggestions } from "./supabase.js";
-import { createMultiSelect } from "./ui/multiselect.js";
+import { createMultiSelect } from "./ui/multiselectV2.js";
 
 await loadFilters();
 createMultiSelect({
