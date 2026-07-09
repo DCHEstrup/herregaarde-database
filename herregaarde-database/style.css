@@ -250,29 +250,7 @@ body{
     user-select: none;
     transition: border-color .2s ease;
 }
-.multiselect-header-content{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    overflow:hidden;
-    flex:1;
-}
-.multiselect-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: #edf4ef;
-    color: var(--primary);
-    padding: 4px 10px;
-    border-radius: 14px;
-    white-space: nowrap;
-    flex: 0 0 auto;
-}
-.multiselect-more{
-    color:#666;
-    font-size:13px;
-    white-space:nowrap;
-}
+
 .multiselect-header:hover {
     border-color: var(--primary);
 }
@@ -347,19 +325,7 @@ body{
     top:44px;
     z-index:2;
 }
-.chip-remove{
-    margin-left:6px;
-    border:none;
-    background:none;
-    color:inherit;
-    cursor:pointer;
-    font-size:14px;
-    padding:0;
-    line-height:1;
-}
-.chip-remove:hover{
-    color:#b00020;
-}
+
 @media(max-width:900px){
 .content{
 grid-template-columns:1fr;
