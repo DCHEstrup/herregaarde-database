@@ -322,4 +322,99 @@ class MultiSelect {
         };
 
     }
+        //--------------------------------------------------
+    // Opdater header
+    //--------------------------------------------------
+
+    updateHeader() {
+        const text =
+            this.header.querySelector(
+                ".multiselect-text"
+            );
+        const values =
+            this.getValues();
+        if (values.length === 0) {
+            text.textContent =
+                this.placeholder;
+            return;
+        }
+        if (values.length <= 2) {
+            text.textContent =
+                values.join(", ");
+            return;
+        }
+        text.textContent =
+            `${values[0]}, ${values[1]} +${values.length - 2}`;
+    }
+
+    //--------------------------------------------------
+    // Opdater "Vælg alle"
+    //--------------------------------------------------
+
+    updateSelectAll() {
+        if (!this.selectAll.checkbox) return;
+        this.selectAll.checkbox.checked =
+            this.selected.size ===
+            this.options.length;
+    }
+
+    //--------------------------------------------------
+    // Filtrer muligheder
+    //--------------------------------------------------
+
+    filterOptions(query) {
+        this.options.forEach(option => {
+            option.setVisible(
+                option.value
+                    .toLowerCase()
+                    .includes(query)
+            );
+        });
+    }
+
+    //--------------------------------------------------
+    // Åbn dropdown
+    //--------------------------------------------------
+
+    open() {
+        this.dropdown.classList.add(
+            "open"
+        );
+        this.header.classList.add(
+            "open"
+        );
+        this.search.focus();
+    }
+
+    //--------------------------------------------------
+    // Luk dropdown
+    //--------------------------------------------------
+
+    close() {
+        this.dropdown.classList.remove(
+            "open"
+        );
+        this.header.classList.remove(
+            "open"
+        );
+    }
+
+    //--------------------------------------------------
+    // Returnér valgte værdier
+    //--------------------------------------------------
+
+    getValues() {
+        return [...this.selected];
+    }
+
+    //--------------------------------------------------
+    // Fjern komponent
+    //--------------------------------------------------
+
+    destroy() {
+        this.container.innerHTML = "";
+        this.options = [];
+        this.selected.clear();
+
+    }
     }
