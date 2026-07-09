@@ -120,19 +120,54 @@ search.addEventListener("input", () => {
     //------------------------------------
     // Header tekst
     //------------------------------------
-    function updateHeader() {
-        if (selected.size === 0) {
-            header.textContent = placeholder;
-        }
-        else if (selected.size <= 2) {
-            header.textContent =
-                [...selected].join(", ");
-        }
-        else {
-            header.textContent =
-                `${selected.size} valgt`;
-        }
+function updateHeader() {
+    if (selected.size === 0) {
+        header.innerHTML = `
+            <span>${placeholder}</span>
+            <span>▾</span>
+        `;
+        return;
     }
+    const values =
+        [...selected];
+    //----------------------------------
+    // Maks 2 chips
+    //----------------------------------
+    let html = "";
+    values
+        .slice(0, 2)
+        .forEach(value => {
+            html += `
+                <span class="multiselect-chip">
+                    ${value}
+                </span>
+            `;
+        });
+    //----------------------------------
+    // Flere valgt
+    //----------------------------------
+
+    if (values.length > 2) {
+
+        html += `
+            <span class="multiselect-more">
+                +${values.length - 2}
+            </span>
+        `;
+
+    }
+
+    header.innerHTML = `
+        <div class="multiselect-header-content">
+
+            ${html}
+
+        </div>
+
+        <span>▾</span>
+    `;
+
+}
     //------------------------------------
     // Åbn/Luk
     //------------------------------------
