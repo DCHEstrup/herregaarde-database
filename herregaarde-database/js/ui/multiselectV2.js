@@ -51,55 +51,56 @@ export function createMultiSelect({
         "multiselect-controls";
   const search = createSearch(filterOptions);
 controls.appendChild(search);
-    state.options =
-    state.values.map(value => {
-        const option =
-            createOption(
-                value,
-                state,
-                updateHeader
-            );
-        optionsContainer.appendChild(
-            option.element
+state.options = state.values.map(value => {
+    const option = createOption(
+        value,
+        state,
+        updateHeader
+    );
+    optionsContainer.appendChild(
+        option.element
+    );
+    return option;
+});
+    function filterOptions(query) {
+    state.options.forEach(option => {
+        option.setVisible(
+            option.value
+                .toLowerCase()
+                .includes(query)
         );
-        return option;
     });
+}
 function createOption(value, state, updateHeader) {
-    const option =
-        document.createElement("div");
-    option.className =
-        "multiselect-option";
-    option.dataset.value = value;
-    option.innerHTML = `
-        <input type="checkbox">
-        <span>${value}</span>
-    `;
-    const checkbox =
-        option.querySelector("input");
-    //----------------------------------
-    // Klik på rækken
-    //----------------------------------
-    option.addEventListener("click", (e) => {
+    const element = document.createElement("div");
+    element.className = "multiselect-option";
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    const label = document.createElement("span");
+    label.textContent = value;
+    element.append(checkbox, label);
+    function setChecked(checked) {
+        checkbox.checked = checked;
+        if (checked) {
+            state.selected.add(value);
+        } else {
+            state.selected.delete(value);
+        }
+    }
+    element.addEventListener("click", e => {
         if (e.target !== checkbox) {
             checkbox.checked = !checkbox.checked;
         }
-        if (checkbox.checked) {
-            state.selected.add(value);
-        }
-        else {
-            state.selected.delete(value);
-        }
-        updateHeader();
-        state.onChange(
-            [...state.selected]
-        );
+        setChecked(checkbox.checked);
+        state.onChange([...state.selected]);
     });
     return {
         value,
-           element: option,
+        element,
         checkbox,
+        setChecked,
         setVisible(show) {
-            option.style.display =
+            element.style.display =
                 show ? "" : "none";
         }
     };
@@ -112,8 +113,21 @@ function createOption(value, state, updateHeader) {
         document.createElement("div");
     optionsContainer.className =
         "multiselect-options";
-    function updateHeader() {
-    console.log(state.selected);
+function updateHeader() {
+    const values = [...state.selected];
+    if (values.length === 0) {
+        header.querySelector(".multiselect-text").textContent =
+            state.placeholder;
+        return;
+    }
+    if (values.length <= 2) {
+        header.querySelector(".multiselect-text").textContent =
+            values.join(", ");
+    }
+    else {
+        header.querySelector(".multiselect-text").textContent =
+            `${values[0]}, ${values[1]} +${values.length - 2}`;
+    }
 }
     dropdown.appendChild(controls);
     dropdown.appendChild(optionsContainer);
@@ -121,14 +135,11 @@ function createOption(value, state, updateHeader) {
     //----------------------------------
     // Byg komponent
     //----------------------------------
-
     container.appendChild(header);
     container.appendChild(dropdown);
-
     //----------------------------------
     // Gem instans
     //----------------------------------
-
     instances.set(containerId, {
         getValues() {
             return [...state.selected];
@@ -184,12 +195,4 @@ function createSearch(onSearch) {
     return search;
 }
 
-function filterOptions(query) {
-    state.options.forEach(option => {
-        option.setVisible(
-            option.value
-                .toLowerCase()
-                .includes(query)
-        );
-    });
-}
+
