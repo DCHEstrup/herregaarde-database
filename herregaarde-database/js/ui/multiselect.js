@@ -56,26 +56,6 @@ dropdown.appendChild(selectAll);
     const selectAllCheckbox =
     selectAll.querySelector("input");
     values.forEach(value => {
-        selectAll.addEventListener("click", () => {
-    const checked =
-        !selectAllCheckbox.checked;
-    selectAllCheckbox.checked =
-        checked;
-    options.forEach(option => {
-        const checkbox =
-            option.querySelector("input");
-        checkbox.checked = checked;
-        const value =
-            option.dataset.value;
-        if (checked) {
-            selected.add(value);
-        }
-        else {
-            selected.delete(value);
-        }
-    });
-    updateHeader();
-})
         const option =
             document.createElement("div");
         option.className = "multiselect-option";
@@ -101,6 +81,26 @@ dropdown.appendChild(selectAll);
         dropdown.appendChild(option);
         options.push(option);
     });
+            selectAll.addEventListener("click", () => {
+    const checked =
+        !selectAllCheckbox.checked;
+    selectAllCheckbox.checked =
+        checked;
+    options.forEach(option => {
+        const checkbox =
+            option.querySelector("input");
+        checkbox.checked = checked;
+        const value =
+            option.dataset.value;
+        if (checked) {
+            selected.add(value);
+        }
+        else {
+            selected.delete(value);
+        }
+    });
+    updateHeader();
+})
     //------------------------------------
 // Filtrer muligheder
 //------------------------------------
