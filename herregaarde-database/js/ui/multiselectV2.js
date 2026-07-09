@@ -51,6 +51,12 @@ export function createMultiSelect({
         "multiselect-controls";
   const search = createSearch(filterOptions);
 controls.appendChild(search);
+    const selectAll =
+    createSelectAll(state);
+    state.selectAll = selectAll;
+controls.appendChild(
+    selectAll.element
+);
 state.options = state.values.map(value => {
     const option = createOption(
         value,
@@ -79,23 +85,36 @@ function createOption(value, state, updateHeader) {
     const label = document.createElement("span");
     label.textContent = value;
     element.append(checkbox, label);
-    function setChecked(checked) {
-        checkbox.checked = checked;
-        if (checked) {
-            state.selected.add(value);
-        } else {
-            state.selected.delete(value);
-        }
+function setChecked(checked) {
+    checkbox.checked = checked;
+    if (checked) {
+        state.selected.add(value);
+    } else {
+        state.selected.delete(value);
     }
-    element.addEventListener("click", e => {
-        if (e.target !== checkbox) {
-            checkbox.checked = !checkbox.checked;
-        }
-        setChecked(checkbox.checked);
-        state.onChange([...state.selected]);
-        updateHeader();
-        state.onChange([...state.selected]);
-    });
+    updateHeader();
+    if (state.selectAll) {
+        state.selectAll.update();
+    }
+    state.onChange([...state.selected]);
+}
+function setChecked(checked) {
+    checkbox.checked = checked;
+    if (checked) {
+        state.selected.add(value);
+    } else {
+        state.selected.delete(value);
+    }
+    updateHeader();
+    state.onChange([...state.selected]);
+}
+    
+element.addEventListener("click", e => {
+    if (e.target !== checkbox) {
+        checkbox.checked = !checkbox.checked;
+    }
+    setChecked(checkbox.checked);
+});
     return {
         value,
         element,
@@ -195,6 +214,39 @@ function createSearch(onSearch) {
         onSearch(search.value.trim().toLowerCase());
     });
     return search;
+}
+
+function createSelectAll(state) {
+    const element =
+        document.createElement("div");
+    element.className =
+        "multiselect-option multiselect-select-all";
+    const checkbox =
+        document.createElement("input");
+    checkbox.type = "checkbox";
+    const label =
+        document.createElement("span");
+    label.textContent = "Vælg alle";
+    element.append(checkbox, label);
+    element.addEventListener("click", e => {
+        if (e.target !== checkbox) {
+            checkbox.checked = !checkbox.checked;
+        }
+        state.options.forEach(option => {
+            option.setChecked(
+                checkbox.checked
+            );
+        });
+    });
+    return {
+        element,
+        checkbox,
+        update() {
+            checkbox.checked =
+                state.selected.size ===
+                state.options.length;
+        }
+    };
 }
 
 
