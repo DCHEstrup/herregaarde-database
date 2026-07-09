@@ -26,6 +26,17 @@ export function createMultiSelect({
     const dropdown =
         document.createElement("div");
     dropdown.className = "multiselect-dropdown";
+    //------------------------------------
+// Søgefelt
+//------------------------------------
+
+const search =
+    document.createElement("input");
+search.type = "text";
+search.placeholder = "Søg...";
+search.className = "multiselect-search";
+dropdown.appendChild(search);
+    const options = [];
     values.forEach(value => {
         const option =
             document.createElement("div");
@@ -47,7 +58,24 @@ export function createMultiSelect({
             updateHeader();
         });
         dropdown.appendChild(option);
+        options.push(option);
     });
+    //------------------------------------
+// Filtrer muligheder
+//------------------------------------
+
+search.addEventListener("input", () => {
+    const query =
+        search.value.toLowerCase();
+    options.forEach(option => {
+        const text =
+            option.innerText.toLowerCase();
+        option.style.display =
+            text.includes(query)
+                ? ""
+                : "none";
+    });
+});
     //------------------------------------
     // Header tekst
     //------------------------------------
@@ -69,6 +97,10 @@ export function createMultiSelect({
     //------------------------------------
     header.addEventListener("click", () => {
         dropdown.classList.toggle("open");
+        header.classList.toggle("open");
+            if (dropdown.classList.contains("open")) {
+        search.focus();
+    }
     });
     //------------------------------------
     // Klik udenfor
@@ -76,6 +108,7 @@ export function createMultiSelect({
     document.addEventListener("click", e => {
         if (!container.contains(e.target)) {
             dropdown.classList.remove("open");
+            header.classList.remove("open");
         }
     });
     //------------------------------------
