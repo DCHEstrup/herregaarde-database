@@ -51,7 +51,59 @@ export function createMultiSelect({
         "multiselect-controls";
   const search = createSearch(filterOptions);
 controls.appendChild(search);
-
+    state.options =
+    state.values.map(value => {
+        const option =
+            createOption(
+                value,
+                state,
+                updateHeader
+            );
+        optionsContainer.appendChild(
+            option.element
+        );
+        return option;
+    });
+function createOption(value, state, updateHeader) {
+    const option =
+        document.createElement("div");
+    option.className =
+        "multiselect-option";
+    option.dataset.value = value;
+    option.innerHTML = `
+        <input type="checkbox">
+        <span>${value}</span>
+    `;
+    const checkbox =
+        option.querySelector("input");
+    //----------------------------------
+    // Klik på rækken
+    //----------------------------------
+    option.addEventListener("click", (e) => {
+        if (e.target !== checkbox) {
+            checkbox.checked = !checkbox.checked;
+        }
+        if (checkbox.checked) {
+            state.selected.add(value);
+        }
+        else {
+            state.selected.delete(value);
+        }
+        updateHeader();
+        state.onChange(
+            [...state.selected]
+        );
+    });
+    return {
+        value,
+           element: option,
+        checkbox,
+        setVisible(show) {
+            option.style.display =
+                show ? "" : "none";
+        }
+    };
+}
     //----------------------------------
     // Scrollområde
     //----------------------------------
@@ -60,6 +112,9 @@ controls.appendChild(search);
         document.createElement("div");
     optionsContainer.className =
         "multiselect-options";
+    function updateHeader() {
+    console.log(state.selected);
+}
     dropdown.appendChild(controls);
     dropdown.appendChild(optionsContainer);
 
@@ -130,5 +185,11 @@ function createSearch(onSearch) {
 }
 
 function filterOptions(query) {
-    console.log(query);
+    state.options.forEach(option => {
+        option.setVisible(
+            option.value
+                .toLowerCase()
+                .includes(query)
+        );
+    });
 }
