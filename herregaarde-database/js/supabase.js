@@ -64,8 +64,6 @@ export async function downloadPeople(filters = {}) {
         p_aar:  filters.aar?.length
                 ? filters.aar.map(Number)
                 : null,
-            ? Number(filters.aar)
-            : null,
         p_koen: filters.koen || null,
         p_region: filters.region || null,
         p_kommune: filters.kommune || null,
