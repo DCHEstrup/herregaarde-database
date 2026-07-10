@@ -213,7 +213,7 @@ class MultiSelect {
             label
         );
         wrapper.addEventListener("click", e => {
-
+            e.stopPropagation();
             if (e.target !== checkbox) {
                 checkbox.checked =
                     !checkbox.checked;
