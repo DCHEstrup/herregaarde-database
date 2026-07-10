@@ -1,9 +1,10 @@
+import { getSelectedValues } from "./ui/multiselectV2.js";
 export function getCurrentFilters() {
     return {
         herregaard:
-            document.getElementById("herregaard").value || null,
+            getSelectedValues("herregaard"),
         aar:
-            document.getElementById("aar").value || null,
+           getSelectedValues("aar"),
         koen:
             document.getElementById("koen").value || null,
         region:
