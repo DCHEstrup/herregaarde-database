@@ -1,23 +1,20 @@
 import { getSelectedValues } from "./ui/multiselectV2.js";
+
 export function getCurrentFilters() {
     return {
         herregaard:
             getSelectedValues("herregaard"),
         aar:
-           getSelectedValues("aar"),
+            getSelectedValues("aar"),
         koen:
-            document.getElementById("koen").value || null,
+            document.getElementById("koen")?.value || null,
         region:
             document.getElementById("region")?.value || null,
         kommune:
             document.getElementById("kommune")?.value || null,
-        arbejde_titel:
-            document.getElementById("arbejde_titel")?.value || null,
-        position_i_husstanden:
-            document.getElementById("position_i_husstanden")?.value || null,
+        arbejde:
+            document.getElementById("arbejde")?.value.trim() || null,
         civilstand:
             document.getElementById("civilstand")?.value || null
-
     };
-
 }
