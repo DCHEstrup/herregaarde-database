@@ -197,43 +197,41 @@ class MultiSelect {
     //--------------------------------------------------
 
     createSelectAll() {
-        const wrapper =
-            document.createElement("div");
-        wrapper.className =
-            "multiselect-option multiselect-select-all";
-        const checkbox =
-            document.createElement("input");
-        checkbox.type = "checkbox";
-        const label =
-            document.createElement("span");
-        label.textContent =
-            "Vælg alle";
-        wrapper.append(
-            checkbox,
-            label
-        );
-        wrapper.addEventListener("click", e => {
-            e.stopPropagation();
-            if (e.target !== checkbox) {
-                checkbox.checked =
-                    !checkbox.checked;
-            }
-            this.options.forEach(option => {
-                console.log("Vælger:", option.value);
-                option.setChecked(
-                    checkbox.checked,
-                    false
-                );
-            });
-            this.updateHeader();
-            this.onChange(
-                this.getValues()
+
+    const wrapper =
+        document.createElement("div");
+    wrapper.className =
+        "multiselect-option multiselect-select-all";
+    const checkbox =
+        document.createElement("input");
+    checkbox.type = "checkbox";
+    const label =
+        document.createElement("span");
+    label.textContent = "Vælg alle";
+    wrapper.append(
+        checkbox,
+        label
+    );
+    wrapper.addEventListener("click", e => {
+        e.preventDefault();
+        e.stopPropagation();
+        const checked =
+            !checkbox.checked;
+        checkbox.checked = checked;
+        this.options.forEach(option => {
+            option.setChecked(
+                checked,
+                false
             );
         });
-        wrapper.checkbox =
-            checkbox;
-        return wrapper;
-    }
+        this.updateHeader();
+        this.onChange(
+            this.getValues()
+        );
+    });
+    wrapper.checkbox = checkbox;
+    return wrapper;
+}
 
     //--------------------------------------------------
     // Byg alle muligheder
