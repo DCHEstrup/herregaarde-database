@@ -219,7 +219,7 @@ class MultiSelect {
                     !checkbox.checked;
             }
             this.options.forEach(option => {
-                console.log("Vælger:", option.value);
+                
                 option.setChecked(
                     checkbox.checked,
                     false
