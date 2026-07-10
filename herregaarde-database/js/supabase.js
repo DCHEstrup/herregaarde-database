@@ -58,8 +58,12 @@ export async function getPerson(id) {
 export async function downloadPeople(filters = {}) {
 
     return await supabase.rpc("download_people", {
-        p_herregaard: filters.herregaard || null,
-        p_aar: filters.aar
+        p_herregaard: filters.herregaard?.length
+                ? filters.herregaard
+                : null,
+        p_aar:  filters.aar?.length
+                ? filters.aar.map(Number)
+                : null,
             ? Number(filters.aar)
             : null,
         p_koen: filters.koen || null,
