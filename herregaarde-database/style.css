@@ -170,6 +170,7 @@ body{
 }
 .autosuggest-list {
     position: absolute;
+    top: calc(100% + 2px);
     background: white;
     border: 1px solid #ccc;
     width: 100%;
