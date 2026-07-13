@@ -39,3 +39,13 @@ export function clearFilters() {
     });
 
 }
+//----------------------------------
+// Tøm søgeresultat
+//----------------------------------
+
+const content =
+    document.getElementById("results");
+
+if (content) {
+    content.innerHTML = "";
+}
