@@ -45,4 +45,8 @@ document
     .addEventListener("click", () => {
         downloadCSV(getCurrentFilters());
     });
-
+document
+    .getElementById("clearBtn")
+    .addEventListener("click", () => {
+        clearFilters();
+    });
