@@ -1,20 +1,13 @@
 import { searchPeople } from "./supabase.js";
-import {getSelectedValues} from "./ui/multiselectV2.js";
+import { getCurrentFilters } from "./filtersState.js";
 
 export async function performSearch(page = 1) {
-const filters = {
-    herregaard:
-        getSelectedValues("herregaard"),
-    aar:
-        getSelectedValues("aar"),
-    arbejde:
-        document
-            .getElementById("arbejde")
-            .value
-            || null,
-    page,
-    pageSize: 8
-};
+    const filters = {
+        ...getCurrentFilters(),
+        page,
+        pageSize: 8
+    };
+
 
     console.log(filters);
     const { data, error } = await searchPeople(filters);
