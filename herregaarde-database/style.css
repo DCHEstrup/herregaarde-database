@@ -353,7 +353,18 @@ body{
     font-weight: 600;
     transition: background .2s ease;
 }
-
+.advanced-arrow{
+    transition:
+        transform .3s ease;
+    font-size:14px;
+}
+.advanced-toggle.open{
+    background:#f7f7f7;
+}
+.advanced-toggle.open
+.advanced-arrow{
+    transform:rotate(180deg);
+}
 .advanced-toggle:hover {
     background: #f8f8f8;
 }
