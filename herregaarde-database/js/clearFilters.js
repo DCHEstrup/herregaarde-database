@@ -9,7 +9,7 @@ export function clearFilters() {
 
     clearMultiSelect("herregaard");
     clearMultiSelect("aar");
-console.log(getCurrentFilters());
+
     //----------------------------------
     // Arbejde / Position
     //----------------------------------
@@ -30,14 +30,17 @@ console.log(getCurrentFilters());
         "kommune",
         "civilstand"
     ].forEach(id => {
-
         const element =
             document.getElementById(id);
         if (element) {
             element.value = "";
         }
-
     });
 
+    //----------------------------------
+    // Ryd søgeresultater
+    //----------------------------------
+
+    clearResults();
+
 }
-clearResults();
