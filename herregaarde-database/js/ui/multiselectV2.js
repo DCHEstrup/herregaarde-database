@@ -19,6 +19,13 @@ export function getSelectedValues(containerId) {
         ?.getValues() ?? [];
 
 }
+export function clearMultiSelect(
+    containerId
+) {
+    instances
+        .get(containerId)
+        ?.clear();
+}
 
 class MultiSelect {
 
