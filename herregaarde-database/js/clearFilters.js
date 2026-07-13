@@ -1,4 +1,5 @@
 import { clearMultiSelect } from "./ui/multiselectV2.js";
+import { clearResults } from "./ui/results.js";
 
 export function clearFilters() {
 
@@ -39,13 +40,4 @@ export function clearFilters() {
     });
 
 }
-//----------------------------------
-// Tøm søgeresultat
-//----------------------------------
-
-const content =
-    document.getElementById("results");
-
-if (content) {
-    content.innerHTML = "";
-}
+clearResults();
