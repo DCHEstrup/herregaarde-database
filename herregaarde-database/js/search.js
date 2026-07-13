@@ -3,15 +3,7 @@ import {getSelectedValues} from "./ui/multiselectV2.js";
 
 export async function performSearch(page = 1) {
 const filters = {
-    herregaard:
-        getSelectedValues("herregaard"),
-    aar:
-        getSelectedValues("aar"),
-    arbejde:
-        document
-            .getElementById("arbejde")
-            .value
-            || null,
+    ...getCurrentFilters(),
     page,
     pageSize: 8
 };
