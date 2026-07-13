@@ -406,6 +406,21 @@ class MultiSelect {
     getValues() {
         return [...this.selected];
     }
+    clear() {
+    this.options.forEach(option => {
+        option.setChecked(
+            false,
+            false
+        );
+    });
+
+    this.selected.clear();
+    this.updateHeader();
+    this.updateSelectAll();
+    this.onChange(
+        this.getValues()
+    );
+}
 
     //--------------------------------------------------
     // Fjern komponent
