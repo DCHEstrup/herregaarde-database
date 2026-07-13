@@ -385,6 +385,12 @@ body{
         padding .25s ease,
         border-color .25s ease;
 }
+.advanced-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(240px,1fr));
+    gap:18px;
+}
 
 .advanced-content.open {
     max-height: 1000px;
