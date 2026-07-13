@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document
         .getElementById("searchBtn")
         .addEventListener("click", () => loadPage(1));
+    initialiseAdvancedFilters();
 });
 
 document
