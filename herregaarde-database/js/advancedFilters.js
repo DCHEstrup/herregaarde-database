@@ -8,17 +8,9 @@ export function initialiseAdvancedFilters() {
         document.getElementById(
             "advancedContent"
         );
-    const arrow =
-        document.getElementById(
-            "advancedArrow"
-        );
     button.addEventListener("click", () => {
-        const open =
-            content.classList.contains("open");
+        button.classList.toggle("open");
         content.classList.toggle("open");
-        arrow.textContent =
-            open
-                ? "▾"
-                : "▴";
     });
+
 }
