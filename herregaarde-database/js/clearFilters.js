@@ -9,7 +9,7 @@ export function clearFilters() {
 
     clearMultiSelect("herregaard");
     clearMultiSelect("aar");
-
+console.log(getCurrentFilters());
     //----------------------------------
     // Arbejde / Position
     //----------------------------------
