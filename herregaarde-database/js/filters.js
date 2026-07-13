@@ -29,6 +29,33 @@ export async function loadFilters() {
         values: data.folketaellinger,
         placeholder: "Alle år"
     });
+    //----------------------------------
+    // Køn
+    //----------------------------------
+
+    createMultiSelect({
+        containerId: "koen",
+        values: data.koen,
+        placeholder: "Alle køn"
+    });
+    //----------------------------------
+    // Trossamfund
+    //----------------------------------
+
+    createMultiSelect({
+        containerId: "trossamfund",
+        values: data.trossamfund,
+        placeholder: "Alle religioner"
+    });
+    //----------------------------------
+    // Civilstand
+    //----------------------------------
+
+    createMultiSelect({
+        containerId: "civilstand",
+        values: data.civilstand,
+        placeholder: "Alle civilstande"
+    });
 }
 
 // Hjælpefunktion
