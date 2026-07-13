@@ -424,6 +424,7 @@ class MultiSelect {
     this.selected.clear();
     this.updateHeader();
     this.updateSelectAll();
+        console.log("Efter clear:", this.getValues());
     this.onChange(
         this.getValues()
     );
