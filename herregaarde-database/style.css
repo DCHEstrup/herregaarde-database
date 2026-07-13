@@ -335,38 +335,52 @@ body{
    Udvidede filtre
 ===================================== */
 
-.advanced-filters{
-
-    margin-top:20px;
-
+.advanced-filters {
+    margin-top: 20px;
 }
 
-.advanced-toggle{
-    width:100%;
-    padding:12px 16px;
-    border:1px solid #d9d9d9;
-    border-radius:8px;
-    background:white;
-    cursor:pointer;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-size:15px;
-    font-weight:600;
-    transition:.2s;
+.advanced-toggle {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background .2s ease;
 }
 
-.advanced-toggle:hover{
-    background:#f8f8f8;
+.advanced-toggle:hover {
+    background: #f8f8f8;
 }
 
-.advanced-content{
-    display:none;
-    margin-top:15px;
-    padding:20px;
-    border:1px solid #d9d9d9;
-    border-radius:8px;
-    background:white;
+.advanced-content {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    padding: 0 20px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: white;
+    transition:
+        max-height .35s ease,
+        opacity .25s ease,
+        margin-top .25s ease,
+        padding .25s ease,
+        border-color .25s ease;
+}
+
+.advanced-content.open {
+    max-height: 1000px;
+    opacity: 1;
+    margin-top: 15px;
+    padding: 20px;
+    border-color: #d9d9d9;
 }
 @media(max-width:900px){
 .content{
