@@ -8,6 +8,7 @@ import { enableAutosuggest } from "./autosuggest.js";
 import { getJobSuggestions, getStatistics } from "./supabase.js";
 import { createMultiSelect } from "./ui/multiselectV2.js";
 import { clearFilters } from "./clearFilters.js";
+import { initialiseAdvancedFilters } from "./advancedFilters.js";
 
 
 /*
