@@ -77,7 +77,7 @@ body{
     font-size: 16px;
     background: white;
 }
-#searchBtn {
+#searchBtn, #clearBtn {
     height: 42px;
     min-width: 90px;
     padding: 0 24px;
@@ -90,13 +90,13 @@ body{
     cursor: pointer;
     transition: background 0.2s ease;
 }
-#searchBtn:hover {
+#searchBtn:hover, #clearBtn:hover {
     background: var(--primary-hover);
 }
-#searchBtn:active {
+#searchBtn:active, #clearBtn:active {
     transform: translateY(1px);
 }
-#searchBtn:disabled {
+#searchBtn:disabled, #clearBtn:disable {
     background: #c7c7c7;
     cursor: not-allowed;
 }
