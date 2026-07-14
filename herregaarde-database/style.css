@@ -67,10 +67,7 @@ body{
     margin-bottom: 4px;
     color: #355c4a;
 }
-.advanced-grid label{
-margin-bottom: 0.5px;
 
-}
 .filter-group select,
 .filter-group input:not([type="checkbox"]) {
     width: 240px;
