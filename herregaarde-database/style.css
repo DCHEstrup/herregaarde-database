@@ -61,12 +61,13 @@ body{
     display: flex;
     flex-direction: column;
 }
-.filter-group label {
+.filter-group label, .advanced-grid label {
     font-size: 0.85rem;
     font-weight: 600;
     margin-bottom: 4px;
     color: #355c4a;
 }
+
 .filter-group select,
 .filter-group input:not([type="checkbox"]) {
     width: 240px;
