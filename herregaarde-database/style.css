@@ -236,7 +236,11 @@ body{
 /* ==========================================
    MULTISELECT
    ========================================== */
-
+.multiselect{
+    position:relative;
+    display:inline-block;
+    width:240px;
+}
 .multiselect-header {
     width: 240px;
     height: 42px;
