@@ -9,6 +9,9 @@ export function clearFilters() {
 
     clearMultiSelect("herregaard");
     clearMultiSelect("aar");
+    clearMultiSelect("koen");
+    clearMultiSelect("trossamfund");
+    clearMultiSelect("civilstand");
 
     //----------------------------------
     // Arbejde / Position
