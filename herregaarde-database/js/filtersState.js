@@ -7,14 +7,14 @@ export function getCurrentFilters() {
         aar:
             getSelectedValues("aar"),
         koen:
-            document.getElementById("koen")?.value || null,
-        region:
-            document.getElementById("region")?.value || null,
+            getSelectedValues("koen"),
+        trossamfund:
+            getSelectedValues("trossamfund"),
         kommune:
             document.getElementById("kommune")?.value || null,
         arbejde:
             document.getElementById("arbejde")?.value.trim() || null,
         civilstand:
-            document.getElementById("civilstand")?.value || null
+            getSelectedValues("civilstand")
     };
 }
