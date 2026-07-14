@@ -58,7 +58,7 @@ class MultiSelect {
 
     build() {
         this.container.innerHTML = "";
-
+        this.container.classList.add("multiselect");
         //----------------------------------
         // Header
         //----------------------------------
