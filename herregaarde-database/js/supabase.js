@@ -123,5 +123,5 @@ export async function downloadPeople(filters = {}) {
         p_alder_til:
             filters.alderTil,
     });
-
+console.log("RPC params:", params);
 }
