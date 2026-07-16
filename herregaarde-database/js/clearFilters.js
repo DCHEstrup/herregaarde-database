@@ -12,6 +12,8 @@ export function clearFilters() {
     clearMultiSelect("koen");
     clearMultiSelect("trossamfund");
     clearMultiSelect("civilstand");
+    clearMultiSelect("region");
+    clearMultiSelect("kommune");
 
     //----------------------------------
     // Arbejde / Position
