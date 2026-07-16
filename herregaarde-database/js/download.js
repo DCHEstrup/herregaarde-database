@@ -3,6 +3,8 @@ import { downloadPeople } from "./supabase.js";
 export async function downloadCSV(filters) {
       console.log("Download filters:", filters);
     const { data, error } = await downloadPeople(filters);
+      console.log(data);
+console.log(error);
     if (error) {
         console.error(error);
         alert("Kunne ikke hente data.");
