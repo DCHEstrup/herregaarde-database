@@ -83,8 +83,12 @@ export async function downloadPeople(filters = {}) {
         p_aar:  filters.aar?.length
                 ? filters.aar.map(Number)
                 : null,
-        p_koen: filters.koen || null,
-        p_region: filters.region || null,
+        p_trossamfund: filters.trossamfund?.length
+        ? filters.trossamfund
+        : null,
+        p_koen: filters.koen?.length
+        ? filters.koen
+        : null,
         p_kommune: filters.kommune || null,
         p_arbejde: filters.arbejde || null,
         p_civilstand:
