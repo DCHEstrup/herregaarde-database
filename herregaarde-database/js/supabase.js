@@ -94,7 +94,15 @@ export async function downloadPeople(filters = {}) {
         p_koen: filters.koen?.length
         ? filters.koen
         : null,
-        p_kommune: filters.kommune || null,
+        p_region:
+            filters.region?.length
+            ? filters.region
+            : null,
+
+        p_kommune:
+            filters.kommune?.length
+            ? filters.kommune
+            : null,
         p_arbejde: filters.arbejde || null,
         p_civilstand:
             filters.civilstand || null
