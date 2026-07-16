@@ -20,11 +20,22 @@ export function clearFilters() {
     // Arbejde / Position
     //----------------------------------
 
-    const arbejde =
-        document.getElementById("arbejde");
-    if (arbejde) {
-        arbejde.value = "";
+    [
+    "arbejde",
+    "alderFra",
+    "alderTil",
+    "transportFra",
+    "transportTil"
+].forEach(id => {
+
+    const element =
+        document.getElementById(id);
+
+    if (element) {
+        element.value = "";
     }
+
+});
 
     //----------------------------------
     // Fremtidige filtre
