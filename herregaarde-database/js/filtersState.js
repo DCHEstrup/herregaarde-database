@@ -20,5 +20,14 @@ export function getCurrentFilters() {
             document.getElementById("arbejde")?.value.trim() || null,
         civilstand:
             getSelectedValues("civilstand")
+        alderFra:
+    document.getElementById("alderFra")?.value
+        ? Number(document.getElementById("alderFra").value)
+        : null,
+
+alderTil:
+    document.getElementById("alderTil")?.value
+        ? Number(document.getElementById("alderTil").value)
+        : null,
     };
 }
