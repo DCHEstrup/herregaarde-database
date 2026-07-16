@@ -10,8 +10,10 @@ export function getCurrentFilters() {
             getSelectedValues("koen"),
         trossamfund:
             getSelectedValues("trossamfund"),
+        region: 
+            getSelectedValues("region"),
         kommune:
-            document.getElementById("kommune")?.value || null,
+            getSelectedValues("kommune"),
         arbejde:
             document.getElementById("arbejde")?.value.trim() || null,
         civilstand:
