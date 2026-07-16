@@ -95,6 +95,10 @@ export async function downloadPeople(filters = {}) {
         p_trossamfund: filters.trossamfund?.length
         ? filters.trossamfund
         : null,
+        p_handicap:
+        filters.handicap?.length
+        ? filters.handicap
+        : null,
         p_koen: filters.koen?.length
         ? filters.koen
         : null,
