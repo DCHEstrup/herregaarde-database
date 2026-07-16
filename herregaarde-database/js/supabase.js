@@ -51,9 +51,14 @@ export async function searchPeople(filters) {
                 ? filters.trossamfund
                 : null,
         p_region:
-            filters.region || null,
+            filters.region?.length
+            ? filters.region
+            : null,
+
         p_kommune:
-            filters.kommune || null,
+            filters.kommune?.length
+            ? filters.kommune
+            : null,
         p_arbejde:
             filters.arbejde || null,
         p_civilstand:
