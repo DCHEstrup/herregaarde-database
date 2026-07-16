@@ -19,7 +19,7 @@ export function getCurrentFilters() {
         arbejde:
             document.getElementById("arbejde")?.value.trim() || null,
         civilstand:
-            getSelectedValues("civilstand")
+            getSelectedValues("civilstand"),
         alderFra:
     document.getElementById("alderFra")?.value
         ? Number(document.getElementById("alderFra").value)
