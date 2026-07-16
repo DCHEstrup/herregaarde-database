@@ -14,6 +14,7 @@ export function clearFilters() {
     clearMultiSelect("civilstand");
     clearMultiSelect("region");
     clearMultiSelect("kommune");
+    clearMultiSelect("handicaps");
 
     //----------------------------------
     // Arbejde / Position
