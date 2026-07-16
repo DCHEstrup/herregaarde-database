@@ -56,6 +56,17 @@ export async function loadFilters() {
         values: data.civilstand,
         placeholder: "Alle civilstande"
     });
+    createMultiSelect({
+    containerId: "region",
+    values: data.region,
+    placeholder: "Alle regioner"
+});
+
+createMultiSelect({
+    containerId: "kommune",
+    values: data.kommune,
+    placeholder: "Alle kommuner"
+});
 }
 
 // Hjælpefunktion
