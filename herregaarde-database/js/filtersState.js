@@ -14,6 +14,8 @@ export function getCurrentFilters() {
             getSelectedValues("region"),
         kommune:
             getSelectedValues("kommune"),
+        handicap:
+            getSelectedValues("handicap"),
         arbejde:
             document.getElementById("arbejde")?.value.trim() || null,
         civilstand:
