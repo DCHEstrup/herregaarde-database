@@ -89,39 +89,41 @@ export async function getPerson(id) {
 
 export async function downloadPeople(filters = {}) {
 
-    return await supabase.rpc("download_people", {
+    const params = {
         p_herregaard: filters.herregaard?.length
-                ? filters.herregaard
-                : null,
-        p_aar:  filters.aar?.length
-                ? filters.aar.map(Number)
-                : null,
-        p_trossamfund: filters.trossamfund?.length
-        ? filters.trossamfund
-        : null,
-        p_handicap:
-        filters.handicap?.length
-        ? filters.handicap
-        : null,
+            ? filters.herregaard
+            : null,
+        p_aar: filters.aar?.length
+            ? filters.aar.map(Number)
+            : null,
         p_koen: filters.koen?.length
-        ? filters.koen
-        : null,
-        p_region:
-            filters.region?.length
+            ? filters.koen
+            : null,
+        p_trossamfund: filters.trossamfund?.length
+            ? filters.trossamfund
+            : null,
+        p_region: filters.region?.length
             ? filters.region
             : null,
-
-        p_kommune:
-            filters.kommune?.length
+        p_kommune: filters.kommune?.length
             ? filters.kommune
             : null,
         p_arbejde: filters.arbejde || null,
-        p_civilstand:
-            filters.civilstand || null,
-        p_alder_fra:
-            filters.alderFra,
-        p_alder_til:
-            filters.alderTil,
-    });
-console.log("RPC params:", params);
+        p_civilstand: filters.civilstand?.length
+            ? filters.civilstand
+            : null,
+        p_handicap: filters.handicap?.length
+            ? filters.handicap
+            : null,
+        p_alder_fra: filters.alderFra,
+        p_alder_til: filters.alderTil
+    };
+
+    console.log("RPC params:", params);
+
+    const result = await supabase.rpc("download_people", params);
+
+    console.log("RPC result:", result);
+
+    return result;
 }
