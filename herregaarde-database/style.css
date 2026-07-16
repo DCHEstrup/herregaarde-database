@@ -391,6 +391,29 @@ top:44px; z-index:2; }
     padding: 20px;
     border-color: #d9d9d9;
 }
+/* ===========================
+   range filter
+   =========================== */
+.range-filter{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.range-filter input{
+    width:90px;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:4px;
+    box-sizing:border-box;
+    font-size:14px;
+}
+
+.range-filter span{
+    color:#666;
+    font-weight:600;
+}
+
 @media(max-width:900px){
 .content{
 grid-template-columns:1fr;
