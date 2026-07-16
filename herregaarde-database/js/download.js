@@ -1,6 +1,7 @@
 import { downloadPeople } from "./supabase.js";
 
 export async function downloadCSV(filters) {
+      console.log("Download filters:", filters);
     const { data, error } = await downloadPeople(filters);
     if (error) {
         console.error(error);
