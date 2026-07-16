@@ -31,7 +31,9 @@ export async function getJobSuggestions(query) {
 }
 
 export async function searchPeople(filters) {
+
     return await supabase.rpc("search_people", {
+
         p_herregaard:
             filters.herregaard?.length
                 ? filters.herregaard
@@ -48,23 +50,22 @@ export async function searchPeople(filters) {
             filters.trossamfund?.length
                 ? filters.trossamfund
                 : null,
-        p_civilstand:
-            filters.civilstand?.length
-                ? filters.civilstand
-                : null,
         p_region:
             filters.region || null,
         p_kommune:
             filters.kommune || null,
         p_arbejde:
             filters.arbejde || null,
+        p_civilstand:
+            filters.civilstand?.length
+                ? filters.civilstand
+                : null,
         p_page:
             filters.page,
         p_page_size:
             filters.pageSize
     });
 }
-
 export async function getPerson(id) {
     return await supabase.rpc("get_person", {
         p_id: id
