@@ -59,6 +59,10 @@ export async function searchPeople(filters) {
             filters.kommune?.length
             ? filters.kommune
             : null,
+        p_handicap:
+            filters.handicap?.length
+            ? filters.handicap
+            : null,
         p_arbejde:
             filters.arbejde || null,
         p_civilstand:
