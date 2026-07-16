@@ -67,6 +67,11 @@ createMultiSelect({
     values: data.kommune,
     placeholder: "Alle kommuner"
 });
+    createMultiSelect({
+    containerId: "handicap",
+    values: data.handicap,
+    placeholder: "Alle handicap"
+});
 }
 
 // Hjælpefunktion
