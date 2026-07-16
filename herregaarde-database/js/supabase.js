@@ -69,6 +69,10 @@ export async function searchPeople(filters) {
             filters.civilstand?.length
                 ? filters.civilstand
                 : null,
+        p_alder_fra:
+    filters.alderFra,
+    p_alder_til:
+    filters.alderTil,
         p_page:
             filters.page,
         p_page_size:
@@ -113,7 +117,11 @@ export async function downloadPeople(filters = {}) {
             : null,
         p_arbejde: filters.arbejde || null,
         p_civilstand:
-            filters.civilstand || null
+            filters.civilstand || null,
+        p_alder_fra:
+            filters.alderFra,
+        p_alder_til:
+            filters.alderTil,
     });
 
 }
