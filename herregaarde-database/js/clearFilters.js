@@ -17,6 +17,8 @@ export function clearFilters() {
     clearMultiSelect("handicap");
     clearMultiSelect("alderFra");
     clearMultiSelect("alderTil");
+    clearMultiSelect("transportFra");
+    clearMultiSelect("transportTil");
 
     //----------------------------------
     // Arbejde / Position
@@ -26,6 +28,8 @@ export function clearFilters() {
     "arbejde",
     "alderFra",
     "alderTil",
+    "transportFra",
+    "transportTil",
     "transportFra",
     "transportTil"
 ].forEach(id => {
