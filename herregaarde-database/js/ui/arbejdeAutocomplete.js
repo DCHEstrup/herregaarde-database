@@ -37,6 +37,21 @@ export function createArbejdeAutocomplete({
     "focus",
     () => render()
 );
+    document.addEventListener(
+    "click",
+    e => {
+
+        if (
+            !input.contains(e.target) &&
+            !suggestions.contains(e.target)
+        ) {
+
+            suggestions.style.display = "none";
+
+        }
+
+    }
+);
 
     function render() {
 
@@ -114,18 +129,4 @@ else {
     }
 
 }
-document.addEventListener(
-    "click",
-    e => {
 
-        if (
-            !input.contains(e.target) &&
-            !suggestions.contains(e.target)
-        ) {
-
-            suggestions.style.display = "none";
-
-        }
-
-    }
-);
