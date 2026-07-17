@@ -73,6 +73,10 @@ export async function searchPeople(filters) {
     filters.alderFra,
     p_alder_til:
     filters.alderTil,
+    p_transport_fra:
+    filters.transportFra,
+    p_transport_til:
+    filters.transportTil,    
         p_page:
             filters.page,
         p_page_size:
@@ -116,7 +120,9 @@ export async function downloadPeople(filters = {}) {
             ? filters.handicap
             : null,
         p_alder_fra: filters.alderFra,
-        p_alder_til: filters.alderTil
+        p_alder_til: filters.alderTil,
+        p_transport_fra: filters.transportFra,
+        p_transport_til: filters.transportTil,
     };
 
     console.log("RPC params:", params);
