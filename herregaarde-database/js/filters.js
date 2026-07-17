@@ -72,6 +72,10 @@ createMultiSelect({
     values: data.handicap,
     placeholder: "Alle handicap"
 });
+    createMultiSelect(
+    "arbejdeSelect",
+    filters.arbejder
+);
 }
 
 // Hjælpefunktion
