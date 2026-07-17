@@ -114,3 +114,18 @@ else {
     }
 
 }
+document.addEventListener(
+    "click",
+    e => {
+
+        if (
+            !input.contains(e.target) &&
+            !suggestions.contains(e.target)
+        ) {
+
+            suggestions.style.display = "none";
+
+        }
+
+    }
+);
