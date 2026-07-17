@@ -74,7 +74,7 @@ createMultiSelect({
 });
     createMultiSelect(
     "arbejdeSelect",
-    filters.arbejder
+    filters.arbejde
 );
 }
 
