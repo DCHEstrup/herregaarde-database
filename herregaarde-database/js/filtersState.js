@@ -29,5 +29,15 @@ alderTil:
     document.getElementById("alderTil")?.value
         ? Number(document.getElementById("alderTil").value)
         : null,
+
+        transportFra:
+    document.getElementById("transportFra")?.value
+        ? Number(document.getElementById("transportFra").value)
+        : null,
+
+        transportTil:
+    document.getElementById("transportTil")?.value
+        ? Number(document.getElementById("transportTil").value)
+        : null,
     };
 }
