@@ -15,12 +15,147 @@ export function createArbejdeAutocomplete({
     const state = {
 
         data,
-
         selected: [],
-
         text: ""
 
     };
+
+    //----------------------------------
+    // Rendering
+    //----------------------------------
+
+    function render() {
+
+        suggestions.innerHTML = "";
+
+        const text =
+            state.text
+                .trim()
+                .toLowerCase();
+
+        let matches;
+
+        if (text) {
+
+            matches = state.data
+
+                .filter(item =>
+                    item.værdi
+                        .toLowerCase()
+                        .includes(text)
+                )
+
+                .sort(
+                    (a, b) => b.antal - a.antal
+                )
+
+                .slice(0, 50);
+
+        }
+
+        else {
+
+            matches = [...state.data]
+
+                .sort(
+                    (a, b) => b.antal - a.antal
+                )
+
+                .slice(0, 50);
+
+        }
+
+        if (matches.length === 0) {
+
+            suggestions.style.display = "none";
+            return;
+
+        }
+
+        suggestions.style.display = "block";
+
+        matches.forEach(item => {
+
+            const row =
+                document.createElement("div");
+
+            row.className =
+                "arbejde-row";
+
+            const checked =
+                state.selected.includes(item.værdi)
+                    ? "checked"
+                    : "";
+
+            row.innerHTML = `
+
+                <label class="arbejde-label">
+
+                    <input
+                        type="checkbox"
+                        ${checked}>
+
+                    <span class="arbejde-value">
+
+                        ${item.værdi}
+
+                    </span>
+
+                    <span class="arbejde-count">
+
+                        (${item.antal})
+
+                    </span>
+
+                </label>
+
+            `;
+
+            const checkbox =
+                row.querySelector("input");
+
+            checkbox.addEventListener(
+                "change",
+                () => {
+
+                    if (checkbox.checked) {
+
+                        if (
+                            !state.selected.includes(
+                                item.værdi
+                            )
+                        ) {
+
+                            state.selected.push(
+                                item.værdi
+                            );
+
+                        }
+
+                    }
+
+                    else {
+
+                        state.selected =
+                            state.selected.filter(
+                                value =>
+                                    value !== item.værdi
+                            );
+
+                    }
+
+                }
+            );
+
+            suggestions.appendChild(row);
+
+        });
+
+    }
+
+    //----------------------------------
+    // Input
+    //----------------------------------
 
     input.addEventListener(
         "input",
@@ -33,120 +168,51 @@ export function createArbejdeAutocomplete({
 
         }
     );
+
+    //----------------------------------
+    // Focus
+    //----------------------------------
+
     input.addEventListener(
-    "focus",
-    () => render()
-);
+        "focus",
+        () => {
+
+            render();
+
+        }
+    );
+
+    //----------------------------------
+    // Luk ved klik udenfor
+    //----------------------------------
+
     document.addEventListener(
-    "click",
-    e => {
+        "click",
+        event => {
 
-        if (
-            !input.contains(e.target) &&
-            !suggestions.contains(e.target)
-        ) {
+            if (
 
-            suggestions.style.display = "none";
+                !input.contains(event.target)
 
-        }
+                &&
 
-    }
-);
+                !suggestions.contains(event.target)
 
-    function render() {
+            ) {
 
-        suggestions.innerHTML = "";
+                suggestions.style.display =
+                    "none";
 
-        const text =
-            state.text
-                .trim()
-                .toLowerCase();
-
-       let matches;
-
-if (text) {
-
-    matches = state.data
-
-        .filter(item =>
-            item.værdi
-                .toLowerCase()
-                .includes(text)
-        )
-
-        .sort(
-            (a,b)=>b.antal-a.antal
-        )
-
-        .slice(0,50);
-
-}
-else {
-
-    matches = state.data
-
-        .slice(0,50);
-
-}
-
-        const checked =
-    state.selected.includes(item.værdi)
-        ? "checked"
-        : "";
-
-        suggestions.style.display = "block";
-
-        matches.forEach(item=>{
-
-            const row =
-                document.createElement("div");
-
-            row.className =
-                "arbejde-row";
-
-row.innerHTML = `
-<label>
-
-    <input
-        type="checkbox"
-        ${checked}>
-
-    <span>${item.værdi}</span>
-
-    <span class="arbejde-count">
-        (${item.antal})
-    </span>
-
-</label>
-`;
-
-            suggestions.appendChild(row);
-            const checkbox =
-    row.querySelector("input");
-
-checkbox.addEventListener(
-    "change",
-    () => {
-
-        if (checkbox.checked) {
-
-            state.selected.push(item.værdi);
-
-        } else {
-
-            state.selected =
-                state.selected.filter(
-                    v => v !== item.værdi
-                );
+            }
 
         }
+    );
 
-    }
-);
+    //----------------------------------
+    // Offentlig metode
+    //----------------------------------
 
-        });
-
-    }
+    input.getSelectedValues =
+        () => [...state.selected];
 
 }
-
