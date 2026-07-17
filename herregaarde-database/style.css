@@ -413,6 +413,26 @@ top:44px; z-index:2; }
     color:#666;
     font-weight:600;
 }
+.arbejde-row{
+    padding:8px 12px;
+    cursor:pointer;
+}
+
+.arbejde-row:hover{
+    background:#f5f5f5;
+}
+
+.arbejde-row label{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    cursor:pointer;
+}
+
+.arbejde-count{
+    color:#777;
+    font-size:13px;
+}
 
 @media(max-width:900px){
 .content{
