@@ -65,6 +65,10 @@ export async function searchPeople(filters) {
             : null,
         p_arbejde:
             filters.arbejde || null,
+        p_arbejde_valgt:
+            filters.arbejdeValgt?.length
+            ? filters.arbejdeValgt
+            : null,
         p_civilstand:
             filters.civilstand?.length
                 ? filters.civilstand
@@ -113,6 +117,10 @@ export async function downloadPeople(filters = {}) {
             ? filters.kommune
             : null,
         p_arbejde: filters.arbejde || null,
+        p_arbejde_valgt:
+            filters.arbejdeValgt?.length
+            ? filters.arbejdeValgt
+            : null,
         p_civilstand: filters.civilstand?.length
             ? filters.civilstand
             : null,
