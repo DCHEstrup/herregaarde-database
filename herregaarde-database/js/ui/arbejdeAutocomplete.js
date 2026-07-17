@@ -1,7 +1,9 @@
 export function createArbejdeAutocomplete({
+
     inputId,
     suggestionId,
     data
+
 }) {
 
     const input =
@@ -12,63 +14,97 @@ export function createArbejdeAutocomplete({
 
     const state = {
 
-        text: "",
+        data,
 
         selected: [],
 
-        data
+        text: ""
 
     };
 
-} input.addEventListener(
-    "input",
-    e => {
+    input.addEventListener(
+        "input",
+        () => {
 
-        state.text =
-            e.target.value;
+            state.text =
+                input.value;
 
-        renderSuggestions();
+            render();
+
+        }
+    );
+
+    function render() {
+
+        suggestions.innerHTML = "";
+
+        const text =
+            state.text
+                .trim()
+                .toLowerCase();
+
+        if (!text) {
+
+            suggestions.style.display = "none";
+
+            return;
+
+        }
+
+        const matches =
+
+            state.data
+
+                .filter(item =>
+                    item.værdi
+                        .toLowerCase()
+                        .includes(text)
+                )
+
+                .sort(
+                    (a,b)=>
+                        b.antal-a.antal
+                )
+
+                .slice(0,15);
+
+        suggestions.style.display = "block";
+
+        matches.forEach(item=>{
+
+            const row =
+                document.createElement("div");
+
+            row.className =
+                "arbejde-row";
+
+            row.innerHTML = `
+
+                <label>
+
+                    <input
+                        type="checkbox">
+
+                    <span>
+
+                        ${item.værdi}
+
+                    </span>
+
+                    <span class="arbejde-count">
+
+                        (${item.antal})
+
+                    </span>
+
+                </label>
+
+            `;
+
+            suggestions.appendChild(row);
+
+        });
 
     }
-);
-function renderSuggestions() {
-
-    suggestions.innerHTML = "";
-
-    if (!state.text.trim()) {
-        return;
-    }
-
-    const matches =
-        state.data
-            .filter(item =>
-                item.værdi
-                    .toLowerCase()
-                    .includes(
-                        state.text.toLowerCase()
-                    )
-            )
-            .sort(
-                (a, b) =>
-                    b.antal - a.antal
-            )
-            .slice(0, 15);
-
-    matches.forEach(item => {
-
-        const div =
-            document.createElement("div");
-
-        div.className =
-            "arbejde-suggestion";
-
-        div.innerHTML = `
-            <span>${item.værdi}</span>
-            <span>${item.antal}</span>
-        `;
-
-        suggestions.appendChild(div);
-
-    });
 
 }
