@@ -33,6 +33,10 @@ export function createArbejdeAutocomplete({
 
         }
     );
+    input.addEventListener(
+    "focus",
+    () => render()
+);
 
     function render() {
 
