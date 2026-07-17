@@ -43,30 +43,32 @@ export function createArbejdeAutocomplete({
                 .trim()
                 .toLowerCase();
 
-        if (!text) {
+       let matches;
 
-            suggestions.style.display = "none";
+if (text) {
 
-            return;
+    matches = state.data
 
-        }
+        .filter(item =>
+            item.værdi
+                .toLowerCase()
+                .includes(text)
+        )
 
-        const matches =
+        .sort(
+            (a,b)=>b.antal-a.antal
+        )
 
-            state.data
+        .slice(0,50);
 
-                .filter(item =>
-                    item.værdi
-                        .toLowerCase()
-                        .includes(text)
-                )
+}
+else {
 
-                .sort(
-                    (a,b)=>
-                        b.antal-a.antal
-                )
+    matches = state.data
 
-                .slice(0,15);
+        .slice(0,50);
+
+}
 
         suggestions.style.display = "block";
 
