@@ -89,6 +89,11 @@ else {
 
 }
 
+        const checked =
+    state.selected.includes(item.værdi)
+        ? "checked"
+        : "";
+
         suggestions.style.display = "block";
 
         matches.forEach(item=>{
@@ -99,30 +104,45 @@ else {
             row.className =
                 "arbejde-row";
 
-            row.innerHTML = `
+row.innerHTML = `
+<label>
 
-                <label>
+    <input
+        type="checkbox"
+        ${checked}>
 
-                    <input
-                        type="checkbox">
+    <span>${item.værdi}</span>
 
-                    <span>
+    <span class="arbejde-count">
+        (${item.antal})
+    </span>
 
-                        ${item.værdi}
-
-                    </span>
-
-                    <span class="arbejde-count">
-
-                        (${item.antal})
-
-                    </span>
-
-                </label>
-
-            `;
+</label>
+`;
 
             suggestions.appendChild(row);
+            const checkbox =
+    row.querySelector("input");
+
+checkbox.addEventListener(
+    "change",
+    () => {
+
+        if (checkbox.checked) {
+
+            state.selected.push(item.værdi);
+
+        } else {
+
+            state.selected =
+                state.selected.filter(
+                    v => v !== item.værdi
+                );
+
+        }
+
+    }
+);
 
         });
 
