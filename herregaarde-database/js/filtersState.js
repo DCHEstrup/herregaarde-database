@@ -18,7 +18,7 @@ export function getCurrentFilters() {
             getSelectedValues("handicap"),
         arbejde:
             document.getElementById("arbejde")?.value.trim() || null,
-        arbejdeValgt:
+       arbejdeValgt:
             getSelectedValues("arbejdeSelect"),
         civilstand:
             getSelectedValues("civilstand"),
