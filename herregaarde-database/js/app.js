@@ -26,7 +26,7 @@ document.getElementById("censusCount").textContent =
 document.addEventListener("DOMContentLoaded", async () => {
 
     await loadFilters();
-    */
+    /*
       enableAutosuggest(
         "arbejde",
         getJobSuggestions
