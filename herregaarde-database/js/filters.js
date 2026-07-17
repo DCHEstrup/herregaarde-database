@@ -1,5 +1,6 @@
 import { getFilters } from "./supabase.js";
 import { createMultiSelect } from "./ui/multiselectV2.js";
+import { createArbejdeAutocomplete } from "./ui/arbejdeAutocomplete.js";
 
 export async function loadFilters() {
 
@@ -72,10 +73,11 @@ createMultiSelect({
     values: data.handicap,
     placeholder: "Alle handicap"
 });
-createMultiSelect({
-    containerId: "arbejdeSelect",
-    values: data.arbejde,
-    placeholder: "Vælg arbejde eller position"
+createArbejdeAutocomplete({
+    inputId: "arbejde",
+    suggestionId: "arbejdeSuggestions",
+    data: data.arbejde
+
 });
 }
 
