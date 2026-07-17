@@ -72,10 +72,11 @@ createMultiSelect({
     values: data.handicap,
     placeholder: "Alle handicap"
 });
-    createMultiSelect(
-    "arbejdeSelect",
-    filters.arbejde
-);
+createMultiSelect({
+    containerId: "arbejdeSelect",
+    values: data.arbejde,
+    placeholder: "Vælg arbejde eller position"
+});
 }
 
 // Hjælpefunktion
