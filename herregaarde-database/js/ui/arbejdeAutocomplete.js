@@ -31,3 +31,44 @@ export function createArbejdeAutocomplete({
 
     }
 );
+function renderSuggestions() {
+
+    suggestions.innerHTML = "";
+
+    if (!state.text.trim()) {
+        return;
+    }
+
+    const matches =
+        state.data
+            .filter(item =>
+                item.værdi
+                    .toLowerCase()
+                    .includes(
+                        state.text.toLowerCase()
+                    )
+            )
+            .sort(
+                (a, b) =>
+                    b.antal - a.antal
+            )
+            .slice(0, 15);
+
+    matches.forEach(item => {
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "arbejde-suggestion";
+
+        div.innerHTML = `
+            <span>${item.værdi}</span>
+            <span>${item.antal}</span>
+        `;
+
+        suggestions.appendChild(div);
+
+    });
+
+}
