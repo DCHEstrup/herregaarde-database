@@ -19,6 +19,7 @@ export function clearFilters() {
     clearMultiSelect("alderTil");
     clearMultiSelect("transportFra");
     clearMultiSelect("transportTil");
+    clearMultiSelect("arbejdeSelect");
 
     //----------------------------------
     // Arbejde / Position
