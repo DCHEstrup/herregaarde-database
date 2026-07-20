@@ -231,7 +231,8 @@ const api = {
         state.selected = [];
         state.text = "";
         input.value = "";
-        render();
+    suggestions.innerHTML = "";
+    suggestions.style.display = "none";
 
     }
 
