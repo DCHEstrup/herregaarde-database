@@ -161,6 +161,7 @@ this.container.append(
                 }
             }
         );
+        this.renderSelectedChips();
     }
         //--------------------------------------------------
     // Header
