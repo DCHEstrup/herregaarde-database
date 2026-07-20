@@ -215,7 +215,24 @@ export function window.arbejdeAutocomplete =
 
     input.getSelectedValues =
         () => [...state.selected];
+return {
 
+    getSelected() {
+
+        return state.selected;
+
+    },
+
+    clear() {
+
+        state.selected = [];
+        state.text = "";
+        input.value = "";
+        render();
+
+    }
+
+};
 }
 
 export function getSelectedArbejde() {
