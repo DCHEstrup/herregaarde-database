@@ -433,6 +433,33 @@ top:44px; z-index:2; }
     color:#777;
     font-size:13px;
 }
+.arbejde-chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:8px;
+    margin-bottom:8px;
+}
+
+.arbejde-chip{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:5px 10px;
+    background:#355c4a;
+    color:white;
+    border-radius:20px;
+    font-size:0.9rem;
+}
+
+.arbejde-chip button{
+    border:none;
+    background:none;
+    color:white;
+    cursor:pointer;
+    font-size:1rem;
+    padding:0;
+}
 
 @media(max-width:900px){
 .content{
