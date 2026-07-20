@@ -162,18 +162,25 @@ export function createArbejdeAutocomplete({
         });
 
     }
-renderChips(
-    chipContainer,
-    state.selected,
-    value => {
+function renderSelectedChips() {
 
-        state.selected =
-            state.selected.filter(v => v !== value);
+    renderChips(
+        chips,
+        state.selected,
+        value => {
 
-        render();
+            state.selected =
+                state.selected.filter(
+                    v => v !== value
+                );
 
-    }
-);
+            render();
+            renderSelectedChips();
+
+        }
+    );
+
+}
 
     //----------------------------------
     // Input
