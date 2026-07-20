@@ -13,6 +13,9 @@ export function createArbejdeAutocomplete({
 
     const suggestions =
         document.getElementById(suggestionId);
+    
+    const chips =
+    document.getElementById("arbejdeChips");
 
     const state = {
 
@@ -156,6 +159,41 @@ export function createArbejdeAutocomplete({
         });
 
     }
+    function renderChips(){
+
+    chips.innerHTML = "";
+
+    state.selected.forEach(value => {
+
+        const chip =
+            document.createElement("div");
+
+        chip.className =
+            "arbejde-chip";
+
+        chip.innerHTML = `
+            <span>${value}</span>
+            <button>&times;</button>
+        `;
+
+        chip.querySelector("button")
+            .addEventListener("click", () => {
+
+                state.selected =
+                    state.selected.filter(
+                        x => x !== value
+                    );
+
+                render();
+                renderChips();
+
+            });
+
+        chips.appendChild(chip);
+
+    });
+
+}
 
     //----------------------------------
     // Input
