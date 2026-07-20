@@ -216,3 +216,9 @@ export function createArbejdeAutocomplete({
         () => [...state.selected];
 
 }
+
+export function getSelectedArbejde() {
+
+    return window.arbejdeAutocomplete?.getSelected() || [];
+
+}
