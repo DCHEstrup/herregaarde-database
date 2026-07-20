@@ -31,7 +31,9 @@ export async function getJobSuggestions(query) {
 }
 
 export async function searchPeople(filters) {
-
+console.log("Arbejde:", filters.arbejde);
+console.log("Arbejde valgt:", filters.arbejdeValgt);
+console.log(filters);
     return await supabase.rpc("search_people", {
 
         p_herregaard:
