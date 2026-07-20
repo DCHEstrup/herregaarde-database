@@ -1,3 +1,4 @@
+import { renderChips } from "./chips.js";
 let instance = null;
 
 export function createArbejdeAutocomplete({
