@@ -36,13 +36,22 @@ function createSection(
     });
     return section;
 }
-function createRow(row, max) {
+function createRow(
+    row,
+    max,
+    total,
+    showPercent
+) {
     const wrapper =
         document.createElement("div");
     wrapper.className =
         "statistics-row";
-    const percent =
-        (row.count / max) * 100;
+    const width =
+        row.count / max * 100;
+    const value =
+        showPercent
+            ? `${Math.round(row.count / total * 100)}%`
+            : row.count.toLocaleString("da-DK");
     wrapper.innerHTML = `
         <div class="statistics-label">
             ${row.label}
@@ -50,11 +59,11 @@ function createRow(row, max) {
         <div class="statistics-bar">
             <div
                 class="statistics-fill"
-                style="width:${percent}%">
+                style="width:${width}%">
             </div>
         </div>
         <div class="statistics-value">
-            ${row.count.toLocaleString("da-DK")}
+            ${value}
         </div>
     `;
     return wrapper;
