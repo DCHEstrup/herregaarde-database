@@ -362,6 +362,32 @@ this.container.append(
         text.textContent =
             `${values[0]}, ${values[1]} +${values.length - 2}`;
     }
+    renderSelectedChips() {
+    renderChips(
+        this.chips,
+        this.getValues(),
+        value => {
+            this.selected.delete(value);
+            const option =
+                this.options.find(
+                    o => o.value === value
+                );
+            if (option) {
+                option.setChecked(
+                    false,
+                    false
+                );
+            }
+            this.updateHeader();
+            this.updateSelectAll();
+            this.onChange(
+                this.getValues()
+            );
+
+            this.renderSelectedChips();
+        }
+    );
+}
 
     //--------------------------------------------------
     // Opdater "Vælg alle"
