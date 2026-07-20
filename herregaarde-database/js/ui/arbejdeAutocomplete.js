@@ -207,6 +207,7 @@ export function createArbejdeAutocomplete({
                 input.value;
 
             render();
+            renderChips();
 
         }
     );
@@ -220,6 +221,7 @@ export function createArbejdeAutocomplete({
         () => {
 
             render();
+            renderChips();
 
         }
     );
