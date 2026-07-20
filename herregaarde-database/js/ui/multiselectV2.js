@@ -461,6 +461,7 @@ this.container.append(
     this.selected.clear();
     this.updateHeader();
     this.updateSelectAll();
+    this.renderSelectedChips();
     this.onChange(
         this.getValues()
     );
