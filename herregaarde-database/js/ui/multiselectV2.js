@@ -365,10 +365,47 @@ this.container.append(
         text.textContent =
             `${values[0]}, ${values[1]} +${values.length - 2}`;
     }
-    renderSelectedChips() {
+renderSelectedChips() {
+    const values = this.getValues();
+    //----------------------------------
+    // Ingen valgt
+    //----------------------------------
+    if (values.length === 0) {
+        this.chips.innerHTML = "";
+        return;
+    }
+    //----------------------------------
+    // Alle valgt
+    //----------------------------------
+    if (values.length === this.options.length) {
+        renderChips(
+            this.chips,
+            ["Alle"],
+            () => {
+                this.clear();
+            }
+        );
+        return;
+    }
+    //----------------------------------
+    // Mange valgt
+    //----------------------------------
+    if (values.length > 7) {
+        renderChips(
+            this.chips,
+            [`${values.length} valgte`],
+            () => {
+                this.clear();
+            }
+        );
+        return;
+    }
+    //----------------------------------
+    // Få valgt
+    //----------------------------------
     renderChips(
         this.chips,
-        this.getValues(),
+        values,
         value => {
             this.selected.delete(value);
             const option =
@@ -386,7 +423,6 @@ this.container.append(
             this.onChange(
                 this.getValues()
             );
-
             this.renderSelectedChips();
         }
     );
