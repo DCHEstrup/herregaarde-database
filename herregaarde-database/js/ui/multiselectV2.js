@@ -241,6 +241,7 @@ this.container.append(
             );
         });
         this.updateHeader();
+        this.renderSelectedChips();
         this.onChange(
             this.getValues()
         );
