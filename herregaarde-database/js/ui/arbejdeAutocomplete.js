@@ -150,6 +150,8 @@ export function createArbejdeAutocomplete({
                             );
 
                     }
+    renderChips();
+    render();
 
                 }
             );
