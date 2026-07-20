@@ -1,3 +1,5 @@
+let instance = null;
+
 export function createArbejdeAutocomplete({
 
     inputId,
@@ -19,6 +21,8 @@ export function createArbejdeAutocomplete({
         text: ""
 
     };
+
+    
 
     //----------------------------------
     // Rendering
