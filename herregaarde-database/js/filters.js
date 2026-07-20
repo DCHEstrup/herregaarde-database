@@ -73,7 +73,7 @@ createMultiSelect({
     values: data.handicap,
     placeholder: "Alle handicap"
 });
-window.arbejdeAutocomplete =
+
 createArbejdeAutocomplete({
     inputId: "arbejde",
     suggestionId: "arbejdeSuggestions",
