@@ -308,6 +308,7 @@ this.container.append(
             this.updateSelectAll();
             if (notify) {
                 this.updateHeader();
+                this.renderSelectedChips();
                 this.onChange(
                     this.getValues()
                 );
