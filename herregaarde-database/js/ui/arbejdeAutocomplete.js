@@ -247,3 +247,8 @@ export function getSelectedArbejde() {
     return instance?.getSelected() || [];
 
 }
+export function clearSelectedArbejde() {
+
+    instance?.clear();
+
+}
