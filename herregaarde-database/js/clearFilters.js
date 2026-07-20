@@ -1,5 +1,6 @@
 import { clearMultiSelect } from "./ui/multiselectV2.js";
 import { clearResults } from "./ui/results.js";
+import { clearSelectedArbejde } from "./ui/arbejdeAutocomplete.js";
 
 export function clearFilters() {
 
