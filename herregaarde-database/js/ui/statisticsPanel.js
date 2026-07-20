@@ -46,12 +46,16 @@ function createRow(
         document.createElement("div");
     wrapper.className =
         "statistics-row";
-    const width =
-        row.count / max * 100;
-    const value =
-        showPercent
-            ? `${Math.round(row.count / total * 100)}%`
-            : row.count.toLocaleString("da-DK");
+const width =
+    showPercent
+        ? row.count / total * 100
+        : row.count / max * 100;
+const percent =
+    Math.round(row.count / total * 100);
+const value =
+    showPercent
+        ? `${row.count.toLocaleString("da-DK")} (${percent}%)`
+        : row.count.toLocaleString("da-DK");
     wrapper.innerHTML = `
         <div class="statistics-label">
             ${row.label}
