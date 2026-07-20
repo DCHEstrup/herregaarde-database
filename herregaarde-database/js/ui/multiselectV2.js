@@ -1,3 +1,5 @@
+import { renderChips } from "./chips.js";
+
 const instances = new Map();
 
 export function createMultiSelect(config) {
@@ -129,10 +131,17 @@ class MultiSelect {
         //----------------------------------
         // Saml komponent
         //----------------------------------
-        this.container.append(
-            this.header,
-            this.dropdown
-        );
+this.chips =
+    document.createElement("div");
+
+this.chips.className =
+    "filter-chips";
+
+this.container.append(
+    this.header,
+    this.chips,
+    this.dropdown
+);
         //----------------------------------
         // Events
         //----------------------------------
