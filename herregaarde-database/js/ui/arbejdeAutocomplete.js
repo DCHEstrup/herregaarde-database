@@ -162,41 +162,18 @@ export function createArbejdeAutocomplete({
         });
 
     }
-    function renderChips(){
+renderChips(
+    chipContainer,
+    state.selected,
+    value => {
 
-    chips.innerHTML = "";
+        state.selected =
+            state.selected.filter(v => v !== value);
 
-    state.selected.forEach(value => {
+        render();
 
-        const chip =
-            document.createElement("div");
-
-        chip.className =
-            "arbejde-chip";
-
-        chip.innerHTML = `
-            <span>${value}</span>
-            <button>&times;</button>
-        `;
-
-        chip.querySelector("button")
-            .addEventListener("click", () => {
-
-                state.selected =
-                    state.selected.filter(
-                        x => x !== value
-                    );
-
-                render();
-                renderChips();
-
-            });
-
-        chips.appendChild(chip);
-
-    });
-
-}
+    }
+);
 
     //----------------------------------
     // Input
