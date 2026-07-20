@@ -14,9 +14,17 @@ export function createArbejdeAutocomplete({
 
     const suggestions =
         document.getElementById(suggestionId);
-    
     const chips =
-    document.getElementById("arbejdeChips");
+    document.createElement("div");
+
+    chips.className =
+    "filter-chips";
+
+    input.parentNode.insertBefore(
+    chips,
+    suggestions
+);
+    
 
     const state = {
 
