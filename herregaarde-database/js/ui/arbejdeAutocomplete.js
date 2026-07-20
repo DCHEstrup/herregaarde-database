@@ -218,11 +218,11 @@ export function createArbejdeAutocomplete({
 
     input.getSelectedValues =
         () => [...state.selected];
-return {
+const api = {
 
     getSelected() {
 
-        return state.selected;
+        return [...state.selected];
 
     },
 
@@ -236,10 +236,14 @@ return {
     }
 
 };
+
+instance = api;
+
+return api;
 }
 
 export function getSelectedArbejde() {
 
-    return window.arbejdeAutocomplete?.getSelected() || [];
+    return instance?.getSelected() || [];
 
 }
