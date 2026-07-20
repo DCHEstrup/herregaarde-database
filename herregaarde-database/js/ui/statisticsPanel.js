@@ -110,22 +110,34 @@ content.appendChild(
         data.aar
     )
 );
+
 content.appendChild(
     createSection(
         "Køn",
-        data.koen
+        data.koen,
+        {
+            showPercent: true
+        }
     )
 );
+
 content.appendChild(
     createSection(
         "Civilstand",
-        data.civilstand
+        data.civilstand,
+        {
+            showPercent: true
+        }
     )
 );
+
 content.appendChild(
     createSection(
         "Religion",
-        data.trossamfund
+        data.trossamfund,
+        {
+            showPercent: true
+        }
     )
 );
     updatePanel();
