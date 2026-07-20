@@ -1,8 +1,13 @@
 let expanded = false;
 let initialized = false;
 
-function createSection(title, rows) {
-
+function createSection(
+    title,
+    rows,
+    {
+        showPercent = false
+    } = {}
+) {
     const section =
         document.createElement("section");
     section.className =
@@ -14,11 +19,18 @@ function createSection(title, rows) {
     section.appendChild(heading);
     const max =
         Math.max(...rows.map(r => r.count));
+    const total =
+        rows.reduce(
+            (sum, row) => sum + row.count,
+            0
+        );
     rows.forEach(row => {
         section.appendChild(
             createRow(
                 row,
-                max
+                max,
+                total,
+                showPercent
             )
         );
     });
