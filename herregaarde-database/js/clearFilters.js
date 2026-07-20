@@ -21,6 +21,11 @@ export function clearFilters() {
     clearMultiSelect("transportFra");
     clearMultiSelect("transportTil");
     clearMultiSelect("arbejdeSelect");
+    const arbejde = document.getElementById("arbejde");
+if (arbejde) {
+    arbejde.value = "";
+}
+clearSelectedArbejde();
 
     //----------------------------------
     // Arbejde / Position
