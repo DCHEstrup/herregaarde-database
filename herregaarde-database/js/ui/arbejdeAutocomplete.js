@@ -273,6 +273,7 @@ const api = {
         input.value = "";
     suggestions.innerHTML = "";
     suggestions.style.display = "none";
+        renderChips();
 
     }
 
