@@ -151,7 +151,7 @@ export function createArbejdeAutocomplete({
                             );
 
                     }
-    renderChips();
+    renderSelectedChips();
     render();
 
                 }
@@ -194,7 +194,7 @@ function renderSelectedChips() {
                 input.value;
 
             render();
-            renderChips();
+            renderSelectedChips();
 
         }
     );
@@ -208,7 +208,7 @@ function renderSelectedChips() {
         () => {
 
             render();
-            renderChips();
+            renderSelectedChips();
 
         }
     );
@@ -260,7 +260,7 @@ const api = {
         input.value = "";
     suggestions.innerHTML = "";
     suggestions.style.display = "none";
-        renderChips();
+        renderSelectedChips();
 
     }
 
