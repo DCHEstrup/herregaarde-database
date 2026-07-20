@@ -321,6 +321,37 @@ outline: none;
 border-bottom:1px solid #ececec; 
 background:#fafafa; position:sticky; 
 top:44px; z-index:2; }
+/* ==========================================
+   statestik
+   ========================================== */
+.statistics-panel{
+    margin:25px 0;
+}
+
+.statistics-toggle{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 18px;
+    border:none;
+    background:#355c4a;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:600;
+}
+
+.statistics-content{
+    display:none;
+    padding:18px;
+    border:1px solid #d8d8d8;
+    border-top:none;
+    border-radius:0 0 8px 8px;
+    background:white;
+}
+
 
 /* =====================================
    Udvidede filtre
