@@ -1,10 +1,11 @@
-export function createArbejdeAutocomplete({
+export function window.arbejdeAutocomplete =
+    createArbejdeAutocomplete({
 
-    inputId,
-    suggestionId,
-    data
+        inputId: "arbejde",
+        suggestionId: "arbejdeSuggestions",
+        data: data.arbejde
 
-}) {
+    }) {
 
     const input =
         document.getElementById(inputId);
