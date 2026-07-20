@@ -1,4 +1,5 @@
 import { getSelectedValues } from "./ui/multiselectV2.js";
+import { getSelectedArbejde } from "./ui/arbejdeAutocomplete.js";
 
 export function getCurrentFilters() {
     return {
@@ -17,9 +18,11 @@ export function getCurrentFilters() {
         handicap:
             getSelectedValues("handicap"),
         arbejde:
-            document.getElementById("arbejde")?.value.trim() || null,
-       arbejdeValgt:
-            getSelectedValues("arbejdeSelect"),
+            document.getElementById("arbejde")
+            ?.value
+            .trim() || null,
+        arbejdeValgt:
+            getSelectedArbejde(),
         civilstand:
             getSelectedValues("civilstand"),
         alderFra:
