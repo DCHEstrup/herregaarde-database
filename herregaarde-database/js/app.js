@@ -5,7 +5,7 @@ import { downloadCSV } from "./download.js";
 import { getCurrentFilters } from "./filtersState.js";
 import { renderPagination } from "./ui/pagination.js";
 import { enableAutosuggest } from "./autosuggest.js";
-import { getJobSuggestions, getStatistics } from "./supabase.js";
+import { getJobSuggestions, getStatistics, getSearchStatistics } from "./supabase.js";
 import { createMultiSelect } from "./ui/multiselectV2.js";
 import { clearFilters } from "./clearFilters.js";
 import { initialiseAdvancedFilters } from "./advancedFilters.js";
@@ -26,6 +26,9 @@ document.getElementById("censusCount").textContent =
 document.addEventListener("DOMContentLoaded", async () => {
 
     await loadFilters();
+    const stats = await getSearchStatistics(getCurrentFilters());
+
+console.log(stats);
     /*
       enableAutosuggest(
         "arbejde",
