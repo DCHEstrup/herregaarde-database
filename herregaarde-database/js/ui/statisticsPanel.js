@@ -1,6 +1,54 @@
 let expanded = false;
 let initialized = false;
 
+function createSection(title, rows) {
+
+    const section =
+        document.createElement("section");
+    section.className =
+        "statistics-section";
+    const heading =
+        document.createElement("h3");
+    heading.textContent =
+        title;
+    section.appendChild(heading);
+    const max =
+        Math.max(...rows.map(r => r.count));
+    rows.forEach(row => {
+        section.appendChild(
+            createRow(
+                row,
+                max
+            )
+        );
+    });
+    return section;
+}
+
+function createRow(row, max) {
+    const wrapper =
+        document.createElement("div");
+    wrapper.className =
+        "statistics-row";
+    const percent =
+        (row.count / max) * 100;
+    wrapper.innerHTML = `
+        <span class="statistics-label">
+            ${row.label}
+        </span>
+        <div class="statistics-bar">
+            <div
+                class="statistics-fill"
+                style="width:${percent}%">
+            </div>
+        </div>
+        <span class="statistics-count">
+            ${row.count.toLocaleString("da-DK")}
+        </span>
+    `;
+    return wrapper;
+}
+
 export function renderStatistics(data) {
     const title =
         document.getElementById("statisticsTitle");
@@ -35,12 +83,31 @@ export function renderStatistics(data) {
     // Midlertidigt indhold
     //----------------------------------
 
-    content.innerHTML = `
-        <p>Folketællinger: ${data.aar.length}</p>
-        <p>Køn: ${data.koen.length}</p>
-        <p>Civilstand: ${data.civilstand.length}</p>
-        <p>Religion: ${data.trossamfund.length}</p>
-    `;
+content.innerHTML = "";
+content.appendChild(
+    createSection(
+        "Folketællinger",
+        data.aar
+    )
+);
+content.appendChild(
+    createSection(
+        "Køn",
+        data.koen
+    )
+);
+content.appendChild(
+    createSection(
+        "Civilstand",
+        data.civilstand
+    )
+);
+content.appendChild(
+    createSection(
+        "Religion",
+        data.trossamfund
+    )
+);
     updatePanel();
 }
 
