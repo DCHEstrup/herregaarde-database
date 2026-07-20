@@ -38,6 +38,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!result) return;
         renderTable(result);
         renderPagination(result, loadPage);
+        await loadStatistics();
+
     }
     document
         .getElementById("searchBtn")
