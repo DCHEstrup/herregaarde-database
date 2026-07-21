@@ -18,6 +18,10 @@ export function renderChips(container, values, onRemove) {
             });
 
         container.appendChild(chip);
+        container.style.display =
+    values.length
+        ? "flex"
+        : "none";
 
     });
 
