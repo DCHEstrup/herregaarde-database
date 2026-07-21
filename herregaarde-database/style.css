@@ -205,17 +205,16 @@ display:block;
     position: relative;
 }
 
-.autosuggest input{
-    width:240px;
-    min-height:36px;
-    padding:0 10px;
-    line-height:34px;
-    border:1px solid #bdbdbd;
-    border-radius:6px;
-    font-size:14px;
-    box-sizing:border-box;
-    font-family:inherit;
-    font-weight:400;
+.autosuggest input{ 
+   width:240px; 
+   height:36px; 
+   padding:0 10px; 
+   border:1px solid #bdbdbd; 
+   border-radius:6px; 
+   background:white; 
+   font-size:14px; 
+   box-sizing:border-box; 
+   transition:border-color .2s ease; 
 }
 .autosuggest-list{
     position:absolute;
