@@ -218,7 +218,7 @@ display:block;
 }
 .autosuggest-list{
     position:absolute;
-    top:calc(100% + 4px);
+    top:calc(100% + 2px);
     left:0;
     width:100%;
     background:white;
