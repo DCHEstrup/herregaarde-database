@@ -10,6 +10,7 @@ import { createMultiSelect } from "./ui/multiselectV2.js";
 import { clearFilters } from "./clearFilters.js";
 import { initialiseAdvancedFilters } from "./advancedFilters.js";
 import { loadStatistics } from "./statistics.js";
+import { downloadStatistics } from "./downloadStatistics.js";
 
 
 /*
@@ -57,3 +58,13 @@ document
     .addEventListener("click", () => {
         clearFilters();
     });
+document
+    .getElementById("downloadStatisticsBtn")
+    .addEventListener(
+        "click",
+        () => {
+            downloadStatistics(
+                getCurrentFilters()
+            );
+        }
+    );
