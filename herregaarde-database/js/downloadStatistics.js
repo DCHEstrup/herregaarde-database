@@ -1,5 +1,24 @@
 import { getSearchStatistics } from "./supabase.js";
 
+const labels = {
+    aar: "Folketælling",
+    koen: "Køn",
+    civilstand: "Civilstand",
+    trossamfund: "Religion"
+};
+const filterLabels = {
+    herregaard: "Herregård",
+    aar: "Folketællingsår",
+    koen: "Køn",
+    trossamfund: "Religion",
+    civilstand: "Civilstand",
+    region: "Region",
+    kommune: "Kommune",
+    handicap: "Handicap",
+    arbejde: "Fritekstsøgning",
+    arbejdeValgt: "Arbejde / Position"
+};
+
 export async function downloadStatistics(filters) {
     const { data, error } =
         await getSearchStatistics(filters);
@@ -11,7 +30,27 @@ export async function downloadStatistics(filters) {
     data,
     filters
 );
-console.log(csv);
+const blob = new Blob(
+    [csv],
+    {
+        type: "text/csv;charset=utf-8;"
+    }
+);
+const url =
+    URL.createObjectURL(blob);
+const link =
+    document.createElement("a");
+link.href = url;
+const today =
+    new Date()
+        .toISOString()
+        .slice(0,10);
+link.download =
+    `Herregaardsdatabasen_Statistik_${today}.csv`;
+document.body.appendChild(link);
+link.click();
+link.remove();
+URL.revokeObjectURL(url);
 }
 
 function buildStatisticsCSV(statistics, filters) {
@@ -39,11 +78,11 @@ function buildStatisticsCSV(statistics, filters) {
             return;
         }
         rows.push([
-            key,
+            filterLabels[key] || key,
             Array.isArray(value)
                 ? value.join(", ")
                 : value
-        ]);
+]);
     });
     rows.push([]);
 
@@ -64,7 +103,7 @@ function buildStatisticsCSV(statistics, filters) {
     Object.entries(statistics).forEach(([category, values]) => {
         if (category === "total")
             return;
-        rows.push([category]);
+        rows.push([labels[category] || category]);
         rows.push([
             "Værdi",
             "Antal",
