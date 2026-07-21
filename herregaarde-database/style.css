@@ -220,7 +220,7 @@ display:block;
     position:absolute;
     top:calc(100% + 4px);
     left:0;
-    width:240px;
+    width:100%;
     background:white;
     border:1px solid #bdbdbd;
     border-radius:6px;
