@@ -51,12 +51,14 @@
         class="autosuggest-list">
     </div>
 </div>
+       <div class="filter-actions">
             <button id="searchBtn">
                 Søg
             </button>
             <button id="clearBtn">
                 Ryd filtre
             </button>
+       </div>
        <div class="advanced-filters">
     <button
     id="toggleAdvanced"
@@ -115,16 +117,20 @@
 </div>
         </div>
     </header>
-    <section class="status-panel">
+    <section class="status-panel"> 
+   <div class="status-left">
         <div id="resultCount">
             Vælg filtre og tryk "Søg"
         </div>
+    </div>
+    <div class="status-right">
         <button id="downloadBtn" disabled>
-            Download CSV
+            ⬇ Download data
         </button>
         <button id="downloadStatisticsBtn">
-    Download statistik
+            📊 Download statistik
         </button>
+    </div>
     </section>
     <section class="statistics-panel">
     <button id="statisticsToggle"
