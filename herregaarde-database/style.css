@@ -31,11 +31,11 @@ body{
     grid-template-rows:
         auto
         auto
-        1fr
+        auto
         auto;
     gap:20px;
     padding:20px;
-    min-height:100vh;
+    min-height:auto;
 }
 .search-panel{
     display:flex;
