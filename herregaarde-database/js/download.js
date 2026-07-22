@@ -1,16 +1,4 @@
 import { downloadPeople } from "./supabase.js";
-const filterLabels = {
-    herregaard: "Herregård",
-    aar: "Folketællingsår",
-    koen: "Køn",
-    trossamfund: "Religion",
-    civilstand: "Civilstand",
-    region: "Region",
-    kommune: "Kommune",
-    handicap: "Handicap",
-    arbejde: "Fritekstsøgning",
-    arbejdeValgt: "Arbejde / Position"
-};
 
 export async function downloadCSV(filters) {
       console.log("Download filters:", filters);
@@ -26,55 +14,18 @@ console.log("error:", error);
         alert("Ingen data at downloade.");
         return;
     }
-// CSV-indhold
-const rows = [];
-
-//----------------------------------
-// Overskrift
-//----------------------------------
-rows.push(["Herregårdsdatabasen", ""]);
-rows.push(["Persondata fra søgeresultat", ""]);
-rows.push(["", ""]);
-rows.push(["Anvendte filtre", ""]);
-Object.entries(filters).forEach(([key, value]) => {
-    if (
-        value == null ||
-        value === "" ||
-        (Array.isArray(value) && value.length === 0)
-    ) {
-        return;
-    }
-rows.push([
-    filterLabels[key] || key,
-    Array.isArray(value)
-        ? value.join(", ")
-        : value
-]);
-});
-rows.push([]);
-
-//----------------------------------
-// Data
-//----------------------------------
-
-const headers = Object.keys(data[0]);
-rows.push(headers);
-data.forEach(row => {
-    rows.push(
-        headers.map(header => {
-            const value = row[header] ?? "";
-            return value;
-        })
-    );
-});
-// Lav CSV
-const csv = rows
-    .map(row =>
-        row.map(value =>
-            `"${String(value).replace(/"/g, '""')}"`
-        ).join(";")
-    )
-    .join("\n");
+    // Kolonnenavne
+    const headers = Object.keys(data[0]);
+    // CSV-indhold
+    const csv = [
+        headers.join(";"),
+        ...data.map(row =>
+            headers.map(header => {
+                const value = row[header] ?? "";
+                return `"${String(value).replace(/"/g, '""')}"`;
+            }).join(";")
+        )
+    ].join("\n");
     // Download fil
     const blob = new Blob(
         [csv],
