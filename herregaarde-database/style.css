@@ -42,3 +42,16 @@
     background:white;
     cursor:pointer;
 }
+/* ==================================================
+   autosuggest 
+================================================== */
+.autosuggest input{
+    width:100%;
+    height:var(--control-height);
+    padding:0 12px;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    background:white;
+    box-sizing:border-box;
+    font:inherit;
+}
