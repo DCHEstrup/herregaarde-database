@@ -217,6 +217,16 @@ display:block;
 .autosuggest-item:hover { 
    background: #f4f4f4; 
 }
+.autosuggest input {
+    width: 240px;
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid #bdbdbd;
+    border-radius: 2px;
+    background: white;
+    font-size: 16px;
+    box-sizing: border-box;
+}
 
 /* Resultatrækker */
 
