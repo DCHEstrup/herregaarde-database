@@ -9,3 +9,22 @@
     --transition:.2s ease;
     --chip-gap:6px;
 }
+/* ==================================================
+   CONTROLS
+================================================== */
+
+.control {
+    width: var(--control-width);
+    min-height: var(--control-height);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    background:white;
+    box-sizing:border-box;
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+.control:focus-within{
+    border-color:var(--primary);
+}
