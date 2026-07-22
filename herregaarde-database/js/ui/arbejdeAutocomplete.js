@@ -9,21 +9,35 @@ export function createArbejdeAutocomplete({
 
 }) {
 
-    const input =
-        document.getElementById(inputId);
+const input =
+    document.getElementById(inputId);
 
-    const suggestions =
-        document.getElementById(suggestionId);
-    const chips =
+const suggestions =
+    document.getElementById(suggestionId);
+
+// Opret komponent-wrapper
+const wrapper =
     document.createElement("div");
 
-    chips.className =
-    "filter-chips";
+wrapper.className =
+    "autocomplete";
 
-    input.parentNode.insertBefore(
-    chips,
-    suggestions
+// Opret chips
+const chips =
+    document.createElement("div");
+
+chips.className =
+    "selected-chips";
+
+// Pak input ind i wrapper
+input.parentNode.insertBefore(
+    wrapper,
+    input
 );
+
+wrapper.appendChild(input);
+wrapper.appendChild(chips);
+wrapper.appendChild(suggestions);
     
 
     const state = {
