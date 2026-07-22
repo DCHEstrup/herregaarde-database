@@ -60,6 +60,7 @@ class MultiSelect {
 
     build() {
         this.container.innerHTML = "";
+        this.container.classList.add("filter-component");
         this.container.classList.add("multiselect");
         //----------------------------------
         // Header
@@ -135,7 +136,7 @@ this.chips =
     document.createElement("div");
 
 this.chips.className =
-    "filter-chips";
+    "selected-chips";
 
 this.container.append(
     this.header,
