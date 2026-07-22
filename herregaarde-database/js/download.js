@@ -1,4 +1,16 @@
 import { downloadPeople } from "./supabase.js";
+const filterLabels = {
+    herregaard: "Herregård",
+    aar: "Folketællingsår",
+    koen: "Køn",
+    trossamfund: "Religion",
+    civilstand: "Civilstand",
+    region: "Region",
+    kommune: "Kommune",
+    handicap: "Handicap",
+    arbejde: "Fritekstsøgning",
+    arbejdeValgt: "Arbejde / Position"
+};
 
 export async function downloadCSV(filters) {
       console.log("Download filters:", filters);
