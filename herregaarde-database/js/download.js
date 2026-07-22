@@ -32,7 +32,9 @@ const rows = [];
 //----------------------------------
 // Overskrift
 //----------------------------------
-
+rows.push(["Herregårdsdatabasen fra Dansk Center for Herregårdsforskning"]);
+rows.push(["Persondata fra søgeresultat"]);
+rows.push([]);
 rows.push(["Anvendte filtre"]);
 Object.entries(filters).forEach(([key, value]) => {
     if (
