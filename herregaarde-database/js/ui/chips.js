@@ -1,6 +1,12 @@
 export function renderChips(container, values, onRemove) {
 
     container.innerHTML = "";
+        if (values.length === 0) {
+        container.style.display = "none";
+        return;
+    }
+
+    container.style.display = "flex";
 
     values.forEach(value => {
 
