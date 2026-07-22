@@ -14,6 +14,31 @@ console.log("error:", error);
         alert("Ingen data at downloade.");
         return;
     }
+// CSV-indhold
+const rows = [];
+
+//----------------------------------
+// Overskrift
+//----------------------------------
+
+rows.push(["Anvendte filtre"]);
+Object.entries(filters).forEach(([key, value]) => {
+    if (
+        value == null ||
+        value === "" ||
+        (Array.isArray(value) && value.length === 0)
+    ) {
+        return;
+    }
+    rows.push([
+        filterLabels[key] || key,
+        Array.isArray(value)
+            ? value.join(", ")
+            : value
+    ]);
+});
+rows.push([]);
+
     // Kolonnenavne
     const headers = Object.keys(data[0]);
     // CSV-indhold
