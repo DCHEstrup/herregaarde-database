@@ -51,18 +51,28 @@ Object.entries(filters).forEach(([key, value]) => {
 });
 rows.push([]);
 
-    // Kolonnenavne
-    const headers = Object.keys(data[0]);
-    // CSV-indhold
-    const csv = [
-        headers.join(";"),
-        ...data.map(row =>
-            headers.map(header => {
-                const value = row[header] ?? "";
-                return `"${String(value).replace(/"/g, '""')}"`;
-            }).join(";")
-        )
-    ].join("\n");
+//----------------------------------
+// Data
+//----------------------------------
+
+const headers = Object.keys(data[0]);
+rows.push(headers);
+data.forEach(row => {
+    rows.push(
+        headers.map(header => {
+            const value = row[header] ?? "";
+            return value;
+        })
+    );
+});
+// Lav CSV
+const csv = rows
+    .map(row =>
+        row.map(value =>
+            `"${String(value).replace(/"/g, '""')}"`
+        ).join(";")
+    )
+    .join("\n");
     // Download fil
     const blob = new Blob(
         [csv],
