@@ -32,10 +32,10 @@ const rows = [];
 //----------------------------------
 // Overskrift
 //----------------------------------
-rows.push(["Herregårdsdatabasen fra Dansk Center for Herregårdsforskning"]);
-rows.push(["Persondata fra søgeresultat"]);
-rows.push([]);
-rows.push(["Anvendte filtre"]);
+rows.push(["Herregårdsdatabasen", ""]);
+rows.push(["Persondata fra søgeresultat", ""]);
+rows.push(["", ""]);
+rows.push(["Anvendte filtre", ""]);
 Object.entries(filters).forEach(([key, value]) => {
     if (
         value == null ||
@@ -44,12 +44,12 @@ Object.entries(filters).forEach(([key, value]) => {
     ) {
         return;
     }
-    rows.push([
-        filterLabels[key] || key,
-        Array.isArray(value)
-            ? value.join(", ")
-            : value
-    ]);
+rows.push([
+    filterLabels[key] || key,
+    Array.isArray(value)
+        ? value.join(", ")
+        : value
+]);
 });
 rows.push([]);
 
