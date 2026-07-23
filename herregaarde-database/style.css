@@ -112,6 +112,30 @@
 .arbejde-row{
     @/* samme udseende */
 }
+.filters{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:24px;
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+}
+.filter-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(3,minmax(240px,1fr));
+    gap:24px;
+    align-items:start;
+}
+.filter-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+
+
 
 
 
