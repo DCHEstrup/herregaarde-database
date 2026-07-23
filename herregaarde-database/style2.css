@@ -671,3 +671,27 @@ input{
     background:#f4f7f5;
     box-shadow:0 0 0 1px var(--primary);
 }
+.result-cell{
+    min-width:0;
+}
+
+.result-cell strong{
+    display:block;
+    margin-bottom:4px;
+    color:var(--primary);
+    font-size:.82rem;
+    font-weight:600;
+}
+
+.result-cell span{
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    color:var(--text);
+    line-height:1.4;
+}
+
+.result-name{
+    font-weight:600;
+}
