@@ -38,5 +38,6 @@ export function clearResults() {
     //----------------------------------
 
     document.getElementById("downloadBtn").disabled = true;
+    document.getElementById("downloadStatisticsBtn").disabled = true;
 
 }
