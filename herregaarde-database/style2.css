@@ -269,8 +269,8 @@ input{
     top:calc(var(--control-height) + 31px);
     left:0;
     width:var(--control-width);
-    max-height:260px;
-    overflow-y:auto;
+    max-height:none;
+    overflow:visible;
     background:var(--surface);
     border:1px solid var(--border);
     border-radius:var(--radius);
