@@ -76,7 +76,7 @@ class MultiSelect {
         this.dropdown =
             document.createElement("div");
         this.dropdown.className =
-            "multiselect-dropdown";
+            "filter-dropdown multiselect-dropdown";
 
         //----------------------------------
         // Sticky område
