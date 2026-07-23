@@ -428,7 +428,11 @@ input{
     padding-top:18px;
     border-top:1px solid #ececec;
 }
-
+.advanced-filters,
+.advanced-grid,
+.filters{
+    overflow:visible;
+}
 .advanced-toggle{
     width:100%;
     min-height:42px;
