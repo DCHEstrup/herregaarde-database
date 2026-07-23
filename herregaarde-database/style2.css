@@ -495,3 +495,54 @@ input{
     flex-wrap:wrap;
     gap:12px;
 }
+/* ==================================================
+   STATISTIKPANEL
+================================================== */
+
+.statistics-panel{
+    padding:0;
+    overflow:hidden;
+}
+
+.statistics-toggle{
+    width:100%;
+    min-height:52px;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    border:0;
+    border-radius:var(--radius);
+    background:var(--primary);
+    color:white;
+    font:inherit;
+    font-size:1.05rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:background var(--transition);
+}
+
+.statistics-toggle:hover{
+    background:var(--primary-hover);
+}
+
+#statisticsArrow{
+    flex-shrink:0;
+    font-size:.9rem;
+    transition:transform .3s ease;
+}
+
+.statistics-toggle.open #statisticsArrow{
+    transform:rotate(180deg);
+}
+
+.statistics-content{
+    display:none;
+    padding:24px;
+    background:var(--surface);
+}
+
+.statistics-content.open{
+    display:block;
+}
