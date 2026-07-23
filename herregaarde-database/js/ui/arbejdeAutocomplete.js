@@ -1,13 +1,5 @@
 import { renderChips } from "./chips.js";
-class ArbejdeAutocomplete {
 
-    constructor(config){
-
-        Object.assign(this, config);
-
-    }
-
-}
 let instance = null;
 
 export function createArbejdeAutocomplete({
