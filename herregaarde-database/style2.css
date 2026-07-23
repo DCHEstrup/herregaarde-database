@@ -79,12 +79,15 @@ input{
     cursor:pointer;
     transition:.2s;
 }
+.multiselect:has(.multiselect-dropdown.open){
+    z-index:2000;
+}
 .multiselect-dropdown{
     position:absolute;
     top:calc(100% + 6px);
     left:0;
     right:0;
-    z-index:1000;
+    z-index:2000;
     max-height:340px;
     overflow:hidden;
     display:none;
