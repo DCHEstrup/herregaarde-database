@@ -615,13 +615,15 @@ input{
 
 .content{
     display:grid;
-    grid-template-columns:minmax(0, 1fr) minmax(320px, 420px);
-    align-items:start;
+    grid-template-columns:minmax(0,1fr) 380px;
     gap:20px;
+    align-items:start;
 }
+
 .results-panel,
 .detail-panel{
     min-width:0;
+    padding:20px;
 }
 /* ==================================================
    RESULTATLISTE
@@ -632,12 +634,7 @@ input{
     flex-direction:column;
     gap:10px;
 }
-#results{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    min-width:0;
-}
+
 .placeholder{
     padding:32px 20px;
     border:1px dashed var(--border);
@@ -731,9 +728,7 @@ input{
     max-height:calc(100vh - 40px);
     overflow:auto;
 }
-#detail{
-    min-width:0;
-}
+
 #detail > .placeholder{
     width:100%;
 }
