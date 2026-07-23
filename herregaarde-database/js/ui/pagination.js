@@ -56,6 +56,7 @@ export function renderPagination(
         .forEach(page => {
             const button =
                 document.createElement("button");
+            button.className = "btn btn-page";
             button.textContent = page;
             if (page === current) {
                 button.classList.add("active");
