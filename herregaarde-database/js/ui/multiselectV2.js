@@ -170,11 +170,11 @@ this.container.append(
 
     createHeader() {
 
-        const header =
-            document.createElement("div");
+const header =
+    document.createElement("button");
 
-        header.className =
-            "multiselect-header";
+header.type = "button";
+header.className = "multiselect-header";
 
         header.innerHTML = `
             <span class="multiselect-text">
