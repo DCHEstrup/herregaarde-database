@@ -276,4 +276,33 @@ input{
     opacity:.4;
     cursor:default;
 }
+/* ==================================================
+   CHIPS
+================================================== */
 
+.selected-chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:var(--chip-gap);
+    min-height:24px;
+}
+
+.chip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:5px 10px;
+    border-radius:999px;
+    background:var(--primary);
+    color:white;
+    font-size:.9rem;
+}
+
+.chip button{
+    border:0;
+    background:none;
+    color:inherit;
+    cursor:pointer;
+    padding:0;
+    font-size:1rem;
+}
