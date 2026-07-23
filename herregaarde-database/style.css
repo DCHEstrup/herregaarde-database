@@ -554,10 +554,7 @@ body{
     min-width:220px;
     padding:10px;
 }
-.filters button{
-    padding:10px 30px;
-    cursor:pointer;
-}
+
 .filter-group {
     position: relative;
     display: flex;
@@ -574,29 +571,6 @@ display:block;
 }
 
 
-#searchBtn, #clearBtn {
-    height: 42px;
-    min-width: 90px;
-    padding: 0 24px;
-    border: none;
-    border-radius: 2px;
-    background: var(--primary);
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-#searchBtn:hover, #clearBtn:hover {
-    background: var(--primary-hover);
-}
-#searchBtn:active, #clearBtn:active {
-    transform: translateY(1px);
-}
-#searchBtn:disabled, #clearBtn:disable {
-    background: #c7c7c7;
-    cursor: not-allowed;
-}
 .status-panel{
     display:flex;
     justify-content:space-between;
@@ -615,25 +589,8 @@ display:block;
     gap:10px;
     align-items:center;
 }
-.status-right button{
-    background:var(--primary);
-    color:white;
-    border:none;
-    border-radius:6px;
-    padding:10px 18px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.2s;
-}
 
-.status-right button:hover{
-    background:var(--primary-hover);
-}
 
-.status-right button:disabled{
-    opacity:.45;
-    cursor:not-allowed;
-}
 .content{
     display:grid;
     grid-template-columns:
@@ -720,20 +677,5 @@ display:block;
     gap:.5rem;
     margin-top:1rem;
 }
-#pagination button{
-    min-width:36px;
-    height:36px;
-    border:1px solid #ccc;
-    background:white;
-    cursor:pointer;
-}
-#pagination button.active{
-    background:#2d6cdf;
-    color:white;
-    border-color:#2d6cdf;
-}
-#pagination button:disabled{
-    opacity:.4;
-    cursor:default;
-}
+
 
