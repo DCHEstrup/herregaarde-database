@@ -276,6 +276,19 @@ input{
     opacity:.4;
     cursor:default;
 }
+.btn-secondary{
+    background:var(--surface);
+    color:var(--primary);
+    border:1px solid var(--primary);
+}
+
+.btn-secondary:hover{
+    background:#f4f7f5;
+}
+
+.btn-secondary:active{
+    transform:translateY(1px);
+}
 /* ==================================================
    CHIPS
 ================================================== */
