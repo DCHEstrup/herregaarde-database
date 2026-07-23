@@ -48,7 +48,7 @@
     padding:0 12px;
     border:none;
     border-radius:0;
-    background:white;
+    background:transparent;
     font:inherit;
     box-sizing:border-box;
     outline:none;
@@ -71,7 +71,7 @@
     padding:0 12px;
     border:none;
     outline:none;
-    background:white;
+    background:transparent;
     font:inherit;
     box-sizing:border-box;
 }
@@ -89,7 +89,7 @@
     width:100%;
     max-height:260px;
     overflow-y:auto;
-    background:var(--surface);
+    background:white;
     border:1px solid var(--border);
     border-radius:var(--radius);
     box-shadow:0 4px 12px rgba(0,0,0,.12);
