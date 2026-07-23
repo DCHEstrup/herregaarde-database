@@ -779,3 +779,19 @@ input{
 .detail-row:last-child .detail-value{
     border-bottom:0;
 }
+.detail-panel::-webkit-scrollbar{
+    width:8px;
+}
+
+.detail-panel::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+.detail-panel::-webkit-scrollbar-thumb{
+    border-radius:999px;
+    background:#c8cfcb;
+}
+
+.detail-panel::-webkit-scrollbar-thumb:hover{
+    background:#aeb8b2;
+}
