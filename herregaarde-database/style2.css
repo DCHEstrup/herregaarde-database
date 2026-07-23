@@ -493,6 +493,7 @@ input{
     opacity:1;
     visibility:visible;
     border-color:var(--border);
+    overflow:visible;
     transition:
         max-height .35s ease,
         opacity .25s ease,
