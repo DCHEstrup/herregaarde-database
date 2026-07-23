@@ -119,12 +119,28 @@ input{
 .multiselect-option{
     display:flex;
     align-items:center;
-    gap:12px;
+    justify-content:space-between;
     width:100%;
-    padding:10px 14px;
+    min-height:42px;
+    padding:8px 14px;
     cursor:pointer;
-    transition:
-        background .15s;
+    transition:background .15s;
+}
+.multiselect-option span{
+    order:1;
+    flex:1;
+    text-align:left;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.multiselect-option input{
+    order:2;
+
+    margin-left:16px;
+
+    flex-shrink:0;
 }
 .multiselect-option input{
     margin:0;
@@ -170,6 +186,14 @@ input{
     font-weight:600;
     border-radius:6px;
     margin-top:10px;
+    justify-content:space-between;
+}
+.multiselect-select-all span{
+    order:1;
+}
+
+.multiselect-select-all input{
+    order:2;
 }
 .multiselect-header.open{
     border-color:var(--primary);
@@ -188,12 +212,7 @@ input{
     padding:12px;
     border-bottom:1px solid #ececec;
 }
-.multiselect-dropdown{
-    border-radius:10px;
-    overflow:hidden;
-    box-shadow:
-        0 12px 40px rgba(0,0,0,.15);
-}
+
 /* ==================================================
    autosuggest 
 ================================================== */
