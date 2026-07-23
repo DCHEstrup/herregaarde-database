@@ -108,7 +108,10 @@
 .filter-option:hover{
     background:#f4f7f5;
 }
-
+.multiselect-option,
+.arbejde-row{
+    @/* samme udseende */
+}
 
 
 
@@ -139,15 +142,6 @@ transition: transform .2s ease; }
 
 
 .multiselect-dropdown.open { display: block; } 
-
-.multiselect-option { 
-display: flex; 
-align-items: center; 
-gap: 10px; 
-padding: 7px 10px; 
-cursor: pointer; 
-transition: background .15s;
-} 
 
 .multiselect-option:hover { background: #f4f7f5; } 
 
@@ -354,10 +348,6 @@ top:44px; z-index:2; }
 .range-filter span{
     color:#666;
     font-weight:600;
-}
-.arbejde-row{
-    padding:8px 12px;
-    cursor:pointer;
 }
 
 .arbejde-row:hover{
