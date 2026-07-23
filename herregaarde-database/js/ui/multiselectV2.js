@@ -146,10 +146,19 @@ this.container.append(
         //----------------------------------
         // Events
         //----------------------------------
-        this.header.addEventListener(
-            "click",
-            () => this.open()
-        );
+this.header.addEventListener(
+    "click",
+    () => this.toggle()
+);
+        toggle() {
+    if (
+        this.dropdown.classList.contains("open")
+    ) {
+        this.close();
+    } else {
+        this.open();
+    }
+}
         document.addEventListener(
             "click",
             e => {
@@ -162,31 +171,65 @@ this.container.append(
                 }
             }
         );
+        
         this.renderSelectedChips();
     }
         //--------------------------------------------------
     // Header
     //--------------------------------------------------
 
-    createHeader() {
+createHeader() {
+    const header =
+        document.createElement("div");
+    header.className =
+        "multiselect-header";
+    header.tabIndex = 0;
+    header.setAttribute(
+        "role",
+        "button"
+    );
+    header.setAttribute(
+        "aria-haspopup",
+        "listbox"
+    );
+    header.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+    const text =
+        document.createElement("span");
+    text.className =
+        "multiselect-text";
+    text.textContent =
+        this.placeholder;
+    const arrow =
+        document.createElement("span");
+    arrow.className =
+        "multiselect-arrow";
+    arrow.textContent =
+        "▾";
+    header.append(
+        text,
+        arrow
+    );
+    header.addEventListener(
+        "keydown",
+        event => {
+            if (
+                event.key === "Enter" ||
+                event.key === " "
+            ) {
+                event.preventDefault();
+                this.toggle();
+            }
 
-const header =
-    document.createElement("button");
-
-header.type = "button";
-header.className = "multiselect-header";
-
-        header.innerHTML = `
-            <span class="multiselect-text">
-                ${this.placeholder}
-            </span>
-            
-            <span class="multiselect-arrow">
-                ▾
-            </span>
-        `;
-        return header;
-    }
+            if (event.key === "Escape") {
+                this.close();
+            }
+        }
+    );
+    return header;
+}
 
     //--------------------------------------------------
     // Søgefelt
@@ -458,28 +501,31 @@ renderSelectedChips() {
     // Åbn dropdown
     //--------------------------------------------------
 
-    open() {
-        this.dropdown.classList.add(
-            "open"
-        );
-        this.header.classList.add(
-            "open"
-        );
-        this.search.focus();
-    }
+open() {
+    this.dropdown.classList.add("open");
+    this.header.classList.add("open");
+
+    this.header.setAttribute(
+        "aria-expanded",
+        "true"
+    );
+
+    this.search.focus();
+}
 
     //--------------------------------------------------
     // Luk dropdown
     //--------------------------------------------------
 
-    close() {
-        this.dropdown.classList.remove(
-            "open"
-        );
-        this.header.classList.remove(
-            "open"
-        );
-    }
+close() {
+    this.dropdown.classList.remove("open");
+    this.header.classList.remove("open");
+
+    this.header.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+}
 
     //--------------------------------------------------
     // Returnér valgte værdier
