@@ -11,7 +11,7 @@ export function renderChips(container, values, onRemove) {
     values.forEach(value => {
 
         const chip = document.createElement("div");
-        chip.className = "filter-chip";
+        chip.className = "chip";
 
         chip.innerHTML = `
             <span>${value}</span>
