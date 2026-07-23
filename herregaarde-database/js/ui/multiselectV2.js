@@ -150,15 +150,7 @@ this.header.addEventListener(
     "click",
     () => this.toggle()
 );
-        toggle() {
-    if (
-        this.dropdown.classList.contains("open")
-    ) {
-        this.close();
-    } else {
-        this.open();
-    }
-}
+
         document.addEventListener(
             "click",
             e => {
@@ -174,7 +166,18 @@ this.header.addEventListener(
         
         this.renderSelectedChips();
     }
-        //--------------------------------------------------
+//--------------------------------------------------
+// Åbn / luk
+//--------------------------------------------------
+
+toggle() {
+    if (this.dropdown.classList.contains("open")) {
+        this.close();
+    } else {
+        this.open();
+    }
+}
+    //--------------------------------------------------
     // Header
     //--------------------------------------------------
 
