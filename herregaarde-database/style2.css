@@ -218,7 +218,90 @@ input{
     padding:12px;
     border-bottom:1px solid #ececec;
 }
+/* ==================================================
+   ARBEJDE AUTOCOMPLETE
+================================================== */
 
+.autosuggest{
+    position:relative;
+}
+
+/* Selve inputfeltet */
+.autosuggest .filter-control{
+    display:flex;
+    align-items:center;
+}
+
+.autosuggest .filter-control input{
+    width:100%;
+    height:100%;
+    padding:0 12px;
+    border:0;
+    background:transparent;
+    outline:none;
+    line-height:normal;
+}
+
+/* Chips skal ligge under inputfeltet */
+#arbejdeChips{
+    position:static;
+    min-height:0;
+    margin-top:0;
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+}
+
+/* Dropdownen placeres under hele filtergruppen,
+   inklusive chips */
+#arbejdeSuggestions{
+    position:absolute;
+    top:100%;
+    left:0;
+    width:var(--control-width);
+    margin-top:6px;
+    max-height:320px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    box-shadow:0 8px 24px rgba(0,0,0,.14);
+    z-index:3000;
+}
+#arbejdeSuggestions .filter-option{
+    display:flex;
+    align-items:center;
+    width:100%;
+    min-height:42px;
+    padding:9px 12px;
+    color:var(--text);
+    cursor:pointer;
+    transition:background .15s ease;
+}
+
+#arbejdeSuggestions .filter-option:hover{
+    background:#f4f7f5;
+}
+
+#arbejdeSuggestions .filter-option span{
+    order:1;
+    flex:1 1 auto;
+    min-width:0;
+    text-align:left;
+    line-height:1.35;
+    white-space:normal;
+    overflow-wrap:anywhere;
+}
+
+#arbejdeSuggestions .filter-option input[type="checkbox"]{
+    order:2;
+    flex:0 0 auto;
+    width:16px;
+    height:16px;
+    margin:0 0 0 12px;
+    accent-color:var(--primary);
+}
 /* ==================================================
    autosuggest 
 ================================================== */
