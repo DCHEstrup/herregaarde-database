@@ -530,7 +530,7 @@ input{
 #statisticsArrow{
     flex-shrink:0;
     font-size:.9rem;
-    transition:transform .6s ease-in-out;
+    transition:transform .45s ease-in-out;
 }
 
 .statistics-toggle:has(+ .statistics-content.open) #statisticsArrow{
