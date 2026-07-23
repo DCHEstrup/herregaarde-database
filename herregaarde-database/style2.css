@@ -642,12 +642,18 @@ input{
 }
 
 .placeholder{
-    padding:32px 20px;
+    width:100%;
+    min-height:140px;
+    padding:28px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     border:1px dashed var(--border);
     border-radius:var(--radius);
+    background:#fafbfa;
     color:var(--muted);
-    text-align:center;
     line-height:1.5;
+    text-align:center;
 }
 
 .result-row{
@@ -1047,4 +1053,17 @@ input{
     .statistics-value{
         grid-area:value;
     }
+}
+/* ==================================================
+   FOKUS OG TILGÆNGELIGHED
+================================================== */
+
+.btn:focus-visible,
+.result-row:focus-visible,
+.statistics-toggle:focus-visible,
+.advanced-toggle:focus-visible,
+.filter-control:focus-visible,
+.range-filter input:focus-visible{
+    outline:3px solid rgba(53,92,74,.25);
+    outline-offset:2px;
 }
