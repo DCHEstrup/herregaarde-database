@@ -160,10 +160,59 @@
     flex-direction:column;
     gap:24px;
 }
+/* ==================================================
+   Knapper
+================================================== */
+.btn{
+    height:42px;
+    min-width:90px;
+    padding:0 24px;
+    border:none;
+    border-radius:var(--radius);
+    font:inherit;
+    font-weight:600;
+    cursor:pointer;
+    transition:
+        background .2s ease,
+        opacity .2s ease,
+        transform .1s ease;
+}
+.btn-primary{
+    background:var(--primary);
+    color:white;
+}
 
+.btn-primary:hover{
+    background:var(--primary-hover);
+}
 
+.btn-primary:active{
+    transform:translateY(1px);
+}
 
+.btn-primary:disabled{
+    background:#c7c7c7;
+    cursor:not-allowed;
+}
+.btn-page{
+    min-width:36px;
+    height:36px;
+    border:1px solid var(--border);
+    background:white;
+    border-radius:4px;
+    cursor:pointer;
+}
 
+.btn-page.active{
+    background:var(--primary);
+    color:white;
+    border-color:var(--primary);
+}
+
+.btn-page:disabled{
+    opacity:.4;
+    cursor:default;
+}
 
 
 
