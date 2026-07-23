@@ -918,6 +918,11 @@ input{
     color:white;
     cursor:default;
 }
+.pagination button.current-page{
+    border-color:var(--primary);
+    background:var(--primary);
+    color:white;
+}
 
 .pagination button:disabled{
     opacity:.45;
