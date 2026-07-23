@@ -1,83 +1,111 @@
-export function renderPagination(
-    result,
-    onPageChange
-) {
-    const container =
-        document.getElementById("pagination");
+export function renderPagination(result, onPageChange) {
+    const container = document.getElementById("pagination");
+
     container.innerHTML = "";
-    const totalPages = Math.max(
-    1,
-    Math.ceil(result.total / result.page_size)
+
+    const totalPages = Math.ceil(
+        result.total / result.page_size
     );
-    if (totalPages <= 1) return;
+
+    if (totalPages <= 1) {
+        return;
+    }
+
     const current = result.page;
 
-    //----------------------------------
-    // Første side <<
-    //----------------------------------
-
-    const first = document.createElement("button");
-    first.textContent = "<<";
-    first.disabled = current === 1;
-    first.addEventListener("click", () => {
-        onPageChange(1);
-    });
-
-    container.appendChild(first);
-
-    //----------------------------------
-    // Sideknapper
-    //----------------------------------
-
     const pages = [];
+
     if (current === 1) {
-        pages.push(1, 2, 3);
-
-    }
-
-    else if (current === totalPages) {
-        pages.push(
-            totalPages - 2,
-            totalPages - 1,
-            totalPages
-        );
-    }
-
-    else {
+        pages.push(1, 2);
+    } else if (current === totalPages) {
+        pages.push(totalPages - 1, totalPages);
+    } else {
         pages.push(
             current - 1,
             current,
             current + 1
         );
-
     }
-    pages
-        .filter(p => p >= 1 && p <= totalPages)
-        .forEach(page => {
-            const button =
-                document.createElement("button");
-            button.className = "btn btn-page";
-            button.textContent = page;
-            if (page === current) {
-                button.classList.add("active");
-            }
-            button.addEventListener("click", () => {
-                onPageChange(page);
-            });
-            container.appendChild(button);
+
+    const visiblePages = [...new Set(pages)]
+        .filter(page => page >= 1 && page <= totalPages);
+
+    const firstPageVisible =
+        visiblePages.includes(1);
+
+    const lastPageVisible =
+        visiblePages.includes(totalPages);
+
+    //----------------------------------
+    // Første side <<
+    //----------------------------------
+
+    if (!firstPageVisible) {
+        const first =
+            document.createElement("button");
+
+        first.type = "button";
+        first.className = "btn btn-page";
+        first.textContent = "<<";
+        first.setAttribute(
+            "aria-label",
+            "Gå til første side"
+        );
+
+        first.addEventListener("click", () => {
+            onPageChange(1);
         });
+
+        container.appendChild(first);
+    }
+
+    //----------------------------------
+    // Sideknapper
+    //----------------------------------
+
+    visiblePages.forEach(page => {
+        const button =
+            document.createElement("button");
+
+        button.type = "button";
+        button.className = "btn btn-page";
+        button.textContent = page;
+
+        if (page === current) {
+            button.classList.add("active");
+            button.setAttribute(
+                "aria-current",
+                "page"
+            );
+        }
+
+        button.addEventListener("click", () => {
+            onPageChange(page);
+        });
+
+        container.appendChild(button);
+    });
 
     //----------------------------------
     // Sidste side >>
     //----------------------------------
 
-    const last = document.createElement("button");
-    last.textContent = ">>";
-    last.disabled = current === totalPages;
-    last.addEventListener("click", () => {
-        onPageChange(totalPages);
-    });
+    if (!lastPageVisible) {
+        const last =
+            document.createElement("button");
 
-    container.appendChild(last);
+        last.type = "button";
+        last.className = "btn btn-page";
+        last.textContent = ">>";
+        last.setAttribute(
+            "aria-label",
+            "Gå til sidste side"
+        );
 
+        last.addEventListener("click", () => {
+            onPageChange(totalPages);
+        });
+
+        container.appendChild(last);
+    }
 }
