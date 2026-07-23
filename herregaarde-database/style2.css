@@ -296,6 +296,12 @@ input{
     opacity:.8;
     transform:none;
 }
+.btn:focus-visible,
+.statistics-toggle:focus-visible,
+.advanced-toggle:focus-visible{
+    outline:3px solid rgba(53,92,74,.25);
+    outline-offset:2px;
+}
 /* ==================================================
    CHIPS
 ================================================== */
@@ -860,4 +866,75 @@ input{
     color:var(--text);
     overflow-wrap:anywhere;
     word-break:break-word;
+}
+/* ==================================================
+   PAGINATION
+================================================== */
+
+.pagination{
+    margin-top:20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.pagination button{
+    min-width:40px;
+    height:40px;
+    padding:0 12px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    background:var(--surface);
+    color:var(--text);
+    font:inherit;
+    font-weight:600;
+    cursor:pointer;
+    transition:
+        background var(--transition),
+        border-color var(--transition),
+        color var(--transition),
+        transform var(--transition);
+}
+
+.pagination button:hover:not(:disabled):not(.active){
+    border-color:var(--primary);
+    color:var(--primary);
+    transform:translateY(-1px);
+}
+
+.pagination button:active:not(:disabled){
+    transform:translateY(0);
+}
+
+.pagination button.active{
+    border-color:var(--primary);
+    background:var(--primary);
+    color:white;
+    cursor:default;
+}
+
+.pagination button:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+}
+.pagination:empty{
+    display:none;
+}
+.results-panel{
+    display:flex;
+    flex-direction:column;
+}
+
+#results{
+    flex:1;
+}
+.pagination button:focus-visible{
+    outline:3px solid rgba(53,92,74,.25);
+    outline-offset:2px;
 }
