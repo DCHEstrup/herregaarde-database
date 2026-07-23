@@ -546,3 +546,66 @@ input{
 .statistics-content.open{
     display:block;
 }
+/* ==================================================
+   STATISTIKINDHOLD
+================================================== */
+
+.statistics-section{
+    margin-bottom:32px;
+}
+
+.statistics-section:last-child{
+    margin-bottom:0;
+}
+
+.statistics-section h3{
+    margin:0 0 16px;
+    color:var(--primary);
+    font-size:1.05rem;
+    font-weight:600;
+}
+
+.statistics-row{
+    display:grid;
+    grid-template-columns:
+        minmax(120px, 180px)
+        minmax(120px, 1fr)
+        80px;
+    align-items:center;
+    gap:12px;
+    margin-bottom:10px;
+}
+
+.statistics-row:last-child{
+    margin-bottom:0;
+}
+
+.statistics-label{
+    min-width:0;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    color:var(--text);
+}
+
+.statistics-bar{
+    height:12px;
+    overflow:hidden;
+    border-radius:999px;
+    background:#e7ece9;
+}
+
+.statistics-fill{
+    height:100%;
+    min-width:0;
+    border-radius:inherit;
+    background:var(--primary);
+    transition:width .35s ease;
+}
+
+.statistics-value{
+    white-space:nowrap;
+    text-align:right;
+    color:var(--text);
+    font-weight:600;
+}
