@@ -108,10 +108,7 @@
 .filter-option:hover{
     background:#f4f7f5;
 }
-.multiselect-option,
-.arbejde-row{
-    @/* samme udseende */
-}
+
 .filters{
     background:var(--surface);
     border:1px solid var(--border);
