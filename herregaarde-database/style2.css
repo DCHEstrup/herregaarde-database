@@ -444,3 +444,34 @@ input{
     color:var(--muted);
     font-weight:600;
 }
+
+/* ==================================================
+   STATUSPANEL
+================================================== */
+
+.status-panel{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    margin:0;
+}
+
+.status-left{
+    flex:1;
+    min-width:0;
+}
+
+#resultCount{
+    color:var(--text);
+    font-weight:600;
+    line-height:1.4;
+}
+
+.status-right{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    flex-wrap:wrap;
+    gap:12px;
+}
