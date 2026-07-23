@@ -533,7 +533,7 @@ input{
     transition:transform .3s ease;
 }
 
-.statistics-toggle.open #statisticsArrow{
+.statistics-toggle:has(+ .statistics-content.open) #statisticsArrow{
     transform:rotate(180deg);
 }
 
