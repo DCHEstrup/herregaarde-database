@@ -504,17 +504,21 @@ input{
 .advanced-grid{
     display:grid;
     grid-template-columns:
-        minmax(150px, 220px)
-        minmax(240px, 1fr);
-    align-items:start;
-    gap:16px 24px;
+        minmax(180px, 1fr)
+        240px;
+    align-items:center;
+    gap:14px 30px;
+}
+.advanced-grid > .filter-control,
+.advanced-grid > .range-filter{
+    width:240px;
+    max-width:100%;
+    justify-self:end;
 }
 
 .advanced-grid > label{
-    padding-top:12px;
-    color:var(--primary);
-    font-size:.9rem;
-    font-weight:600;
+    justify-self:start;
+    margin:0;
 }
 
 .advanced-grid > div{
