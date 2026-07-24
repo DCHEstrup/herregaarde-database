@@ -50,3 +50,19 @@ export async function showDetail(id) {
     }
     detail.appendChild(table);
 }
+export function clearDetail() {
+    document
+        .querySelectorAll(".result-row.selected")
+        .forEach(row => {
+            row.classList.remove("selected");
+            row.removeAttribute("aria-current");
+        });
+    const detail =
+        document.getElementById("detail");
+    if (!detail) return;
+    detail.innerHTML = `
+        <div class="placeholder">
+            Klik på en person for at se alle oplysninger
+        </div>
+    `;
+}
