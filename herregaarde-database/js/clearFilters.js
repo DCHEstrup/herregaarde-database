@@ -1,6 +1,7 @@
 import { clearMultiSelect } from "./ui/multiselectV2.js";
 import { clearResults } from "./ui/results.js";
 import { clearSelectedArbejde } from "./ui/arbejdeAutocomplete.js";
+import { clearStatistics } from "./ui/statisticsPanel.js";
 
 export function clearFilters() {
 
@@ -70,7 +71,7 @@ clearSelectedArbejde();
     //----------------------------------
     // Ryd søgeresultater
     //----------------------------------
-
+    clearStatistics()
     clearResults();
 
 }
