@@ -4,7 +4,8 @@ const labels = {
     aar: "Folketælling",
     koen: "Køn",
     civilstand: "Civilstand",
-    trossamfund: "Religion"
+    trossamfund: "Religion",
+    alder: "Aldersfordeling"
 };
 const filterLabels = {
     herregaard: "Herregård",
@@ -100,33 +101,38 @@ function buildStatisticsCSV(statistics, filters) {
     // Statistik
     //----------------------------------
 
-    Object.entries(statistics).forEach(([category, values]) => {
-        if (category === "total")
-            return;
-        rows.push([labels[category] || category]);
+Object.entries(statistics).forEach(([category, values]) => {
+    if (
+        category === "total" ||
+        !values ||
+        values.length === 0
+    ) {
+        return;
+    }
+    rows.push([labels[category] || category]);
+    rows.push([
+        "Værdi",
+        "Antal",
+        "Procent"
+    ]);
+    const total =
+        values.reduce(
+            (sum, row) => sum + row.count,
+            0
+        );
+    values.forEach(row => {
         rows.push([
-            "Værdi",
-            "Antal",
-            "Procent"
+            row.label,
+            row.count,
+            (
+                row.count /
+                total *
+                100
+            ).toFixed(1) + "%"
         ]);
-        const total =
-            values.reduce(
-                (sum, row) => sum + row.count,
-                0
-            );
-        values.forEach(row => {
-            rows.push([
-                row.label,
-                row.count,
-                (
-                    row.count /
-                    total *
-                    100
-                ).toFixed(1) + "%"
-            ]);
-        });
-        rows.push([]);
     });
+    rows.push([]);
+});
     return rows
         .map(r => r.join(";"))
         .join("\n");
