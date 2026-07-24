@@ -11,7 +11,7 @@ import { clearFilters } from "./clearFilters.js";
 import { initialiseAdvancedFilters } from "./advancedFilters.js";
 import { loadStatistics } from "./statistics.js";
 import { downloadStatistics } from "./downloadStatistics.js";
-
+import { clearDetail } from "./ui/detail.js";
 
 /*
 document.addEventListener("DOMContentLoaded", async () => {
@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
 */
     async function loadPage(page = 1) {
+        clearDetail();
         const result = await performSearch(page);
         if (!result) return;
         renderTable(result);
