@@ -146,6 +146,19 @@ content.appendChild(
 );
     updatePanel();
 }
+export function clearStatistics() {
+    const title =
+        document.getElementById("statisticsTitle");
+    const content =
+        document.getElementById("statisticsContent");
+    const arrow =
+        document.getElementById("statisticsArrow");
+    title.textContent = "📊 Statistik";
+    content.innerHTML = "";
+    content.style.display = "none";
+    arrow.textContent = "▼";
+    expanded = false;
+}
 
 function updatePanel() {
     const content =
