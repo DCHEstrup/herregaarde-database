@@ -109,7 +109,7 @@ input{
     white-space:nowrap;
     text-overflow:ellipsis;
 }
-..autosuggest input{{
+.autosuggest input{
     max-height:260px;
     overflow-y:auto;
     overflow-x:hidden;
@@ -128,6 +128,16 @@ input{
     color:var(--text);
     cursor:pointer;
     transition:background .15s ease;
+}
+.multiselect-options{
+    max-height:260px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    display:flex;
+    flex-direction:column;
+    padding:4px 0;
+    scrollbar-width:thin;
+    scrollbar-color:#a8a8a8 transparent;
 }
 .multiselect-option span{
     display:block;
@@ -153,31 +163,31 @@ input{
 .multiselect-option:hover{
     background:#f4f7f5;
 }
-..autosuggest input{,
+.multiselect-options,
 #arbejdeSuggestions{
     scrollbar-width:thin;
     scrollbar-color:#a8a8a8 transparent;
 }
 
-..autosuggest input{::-webkit-scrollbar,
+.multiselect-options::-webkit-scrollbar,
 #arbejdeSuggestions::-webkit-scrollbar{
     width:8px;
 }
 
-..autosuggest input{::-webkit-scrollbar-track,
+.multiselect-options::-webkit-scrollbar-track,
 #arbejdeSuggestions::-webkit-scrollbar-track{
     background:transparent;
 }
 
-..autosuggest input{::-webkit-scrollbar-thumb,
+.multiselect-options::-webkit-scrollbar-thumb,
 #arbejdeSuggestions::-webkit-scrollbar-thumb{
     border-radius:999px;
     background:#a8a8a8;
 }
 
-..autosuggest input{::-webkit-scrollbar-thumb:hover,
+.multiselect-options::-webkit-scrollbar-thumb:hover,
 #arbejdeSuggestions::-webkit-scrollbar-thumb:hover{
-    background:#888888;
+    background:#888;
 }
 
 .multiselect-arrow{
@@ -363,20 +373,6 @@ input + chips + dropdown
     height:16px;
     margin:0 0 0 auto;
     accent-color:var(--primary);
-}
-/* ==================================================
-   autosuggest 
-================================================== */
-.autosuggest input{
-    width:100%;
-    height:100%;
-    padding:0 12px;
-    border:none;
-    border-radius:0;
-    background:transparent;
-    font:inherit;
-    box-sizing:border-box;
-    outline:none;
 }
 /* ==================================================
    filter-control 
