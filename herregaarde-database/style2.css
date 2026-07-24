@@ -109,14 +109,6 @@ input{
     white-space:nowrap;
     text-overflow:ellipsis;
 }
-.autosuggest input{
-    max-height:260px;
-    overflow-y:auto;
-    overflow-x:hidden;
-    display:flex;
-    flex-direction:column;
-    padding:4px 0;
-}
 .multiselect-option{
     display:flex;
     flex-direction:row-reverse;
@@ -400,6 +392,30 @@ input + chips + dropdown
     outline:0;
     background:transparent;
     color:var(--text);
+}
+/* Arbejde-input skal have sin egen synlige boks */
+.filter-control .autocomplete > input{
+    width:100%;
+    height:var(--control-height);
+    padding:0 12px;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    background:var(--surface);
+    color:var(--text);
+    line-height:normal;
+    outline:none;
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+.filter-control .autocomplete > input:hover{
+    border-color:var(--primary);
+}
+
+.filter-control .autocomplete > input:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 0 3px rgba(53,92,74,.12);
 }
 
 .filter-control input::placeholder{
