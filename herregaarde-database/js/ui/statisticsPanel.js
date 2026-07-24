@@ -218,6 +218,11 @@ content.appendChild(
         }
     )
 );
+    content.appendChild(
+    createAgeChart(
+        data.alder || []
+    )
+);
     updatePanel();
 }
 export function clearStatistics() {
