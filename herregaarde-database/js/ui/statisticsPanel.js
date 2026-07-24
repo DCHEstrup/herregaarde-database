@@ -73,6 +73,80 @@ const value =
     return wrapper;
 }
 
+function createAgeChart(rows = []) {
+    const section =
+        document.createElement("section");
+    section.className =
+        "statistics-section statistics-age-section";
+    const heading =
+        document.createElement("h3");
+    heading.textContent =
+        "Aldersfordeling";
+    section.appendChild(heading);
+    if (!rows.length) {
+        const empty =
+            document.createElement("p");
+        empty.className =
+            "statistics-empty";
+        empty.textContent =
+            "Der er ingen aldersoplysninger for søgeresultatet.";
+        section.appendChild(empty);
+        return section;
+    }
+    const max =
+        Math.max(
+            ...rows.map(row => Number(row.count) || 0),
+            1
+        );
+    const chart =
+        document.createElement("div");
+    chart.className =
+        "age-chart";
+    rows.forEach(row => {
+        const count =
+            Number(row.count) || 0;
+        const height =
+            count / max * 100;
+        const column =
+            document.createElement("div");
+        column.className =
+            "age-chart-column";
+        const value =
+            document.createElement("div");
+        value.className =
+            "age-chart-value";
+        value.textContent =
+            count.toLocaleString("da-DK");
+        const barWrapper =
+            document.createElement("div");
+        barWrapper.className =
+            "age-chart-bar-wrapper";
+        const bar =
+            document.createElement("div");
+        bar.className =
+            "age-chart-bar";
+        bar.style.height =
+            `${height}%`;
+        bar.title =
+            `${row.label}: ${count.toLocaleString("da-DK")} personer`;
+        const label =
+            document.createElement("div");
+        label.className =
+            "age-chart-label";
+        label.textContent =
+            row.label;
+        barWrapper.appendChild(bar);
+        column.append(
+            value,
+            barWrapper,
+            label
+        );
+        chart.appendChild(column);
+    });
+    section.appendChild(chart);
+    return section;
+}
+
 export function renderStatistics(data) {
     const title =
         document.getElementById("statisticsTitle");
