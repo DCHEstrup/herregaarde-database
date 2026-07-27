@@ -184,23 +184,24 @@ wrapper.appendChild(suggestions);
 
     }
 function renderSelectedChips() {
-
     renderChips(
         chips,
         state.selected,
         value => {
-
             state.selected =
                 state.selected.filter(
                     v => v !== value
                 );
-
             render();
             renderSelectedChips();
 
+            document.dispatchEvent(
+                new CustomEvent(
+                    "filtersChanged"
+                )
+            );
         }
     );
-
 }
 
     //----------------------------------
@@ -313,3 +314,20 @@ const api = {
 instance = api;
 
 return api;
+}
+
+//--------------------------------------------------
+// Offentlige hjælpefunktioner
+//--------------------------------------------------
+
+export function getSelectedArbejde() {
+    return instance?.getSelected() || [];
+}
+
+export function clearSelectedArbejde() {
+    instance?.clear();
+}
+
+export function removeSelectedArbejde(value) {
+    instance?.remove(value);
+}
