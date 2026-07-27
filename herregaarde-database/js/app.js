@@ -26,47 +26,74 @@ document.getElementById("censusCount").textContent =
 });
 */
 
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener(
+    "DOMContentLoaded",
+    async () => {
 
-    await loadFilters();
-    /*
-      enableAutosuggest(
-        "arbejde",
-        getJobSuggestions
-    );
-*/
-    async function loadPage(page = 1) {
-        clearDetail();
-        const result = await performSearch(page);
-        if (!result) return;
-        renderTable(result);
-        renderPagination(result, loadPage);
-        await loadStatistics();
+        await loadFilters();
 
-    }
-    document
-        .getElementById("searchBtn")
-        .addEventListener("click", () => loadPage(1));
-    initialiseAdvancedFilters();
-});
+        initialiseAdvancedFilters();
 
-document
-    .getElementById("downloadBtn")
-    .addEventListener("click", () => {
-        downloadCSV(getCurrentFilters());
-    });
-document
-    .getElementById("clearBtn")
-    .addEventListener("click", () => {
-        clearFilters();
-    });
-document
-    .getElementById("downloadStatisticsBtn")
-    .addEventListener(
-        "click",
-        () => {
-            downloadStatistics(
-                getCurrentFilters()
+        initSelectedFilters();
+
+        async function loadPage(page = 1) {
+            clearDetail();
+
+            const result =
+                await performSearch(page);
+
+            if (!result) {
+                return;
+            }
+
+            renderTable(result);
+
+            renderPagination(
+                result,
+                loadPage
             );
+
+            await loadStatistics();
         }
-    );
+
+        document
+            .getElementById("searchBtn")
+            ?.addEventListener(
+                "click",
+                () => loadPage(1)
+            );
+
+        document
+            .getElementById("downloadBtn")
+            ?.addEventListener(
+                "click",
+                () => {
+                    downloadCSV(
+                        getCurrentFilters()
+                    );
+                }
+            );
+
+        document
+            .getElementById("clearBtn")
+            ?.addEventListener(
+                "click",
+                () => {
+                    clearFilters();
+                }
+            );
+
+        document
+            .getElementById(
+                "downloadStatisticsBtn"
+            )
+            ?.addEventListener(
+                "click",
+                () => {
+                    downloadStatistics(
+                        getCurrentFilters()
+                    );
+                }
+            );
+    }
+);
