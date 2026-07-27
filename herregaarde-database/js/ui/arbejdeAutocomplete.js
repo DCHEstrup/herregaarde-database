@@ -207,18 +207,22 @@ function renderSelectedChips() {
     // Input
     //----------------------------------
 
-    input.addEventListener(
-        "input",
-        () => {
+input.addEventListener(
+    "input",
+    () => {
+        state.text =
+            input.value;
 
-            state.text =
-                input.value;
+        render();
+        renderSelectedChips();
 
-            render();
-            renderSelectedChips();
-
-        }
-    );
+        document.dispatchEvent(
+            new CustomEvent(
+                "filtersChanged"
+            )
+        );
+    }
+);
 
     //----------------------------------
     // Focus
