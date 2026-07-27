@@ -2,6 +2,7 @@ import { clearMultiSelect } from "./ui/multiselectV2.js";
 import { clearResults } from "./ui/results.js";
 import { clearSelectedArbejde } from "./ui/arbejdeAutocomplete.js";
 import { clearStatistics } from "./ui/statisticsPanel.js";
+import {clearSelectedFilters} from "./ui/selectedFilters.js";
 
 export function clearFilters() {
 
@@ -73,5 +74,6 @@ clearSelectedArbejde();
     //----------------------------------
     clearStatistics()
     clearResults();
+    clearSelectedFilters();
 
 }
