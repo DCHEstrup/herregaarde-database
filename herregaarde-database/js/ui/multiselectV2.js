@@ -434,8 +434,8 @@ class MultiSelect {
     // Opdater header
     //--------------------------------------------------
 
-    updateHeader() {
-const headerText =
+updateHeader() {
+    const headerText =
         this.header.querySelector(
             ".multiselect-text"
         );
@@ -443,19 +443,26 @@ const headerText =
     const selectedValues =
         this.getValues();
 
+    const label =
+        this.placeholder
+            .replace(/^Alle\s+/i, "")
+            .replace(/^./, c => c.toUpperCase());
+
     if (selectedValues.length === 0) {
         headerText.textContent =
             this.placeholder;
+        return;
     }
-    else if (selectedValues.length === 1) {
+
+    if (selectedValues.length === 1) {
         headerText.textContent =
             selectedValues[0];
+        return;
     }
-    else {
-        headerText.textContent =
-            `${this.placeholder} · ${selectedValues.length} valgt`;
-    }
-    }
+
+    headerText.textContent =
+        `${label} · ${selectedValues.length} valgt`;
+}
 
     //--------------------------------------------------
     // Opdater "Vælg alle"
