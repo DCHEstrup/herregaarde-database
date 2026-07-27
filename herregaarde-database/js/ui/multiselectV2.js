@@ -435,40 +435,26 @@ class MultiSelect {
     //--------------------------------------------------
 
     updateHeader() {
-        const text =
-            this.header.querySelector(
-                ".multiselect-text"
-            );
+const headerText =
+        this.header.querySelector(
+            ".multiselect-text"
+        );
 
-        const values =
-            this.getValues();
+    const selectedValues =
+        this.getValues();
 
-        if (values.length === 0) {
-            text.textContent =
-                this.placeholder;
-
-            return;
-        }
-
-        if (
-            values.length ===
-            this.options.length
-        ) {
-            text.textContent =
-                "Alle";
-
-            return;
-        }
-
-        if (values.length <= 2) {
-            text.textContent =
-                values.join(", ");
-
-            return;
-        }
-
-        text.textContent =
-            `${values[0]}, ${values[1]} +${values.length - 2}`;
+    if (selectedValues.length === 0) {
+        headerText.textContent =
+            this.placeholder;
+    }
+    else if (selectedValues.length === 1) {
+        headerText.textContent =
+            selectedValues[0];
+    }
+    else {
+        headerText.textContent =
+            `${selectedValues.length} valgt`;
+    }
     }
 
     //--------------------------------------------------
