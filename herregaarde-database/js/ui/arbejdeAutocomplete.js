@@ -304,3 +304,21 @@ export function clearSelectedArbejde() {
     instance?.clear();
 
 }
+export function removeSelectedArbejde(
+    value
+) {
+    selectedArbejde.delete(value);
+    const checkbox =
+        document.querySelector(
+            `#arbejdeSuggestions input[type="checkbox"][value="${CSS.escape(value)}"]`
+        );
+    if (checkbox) {
+        checkbox.checked = false;
+    }
+    renderSelectedArbejde();
+    document.dispatchEvent(
+        new CustomEvent(
+            "filtersChanged"
+        )
+    );
+}
