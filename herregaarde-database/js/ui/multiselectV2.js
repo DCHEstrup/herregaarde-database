@@ -1,4 +1,4 @@
-import { renderChips } from "./chips.js";
+
 
 const instances = new Map();
 
@@ -402,66 +402,7 @@ createHeader() {
         text.textContent =
             `${values[0]}, ${values[1]} +${values.length - 2}`;
     }
-    const values = this.getValues();
-    //----------------------------------
-    // Ingen valgt
-    //----------------------------------
-    if (values.length === 0) {
-        this.chips.innerHTML = "";
-        return;
-    }
-    //----------------------------------
-    // Alle valgt
-    //----------------------------------
-    if (values.length === this.options.length) {
-        renderChips(
-            this.chips,
-            ["Alle"],
-            () => {
-                this.clear();
-            }
-        );
-        return;
-    }
-    //----------------------------------
-    // Mange valgt
-    //----------------------------------
-    if (values.length > 7) {
-        renderChips(
-            this.chips,
-            [`${values.length} valgte`],
-            () => {
-                this.clear();
-            }
-        );
-        return;
-    }
-    //----------------------------------
-    // Få valgt
-    //----------------------------------
-    renderChips(
-        this.chips,
-        values,
-        value => {
-            this.selected.delete(value);
-            const option =
-                this.options.find(
-                    o => o.value === value
-                );
-            if (option) {
-                option.setChecked(
-                    false,
-                    false
-                );
-            }
-            this.updateHeader();
-            this.updateSelectAll();
-            this.onChange(
-                this.getValues()
-            );
-        }
-    );
-}
+    
 
     //--------------------------------------------------
     // Opdater "Vælg alle"
