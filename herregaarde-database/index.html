@@ -119,6 +119,38 @@
     </div>
 </div>
        <div class="filter-actions">
+               <div class="selected-filters">
+        <button
+            type="button"
+            id="selectedFiltersToggle"
+            class="selected-filters-toggle"
+            aria-expanded="false"
+            aria-controls="selectedFiltersDropdown"
+        >
+            Valgte filtre
+            <span id="selectedFiltersCount"></span>
+            <span
+                id="selectedFiltersArrow"
+                aria-hidden="true"
+            >
+                ▼
+            </span>
+        </button>
+        <div
+            id="selectedFiltersDropdown"
+            class="selected-filters-dropdown"
+            hidden
+        >
+            <div
+                id="selectedFiltersContent"
+                class="selected-filters-content"
+            >
+                <p class="selected-filters-empty">
+                    Ingen filtre er valgt.
+                </p>
+            </div>
+        </div>
+    </div>
             <button id="searchBtn" class="btn btn-primary">
                 Søg
             </button>
