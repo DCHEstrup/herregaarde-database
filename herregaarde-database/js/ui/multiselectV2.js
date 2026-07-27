@@ -1,32 +1,48 @@
-
-
 const instances = new Map();
 
 export function createMultiSelect(config) {
-
     const multiselect =
         new MultiSelect(config);
+
     instances.set(
         config.containerId,
         multiselect
     );
-    return multiselect;
 
+    return multiselect;
 }
 
 export function getSelectedValues(containerId) {
-
     return instances
         .get(containerId)
         ?.getValues() ?? [];
-
 }
-export function clearMultiSelect(
-    containerId
-) {
+
+export function clearMultiSelect(containerId) {
     instances
         .get(containerId)
         ?.clear();
+}
+
+export function getMultiSelectValues(containerId) {
+    return instances
+        .get(containerId)
+        ?.getValues() ?? [];
+}
+
+export function getMultiSelectOptionCount(containerId) {
+    return instances
+        .get(containerId)
+        ?.getOptionCount() ?? 0;
+}
+
+export function removeMultiSelectValue(
+    containerId,
+    value
+) {
+    instances
+        .get(containerId)
+        ?.removeValue(value);
 }
 
 class MultiSelect {
@@ -36,22 +52,29 @@ class MultiSelect {
         values = [],
         placeholder = "Vælg...",
         onChange = () => {}
-
     }) {
         this.container =
             document.getElementById(
                 containerId
             );
+
+        if (!this.container) {
+            console.error(
+                `Multiselect-containeren "${containerId}" blev ikke fundet.`
+            );
+            return;
+        }
+
         this.values = values;
-        this.placeholder =
-            placeholder;
-        this.onChange =
-            onChange;
+        this.placeholder = placeholder;
+        this.onChange = onChange;
+
         this.selected =
             new Set();
-        this.options = [];
-        this.build();
 
+        this.options = [];
+
+        this.build();
     }
 
     //--------------------------------------------------
@@ -60,171 +83,162 @@ class MultiSelect {
 
     build() {
         this.container.innerHTML = "";
-        this.container.classList.add("filter-component");
-        this.container.classList.add("multiselect");
-        //----------------------------------
-        // Header
-        //----------------------------------
+
+        this.container.classList.add(
+            "filter-component",
+            "multiselect"
+        );
 
         this.header =
             this.createHeader();
 
-        //----------------------------------
-        // Dropdown
-        //----------------------------------
-
         this.dropdown =
             document.createElement("div");
+
         this.dropdown.className =
             "filter-dropdown multiselect-dropdown";
 
-        //----------------------------------
-        // Sticky område
-        //----------------------------------
-
         this.controls =
             document.createElement("div");
+
         this.controls.className =
             "multiselect-controls";
 
-        //----------------------------------
-        // Scrollområde
-        //----------------------------------
-
         this.optionsContainer =
             document.createElement("div");
+
         this.optionsContainer.className =
             "multiselect-options";
-
-        //----------------------------------
-        // Søgefelt
-        //----------------------------------
 
         this.search =
             this.createSearch();
 
-        //----------------------------------
-        // Vælg alle
-        //----------------------------------
-
         this.selectAll =
             this.createSelectAll();
 
-        //----------------------------------
-        // Muligheder
-        //----------------------------------
-
         this.createOptions();
-
-        //----------------------------------
-        // Saml dropdown
-        //----------------------------------
 
         this.controls.append(
             this.search,
             this.selectAll
         );
+
         this.dropdown.append(
             this.controls,
             this.optionsContainer
         );
 
-        //----------------------------------
-        // Saml komponent
-        //----------------------------------
-this.container.append(
-    this.header,
-    this.dropdown
-);
-        //----------------------------------
-        // Events
-        //----------------------------------
-this.header.addEventListener(
-    "click",
-    () => this.toggle()
-);
+        this.container.append(
+            this.header,
+            this.dropdown
+        );
+
+        this.header.addEventListener(
+            "click",
+            () => this.toggle()
+        );
 
         document.addEventListener(
             "click",
-            e => {
+            event => {
                 if (
                     !this.container.contains(
-                        e.target
+                        event.target
                     )
                 ) {
                     this.close();
                 }
             }
         );
-        
     }
-//--------------------------------------------------
-// Åbn / luk
-//--------------------------------------------------
 
-toggle() {
-    if (this.dropdown.classList.contains("open")) {
-        this.close();
-    } else {
-        this.open();
+    //--------------------------------------------------
+    // Åbn / luk
+    //--------------------------------------------------
+
+    toggle() {
+        if (
+            this.dropdown.classList.contains(
+                "open"
+            )
+        ) {
+            this.close();
+        }
+        else {
+            this.open();
+        }
     }
-}
+
     //--------------------------------------------------
     // Header
     //--------------------------------------------------
 
-createHeader() {
-    const header =
-        document.createElement("div");
-    header.className =
-        "multiselect-header";
-    header.tabIndex = 0;
-    header.setAttribute(
-        "role",
-        "button"
-    );
-    header.setAttribute(
-        "aria-haspopup",
-        "listbox"
-    );
-    header.setAttribute(
-        "aria-expanded",
-        "false"
-    );
-    const text =
-        document.createElement("span");
-    text.className =
-        "multiselect-text";
-    text.textContent =
-        this.placeholder;
-    const arrow =
-        document.createElement("span");
-    arrow.className =
-        "multiselect-arrow";
-    arrow.textContent =
-        "▾";
-    header.append(
-        text,
-        arrow
-    );
-    header.addEventListener(
-        "keydown",
-        event => {
-            if (
-                event.key === "Enter" ||
-                event.key === " "
-            ) {
-                event.preventDefault();
-                this.toggle();
-            }
+    createHeader() {
+        const header =
+            document.createElement("div");
 
-            if (event.key === "Escape") {
-                this.close();
+        header.className =
+            "multiselect-header";
+
+        header.tabIndex = 0;
+
+        header.setAttribute(
+            "role",
+            "button"
+        );
+
+        header.setAttribute(
+            "aria-haspopup",
+            "listbox"
+        );
+
+        header.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        const text =
+            document.createElement("span");
+
+        text.className =
+            "multiselect-text";
+
+        text.textContent =
+            this.placeholder;
+
+        const arrow =
+            document.createElement("span");
+
+        arrow.className =
+            "multiselect-arrow";
+
+        arrow.textContent =
+            "▾";
+
+        header.append(
+            text,
+            arrow
+        );
+
+        header.addEventListener(
+            "keydown",
+            event => {
+                if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                ) {
+                    event.preventDefault();
+                    this.toggle();
+                }
+
+                if (event.key === "Escape") {
+                    this.close();
+                }
             }
-        }
-    );
-    return header;
-}
+        );
+
+        return header;
+    }
 
     //--------------------------------------------------
     // Søgefelt
@@ -233,18 +247,30 @@ createHeader() {
     createSearch() {
         const input =
             document.createElement("input");
+
         input.type = "text";
         input.placeholder = "Søg...";
         input.className =
             "multiselect-search";
-        input.addEventListener("click", e => {
-            e.stopPropagation();
-        });
-        input.addEventListener("input", () => {
-            this.filterOptions(
-                input.value.trim().toLowerCase()
-            );
-        });
+
+        input.addEventListener(
+            "click",
+            event => {
+                event.stopPropagation();
+            }
+        );
+
+        input.addEventListener(
+            "input",
+            () => {
+                this.filterOptions(
+                    input.value
+                        .trim()
+                        .toLowerCase()
+                );
+            }
+        );
+
         return input;
     }
 
@@ -253,52 +279,75 @@ createHeader() {
     //--------------------------------------------------
 
     createSelectAll() {
+        const wrapper =
+            document.createElement("div");
 
-    const wrapper =
-        document.createElement("div");
-    wrapper.className =
-        "multiselect-option multiselect-select-all";
-    const checkbox =
-        document.createElement("input");
-    checkbox.type = "checkbox";
-    const label =
-        document.createElement("span");
-    label.textContent = "Vælg alle";
-    wrapper.append(
-        checkbox,
-        label
-    );
-    wrapper.addEventListener("click", e => {
-        e.preventDefault();
-        e.stopPropagation();
-        const checked =
-            !checkbox.checked;
-        checkbox.checked = checked;
-        this.options.forEach(option => {
-            option.setChecked(
-                checked,
-                false
-            );
-        });
-        this.updateHeader();
-        this.onChange(
-            this.getValues()
+        wrapper.className =
+            "multiselect-option multiselect-select-all";
+
+        const checkbox =
+            document.createElement("input");
+
+        checkbox.type = "checkbox";
+
+        const label =
+            document.createElement("span");
+
+        label.textContent =
+            "Vælg alle";
+
+        wrapper.append(
+            checkbox,
+            label
         );
-    });
-    wrapper.checkbox = checkbox;
-    return wrapper;
-}
+
+        wrapper.addEventListener(
+            "click",
+            event => {
+                event.preventDefault();
+                event.stopPropagation();
+
+                const checked =
+                    !checkbox.checked;
+
+                checkbox.checked =
+                    checked;
+
+                this.options.forEach(
+                    option => {
+                        option.setChecked(
+                            checked,
+                            false
+                        );
+                    }
+                );
+
+                this.updateHeader();
+                this.updateSelectAll();
+
+                this.notifyChange();
+            }
+        );
+
+        wrapper.checkbox =
+            checkbox;
+
+        return wrapper;
+    }
 
     //--------------------------------------------------
-    // Byg alle muligheder
+    // Byg muligheder
     //--------------------------------------------------
 
     createOptions() {
         this.options = [];
+
         this.values.forEach(value => {
             const option =
                 this.createOption(value);
+
             this.options.push(option);
+
             this.optionsContainer.appendChild(
                 option.element
             );
@@ -312,17 +361,25 @@ createHeader() {
     createOption(value) {
         const element =
             document.createElement("div");
+
         element.className =
             "multiselect-option";
+
         element.dataset.value =
             value;
+
         const checkbox =
             document.createElement("input");
-        checkbox.type = "checkbox";
+
+        checkbox.type =
+            "checkbox";
+
         const label =
             document.createElement("span");
+
         label.textContent =
             value;
+
         element.append(
             checkbox,
             label
@@ -332,53 +389,56 @@ createHeader() {
             checked,
             notify = true
         ) => {
-
             checkbox.checked =
                 checked;
+
             if (checked) {
                 this.selected.add(value);
-
             }
-
             else {
-
                 this.selected.delete(value);
-
             }
+
             this.updateSelectAll();
+
             if (notify) {
                 this.updateHeader();
-                this.onChange(
-                    this.getValues()
-                );
+                this.notifyChange();
             }
         };
+
         element.addEventListener(
             "click",
-            e => {
-                e.stopPropagation();
-                if (e.target !== checkbox) {
+            event => {
+                event.stopPropagation();
+
+                if (
+                    event.target !== checkbox
+                ) {
                     checkbox.checked =
                         !checkbox.checked;
                 }
+
                 setChecked(
                     checkbox.checked
                 );
             }
         );
+
         return {
             value,
             element,
             checkbox,
             setChecked,
+
             setVisible(show) {
                 element.style.display =
                     show ? "" : "none";
             }
         };
-
     }
-        //--------------------------------------------------
+
+    //--------------------------------------------------
     // Opdater header
     //--------------------------------------------------
 
@@ -387,32 +447,51 @@ createHeader() {
             this.header.querySelector(
                 ".multiselect-text"
             );
+
         const values =
             this.getValues();
+
         if (values.length === 0) {
             text.textContent =
                 this.placeholder;
+
             return;
         }
+
+        if (
+            values.length ===
+            this.options.length
+        ) {
+            text.textContent =
+                "Alle";
+
+            return;
+        }
+
         if (values.length <= 2) {
             text.textContent =
                 values.join(", ");
+
             return;
         }
+
         text.textContent =
             `${values[0]}, ${values[1]} +${values.length - 2}`;
     }
-    
 
     //--------------------------------------------------
     // Opdater "Vælg alle"
     //--------------------------------------------------
 
     updateSelectAll() {
-        if (!this.selectAll.checkbox) return;
+        if (!this.selectAll?.checkbox) {
+            return;
+        }
+
         this.selectAll.checkbox.checked =
+            this.options.length > 0 &&
             this.selected.size ===
-            this.options.length;
+                this.options.length;
     }
 
     //--------------------------------------------------
@@ -433,31 +512,41 @@ createHeader() {
     // Åbn dropdown
     //--------------------------------------------------
 
-open() {
-    this.dropdown.classList.add("open");
-    this.header.classList.add("open");
+    open() {
+        this.dropdown.classList.add(
+            "open"
+        );
 
-    this.header.setAttribute(
-        "aria-expanded",
-        "true"
-    );
+        this.header.classList.add(
+            "open"
+        );
 
-    this.search.focus();
-}
+        this.header.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+        this.search.focus();
+    }
 
     //--------------------------------------------------
     // Luk dropdown
     //--------------------------------------------------
 
-close() {
-    this.dropdown.classList.remove("open");
-    this.header.classList.remove("open");
+    close() {
+        this.dropdown.classList.remove(
+            "open"
+        );
 
-    this.header.setAttribute(
-        "aria-expanded",
-        "false"
-    );
-}
+        this.header.classList.remove(
+            "open"
+        );
+
+        this.header.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+    }
 
     //--------------------------------------------------
     // Returnér valgte værdier
@@ -466,21 +555,77 @@ close() {
     getValues() {
         return [...this.selected];
     }
-    clear() {
-    this.options.forEach(option => {
+
+    //--------------------------------------------------
+    // Antal muligheder
+    //--------------------------------------------------
+
+    getOptionCount() {
+        return this.options.length;
+    }
+
+    //--------------------------------------------------
+    // Fjern én værdi
+    //--------------------------------------------------
+
+    removeValue(value) {
+        const option =
+            this.options.find(
+                item =>
+                    String(item.value) ===
+                    String(value)
+            );
+
+        if (!option) {
+            return;
+        }
+
         option.setChecked(
             false,
             false
         );
-    });
 
-    this.selected.clear();
-    this.updateHeader();
-    this.updateSelectAll();
-    this.onChange(
-        this.getValues()
-    );
-}
+        this.updateHeader();
+        this.updateSelectAll();
+
+        this.notifyChange();
+    }
+
+    //--------------------------------------------------
+    // Ryd multiselect
+    //--------------------------------------------------
+
+    clear() {
+        this.options.forEach(option => {
+            option.setChecked(
+                false,
+                false
+            );
+        });
+
+        this.selected.clear();
+
+        this.updateHeader();
+        this.updateSelectAll();
+
+        this.notifyChange();
+    }
+
+    //--------------------------------------------------
+    // Underret resten af appen
+    //--------------------------------------------------
+
+    notifyChange() {
+        this.onChange(
+            this.getValues()
+        );
+
+        document.dispatchEvent(
+            new CustomEvent(
+                "filtersChanged"
+            )
+        );
+    }
 
     //--------------------------------------------------
     // Fjern komponent
@@ -490,6 +635,5 @@ close() {
         this.container.innerHTML = "";
         this.options = [];
         this.selected.clear();
-
     }
-    }
+}
