@@ -269,56 +269,45 @@ function renderSelectedChips() {
     input.getSelectedValues =
         () => [...state.selected];
 const api = {
-
     getSelected() {
-
         return [...state.selected];
+    },
 
+    remove(value) {
+        state.selected =
+            state.selected.filter(
+                selectedValue =>
+                    selectedValue !== value
+            );
+
+        render();
+        renderSelectedChips();
+
+        document.dispatchEvent(
+            new CustomEvent(
+                "filtersChanged"
+            )
+        );
     },
 
     clear() {
-
         state.selected = [];
         state.text = "";
         input.value = "";
-    suggestions.innerHTML = "";
-    suggestions.style.display = "none";
+
+        suggestions.innerHTML = "";
+        suggestions.style.display = "none";
+
         renderSelectedChips();
 
+        document.dispatchEvent(
+            new CustomEvent(
+                "filtersChanged"
+            )
+        );
     }
-
 };
 
 instance = api;
 
 return api;
-}
-
-export function getSelectedArbejde() {
-
-    return instance?.getSelected() || [];
-
-}
-export function clearSelectedArbejde() {
-
-    instance?.clear();
-
-}
-export function removeSelectedArbejde(
-    value
-) {
-    selectedArbejde.delete(value);
-    const checkbox =
-        document.querySelector(
-            `#arbejdeSuggestions input[type="checkbox"][value="${CSS.escape(value)}"]`
-        );
-    if (checkbox) {
-        checkbox.checked = false;
-    }
-    renderSelectedChips();
-    document.dispatchEvent(
-        new CustomEvent(
-            "filtersChanged"
-        )
-    );
-}
