@@ -91,11 +91,19 @@ function buildStatisticsCSV(statistics, filters) {
     // Antal personer
     //----------------------------------
 
-    rows.push([
-        "Antal personer",
-        statistics.total
-    ]);
-    rows.push([]);
+rows.push([
+    "Antal personer",
+    statistics.total
+]);
+rows.push([
+    "Antal herregårde",
+    statistics.herregaarde_count
+]);
+rows.push([
+    "Antal folketællinger",
+    statistics.folketaellinger_count
+]);
+rows.push([]);
 
     //----------------------------------
     // Statistik
