@@ -17,22 +17,6 @@ export function getSelectedValues(containerId) {
         .get(containerId)
         ?.getValues() ?? [];
 }
-export function getMultiSelectOptionCount(
-    containerId
-) {
-    return instances
-        .get(containerId)
-        ?.getOptionCount() ?? 0;
-}
-
-export function removeMultiSelectValue(
-    containerId,
-    value
-) {
-    instances
-        .get(containerId)
-        ?.removeValue(value);
-}
 
 export function clearMultiSelect(containerId) {
     instances
@@ -40,13 +24,9 @@ export function clearMultiSelect(containerId) {
         ?.clear();
 }
 
-export function getMultiSelectValues(containerId) {
-    return instances
-        .get(containerId)
-        ?.getValues() ?? [];
-}
-
-export function getMultiSelectOptionCount(containerId) {
+export function getMultiSelectOptionCount(
+    containerId
+) {
     return instances
         .get(containerId)
         ?.getOptionCount() ?? 0;
@@ -326,9 +306,6 @@ class MultiSelect {
                 const checked =
                     !checkbox.checked;
 
-                checkbox.checked =
-                    checked;
-
                 this.options.forEach(
                     option => {
                         option.setChecked(
@@ -340,7 +317,6 @@ class MultiSelect {
 
                 this.updateHeader();
                 this.updateSelectAll();
-
                 this.notifyChange();
             }
         );
@@ -517,7 +493,7 @@ class MultiSelect {
     filterOptions(query) {
         this.options.forEach(option => {
             option.setVisible(
-                option.value
+                String(option.value)
                     .toLowerCase()
                     .includes(query)
             );
@@ -603,16 +579,7 @@ class MultiSelect {
 
         this.updateHeader();
         this.updateSelectAll();
-
- this.onChange(
-        this.getValues()
-    );
-
-    document.dispatchEvent(
-        new CustomEvent(
-            "filtersChanged"
-        )
-    );
+        this.notifyChange();
     }
 
     //--------------------------------------------------
@@ -631,7 +598,6 @@ class MultiSelect {
 
         this.updateHeader();
         this.updateSelectAll();
-
         this.notifyChange();
     }
 
@@ -659,5 +625,9 @@ class MultiSelect {
         this.container.innerHTML = "";
         this.options = [];
         this.selected.clear();
+
+        instances.delete(
+            this.container.id
+        );
     }
 }
