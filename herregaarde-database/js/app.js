@@ -29,32 +29,55 @@ document.getElementById("censusCount").textContent =
 document.addEventListener(
     "DOMContentLoaded",
     async () => {
-
         await loadFilters();
-
         initialiseAdvancedFilters();
-
         initSelectedFilters();
-
-        async function loadPage(page = 1) {
-            clearDetail();
-
-            const result =
-                await performSearch(page);
-
-            if (!result) {
-                return;
-            }
-
-            renderTable(result);
-
-            renderPagination(
-                result,
-                loadPage
+        
+async function loadPage(page = 1) {
+    const searchButton =
+        document.getElementById("searchBtn");
+    const originalText =
+        searchButton?.textContent ?? "Søg";
+    try {
+        if (searchButton) {
+            searchButton.disabled = true;
+            searchButton.textContent = "Søger …";
+            searchButton.setAttribute(
+                "aria-busy",
+                "true"
             );
-
-            await loadStatistics();
         }
+        clearDetail();
+        const result =
+            await performSearch(page);
+        if (!result) {
+            return;
+        }
+        renderTable(result);
+        renderPagination(
+            result,
+            loadPage
+        );
+
+        await loadStatistics();
+    }
+    catch (error) {
+        console.error(
+            "Fejl under søgning:",
+            error
+        );
+    }
+    finally {
+        if (searchButton) {
+            searchButton.disabled = false;
+            searchButton.textContent =
+                originalText;
+            searchButton.removeAttribute(
+                "aria-busy"
+            );
+        }
+    }
+}
 
         document
             .getElementById("searchBtn")
