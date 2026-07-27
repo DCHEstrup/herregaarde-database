@@ -12,6 +12,7 @@ import { initialiseAdvancedFilters } from "./advancedFilters.js";
 import { loadStatistics } from "./statistics.js";
 import { downloadStatistics } from "./downloadStatistics.js";
 import { clearDetail } from "./ui/detail.js";
+import { initSelectedFilters } from "./ui/selectedFilters.js";
 
 /*
 document.addEventListener("DOMContentLoaded", async () => {
