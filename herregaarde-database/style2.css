@@ -300,6 +300,9 @@ input + chips + dropdown
     flex-wrap:wrap;
     gap:var(--chip-gap);
 }
+.multiselect > .selected-chips{
+    display:none;
+}
 
 /* Dropdown */
 #arbejdeSuggestions{
