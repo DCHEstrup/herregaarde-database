@@ -315,7 +315,7 @@ export function removeSelectedArbejde(
     if (checkbox) {
         checkbox.checked = false;
     }
-    renderSelectedArbejde();
+    renderSelectedChips();
     document.dispatchEvent(
         new CustomEvent(
             "filtersChanged"
