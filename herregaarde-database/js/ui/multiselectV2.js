@@ -132,15 +132,8 @@ class MultiSelect {
         //----------------------------------
         // Saml komponent
         //----------------------------------
-this.chips =
-    document.createElement("div");
-
-this.chips.className =
-    "selected-chips";
-
 this.container.append(
     this.header,
-    this.chips,
     this.dropdown
 );
         //----------------------------------
@@ -164,7 +157,6 @@ this.header.addEventListener(
             }
         );
         
-        this.renderSelectedChips();
     }
 //--------------------------------------------------
 // Åbn / luk
@@ -289,7 +281,6 @@ createHeader() {
             );
         });
         this.updateHeader();
-        this.renderSelectedChips();
         this.onChange(
             this.getValues()
         );
@@ -357,7 +348,6 @@ createHeader() {
             this.updateSelectAll();
             if (notify) {
                 this.updateHeader();
-                this.renderSelectedChips();
                 this.onChange(
                     this.getValues()
                 );
@@ -412,7 +402,6 @@ createHeader() {
         text.textContent =
             `${values[0]}, ${values[1]} +${values.length - 2}`;
     }
-renderSelectedChips() {
     const values = this.getValues();
     //----------------------------------
     // Ingen valgt
@@ -470,7 +459,6 @@ renderSelectedChips() {
             this.onChange(
                 this.getValues()
             );
-            this.renderSelectedChips();
         }
     );
 }
@@ -548,7 +536,6 @@ close() {
     this.selected.clear();
     this.updateHeader();
     this.updateSelectAll();
-    this.renderSelectedChips();
     this.onChange(
         this.getValues()
     );
