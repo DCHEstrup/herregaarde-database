@@ -453,7 +453,7 @@ const headerText =
     }
     else {
         headerText.textContent =
-            `${selectedValues.length} valgt`;
+            `${this.placeholder} · ${selectedValues.length} valgt`;
     }
     }
 
