@@ -145,40 +145,38 @@ wrapper.appendChild(suggestions);
             const checkbox =
                 row.querySelector("input");
 
-            checkbox.addEventListener(
-                "change",
-                () => {
+           checkbox.addEventListener(
+    "change",
+    () => {
+        if (checkbox.checked) {
+            if (
+                !state.selected.includes(
+                    item.værdi
+                )
+            ) {
+                state.selected.push(
+                    item.værdi
+                );
+            }
+        }
+        else {
+            state.selected =
+                state.selected.filter(
+                    value =>
+                        value !== item.værdi
+                );
+        }
 
-                    if (checkbox.checked) {
+        renderSelectedChips();
+        render();
 
-                        if (
-                            !state.selected.includes(
-                                item.værdi
-                            )
-                        ) {
-
-                            state.selected.push(
-                                item.værdi
-                            );
-
-                        }
-
-                    }
-
-                    else {
-
-                        state.selected =
-                            state.selected.filter(
-                                value =>
-                                    value !== item.værdi
-                            );
-
-                    }
-    renderSelectedChips();
-    render();
-
-                }
-            );
+        document.dispatchEvent(
+            new CustomEvent(
+                "filtersChanged"
+            )
+        );
+    }
+);
 
             suggestions.appendChild(row);
 
