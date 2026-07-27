@@ -714,6 +714,145 @@ input + chips + dropdown
     min-width:0;
 }
 /* ==================================================
+   VALGTE FILTRE
+================================================== */
+
+.filter-actions{
+    position:relative;
+    display:flex;
+    justify-content:flex-end;
+    align-items:flex-start;
+    gap:12px;
+    padding-top:20px;
+}
+
+.selected-filters{
+    position:relative;
+}
+
+.selected-filters-toggle{
+    min-width:170px;
+    min-height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:10px 14px;
+    border:1px solid var(--primary);
+    border-radius:0;
+    background:var(--surface);
+    color:var(--primary);
+    font:inherit;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.selected-filters-toggle:hover{
+    background:rgba(53, 92, 74, .06);
+}
+
+.selected-filters-toggle.has-filters{
+    background:var(--primary);
+    color:#fff;
+}
+
+#selectedFiltersCount{
+    margin-left:auto;
+    font-size:.85rem;
+    font-weight:700;
+}
+
+#selectedFiltersArrow{
+    font-size:.72rem;
+    transition:transform .25s ease;
+}
+
+.selected-filters-toggle[aria-expanded="true"]
+#selectedFiltersArrow{
+    transform:rotate(180deg);
+}
+
+.selected-filters-dropdown{
+    position:absolute;
+    right:0;
+    top:calc(100% + 8px);
+    z-index:1000;
+    width:min(560px, calc(100vw - 40px));
+    max-height:500px;
+    overflow-y:auto;
+    padding:18px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    box-shadow:var(--shadow);
+}
+
+.selected-filter-group + .selected-filter-group{
+    margin-top:18px;
+    padding-top:18px;
+    border-top:1px solid var(--border);
+}
+
+.selected-filter-heading{
+    margin:0 0 10px;
+    color:var(--text);
+    font-size:.95rem;
+    font-weight:700;
+}
+
+.selected-filter-values{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.selected-filter-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    max-width:100%;
+    padding:6px 9px;
+    border-radius:999px;
+    background:var(--primary);
+    color:#fff;
+    font-size:.88rem;
+}
+
+.selected-filter-chip-text{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.selected-filter-remove{
+    width:18px;
+    height:18px;
+    display:grid;
+    place-items:center;
+    padding:0;
+    border:0;
+    background:transparent;
+    color:inherit;
+    font-size:1rem;
+    line-height:1;
+    cursor:pointer;
+}
+
+.selected-filter-more{
+    display:inline-flex;
+    align-items:center;
+    padding:6px 9px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    color:var(--muted);
+    font-size:.88rem;
+}
+
+.selected-filters-empty{
+    margin:0;
+    color:var(--muted);
+    text-align:center;
+}
+/* ==================================================
    RANGE-FILTRE
 ================================================== */
 
