@@ -102,14 +102,12 @@ function buildStatisticsCSV(statistics, filters) {
     //----------------------------------
 
 Object.entries(statistics).forEach(([category, values]) => {
-    if (
-        category === "total" ||
-        !values ||
-        values.length === 0
-    ) {
+    if (!Array.isArray(values) || values.length === 0) {
         return;
     }
-    rows.push([labels[category] || category]);
+    rows.push([
+        labels[category] || category
+    ]);
     rows.push([
         "Værdi",
         "Antal",
@@ -117,18 +115,21 @@ Object.entries(statistics).forEach(([category, values]) => {
     ]);
     const total =
         values.reduce(
-            (sum, row) => sum + row.count,
+            (sum, row) =>
+                sum + Number(row.count || 0),
             0
         );
     values.forEach(row => {
         rows.push([
             row.label,
             row.count,
-            (
-                row.count /
-                total *
-                100
-            ).toFixed(1) + "%"
+            total > 0
+                ? (
+                    Number(row.count) /
+                    total *
+                    100
+                ).toFixed(1) + "%"
+                : "0,0%"
         ]);
     });
     rows.push([]);
