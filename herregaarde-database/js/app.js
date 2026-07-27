@@ -33,15 +33,22 @@ document.addEventListener(
         initialiseAdvancedFilters();
         initSelectedFilters();
         
-async function loadPage(page = 1) {
+async function loadPage(
+    page = 1,
+    showLoadingOnButton = false
+) {
     const searchButton =
         document.getElementById("searchBtn");
     const originalText =
         searchButton?.textContent ?? "Søg";
     try {
-        if (searchButton) {
+        if (
+            showLoadingOnButton &&
+            searchButton
+        ) {
             searchButton.disabled = true;
-            searchButton.textContent = "Søger …";
+            searchButton.textContent =
+                "Søger …";
             searchButton.setAttribute(
                 "aria-busy",
                 "true"
@@ -56,9 +63,12 @@ async function loadPage(page = 1) {
         renderTable(result);
         renderPagination(
             result,
-            loadPage
+            pageNumber =>
+                loadPage(
+                    pageNumber,
+                    false
+                )
         );
-
         await loadStatistics();
     }
     catch (error) {
@@ -68,7 +78,10 @@ async function loadPage(page = 1) {
         );
     }
     finally {
-        if (searchButton) {
+        if (
+            showLoadingOnButton &&
+            searchButton
+        ) {
             searchButton.disabled = false;
             searchButton.textContent =
                 originalText;
@@ -83,7 +96,7 @@ async function loadPage(page = 1) {
             .getElementById("searchBtn")
             ?.addEventListener(
                 "click",
-                () => loadPage(1)
+                () => loadPage(1, true)
             );
 
         document
