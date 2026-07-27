@@ -17,6 +17,22 @@ export function getSelectedValues(containerId) {
         .get(containerId)
         ?.getValues() ?? [];
 }
+export function getMultiSelectOptionCount(
+    containerId
+) {
+    return instances
+        .get(containerId)
+        ?.getOptionCount() ?? 0;
+}
+
+export function removeMultiSelectValue(
+    containerId,
+    value
+) {
+    instances
+        .get(containerId)
+        ?.removeValue(value);
+}
 
 export function clearMultiSelect(containerId) {
     instances
@@ -588,7 +604,15 @@ class MultiSelect {
         this.updateHeader();
         this.updateSelectAll();
 
-        this.notifyChange();
+ this.onChange(
+        this.getValues()
+    );
+
+    document.dispatchEvent(
+        new CustomEvent(
+            "filtersChanged"
+        )
+    );
     }
 
     //--------------------------------------------------
