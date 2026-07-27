@@ -159,8 +159,17 @@ export function renderStatistics(data) {
     // Titel
     //----------------------------------
 
-    title.textContent =
-        `📊 Statistik over søgeresultatet (${data.total.toLocaleString("da-DK")} personer)`;
+const total =
+    Number(data.total) || 0;
+const herregaardeCount =
+    Number(data.herregaarde_count) || 0;
+const folketaellingerCount =
+    Number(data.folketaellinger_count) || 0;
+title.textContent =
+    `📊 Statistik · ` +
+    `${total.toLocaleString("da-DK")} personer · ` +
+    `${herregaardeCount.toLocaleString("da-DK")} herregårde · ` +
+    `${folketaellingerCount.toLocaleString("da-DK")} folketællinger`;
 
     //----------------------------------
     // Opret click-event én gang
