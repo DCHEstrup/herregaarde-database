@@ -84,7 +84,11 @@ export async function searchPeople(filters) {
         p_page:
             filters.page,
         p_page_size:
-            filters.pageSize
+            filters.pageSize,
+        p_sort_column:
+            filters.sortColumn,
+        p_sort_direction:
+            filters.sortDirection
     });
 }
 
