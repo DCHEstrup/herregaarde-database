@@ -131,5 +131,11 @@ async function loadPage(
                     );
                 }
             );
+        document
+    .getElementById("sortSelect")
+    ?.addEventListener(
+        "change",
+        () => loadPage(1, false)
+    );
     }
 );
