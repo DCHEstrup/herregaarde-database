@@ -2,6 +2,12 @@ import { getSelectedValues } from "./ui/multiselectV2.js";
 import { getSelectedArbejde } from "./ui/arbejdeAutocomplete.js";
 
 export function getCurrentFilters() {
+     const sortValue =
+        document.getElementById("sortSelect")
+            ?.value || "navn-asc";
+
+    const [sortColumn, sortDirection] =
+        sortValue.split("-");
     return {
         herregaard:
             getSelectedValues("herregaard"),
@@ -45,13 +51,7 @@ alderTil:
         ? Number(document.getElementById("transportTil").value)
         : null,
         
-        sortColumn:
-            document.getElementById("sortSelect")
-                .value.split("-")[0],
-
-        sortDirection:
-            document.getElementById("sortSelect")
-                .value.split("-")[1]
-
+        sortColumn,
+        sortDirection
     };
 }
