@@ -1388,6 +1388,16 @@ input + chips + dropdown
     overflow-wrap:anywhere;
     word-break:break-word;
 }
+.result-item {
+    border-left: 5px solid transparent;
+    transition:
+        border-color 0.15s ease,
+        background-color 0.15s ease;
+}
+.result-item.active {
+    border-left-color: var(--primary);
+    background-color: #f3f7f4;
+}
 /* ==================================================
    PAGINATION
 ================================================== */
