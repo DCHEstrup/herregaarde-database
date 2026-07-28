@@ -44,5 +44,14 @@ alderTil:
     document.getElementById("transportTil")?.value
         ? Number(document.getElementById("transportTil").value)
         : null,
+        
+        sortColumn:
+            document.getElementById("sortSelect")
+                .value.split("-")[0],
+
+        sortDirection:
+            document.getElementById("sortSelect")
+                .value.split("-")[1]
+
     };
 }
