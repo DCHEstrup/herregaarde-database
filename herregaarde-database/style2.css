@@ -1135,15 +1135,19 @@ input + chips + dropdown
     align-items:center;
     justify-content:flex-end;
     gap:.75rem;
+    width: 100%;
     margin-bottom:1rem;
 }
 
 .results-toolbar label{
     font-weight:600;
+    white-space: nowrap;
 }
 
 .results-toolbar select{
-    min-width:220px;
+    width: auto;
+    min-width: 220px;
+    padding: 0.5rem 0.75rem;
 }
 .results-list{
     display:flex;
