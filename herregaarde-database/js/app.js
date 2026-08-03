@@ -103,6 +103,43 @@ async function loadPage(
         }
     }
 }
+        const globalSearch =
+    document.getElementById("globalSearch");
+
+const clearGlobalSearch =
+    document.getElementById(
+        "clearGlobalSearch"
+    );
+
+globalSearch?.addEventListener(
+    "input",
+    () => {
+        clearGlobalSearch.hidden =
+            !globalSearch.value.trim();
+
+        document.dispatchEvent(
+            new CustomEvent(
+                "filtersChanged"
+            )
+        );
+    }
+);
+
+clearGlobalSearch?.addEventListener(
+    "click",
+    () => {
+        globalSearch.value = "";
+        clearGlobalSearch.hidden = true;
+
+        globalSearch.focus();
+
+        document.dispatchEvent(
+            new CustomEvent(
+                "filtersChanged"
+            )
+        );
+    }
+);
 
         document
             .getElementById("searchBtn")
