@@ -87,7 +87,13 @@ const filterConfig = {
         fromId: "transportFra",
         toId: "transportTil",
         suffix: " km"
-    }
+    },
+    globalSoegning: {
+    label: "Søgning i hele databasen",
+    type: "text",
+    elementId: "globalSearch"
+}
+    
 };
 
 export function initSelectedFilters() {
@@ -270,6 +276,30 @@ export function renderSelectedFilters() {
         selectedCount += 1;
         visibleGroups += 1;
     }
+    if (filters.globalSoegning) {
+    content.appendChild(
+        createSingleValueGroup({
+            label: "Søgning i hele databasen",
+            value: filters.globalSoegning,
+
+            remove() {
+                const input =
+                    document.getElementById(
+                        "globalSearch"
+                    );
+
+                if (input) {
+                    input.value = "";
+                }
+
+                notifyFiltersChanged();
+            }
+        })
+    );
+
+    selectedCount += 1;
+    visibleGroups += 1;
+}
 
     //--------------------------------------------------
     // Alder
