@@ -52,6 +52,14 @@ clearSelectedArbejde();
     }
 
 });
+const clearGlobalSearch =
+    document.getElementById(
+        "clearGlobalSearch"
+    );
+
+if (clearGlobalSearch) {
+    clearGlobalSearch.hidden = true;
+}
 
     //----------------------------------
     // Fremtidige filtre
