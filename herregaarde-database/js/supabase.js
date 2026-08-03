@@ -193,6 +193,7 @@ export async function downloadPeople(filters = {}) {
         p_alder_til: filters.alderTil,
         p_transport_fra: filters.transportFra,
         p_transport_til: filters.transportTil,
+        p_global_soegning: filters.globalSoegning || null,
     };
 
     console.log("RPC params:", params);
