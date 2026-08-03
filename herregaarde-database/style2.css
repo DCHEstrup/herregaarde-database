@@ -329,6 +329,54 @@ input{
     border-bottom:1px solid #ececec;
 }
 /* ==================================================
+   INFORMATION OM FILTRE
+================================================== */
+
+.label-with-info{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    min-width:0;
+}
+
+.label-with-info label{
+    margin:0;
+}
+
+.info-button{
+    flex:0 0 auto;
+    width:18px;
+    height:18px;
+    padding:0;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border:1.5px solid #1769ff;
+    border-radius:50%;
+    background:white;
+    color:#1769ff;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    font-weight:700;
+    line-height:1;
+    cursor:pointer;
+    transition:
+        background .15s ease,
+        color .15s ease,
+        box-shadow .15s ease;
+}
+
+.info-button:hover,
+.info-button[aria-expanded="true"]{
+    background:#1769ff;
+    color:white;
+}
+
+.info-button:focus-visible{
+    outline:3px solid rgba(23,105,255,.22);
+    outline-offset:2px;
+}
+/* ==================================================
    ARBEJDE AUTOCOMPLETE
 ================================================== */
 
