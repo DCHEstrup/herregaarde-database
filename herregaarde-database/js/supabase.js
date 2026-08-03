@@ -143,7 +143,9 @@ export async function getSearchStatistics(filters) {
         p_transport_fra:
             filters.transportFra,
         p_transport_til:
-            filters.transportTil
+            filters.transportTil,
+        p_global_soegning:
+            filters.globalSoegning || null
     });
 }
 
