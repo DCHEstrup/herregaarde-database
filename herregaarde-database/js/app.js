@@ -4,9 +4,6 @@ import { renderTable } from "./ui/table.js";
 import { downloadCSV } from "./download.js";
 import { getCurrentFilters } from "./filtersState.js";
 import { renderPagination } from "./ui/pagination.js";
-import { enableAutosuggest } from "./autosuggest.js";
-import { getJobSuggestions, getStatistics } from "./supabase.js";
-import { createMultiSelect } from "./ui/multiselectV2.js";
 import { clearFilters } from "./clearFilters.js";
 import { initialiseAdvancedFilters } from "./advancedFilters.js";
 import { loadStatistics } from "./statistics.js";
@@ -14,140 +11,161 @@ import { downloadStatistics } from "./downloadStatistics.js";
 import { clearDetail } from "./ui/detail.js";
 import { initSelectedFilters } from "./ui/selectedFilters.js";
 
-/*
-document.addEventListener("DOMContentLoaded", async () => {
-    const { data } = await getStatistics();
-document.getElementById("personCount").textContent =
-    data.persons.toLocaleString("da-DK");
-document.getElementById("estateCount").textContent =
-    data.estates.toLocaleString("da-DK");
-document.getElementById("censusCount").textContent =
-    data.censusYears;
-});
-*/
-document.getElementById("globalSearch")
-    ?.addEventListener(
-        "keydown",
-        event => {
-            if (event.key !== "Enter") {
-                return;
-            }
-
-            event.preventDefault();
-            loadPage(1, true);
-        }
-    );
-
 document.addEventListener(
     "DOMContentLoaded",
     async () => {
+        //----------------------------------
+        // Initialisering
+        //----------------------------------
+
         await loadFilters();
+
         initialiseAdvancedFilters();
         initSelectedFilters();
-        
-async function loadPage(
-    page = 1,
-    showLoadingOnButton = false
-) {
-    const searchButton =
-        document.getElementById("searchBtn");
-    const originalText =
-        searchButton?.textContent ?? "Søg";
-    try {
-        if (
-            showLoadingOnButton &&
-            searchButton
+
+        //----------------------------------
+        // Hent og vis en side
+        //----------------------------------
+
+        async function loadPage(
+            page = 1,
+            showLoadingOnButton = false
         ) {
-            searchButton.disabled = true;
-            searchButton.textContent =
-                "Søger …";
-            searchButton.setAttribute(
-                "aria-busy",
-                "true"
-            );
+            const searchButton =
+                document.getElementById(
+                    "searchBtn"
+                );
+            const originalText =
+                searchButton?.textContent
+                    ?.trim() || "Søg";
+            try {
+                if (
+                    showLoadingOnButton &&
+                    searchButton
+                ) {
+                    searchButton.disabled = true;
+                    searchButton.textContent =
+                        "Søger …";
+                    searchButton.setAttribute(
+                        "aria-busy",
+                        "true"
+                    );
+                }
+                clearDetail();
+                const result =
+                    await performSearch(page);
+                if (!result) {
+                    return;
+                }
+                renderTable(result);
+                renderPagination(
+                    result,
+                    pageNumber => {
+                        loadPage(
+                            pageNumber,
+                            false
+                        );
+                    }
+                );
+                await loadStatistics();
+            }
+            catch (error) {
+                console.error(
+                    "Fejl under søgning:",
+                    error
+                );
+            }
+            finally {
+                if (
+                    showLoadingOnButton &&
+                    searchButton
+                ) {
+                    searchButton.disabled =
+                        false;
+                    searchButton.textContent =
+                        originalText;
+                    searchButton.removeAttribute(
+                        "aria-busy"
+                    );
+                }
+            }
         }
-        clearDetail();
-        const result =
-            await performSearch(page);
-        if (!result) {
-            return;
-        }
-        renderTable(result);
-        renderPagination(
-            result,
-            pageNumber =>
-                loadPage(
-                    pageNumber,
-                    false
-                )
-        );
-        await loadStatistics();
-    }
-    catch (error) {
-        console.error(
-            "Fejl under søgning:",
-            error
-        );
-    }
-    finally {
-        if (
-            showLoadingOnButton &&
-            searchButton
-        ) {
-            searchButton.disabled = false;
-            searchButton.textContent =
-                originalText;
-            searchButton.removeAttribute(
-                "aria-busy"
-            );
-        }
-    }
-}
+        //----------------------------------
+        // Global søgning
+        //----------------------------------
         const globalSearch =
-    document.getElementById("globalSearch");
-
-const clearGlobalSearch =
-    document.getElementById(
-        "clearGlobalSearch"
-    );
-
-globalSearch?.addEventListener(
-    "input",
-    () => {
-        clearGlobalSearch.hidden =
-            !globalSearch.value.trim();
-
-        document.dispatchEvent(
-            new CustomEvent(
-                "filtersChanged"
-            )
+            document.getElementById(
+                "globalSearch"
+            );
+        const clearGlobalSearch =
+            document.getElementById(
+                "clearGlobalSearch"
+            );
+        globalSearch?.addEventListener(
+            "keydown",
+            event => {
+                if (event.key !== "Enter") {
+                    return;
+                }
+                event.preventDefault();
+                loadPage(1, true);
+            }
         );
-    }
-);
-
-clearGlobalSearch?.addEventListener(
-    "click",
-    () => {
-        globalSearch.value = "";
-        clearGlobalSearch.hidden = true;
-
-        globalSearch.focus();
-
-        document.dispatchEvent(
-            new CustomEvent(
-                "filtersChanged"
-            )
+        globalSearch?.addEventListener(
+            "input",
+            () => {
+                if (clearGlobalSearch) {
+                    clearGlobalSearch.hidden =
+                        !globalSearch.value.trim();
+                }
+                document.dispatchEvent(
+                    new CustomEvent(
+                        "filtersChanged"
+                    )
+                );
+            }
         );
-    }
-);
-
+        clearGlobalSearch?.addEventListener(
+            "click",
+            () => {
+                if (!globalSearch) {
+                    return;
+                }
+                globalSearch.value = "";
+                clearGlobalSearch.hidden = true;
+                globalSearch.focus();
+                document.dispatchEvent(
+                    new CustomEvent(
+                        "filtersChanged"
+                    )
+                );
+            }
+        );
+        //----------------------------------
+        // Søg
+        //----------------------------------
         document
             .getElementById("searchBtn")
             ?.addEventListener(
                 "click",
-                () => loadPage(1, true)
+                () => {
+                    loadPage(1, true);
+                }
             );
-
+        //----------------------------------
+        // Sortering
+        //----------------------------------
+        document
+            .getElementById("sortSelect")
+            ?.addEventListener(
+                "change",
+                () => {
+                    loadPage(1, false);
+                }
+            );
+        //----------------------------------
+        // Download data
+        //----------------------------------
         document
             .getElementById("downloadBtn")
             ?.addEventListener(
@@ -158,16 +176,9 @@ clearGlobalSearch?.addEventListener(
                     );
                 }
             );
-
-        document
-            .getElementById("clearBtn")
-            ?.addEventListener(
-                "click",
-                () => {
-                    clearFilters();
-                }
-            );
-
+        //----------------------------------
+        // Download statistik
+        //----------------------------------
         document
             .getElementById(
                 "downloadStatisticsBtn"
@@ -180,11 +191,16 @@ clearGlobalSearch?.addEventListener(
                     );
                 }
             );
+        //----------------------------------
+        // Ryd filtre
+        //----------------------------------
         document
-    .getElementById("sortSelect")
-    ?.addEventListener(
-        "change",
-        () => loadPage(1, false)
-    );
+            .getElementById("clearBtn")
+            ?.addEventListener(
+                "click",
+                () => {
+                    clearFilters();
+                }
+            );
     }
 );
