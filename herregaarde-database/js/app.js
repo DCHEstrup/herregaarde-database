@@ -10,6 +10,7 @@ import { loadStatistics } from "./statistics.js";
 import { downloadStatistics } from "./downloadStatistics.js";
 import { clearDetail } from "./ui/detail.js";
 import { initSelectedFilters } from "./ui/selectedFilters.js";
+import { initialiseFilterInfo } from "./filterInfo.js";
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -22,6 +23,7 @@ document.addEventListener(
 
         initialiseAdvancedFilters();
         initSelectedFilters();
+        initialiseFilterInfo();
 
         //----------------------------------
         // Hent og vis en side
