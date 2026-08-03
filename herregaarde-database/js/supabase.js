@@ -34,6 +34,8 @@ export async function searchPeople(filters) {
 
     return await supabase.rpc("search_people", {
 
+        p_global_soegning:
+            filters.globalSoegning || null,
         p_herregaard:
             filters.herregaard?.length
                 ? filters.herregaard
