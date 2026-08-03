@@ -9,6 +9,10 @@ export function getCurrentFilters() {
     const [sortColumn, sortDirection] =
         sortValue.split("-");
     return {
+         globalSoegning:
+    document.getElementById("globalSearch")
+        ?.value
+        .trim() || null,
         herregaard:
             getSelectedValues("herregaard"),
         aar:
