@@ -159,7 +159,40 @@
         id="alderTil"
         placeholder="Til">
 </div>
-    <label>Transport (km)</label>
+   <div class="label-with-info">
+    <label for="transportFra">
+        Transport (km)
+    </label>
+
+    <button
+        type="button"
+        class="info-button"
+        aria-label="Læs mere om filteret Transport"
+        aria-expanded="false"
+        aria-controls="infoTransport"
+        data-info-target="infoTransport"
+    >
+        i
+    </button>
+</div>
+
+<div
+    id="infoTransport"
+    class="filter-info"
+    hidden
+>
+    <strong>Transport</strong>
+
+    <p>
+        Angiver den beregnede afstand i kilometer mellem personens
+        registrerede fødested og den herregård, hvor personen optræder
+        i folketællingen.
+    </p>
+
+    <p>
+        Brug felterne Fra og Til til at afgrænse afstanden.
+    </p>
+</div>
     <div class="range-filter">
     <input
         type="number"
