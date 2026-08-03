@@ -14,6 +14,38 @@
     <header class="search-panel">
         <h1>Herregårdsdatabase</h1>
    <div class="filters panel">
+       <div class="global-search-group">
+    <label for="globalSearch">
+        Søg i hele databasen
+    </label>
+
+    <div class="global-search-control">
+        <span class="global-search-icon" aria-hidden="true">
+            🔎
+        </span>
+
+        <input
+            id="globalSearch"
+            type="search"
+            placeholder="Søg f.eks. navn, herregård, arbejde, fødested eller sted"
+            autocomplete="off"
+        >
+
+        <button
+            id="clearGlobalSearch"
+            type="button"
+            class="global-search-clear"
+            aria-label="Ryd den frie søgning"
+            hidden
+        >
+            ×
+        </button>
+    </div>
+
+    <p class="global-search-help">
+        Søger samtidig i alle tekst- og talfelter i databasen.
+    </p>
+</div>
        <div class="filter-grid">
 <div class="filter-group">
     <label for="herregaard">
