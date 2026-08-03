@@ -69,9 +69,36 @@
     </div>
 </div>
 <div class="filter-group autosuggest">
+    <div class="label-with-info">
     <label for="arbejde">
         Arbejde eller position
     </label>
+
+    <button
+        type="button"
+        class="info-button"
+        aria-label="Læs mere om filteret Arbejde eller position"
+        aria-expanded="false"
+        aria-controls="infoArbejde"
+        data-info-target="infoArbejde"
+    >
+        i
+    </button>
+</div>
+
+<div
+    id="infoArbejde"
+    class="filter-info"
+    hidden
+>
+    <strong>Arbejde eller position</strong>
+
+    <p>
+        Søger både i personens arbejdsbetegnelse og i personens
+        position i husstanden. Du kan skrive frit eller vælge en
+        eller flere foreslåede betegnelser.
+    </p>
+</div>
     <div class="filter-control">
         <input
             id="arbejde"
