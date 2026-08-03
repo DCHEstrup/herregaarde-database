@@ -407,6 +407,16 @@ input{
 .filter-info[hidden]{
     display:none;
 }
+.filter-info-transport{
+    top:calc(100% + 12px);
+    left:0;
+    margin-top:0;
+}
+.filter-info-work{
+    top:calc(var(--control-height) + 34px);
+    left:0;
+    margin-top:0;
+}
 /* ==================================================
    ARBEJDE AUTOCOMPLETE
 ================================================== */
