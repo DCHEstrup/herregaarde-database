@@ -404,6 +404,9 @@ input{
 .filter-info p + p{
     margin-top:8px;
 }
+.filter-info[hidden]{
+    display:none;
+}
 /* ==================================================
    ARBEJDE AUTOCOMPLETE
 ================================================== */
