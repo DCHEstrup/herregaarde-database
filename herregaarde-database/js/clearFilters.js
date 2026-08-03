@@ -34,6 +34,7 @@ clearSelectedArbejde();
     //----------------------------------
 
     [
+    "globalSearch",
     "arbejde",
     "alderFra",
     "alderTil",
