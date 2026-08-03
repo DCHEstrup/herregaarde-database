@@ -25,6 +25,18 @@ document.getElementById("censusCount").textContent =
     data.censusYears;
 });
 */
+document.getElementById("globalSearch")
+    ?.addEventListener(
+        "keydown",
+        event => {
+            if (event.key !== "Enter") {
+                return;
+            }
+
+            event.preventDefault();
+            loadPage(1, true);
+        }
+    );
 
 document.addEventListener(
     "DOMContentLoaded",
