@@ -39,8 +39,6 @@ clearSelectedArbejde();
     "alderFra",
     "alderTil",
     "transportFra",
-    "transportTil",
-    "transportFra",
     "transportTil"
 ].forEach(id => {
 
