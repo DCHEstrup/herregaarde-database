@@ -376,6 +376,34 @@ input{
     outline:3px solid rgba(23,105,255,.22);
     outline-offset:2px;
 }
+.filter-info{
+    position:absolute;
+    z-index:4000;
+    width:min(320px, calc(100vw - 40px));
+    margin-top:6px;
+    padding:14px 16px;
+    border:1px solid var(--border);
+    border-radius:6px;
+    background:var(--surface);
+    box-shadow:0 10px 30px rgba(0,0,0,.14);
+    color:var(--text);
+    font-size:.9rem;
+    line-height:1.5;
+}
+
+.filter-info strong{
+    display:block;
+    margin-bottom:6px;
+    color:var(--primary);
+}
+
+.filter-info p{
+    margin:0;
+}
+
+.filter-info p + p{
+    margin-top:8px;
+}
 /* ==================================================
    ARBEJDE AUTOCOMPLETE
 ================================================== */
