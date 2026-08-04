@@ -130,6 +130,39 @@ for (const [key, label] of fields) {
 }
 
     }
+    table
+    .querySelectorAll(
+        ".detail-info-button"
+    )
+    .forEach(button => {
+        button.addEventListener(
+            "click",
+            event => {
+                event.stopPropagation();
+
+                const popup =
+                    button.parentElement
+                        .querySelector(
+                            ".detail-info-popup"
+                        );
+
+                if (!popup) {
+                    return;
+                }
+
+                const shouldOpen =
+                    popup.hidden;
+
+                popup.hidden =
+                    !shouldOpen;
+
+                button.setAttribute(
+                    "aria-expanded",
+                    String(shouldOpen)
+                );
+            }
+        );
+    });
     detail.appendChild(table);
 }
 export function clearDetail() {
