@@ -52,7 +52,7 @@ if (key === "arbejde_titel") {
             rel="noopener noreferrer"
             title="Læs om arbejdsfunktioner på Danske Herregårde"
         >
-            Arbejde ↗
+            Arbejde <span class="external-icon">↗</span>
         </a>
     `;
 } else {
