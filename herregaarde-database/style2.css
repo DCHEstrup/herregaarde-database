@@ -1591,6 +1591,72 @@ input + chips + dropdown
     font-size:.8em;
     vertical-align:super;
 }
+.detail-label-with-info{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+}
+
+.detail-info-button{
+    flex:0 0 auto;
+    width:18px;
+    height:18px;
+    padding:0;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border:1.5px solid #1769ff;
+    border-radius:50%;
+    background:white;
+    color:#1769ff;
+    font-size:12px;
+    font-weight:700;
+    line-height:1;
+    cursor:pointer;
+}
+
+.detail-info-button:hover,
+.detail-info-button[aria-expanded="true"]{
+    background:#1769ff;
+    color:white;
+}
+
+.detail-info-button:focus-visible{
+    outline:3px solid rgba(23,105,255,.22);
+    outline-offset:2px;
+}
+.detail-info-popup{
+    position:absolute;
+    z-index:5000;
+    top:calc(100% + 8px);
+    left:0;
+    width:280px;
+    padding:12px 14px;
+    border:1px solid var(--border);
+    border-radius:6px;
+    background:var(--surface);
+    box-shadow:0 10px 30px rgba(0,0,0,.14);
+    color:var(--text);
+    font-size:.9rem;
+    font-weight:400;
+    line-height:1.5;
+    text-align:left;
+}
+
+.detail-info-popup strong{
+    display:block;
+    margin-bottom:6px;
+    color:var(--primary);
+}
+
+.detail-info-popup span{
+    display:block;
+}
+
+.detail-info-popup[hidden]{
+    display:none;
+}
 
 /* ==================================================
    PAGINATION
