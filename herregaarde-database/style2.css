@@ -1574,6 +1574,23 @@ input + chips + dropdown
     overflow-wrap:anywhere;
     word-break:break-word;
 }
+.detail-heading-link{
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.detail-heading-link:hover{
+    text-decoration: underline;
+}
+
+.detail-heading-link:visited{
+    color: var(--primary);
+}
+.external-icon{
+    font-size:.8em;
+    vertical-align:super;
+}
 
 /* ==================================================
    PAGINATION
