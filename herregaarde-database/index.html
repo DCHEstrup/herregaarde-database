@@ -116,23 +116,27 @@
 </div>
 </div>
        <div class="advanced-filters">
-   <button
+<button
     id="toggleAdvanced"
     class="advanced-toggle"
     type="button"
+    aria-expanded="false"
+    aria-controls="advancedContent"
 >
-    <span>Udvidede filtre</span>
-
-    <span class="advanced-toggle-icons">
-        <span class="advanced-status" aria-hidden="true"></span>
-
+    <span class="advanced-toggle-label">
         <span
-            id="advancedArrow"
-            class="advanced-arrow"
-            aria-hidden="true"
-        >
-            ▼
+            class="advanced-status"
+            aria-hidden="true">
         </span>
+
+        <span>Udvidede filtre</span>
+    </span>
+
+    <span
+        id="advancedArrow"
+        class="advanced-arrow"
+        aria-hidden="true">
+        ▼
     </span>
 </button>
     <div
