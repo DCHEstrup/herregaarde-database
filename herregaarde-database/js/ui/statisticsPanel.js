@@ -170,7 +170,7 @@ title.textContent =
     `${total.toLocaleString("da-DK")} personer · ` +
     `${herregaardeCount.toLocaleString("da-DK")} herregårde · ` +
     `${folketaellingerCount.toLocaleString("da-DK")} folketællinger` + 
-    `(Klik for at udvide)`;
+    ` · (Klik for at udvide)`;
 
     //----------------------------------
     // Opret click-event én gang
