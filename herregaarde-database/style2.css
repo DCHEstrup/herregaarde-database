@@ -832,6 +832,11 @@ input + chips + dropdown
     align-items:center;
     gap:10px;
 }
+.advanced-toggle-label{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+}
 
 .advanced-status{
     width:18px;
