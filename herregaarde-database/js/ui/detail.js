@@ -22,149 +22,174 @@ const fields = [
 ];
 
 export async function showDetail(id) {
-    const { data, error } = await getPerson(id);
+    const { data, error } =
+        await getPerson(id);
+
     if (error) {
         console.error(error);
         return;
     }
-    const detail = document.getElementById("detail");
+
+    const detail =
+        document.getElementById("detail");
+
     detail.innerHTML = "";
+
+    //----------------------------------
     // Titel
-    const title = document.createElement("h2");
-    title.textContent = data.navn || "Ukendt person";
+    //----------------------------------
+
+    const title =
+        document.createElement("h2");
+
+    title.textContent =
+        data.navn || "Ukendt person";
+
     detail.appendChild(title);
 
+    //----------------------------------
     // Tabel
-    const table = document.createElement("table");
-    table.className = "detail-table";
+    //----------------------------------
+
+    const table =
+        document.createElement("table");
+
+    table.className =
+        "detail-table";
 
     for (const [key, label] of fields) {
-        if (data[key] === null || data[key] === "") continue;
-        const row = document.createElement("tr");
-for (const [key, label] of fields) {
-    if (
-        data[key] === null ||
-        data[key] === ""
-    ) {
-        continue;
-    }
+        if (
+            data[key] === null ||
+            data[key] === ""
+        ) {
+            continue;
+        }
 
-    const row =
-        document.createElement("tr");
+        const row =
+            document.createElement("tr");
 
-    const th =
-        document.createElement("th");
+        const th =
+            document.createElement("th");
 
-    const td =
-        document.createElement("td");
+        const td =
+            document.createElement("td");
 
-    //----------------------------------
-    // Arbejde som link
-    //----------------------------------
+        //----------------------------------
+        // Arbejde som link
+        //----------------------------------
 
-    if (key === "arbejde_titel") {
-        th.innerHTML = `
-            <a
-                class="detail-heading-link"
-                href="https://www.danskeherregaarde.dk/tjenestefolk/herregaardens-hushold-funktioner-og-personer"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Læs om arbejdsfunktioner på Danske Herregårde"
-            >
-                Arbejde
-                <span class="external-icon">
-                    ↗
-                </span>
-            </a>
-        `;
-    }
-
-    //----------------------------------
-    // Transport med info-knap
-    //----------------------------------
-
-    else if (key === "transport") {
-        th.innerHTML = `
-            <span class="detail-label-with-info">
-                <span>Transport</span>
-
-                <button
-                    type="button"
-                    class="detail-info-button"
-                    aria-label="Læs mere om Transport"
-                    aria-expanded="false"
+        if (key === "arbejde_titel") {
+            th.innerHTML = `
+                <a
+                    class="detail-heading-link"
+                    href="https://www.danskeherregaarde.dk/tjenestefolk/herregaardens-hushold-funktioner-og-personer"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Læs om arbejdsfunktioner på Danske Herregårde"
                 >
-                    i
-                </button>
+                    Arbejde
+                    <span class="external-icon">
+                        ↗
+                    </span>
+                </a>
+            `;
+        }
 
-                <span
-                    class="detail-info-popup"
-                    hidden
-                >
-                    <strong>Transport</strong>
+        //----------------------------------
+        // Transport med info-knap
+        //----------------------------------
 
-                    <span>
-                        Viser afstanden fra personens fødested
-                        til den herregård, de arbejder på.
+        else if (key === "transport") {
+            th.innerHTML = `
+                <span class="detail-label-with-info">
+                    <span>Transport</span>
+
+                    <button
+                        type="button"
+                        class="detail-info-button"
+                        aria-label="Læs mere om Transport"
+                        aria-expanded="false"
+                    >
+                        i
+                    </button>
+
+                    <span
+                        class="detail-info-popup"
+                        hidden
+                    >
+                        <strong>Transport</strong>
+
+                        <span>
+                            Viser afstanden fra personens fødested
+                            til den herregård, de arbejder på.
+                        </span>
                     </span>
                 </span>
-            </span>
-        `;
-    }
+            `;
+        }
 
-    //----------------------------------
-    // Almindelige felter
-    //----------------------------------
+        //----------------------------------
+        // Almindelige felter
+        //----------------------------------
 
-    else {
-        th.textContent = label;
-    }
+        else {
+            th.textContent = label;
+        }
 
-    td.textContent = data[key];
+        td.textContent = data[key];
 
-    row.append(
-        th,
-        td
-    );
-    table.appendChild(row);
-}
-
-    }
-    table
-    .querySelectorAll(
-        ".detail-info-button"
-    )
-    .forEach(button => {
-        button.addEventListener(
-            "click",
-            event => {
-                event.stopPropagation();
-
-                const popup =
-                    button.parentElement
-                        .querySelector(
-                            ".detail-info-popup"
-                        );
-
-                if (!popup) {
-                    return;
-                }
-
-                const shouldOpen =
-                    popup.hidden;
-
-                popup.hidden =
-                    !shouldOpen;
-
-                button.setAttribute(
-                    "aria-expanded",
-                    String(shouldOpen)
-                );
-            }
+        row.append(
+            th,
+            td
         );
-    });
+
+        table.appendChild(row);
+    }
+
+    //----------------------------------
+    // Info-popup
+    //----------------------------------
+
+    table
+        .querySelectorAll(
+            ".detail-info-button"
+        )
+        .forEach(button => {
+            button.addEventListener(
+                "click",
+                event => {
+                    event.stopPropagation();
+
+                    const popup =
+                        button
+                            .closest(
+                                ".detail-label-with-info"
+                            )
+                            ?.querySelector(
+                                ".detail-info-popup"
+                            );
+
+                    if (!popup) {
+                        return;
+                    }
+
+                    const shouldOpen =
+                        popup.hidden;
+
+                    popup.hidden =
+                        !shouldOpen;
+
+                    button.setAttribute(
+                        "aria-expanded",
+                        String(shouldOpen)
+                    );
+                }
+            );
+        });
+
     detail.appendChild(table);
 }
+
 export function clearDetail() {
     document
         .querySelectorAll(".result-row.selected")
