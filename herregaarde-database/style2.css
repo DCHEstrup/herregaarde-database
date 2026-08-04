@@ -407,8 +407,13 @@ input{
 .filter-info[hidden]{
     display:none;
 }
+.advanced-filter-label{
+    position:relative;
+    justify-self:start;
+}
+
 .filter-info-transport{
-    top:calc(var(--control-height) + 34px);
+    top:calc(100% + 8px);
     left:0;
     margin-top:0;
 }
