@@ -41,25 +41,31 @@ export async function showDetail(id) {
     for (const [key, label] of fields) {
         if (data[key] === null || data[key] === "") continue;
         const row = document.createElement("tr");
-let value = data[key];
-        
+const th = document.createElement("th");
+
 if (key === "arbejde_titel") {
-    value = `
+    th.innerHTML = `
         <a
-            class="detail-link"
+            class="detail-heading-link"
             href="https://www.danskeherregaarde.dk/tjenestefolk/herregaardens-hushold-funktioner-og-personer"
             target="_blank"
             rel="noopener noreferrer"
+            title="Læs om arbejdsfunktioner på Danske Herregårde"
         >
-            ${data[key]}
+            Arbejde ↗
         </a>
     `;
+} else {
+    th.textContent = label;
 }
 
-row.innerHTML = `
-    <th>${label}</th>
-    <td>${value}</td>
-`;
+const td = document.createElement("td");
+td.textContent = data[key];
+
+row.appendChild(th);
+row.appendChild(td);
+
+table.appendChild(row);
 
         table.appendChild(row);
     }
