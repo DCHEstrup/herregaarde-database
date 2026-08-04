@@ -827,6 +827,29 @@ input + chips + dropdown
     background:#f4f7f5;
     border-color:var(--primary);
 }
+.advanced-toggle-icons{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+}
+
+.advanced-status{
+    width:18px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.25rem;
+    font-weight:600;
+    line-height:1;
+}
+
+.advanced-status::before{
+    content:"+";
+}
+
+.advanced-toggle.open .advanced-status::before{
+    content:"−";
+}
 
 .advanced-arrow{
     flex-shrink:0;
