@@ -41,33 +41,94 @@ export async function showDetail(id) {
     for (const [key, label] of fields) {
         if (data[key] === null || data[key] === "") continue;
         const row = document.createElement("tr");
-const th = document.createElement("th");
+for (const [key, label] of fields) {
+    if (
+        data[key] === null ||
+        data[key] === ""
+    ) {
+        continue;
+    }
 
-if (key === "arbejde_titel") {
-    th.innerHTML = `
-        <a
-            class="detail-heading-link"
-            href="https://www.danskeherregaarde.dk/tjenestefolk/herregaardens-hushold-funktioner-og-personer"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Læs om arbejdsfunktioner på Danske Herregårde"
-        >
-            Arbejde <span class="external-icon">↗</span>
-        </a>
-    `;
-} else {
-    th.textContent = label;
+    const row =
+        document.createElement("tr");
+
+    const th =
+        document.createElement("th");
+
+    const td =
+        document.createElement("td");
+
+    //----------------------------------
+    // Arbejde som link
+    //----------------------------------
+
+    if (key === "arbejde_titel") {
+        th.innerHTML = `
+            <a
+                class="detail-heading-link"
+                href="https://www.danskeherregaarde.dk/tjenestefolk/herregaardens-hushold-funktioner-og-personer"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Læs om arbejdsfunktioner på Danske Herregårde"
+            >
+                Arbejde
+                <span class="external-icon">
+                    ↗
+                </span>
+            </a>
+        `;
+    }
+
+    //----------------------------------
+    // Transport med info-knap
+    //----------------------------------
+
+    else if (key === "transport") {
+        th.innerHTML = `
+            <span class="detail-label-with-info">
+                <span>Transport</span>
+
+                <button
+                    type="button"
+                    class="detail-info-button"
+                    aria-label="Læs mere om Transport"
+                    aria-expanded="false"
+                >
+                    i
+                </button>
+
+                <span
+                    class="detail-info-popup"
+                    hidden
+                >
+                    <strong>Transport</strong>
+
+                    <span>
+                        Viser afstanden fra personens fødested
+                        til den herregård, de arbejder på.
+                    </span>
+                </span>
+            </span>
+        `;
+    }
+
+    //----------------------------------
+    // Almindelige felter
+    //----------------------------------
+
+    else {
+        th.textContent = label;
+    }
+
+    td.textContent = data[key];
+
+    row.append(
+        th,
+        td
+    );
+    table.appendChild(row);
 }
 
-const td = document.createElement("td");
-td.textContent = data[key];
-
-row.appendChild(th);
-row.appendChild(td);
-
-table.appendChild(row);
-
-        table.appendChild(row);
     }
     detail.appendChild(table);
 }
