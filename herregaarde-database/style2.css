@@ -1690,6 +1690,117 @@ input + chips + dropdown
 .detail-info-popup[hidden]{
     display:none;
 }
+/* ==================================================
+   HUSSTAND
+================================================== */
+
+.household-section{
+    margin-top:20px;
+    border-top:1px solid var(--border);
+    padding-top:16px;
+}
+
+.household-toggle{
+    width:100%;
+    min-height:42px;
+    padding:0 14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+
+    border:1px solid var(--primary);
+    border-radius:var(--radius);
+    background:white;
+    color:var(--primary);
+
+    font:inherit;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.household-toggle:hover{
+    background:#f4f7f5;
+}
+
+.household-content{
+    margin-top:10px;
+    border:1px solid var(--border);
+    background:white;
+}
+
+.household-content[hidden]{
+    display:none;
+}
+
+.household-count{
+    margin:0;
+    padding:12px 14px;
+    border-bottom:1px solid var(--border);
+    color:var(--muted);
+    font-size:.9rem;
+}
+
+.household-list{
+    display:flex;
+    flex-direction:column;
+}
+
+.household-person{
+    width:100%;
+    padding:12px 14px;
+
+    display:grid;
+    grid-template-columns:
+        minmax(130px, 1fr)
+        auto;
+    gap:4px 12px;
+
+    border:0;
+    border-bottom:1px solid var(--border);
+    background:white;
+
+    color:var(--text);
+    font:inherit;
+    text-align:left;
+    cursor:pointer;
+}
+
+.household-person:last-child{
+    border-bottom:0;
+}
+
+.household-person:hover{
+    background:#f4f7f5;
+}
+
+.household-person.current{
+    border-left:4px solid var(--primary);
+    background:#f4f7f5;
+}
+
+.household-person-name{
+    font-weight:600;
+}
+
+.household-person-meta{
+    color:var(--muted);
+    white-space:nowrap;
+}
+
+.household-person-job{
+    grid-column:1 / -1;
+    color:var(--muted);
+    font-size:.9rem;
+}
+
+.household-loading,
+.household-error,
+.household-empty{
+    padding:16px;
+    color:var(--muted);
+}
 
 /* ==================================================
    PAGINATION
