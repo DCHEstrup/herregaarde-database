@@ -200,7 +200,7 @@ householdSection.innerHTML = `
         class="household-toggle"
         aria-expanded="false"
     >
-        <span>+ Se husstand</span>
+        <span>+ Se personer på herregården</span>
         <span aria-hidden="true">▼</span>
     </button>
 
