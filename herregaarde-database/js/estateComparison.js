@@ -246,23 +246,29 @@ function createComparisonChart(
             labelElement
         );
 
-        const maximum =
-            Math.max(
-                1,
-                ...estates.map(
-                    estate =>
-                        Number(
-                            estate[key]
-                                ?.find(
-                                    item =>
-                                        String(
-                                            item.label
-                                        ) === label
-                                )
-                                ?.count
-                        ) || 0
-                )
-            );
+       const valuesContainer =
+    document.createElement("div");
+
+valuesContainer.className =
+    "compare-chart-values";
+
+const maximum =
+    Math.max(
+        1,
+        ...estates.map(
+            estate =>
+                Number(
+                    estate[key]
+                        ?.find(
+                            item =>
+                                String(
+                                    item.label
+                                ) === label
+                        )
+                        ?.count
+                ) || 0
+        )
+    );
 
         estates.forEach(estate => {
             const value =
