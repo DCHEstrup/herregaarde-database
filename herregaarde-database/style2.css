@@ -1745,6 +1745,9 @@ input + chips + dropdown
 .household-list{
     display:flex;
     flex-direction:column;
+    max-height:520px;    
+    overflow-y:auto;
+    scrollbar-gutter:stable;
 }
 
 .household-person{
@@ -1800,6 +1803,22 @@ input + chips + dropdown
 .household-empty{
     padding:16px;
     color:var(--muted);
+}
+.household-list::-webkit-scrollbar{
+    width:10px;
+}
+
+.household-list::-webkit-scrollbar-track{
+    background:#f4f4f4;
+}
+
+.household-list::-webkit-scrollbar-thumb{
+    background:var(--primary);
+    border-radius:8px;
+}
+
+.household-list::-webkit-scrollbar-thumb:hover{
+    background:var(--primary-hover);
 }
 
 /* ==================================================
