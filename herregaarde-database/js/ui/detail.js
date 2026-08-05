@@ -200,7 +200,7 @@ householdSection.innerHTML = `
         class="household-toggle"
         aria-expanded="false"
     >
-        <span>+ Se personer på herregården</span>
+        <span>+ Se husstand</span>
         <span aria-hidden="true">▼</span>
     </button>
 
@@ -292,7 +292,9 @@ householdButton.addEventListener(
         renderHousehold(
             householdContent,
             household,
-            data.id
+            data.id,
+            data.herregaard,
+            data.folketaelling_aar
         );
 
         householdLoaded = true;
@@ -302,7 +304,9 @@ householdButton.addEventListener(
 function renderHousehold(
     container,
     people,
-    currentPersonId
+    currentPersonId,
+    herregaard,
+    folketaellingAar
 ) {
     container.innerHTML = "";
 
@@ -325,7 +329,7 @@ function renderHousehold(
         "household-count";
 
     count.textContent =
-        `${people.length.toLocaleString("da-DK")} personer på ${people[0]?.herregaard ?? ""} (${people[0]?.folketaelling_aar ?? ""})`;
+           `${people.length.toLocaleString("da-DK")} personer på ${herregaard} (${folketaellingAar})`;
 
     container.appendChild(count);
 
