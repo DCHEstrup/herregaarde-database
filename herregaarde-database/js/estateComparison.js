@@ -526,7 +526,64 @@ function formatComparisonFilterValue(
 
     return String(value);
 }
+function normalizeComparisonFilters(filters) {
+    return {
+        herregaard:
+            [...(filters.herregaard || [])]
+                .sort(),
 
+        aar:
+            [...(filters.aar || [])]
+                .map(Number)
+                .sort((a, b) => a - b),
+
+        koen:
+            [...(filters.koen || [])]
+                .sort(),
+
+        trossamfund:
+            [...(filters.trossamfund || [])]
+                .sort(),
+
+        region:
+            [...(filters.region || [])]
+                .sort(),
+
+        kommune:
+            [...(filters.kommune || [])]
+                .sort(),
+
+        arbejde:
+            filters.arbejde || null,
+
+        arbejdeValgt:
+            [...(filters.arbejdeValgt || [])]
+                .sort(),
+
+        civilstand:
+            [...(filters.civilstand || [])]
+                .sort(),
+
+        handicap:
+            [...(filters.handicap || [])]
+                .sort(),
+
+        alderFra:
+            filters.alderFra ?? null,
+
+        alderTil:
+            filters.alderTil ?? null,
+
+        transportFra:
+            filters.transportFra ?? null,
+
+        transportTil:
+            filters.transportTil ?? null,
+
+        globalSoegning:
+            filters.globalSoegning || null
+    };
+}
 function isEmptyFilter(value) {
     return (
         value == null ||
