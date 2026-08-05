@@ -1919,6 +1919,121 @@ input + chips + dropdown
         var(--primary)
         #f5f5f5;
 }
+/* ==================================================
+   SAMMENLIGN HERREGÅRDE
+================================================== */
+
+.compare-loading,
+.compare-error{
+    padding:24px;
+    color:var(--muted);
+}
+
+.compare-metrics{
+    display:grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap:20px;
+    margin-bottom:28px;
+}
+
+.compare-estate-card{
+    border:1px solid var(--border);
+    padding:20px;
+    background:white;
+}
+
+.compare-estate-card h3{
+    margin:0 0 16px;
+    color:var(--primary);
+}
+
+.compare-estate-card dl{
+    margin:0;
+}
+
+.compare-estate-card dl > div{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:9px 0;
+    border-bottom:1px solid #ececec;
+}
+
+.compare-estate-card dl > div:last-child{
+    border-bottom:0;
+}
+
+.compare-estate-card dt{
+    color:var(--muted);
+}
+
+.compare-estate-card dd{
+    margin:0;
+    font-weight:600;
+}
+
+.compare-chart{
+    margin-top:28px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+}
+
+.compare-chart h3{
+    margin:0 0 18px;
+    color:var(--primary);
+}
+
+.compare-chart-row{
+    display:grid;
+    grid-template-columns:
+        minmax(110px, 160px)
+        minmax(0, 1fr);
+    gap:12px 20px;
+    padding:12px 0;
+    border-bottom:1px solid #ececec;
+}
+
+.compare-chart-label{
+    font-weight:600;
+    color:var(--primary);
+}
+
+.compare-chart-estate{
+    display:grid;
+    grid-template-columns:
+        minmax(120px, 180px)
+        minmax(120px, 1fr)
+        70px;
+    align-items:center;
+    gap:12px;
+    margin-bottom:8px;
+}
+
+.compare-chart-estate:last-child{
+    margin-bottom:0;
+}
+
+.compare-chart-track{
+    height:12px;
+    overflow:hidden;
+    border-radius:999px;
+    background:#e5ebe8;
+}
+
+.compare-chart-fill{
+    height:100%;
+    min-width:2px;
+    border-radius:inherit;
+    background:var(--primary);
+}
+
+.compare-chart-estate strong{
+    text-align:right;
+}
+
+
 
 
 /* ==================================================
@@ -2050,6 +2165,22 @@ input + chips + dropdown
     .detail-panel{
         position:static;
         max-height:none;
+    }
+}
+@media (max-width:800px){
+    .compare-metrics{
+        grid-template-columns:1fr;
+    }
+
+    .compare-chart-row{
+        grid-template-columns:1fr;
+    }
+
+    .compare-chart-estate{
+        grid-template-columns:
+            minmax(100px, 140px)
+            minmax(80px, 1fr)
+            60px;
     }
 }
 @media (max-width:700px){
