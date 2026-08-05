@@ -2084,7 +2084,175 @@ input + chips + dropdown
     color:var(--muted);
     font-size:.9rem;
 }
+/* ==================================================
+   DEMOGRAFISK FORDELING
+================================================== */
 
+.compare-demography{
+    margin-top:28px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+}
+
+.compare-demography > h3{
+    margin:0 0 6px;
+    color:var(--primary);
+}
+
+.compare-demography-description{
+    margin:0 0 22px;
+    color:var(--muted);
+}
+
+.population-pyramid-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap:24px;
+}
+.population-pyramid{
+    min-width:0;
+    padding:18px;
+
+    border:1px solid var(--border);
+    background:var(--surface);
+}
+
+.population-pyramid h4{
+    margin:0 0 16px;
+    color:var(--primary);
+    font-size:1.1rem;
+}
+
+.population-pyramid-headings{
+    display:grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        60px
+        minmax(0, 1fr);
+
+    align-items:center;
+    gap:8px;
+
+    margin-bottom:8px;
+
+    color:var(--primary);
+    font-size:.85rem;
+    font-weight:600;
+    text-align:center;
+}
+
+.population-pyramid-headings span:first-child{
+    text-align:right;
+}
+
+.population-pyramid-headings span:last-child{
+    text-align:left;
+}
+.population-pyramid-rows{
+    display:flex;
+    flex-direction:column;
+}
+
+.population-pyramid-row{
+    display:grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        60px
+        minmax(0, 1fr);
+
+    align-items:center;
+    gap:8px;
+
+    min-height:30px;
+    padding:3px 0;
+
+    border-bottom:1px solid #edf0ee;
+}
+
+.population-pyramid-row:last-child{
+    border-bottom:0;
+}
+
+.population-age{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    height:100%;
+    padding:0 4px;
+
+    border-left:1px solid var(--border);
+    border-right:1px solid var(--border);
+
+    color:var(--text);
+    font-size:.78rem;
+    font-weight:600;
+    white-space:nowrap;
+}
+.population-side{
+    min-width:0;
+    display:grid;
+    align-items:center;
+    gap:7px;
+}
+
+.population-side-men{
+    grid-template-columns:
+        minmax(24px, auto)
+        minmax(0, 1fr);
+}
+
+.population-side-women{
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(24px, auto);
+}
+
+.population-track{
+    position:relative;
+    height:14px;
+    overflow:hidden;
+
+    border-radius:2px;
+    background:#e5ebe8;
+}
+
+.population-side-men
+.population-track{
+    display:flex;
+    justify-content:flex-end;
+}
+
+.population-fill{
+    height:100%;
+    min-width:0;
+}
+
+.population-fill-men{
+    background:var(--primary);
+}
+
+.population-fill-women{
+    background:rgba(53,92,74,.62);
+}
+
+.population-count{
+    min-width:24px;
+    color:var(--text);
+    font-size:.78rem;
+    font-weight:600;
+}
+
+.population-side-men
+.population-count{
+    text-align:right;
+}
+
+.population-side-women
+.population-count{
+    text-align:left;
+}
 
 /* ==================================================
    PAGINATION
@@ -2209,6 +2377,9 @@ input + chips + dropdown
 @media (max-width:900px){
 
     .content{
+        grid-template-columns:1fr;
+    }
+        .population-pyramid-grid{
         grid-template-columns:1fr;
     }
 
@@ -2336,6 +2507,26 @@ input + chips + dropdown
         border-bottom:1px solid var(--border);
         border-radius:var(--radius);
         text-align:left;
+    }
+}
+@media (max-width:520px){
+    .population-pyramid{
+        padding:12px;
+    }
+
+    .population-pyramid-row,
+    .population-pyramid-headings{
+        grid-template-columns:
+            minmax(0, 1fr)
+            48px
+            minmax(0, 1fr);
+
+        gap:5px;
+    }
+
+    .population-age,
+    .population-count{
+        font-size:.7rem;
     }
 }
 /* ==================================================
