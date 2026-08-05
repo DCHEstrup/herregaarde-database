@@ -2041,7 +2041,49 @@ input + chips + dropdown
     text-align:right;
 }
 
+#compareDescription{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:7px;
+}
 
+.compare-description-main{
+    color:var(--muted);
+}
+
+.compare-description-label{
+    margin-top:4px;
+    color:var(--primary);
+    font-weight:600;
+}
+
+.compare-description-filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+}
+
+.compare-description-filter{
+    display:inline-flex;
+    align-items:center;
+    min-height:28px;
+    padding:4px 9px;
+
+    border:1px solid #cad5cf;
+    border-radius:999px;
+
+    background:#f2f6f4;
+    color:var(--primary);
+
+    font-size:.85rem;
+    line-height:1.2;
+}
+
+.compare-description-empty{
+    color:var(--muted);
+    font-size:.9rem;
+}
 
 
 /* ==================================================
