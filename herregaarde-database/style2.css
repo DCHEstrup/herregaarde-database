@@ -1728,6 +1728,8 @@ input + chips + dropdown
     margin-top:10px;
     border:1px solid var(--border);
     background:white;
+    display:flex;
+    flex-direction:column;
 }
 
 .household-content[hidden]{
@@ -1745,9 +1747,6 @@ input + chips + dropdown
 .household-list{
     display:flex;
     flex-direction:column;
-    max-height:520px;    
-    overflow-y:auto;
-    scrollbar-gutter:stable;
 }
 
 .household-person{
@@ -1810,6 +1809,13 @@ input + chips + dropdown
 
 .household-list::-webkit-scrollbar-track{
     background:#f4f4f4;
+}
+.household-scroll{
+    max-height:520px;      
+    overflow-y:auto;
+    scrollbar-gutter:stable;
+    display:flex;
+    flex-direction:column;
 }
 
 .household-list::-webkit-scrollbar-thumb{
