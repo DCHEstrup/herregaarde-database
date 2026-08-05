@@ -302,54 +302,131 @@
         class="statistics-content">
     </div>
 </section>
-<section class="content">
-    <section class="results-panel panel">
-        <div class="results-toolbar">
-    <label for="sortSelect">
-        Sortér efter:
-    </label>
-    <select id="sortSelect">
-        <option value="default-asc" selected>
-            Standard
-        </option>
-        <option value="alder-asc">
-            Alder stigende
-        </option>
-        <option value="navn-asc">
-            Navn A–Å
-        </option>
-        <option value="herregaard-asc">
-            Herregård A–Å
-        </option>
-        <option value="aar-desc">
-            Folketællingsår (nyeste først)
-        </option>
-        <option value="aar-asc">
-            Folketællingsår (ældste først)
-        </option>
-    </select>
-</div>
-        <div id="results">
-            <div class="placeholder">
-                Ingen søgeresultater endnu
-            </div>
-        </div>
+<section class="database-tabs">
 
-        <nav
-            id="pagination"
-            class="pagination"
-            aria-label="Sidenavigation">
-        </nav>
+    <div
+        class="tab-list"
+        role="tablist"
+        aria-label="Databasevisninger"
+    >
+        <button
+            id="personRegisterTab"
+            class="tab-button active"
+            type="button"
+            role="tab"
+            aria-selected="true"
+            aria-controls="personRegisterPanel"
+        >
+            Personregister
+        </button>
 
+        <button
+            id="compareEstatesTab"
+            class="tab-button"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="compareEstatesPanel"
+            disabled
+        >
+            Sammenlign herregårde
+        </button>
+    </div>
+
+    <section
+        id="personRegisterPanel"
+        class="tab-panel active"
+        role="tabpanel"
+        aria-labelledby="personRegisterTab"
+    >
+        <section class="content">
+
+            <section class="results-panel panel">
+
+                <div class="results-toolbar">
+                    <label for="sortSelect">
+                        Sortér efter:
+                    </label>
+
+                    <select id="sortSelect">
+                        <option value="default-asc">
+                            Standard
+                        </option>
+
+                        <option value="navn-asc">
+                            Navn A–Å
+                        </option>
+
+                        <option value="alder-asc">
+                            Alder stigende
+                        </option>
+
+                        <option value="herregaard-asc">
+                            Herregård A–Å
+                        </option>
+
+                        <option value="aar-desc">
+                            Folketællingsår – nyeste først
+                        </option>
+
+                        <option value="aar-asc">
+                            Folketællingsår – ældste først
+                        </option>
+                    </select>
+                </div>
+
+                <div id="results">
+                    <div class="placeholder">
+                        Ingen søgeresultater endnu
+                    </div>
+                </div>
+
+                <nav
+                    id="pagination"
+                    class="pagination"
+                    aria-label="Sidenavigation"
+                ></nav>
+
+            </section>
+
+            <aside class="detail-panel panel">
+                <div id="detail">
+                    <div class="placeholder">
+                        Klik på en person for at se alle oplysninger
+                    </div>
+                </div>
+            </aside>
+
+        </section>
     </section>
 
-    <aside class="detail-panel panel">
-        <div id="detail">
-            <div class="placeholder">
-                Klik på en person for at se alle oplysninger
+    <section
+        id="compareEstatesPanel"
+        class="tab-panel"
+        role="tabpanel"
+        aria-labelledby="compareEstatesTab"
+        hidden
+    >
+        <section class="compare-panel panel">
+
+            <div class="compare-heading">
+                <div>
+                    <h2>Sammenlign herregårde</h2>
+
+                    <p id="compareDescription">
+                        Vælg præcis to herregårde for at sammenligne dem.
+                    </p>
+                </div>
             </div>
-        </div>
-    </aside>
+
+            <div id="compareContent">
+                <div class="placeholder">
+                    Sammenligningen vises her.
+                </div>
+            </div>
+
+        </section>
+    </section>
 
 </section>
     <footer>
