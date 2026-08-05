@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="da">
+    
 <head>
     <meta charset="UTF-8">
     <title>Herregårdsdatabasen</title>
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="style2.css">
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
 </head>
 <body>
@@ -279,6 +281,9 @@
         <button id="downloadStatisticsBtn" title="Download en CSV fil med en statistisk oversigt over den aktuelle søgning" class="btn btn-primary" disabled>
             📊 Download statistik
         </button>
+        <button id="downloadExcelBtn" title="Download en excel fil over personer fundet gennem den aktuelle søgning, samt en oversigt over valgte filtre og en statistisk oversigt" class="btn btn-primary" disabled >
+    📗 Download Excel
+</button>
     </div>
     </section>
     <section class="statistics-panel panel">
