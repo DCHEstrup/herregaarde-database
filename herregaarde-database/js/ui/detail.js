@@ -325,7 +325,7 @@ function renderHousehold(
         "household-count";
 
     count.textContent =
-        `${people.length.toLocaleString("da-DK")} personer`;
+        `${people.length.toLocaleString("da-DK")} personer på ${people[0]?.herregaard ?? ""} (${people[0]?.folketaelling_aar ?? ""})`;
 
     container.appendChild(count);
 
