@@ -5,6 +5,7 @@ export function renderTable(result) {
     const resultCount = document.getElementById("resultCount");
     const downloadBtn = document.getElementById("downloadBtn");
     const downloadStatisticsBtn = document.getElementById("downloadStatisticsBtn");
+    const downloadExcelBtn = document.getElementById("downloadExcelBtn");
     // Opdater antal fundne personer
     resultCount.textContent =
         `${result.total.toLocaleString("da-DK")} personer fundet`;
