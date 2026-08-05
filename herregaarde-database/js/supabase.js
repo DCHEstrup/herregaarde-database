@@ -93,6 +93,21 @@ export async function searchPeople(filters) {
             filters.sortDirection
     });
 }
+export async function getHousehold(
+    herregaardId,
+    aar
+) {
+    return await supabase.rpc(
+        "get_household",
+        {
+            p_herregaard_id:
+                herregaardId,
+
+            p_aar:
+                Number(aar)
+        }
+    );
+}
 
 export async function getSearchStatistics(filters) {
 
