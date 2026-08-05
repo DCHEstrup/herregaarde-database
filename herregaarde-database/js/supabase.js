@@ -171,13 +171,71 @@ export async function getPerson(id) {
 }
 
 export async function compareEstates(
-    estates
+    filters
 ) {
     return await supabase.rpc(
         "compare_estates",
         {
             p_herregaarde:
-                estates
+                filters.herregaard,
+
+            p_aar:
+                filters.aar?.length
+                    ? filters.aar.map(Number)
+                    : null,
+
+            p_koen:
+                filters.koen?.length
+                    ? filters.koen
+                    : null,
+
+            p_trossamfund:
+                filters.trossamfund?.length
+                    ? filters.trossamfund
+                    : null,
+
+            p_region:
+                filters.region?.length
+                    ? filters.region
+                    : null,
+
+            p_kommune:
+                filters.kommune?.length
+                    ? filters.kommune
+                    : null,
+
+            p_arbejde:
+                filters.arbejde || null,
+
+            p_arbejde_valgt:
+                filters.arbejdeValgt?.length
+                    ? filters.arbejdeValgt
+                    : null,
+
+            p_civilstand:
+                filters.civilstand?.length
+                    ? filters.civilstand
+                    : null,
+
+            p_handicap:
+                filters.handicap?.length
+                    ? filters.handicap
+                    : null,
+
+            p_alder_fra:
+                filters.alderFra,
+
+            p_alder_til:
+                filters.alderTil,
+
+            p_transport_fra:
+                filters.transportFra,
+
+            p_transport_til:
+                filters.transportTil,
+
+            p_global_soegning:
+                filters.globalSoegning || null
         }
     );
 }
