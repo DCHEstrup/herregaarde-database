@@ -184,13 +184,11 @@ function renderEstateComparison(
         )
     );
 
-    container.appendChild(
-        createComparisonChart(
-            "Kønsfordeling",
-            estates,
-            "koen"
-        )
-    );
+container.appendChild(
+    createDemographicComparison(
+        estates
+    )
+);
 }
 
 function createComparisonChart(
@@ -349,6 +347,190 @@ function createComparisonChart(
     });
 
     return section;
+}
+function createDemographicComparison(
+    estates
+) {
+    const section =
+        document.createElement("section");
+
+    section.className =
+        "compare-demography";
+
+    const heading =
+        document.createElement("h3");
+
+    heading.textContent =
+        "Demografisk fordeling";
+
+    section.appendChild(heading);
+
+    const description =
+        document.createElement("p");
+
+    description.className =
+        "compare-demography-description";
+
+    description.textContent =
+        "Aldersfordeling fordelt på mænd og kvinder. Tallene viser antal personer.";
+
+    section.appendChild(description);
+
+    const grid =
+        document.createElement("div");
+
+    grid.className =
+        "population-pyramid-grid";
+
+    estates.forEach(estate => {
+        grid.appendChild(
+            createPopulationPyramid(
+                estate
+            )
+        );
+    });
+
+    section.appendChild(grid);
+
+    return section;
+}
+
+function createPopulationPyramid(
+    estate
+) {
+    const article =
+        document.createElement("article");
+
+    article.className =
+        "population-pyramid";
+
+    const title =
+        document.createElement("h4");
+
+    title.textContent =
+        estate.herregaard;
+
+    article.appendChild(title);
+
+    const columnHeadings =
+        document.createElement("div");
+
+    columnHeadings.className =
+        "population-pyramid-headings";
+
+    columnHeadings.innerHTML = `
+        <span>Mænd</span>
+        <span>Alder</span>
+        <span>Kvinder</span>
+    `;
+
+    article.appendChild(
+        columnHeadings
+    );
+
+    const data =
+        Array.isArray(estate.demografi)
+            ? [...estate.demografi]
+            : [];
+
+    if (data.length === 0) {
+        const empty =
+            document.createElement("div");
+
+        empty.className =
+            "population-pyramid-empty";
+
+        empty.textContent =
+            "Ingen aldersdata tilgængelig.";
+
+        article.appendChild(empty);
+
+        return article;
+    }
+
+    /*
+     * Højeste alder øverst, så pyramiden
+     * læses som en traditionel
+     * befolkningspyramide.
+     */
+    data.sort(
+        (a, b) =>
+            Number(b.ageStart) -
+            Number(a.ageStart)
+    );
+
+    const maximum =
+        Math.max(
+            1,
+            ...data.flatMap(row => [
+                Number(row.maend) || 0,
+                Number(row.kvinder) || 0
+            ])
+        );
+
+    const rows =
+        document.createElement("div");
+
+    rows.className =
+        "population-pyramid-rows";
+
+    data.forEach(item => {
+        const men =
+            Number(item.maend) || 0;
+
+        const women =
+            Number(item.kvinder) || 0;
+
+        const menWidth =
+            men / maximum * 100;
+
+        const womenWidth =
+            women / maximum * 100;
+
+        const row =
+            document.createElement("div");
+
+        row.className =
+            "population-pyramid-row";
+
+        row.innerHTML = `
+            <div class="population-side population-side-men">
+                <span class="population-count">
+                    ${formatNumber(men)}
+                </span>
+
+                <div class="population-track">
+                    <div
+                        class="population-fill population-fill-men"
+                        style="width:${menWidth}%">
+                    </div>
+                </div>
+            </div>
+
+            <div class="population-age">
+                ${item.label}
+            </div>
+
+            <div class="population-side population-side-women">
+                <div class="population-track">
+                    <div
+                        class="population-fill population-fill-women"
+                        style="width:${womenWidth}%">
+                    </div>
+                </div>
+
+                <span class="population-count">
+                    ${formatNumber(women)}
+                </span>
+            </div>
+        `;
+
+        rows.appendChild(row);
+    });
+
+    article.appendChild(rows);
+
+    return article;
 }
 
 function formatNumber(value) {
