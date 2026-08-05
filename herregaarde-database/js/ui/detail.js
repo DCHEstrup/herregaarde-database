@@ -1,4 +1,4 @@
-import { getPerson } from "../supabase.js";
+import { getPerson,getHousehold } from "../supabase.js";
 
 const fields = [
     ["navn", "Navn"],
@@ -188,6 +188,116 @@ export async function showDetail(id) {
         });
 
     detail.appendChild(table);
+    const householdSection =
+    document.createElement("section");
+
+householdSection.className =
+    "household-section";
+
+householdSection.innerHTML = `
+    <button
+        type="button"
+        class="household-toggle"
+        aria-expanded="false"
+    >
+        <span>+ Se husstand</span>
+        <span aria-hidden="true">▼</span>
+    </button>
+
+    <div
+        class="household-content"
+        hidden
+    ></div>
+`;
+
+detail.appendChild(
+    householdSection
+);
+
+const householdButton =
+    householdSection.querySelector(
+        ".household-toggle"
+    );
+
+const householdContent =
+    householdSection.querySelector(
+        ".household-content"
+    );
+
+let householdLoaded = false;
+
+householdButton.addEventListener(
+    "click",
+    async () => {
+        const isOpen =
+            householdButton.getAttribute(
+                "aria-expanded"
+            ) === "true";
+
+        if (isOpen) {
+            householdButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            householdButton
+                .querySelector("span")
+                .textContent =
+                "+ Se husstand";
+
+            householdContent.hidden = true;
+            return;
+        }
+
+        householdButton.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+        householdButton
+            .querySelector("span")
+            .textContent =
+            "− Skjul husstand";
+
+        householdContent.hidden = false;
+
+        if (householdLoaded) {
+            return;
+        }
+
+        householdContent.innerHTML = `
+            <div class="household-loading">
+                Henter husstanden …
+            </div>
+        `;
+
+        const { data: household, error } =
+            await getHousehold(
+                data.herregaard_id,
+                data.folketaelling_aar
+            );
+
+        if (error) {
+            console.error(error);
+
+            householdContent.innerHTML = `
+                <div class="household-error">
+                    Husstanden kunne ikke hentes.
+                </div>
+            `;
+
+            return;
+        }
+
+        renderHousehold(
+            householdContent,
+            household,
+            data.id
+        );
+
+        householdLoaded = true;
+    }
+);
 }
 
 export function clearDetail() {
