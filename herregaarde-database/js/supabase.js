@@ -170,7 +170,17 @@ export async function getPerson(id) {
     });
 }
 
-
+export async function compareEstates(
+    estates
+) {
+    return await supabase.rpc(
+        "compare_estates",
+        {
+            p_herregaarde:
+                estates
+        }
+    );
+}
 
 export async function downloadPeople(filters = {}) {
 
