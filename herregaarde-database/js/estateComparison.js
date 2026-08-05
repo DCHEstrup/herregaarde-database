@@ -313,8 +313,13 @@ const maximum =
             ).textContent =
                 estate.herregaard;
 
-            row.appendChild(bar);
+            valuesContainer.appendChild(bar);
         });
+        
+    row.appendChild(
+        valuesContainer);
+    return section;
+        
 
         section.appendChild(row);
     });
