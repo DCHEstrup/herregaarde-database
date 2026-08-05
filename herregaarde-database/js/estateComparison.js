@@ -355,3 +355,185 @@ function formatNumber(value) {
     return Number(value || 0)
         .toLocaleString("da-DK");
 }
+const comparisonFilterLabels = {
+    globalSoegning:
+        "Fritekst",
+
+    aar:
+        "Folketællingsår",
+
+    koen:
+        "Køn",
+
+    trossamfund:
+        "Religion",
+
+    region:
+        "Region",
+
+    kommune:
+        "Kommune",
+
+    arbejde:
+        "Arbejdssøgning",
+
+    arbejdeValgt:
+        "Arbejde / position",
+
+    civilstand:
+        "Civilstand",
+
+    handicap:
+        "Handicap",
+
+    alderFra:
+        "Alder fra",
+
+    alderTil:
+        "Alder til",
+
+    transportFra:
+        "Transport fra",
+
+    transportTil:
+        "Transport til"
+};
+
+function renderComparisonDescription(
+    container,
+    filters
+) {
+    if (!container) {
+        return;
+    }
+
+    const [firstEstate, secondEstate] =
+        filters.herregaard;
+
+    container.innerHTML = "";
+
+    const mainText =
+        document.createElement("span");
+
+    mainText.className =
+        "compare-description-main";
+
+    mainText.textContent =
+        `${firstEstate} sammenlignes med ${secondEstate}`;
+
+    container.appendChild(mainText);
+
+    const activeFilters =
+        getActiveComparisonFilters(
+            filters
+        );
+
+    if (activeFilters.length === 0) {
+        const allData =
+            document.createElement("span");
+
+        allData.className =
+            "compare-description-empty";
+
+        allData.textContent =
+            "Alle registreringer er medtaget.";
+
+        container.appendChild(allData);
+
+        return;
+    }
+
+    const label =
+        document.createElement("span");
+
+    label.className =
+        "compare-description-label";
+
+    label.textContent =
+        "Ekstra filtre:";
+
+    container.appendChild(label);
+
+    const list =
+        document.createElement("span");
+
+    list.className =
+        "compare-description-filters";
+
+    activeFilters.forEach(filter => {
+        const item =
+            document.createElement("span");
+
+        item.className =
+            "compare-description-filter";
+
+        item.textContent =
+            `${filter.label}: ${filter.value}`;
+
+        list.appendChild(item);
+    });
+
+    container.appendChild(list);
+}
+
+function getActiveComparisonFilters(
+    filters
+) {
+    const ignoredKeys =
+        new Set([
+            "herregaard",
+            "sortColumn",
+            "sortDirection",
+            "page",
+            "pageSize"
+        ]);
+
+    return Object.entries(filters)
+        .filter(([key, value]) => {
+            if (ignoredKeys.has(key)) {
+                return false;
+            }
+
+            return !isEmptyFilter(value);
+        })
+        .map(([key, value]) => ({
+            label:
+                comparisonFilterLabels[key]
+                || key,
+
+            value:
+                formatComparisonFilterValue(
+                    key,
+                    value
+                )
+        }));
+}
+
+function formatComparisonFilterValue(
+    key,
+    value
+) {
+    if (Array.isArray(value)) {
+        return value.join(", ");
+    }
+
+    if (
+        key === "transportFra" ||
+        key === "transportTil"
+    ) {
+        return `${value} km`;
+    }
+
+    return String(value);
+}
+
+function isEmptyFilter(value) {
+    return (
+        value == null ||
+        value === "" ||
+        (
+            Array.isArray(value) &&
+            value.length === 0
+        )
+    );
+}
