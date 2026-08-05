@@ -209,22 +209,19 @@ function createComparisonChart(
 
     section.appendChild(heading);
 
-    const allLabels =
-        [
-            ...new Set(
-                estates.flatMap(
-                    estate =>
-                        estate[key]
-                            ?.map(
-                                row =>
-                                    String(
-                                        row.label
-                                    )
+    const allLabels = [
+        ...new Set(
+            estates.flatMap(
+                estate =>
+                    estate[key]?.map(
+                        item =>
+                            String(
+                                item.label
                             )
-                        || []
-                )
+                    ) || []
             )
-        ];
+        )
+    ];
 
     allLabels.forEach(label => {
         const row =
@@ -232,6 +229,10 @@ function createComparisonChart(
 
         row.className =
             "compare-chart-row";
+
+        //----------------------------------
+        // Kategori, fx 1787 eller K
+        //----------------------------------
 
         const labelElement =
             document.createElement("div");
@@ -246,29 +247,41 @@ function createComparisonChart(
             labelElement
         );
 
-       const valuesContainer =
-    document.createElement("div");
+        //----------------------------------
+        // Wrapper til begge herregårde
+        //----------------------------------
 
-valuesContainer.className =
-    "compare-chart-values";
+        const valuesContainer =
+            document.createElement("div");
 
-const maximum =
-    Math.max(
-        1,
-        ...estates.map(
-            estate =>
-                Number(
-                    estate[key]
-                        ?.find(
-                            item =>
-                                String(
-                                    item.label
-                                ) === label
-                        )
-                        ?.count
-                ) || 0
-        )
-    );
+        valuesContainer.className =
+            "compare-chart-values";
+
+        //----------------------------------
+        // Største værdi inden for kategorien
+        //----------------------------------
+
+        const maximum =
+            Math.max(
+                1,
+                ...estates.map(
+                    estate =>
+                        Number(
+                            estate[key]
+                                ?.find(
+                                    item =>
+                                        String(
+                                            item.label
+                                        ) === label
+                                )
+                                ?.count
+                        ) || 0
+                )
+            );
+
+        //----------------------------------
+        // Én bjælke pr. herregård
+        //----------------------------------
 
         estates.forEach(estate => {
             const value =
@@ -289,18 +302,19 @@ const maximum =
             bar.className =
                 "compare-chart-estate";
 
+            const percentage =
+                value / maximum * 100;
+
             bar.innerHTML = `
-                <span class="compare-chart-name"></span>
+                <span
+                    class="compare-chart-name">
+                </span>
 
                 <div class="compare-chart-track">
                     <div
                         class="compare-chart-fill"
-                        style="width:${
-                            value /
-                            maximum *
-                            100
-                        }%"
-                    ></div>
+                        style="width:${percentage}%">
+                    </div>
                 </div>
 
                 <strong>
@@ -313,15 +327,22 @@ const maximum =
             ).textContent =
                 estate.herregaard;
 
-            valuesContainer.appendChild(bar);
+            valuesContainer.appendChild(
+                bar
+            );
         });
-        
-    row.appendChild(
-        valuesContainer);
-    return section;
-        
 
-        section.appendChild(row);
+        //----------------------------------
+        // Saml kategorirækken
+        //----------------------------------
+
+        row.appendChild(
+            valuesContainer
+        );
+
+        section.appendChild(
+            row
+        );
     });
 
     return section;
