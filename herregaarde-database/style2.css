@@ -2143,6 +2143,18 @@ input + chips + dropdown
     .statistics-value{
         grid-area:value;
     }
+     .tab-list{
+        align-items:stretch;
+        flex-direction:column;
+        border-bottom:0;
+    }
+
+    .tab-button{
+        width:100%;
+        border-bottom:1px solid var(--border);
+        border-radius:var(--radius);
+        text-align:left;
+    }
 }
 /* ==================================================
    FOKUS OG TILGÆNGELIGHED
