@@ -381,7 +381,15 @@ function renderHousehold(
         list.appendChild(item);
     });
 
-    container.appendChild(list);
+    const scroll =
+    document.createElement("div");
+
+scroll.className =
+    "household-scroll";
+
+scroll.appendChild(list);
+
+container.appendChild(scroll);
 }
 
 
