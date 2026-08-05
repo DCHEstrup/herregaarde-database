@@ -757,6 +757,11 @@ input + chips + dropdown
     outline:3px solid rgba(53,92,74,.25);
     outline-offset:2px;
 }
+#downloadExcelBtn[aria-busy="true"]{
+    cursor:wait;
+    opacity:.75;
+}
+
 /* ==================================================
    CHIPS
 ================================================== */
