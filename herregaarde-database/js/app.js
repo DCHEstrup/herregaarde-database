@@ -12,6 +12,8 @@ import { clearDetail } from "./ui/detail.js";
 import { initSelectedFilters } from "./ui/selectedFilters.js";
 import { initialiseFilterInfo } from "./filterInfo.js";
 import { downloadExcel } from "./downloadExcel.js";
+import { initDatabaseTabs } from "./ui/databaseTabs.js";
+import { loadEstateComparison } from "./estateComparison.js";
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -25,6 +27,8 @@ document.addEventListener(
         initialiseAdvancedFilters();
         initSelectedFilters();
         initialiseFilterInfo();
+        initDatabaseTabs({
+            onOpenComparison:loadEstateComparison});
 
         //----------------------------------
         // Hent og vis en side
