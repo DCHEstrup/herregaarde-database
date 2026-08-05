@@ -11,6 +11,7 @@ import { downloadStatistics } from "./downloadStatistics.js";
 import { clearDetail } from "./ui/detail.js";
 import { initSelectedFilters } from "./ui/selectedFilters.js";
 import { initialiseFilterInfo } from "./filterInfo.js";
+import { downloadExcel } from "./downloadExcel.js";
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -193,6 +194,21 @@ document.addEventListener(
                     );
                 }
             );
+        //----------------------------------
+        // Download Excel
+        //----------------------------------
+        document
+    .getElementById(
+        "downloadExcelBtn"
+    )
+    ?.addEventListener(
+        "click",
+        () => {
+            downloadExcel(
+                getCurrentFilters()
+            );
+        }
+    );
         //----------------------------------
         // Ryd filtre
         //----------------------------------
