@@ -12,6 +12,7 @@ export function renderTable(result) {
     // Aktivér download-knappen
     downloadBtn.disabled = result.total === 0;
     downloadStatisticsBtn.disabled = result.total === 0;
+    downloadExcelBtn.disabled = result.total === 0;
     // Fjern tidligere resultater
     container.innerHTML = "";
     // Ingen resultater
