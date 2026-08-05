@@ -1,4 +1,5 @@
 import { getSelectedValues } from "./multiselectV2.js";
+import { getCurrentFilters } from "../filtersState.js";
 
 let activeTab = "personRegister";
 
@@ -45,31 +46,31 @@ export function initDatabaseTabs({
         });
     }
 
-    async function openComparison() {
-        const selectedEstates =
-            getSelectedValues(
-                "herregaard"
-            );
+ async function openComparison() {
+    const selectedEstates =
+        getSelectedValues(
+            "herregaard"
+        );
 
-        if (selectedEstates.length !== 2) {
-            return;
-        }
-
-        activeTab = "comparison";
-
-        setActiveTab({
-            activeButton: compareTab,
-            inactiveButton: personTab,
-            activePanel: comparePanel,
-            inactivePanel: personPanel
-        });
-
-        if (onOpenComparison) {
-            await onOpenComparison(
-                selectedEstates
-            );
-        }
+    if (selectedEstates.length !== 2) {
+        return;
     }
+
+    activeTab = "comparison";
+
+    setActiveTab({
+        activeButton: compareTab,
+        inactiveButton: personTab,
+        activePanel: comparePanel,
+        inactivePanel: personPanel
+    });
+
+    if (onOpenComparison) {
+        await onOpenComparison(
+            getCurrentFilters()
+        );
+    }
+}
 
     function updateCompareAvailability() {
         const selectedEstates =
