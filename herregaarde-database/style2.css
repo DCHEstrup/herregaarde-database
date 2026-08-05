@@ -1988,11 +1988,19 @@ input + chips + dropdown
 .compare-chart-row{
     display:grid;
     grid-template-columns:
-        minmax(110px, 160px)
+        minmax(80px, 120px)
         minmax(0, 1fr);
-    gap:12px 20px;
-    padding:12px 0;
+
+    align-items:start;
+    gap:16px 20px;
+
+    padding:16px 0;
     border-bottom:1px solid #ececec;
+}
+.compare-chart-values{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
 }
 
 .compare-chart-label{
@@ -2003,7 +2011,7 @@ input + chips + dropdown
 .compare-chart-estate{
     display:grid;
     grid-template-columns:
-        minmax(120px, 180px)
+        minmax(120px, 170px)
         minmax(120px, 1fr)
         70px;
     align-items:center;
@@ -2174,13 +2182,14 @@ input + chips + dropdown
 
     .compare-chart-row{
         grid-template-columns:1fr;
+        gap:10px;
     }
 
     .compare-chart-estate{
         grid-template-columns:
-            minmax(100px, 140px)
-            minmax(80px, 1fr)
-            60px;
+            minmax(90px, 130px)
+            minmax(70px, 1fr)
+            55px;
     }
 }
 @media (max-width:700px){
