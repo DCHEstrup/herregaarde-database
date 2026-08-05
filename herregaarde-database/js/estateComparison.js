@@ -3,8 +3,11 @@ import { compareEstates } from "./supabase.js";
 let lastComparisonKey = null;
 
 export async function loadEstateComparison(
-    estates
+    filters
 ) {
+    const estates =
+        filters.herregaard;
+
     const container =
         document.getElementById(
             "compareContent"
@@ -32,18 +35,18 @@ export async function loadEstateComparison(
         return;
     }
 
-    description.textContent =
-        `${estates[0]} sammenlignes med ${estates[1]}`;
+    renderComparisonDescription(
+        description,
+        filters
+    );
 
     const comparisonKey =
-        [...estates]
-            .sort()
-            .join("::");
+        JSON.stringify(
+            normalizeComparisonFilters(
+                filters
+            )
+        );
 
-    /*
-     * Undgå nyt RPC-kald, hvis den samme
-     * sammenligning allerede vises.
-     */
     if (
         lastComparisonKey ===
         comparisonKey
@@ -59,7 +62,7 @@ export async function loadEstateComparison(
 
     const { data, error } =
         await compareEstates(
-            estates
+            filters
         );
 
     if (error) {
