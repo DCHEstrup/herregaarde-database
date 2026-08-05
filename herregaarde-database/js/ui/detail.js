@@ -299,6 +299,91 @@ householdButton.addEventListener(
     }
 );
 }
+function renderHousehold(
+    container,
+    people,
+    currentPersonId
+) {
+    container.innerHTML = "";
+
+    if (
+        !Array.isArray(people) ||
+        people.length === 0
+    ) {
+        container.innerHTML = `
+            <div class="household-empty">
+                Ingen medlemmer blev fundet.
+            </div>
+        `;
+        return;
+    }
+
+    const count =
+        document.createElement("p");
+
+    count.className =
+        "household-count";
+
+    count.textContent =
+        `${people.length.toLocaleString("da-DK")} personer`;
+
+    container.appendChild(count);
+
+    const list =
+        document.createElement("div");
+
+    list.className =
+        "household-list";
+
+    people.forEach(person => {
+        const item =
+            document.createElement("button");
+
+        item.type = "button";
+        item.className =
+            "household-person";
+
+        if (
+            String(person.id) ===
+            String(currentPersonId)
+        ) {
+            item.classList.add(
+                "current"
+            );
+        }
+
+        item.innerHTML = `
+            <span class="household-person-name">
+                ${person.navn || "Ukendt"}
+            </span>
+
+            <span class="household-person-meta">
+                ${person.alder ?? "?"} år
+                · ${person.koen ?? "Ukendt"}
+            </span>
+
+            <span class="household-person-job">
+                ${
+                    person.arbejde_titel ||
+                    person.position_i_husstanden ||
+                    "Ingen betegnelse"
+                }
+            </span>
+        `;
+
+        item.addEventListener(
+            "click",
+            () => {
+                showDetail(person.id);
+            }
+        );
+
+        list.appendChild(item);
+    });
+
+    container.appendChild(list);
+}
+
 
 export function clearDetail() {
     document
