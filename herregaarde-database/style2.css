@@ -2991,7 +2991,11 @@ input + chips + dropdown
     text-align:left;
 }
 
-
+.function-butterfly-rows{
+    max-height:600px;
+    overflow-y:auto;
+    scrollbar-gutter:stable;
+}
 
 /* ==================================================
    PAGINATION
