@@ -189,6 +189,11 @@ container.appendChild(
         estates
     )
 );
+    container.appendChild(
+    createCivilStatusComparison(
+        estates
+    )
+);
 }
 
 function createComparisonChart(
@@ -784,3 +789,360 @@ function isEmptyFilter(value) {
         )
     );
 }
+function createCivilStatusComparison(
+    estates
+) {
+    const section =
+        document.createElement("section");
+
+    section.className =
+        "civil-status-comparison";
+
+    const heading =
+        document.createElement("h3");
+
+    heading.textContent =
+        "Civilstand";
+
+    section.appendChild(heading);
+
+    const description =
+        document.createElement("p");
+
+    description.className =
+        "civil-status-description";
+
+    description.textContent =
+        "Fordelingen viser civilstandenes andel af personerne på hver herregård.";
+
+    section.appendChild(description);
+
+    //----------------------------------
+    // Find alle civilstande
+    //----------------------------------
+
+    const categories = [
+        ...new Set(
+            estates.flatMap(
+                estate =>
+                    estate.civilstand
+                        ?.map(item =>
+                            String(
+                                item.label
+                            )
+                        ) || []
+            )
+        )
+    ];
+
+    /*
+     * Sortér kategorier efter deres
+     * samlede antal på begge herregårde.
+     */
+    categories.sort((a, b) => {
+        const totalA =
+            getCombinedCategoryCount(
+                estates,
+                "civilstand",
+                a
+            );
+
+        const totalB =
+            getCombinedCategoryCount(
+                estates,
+                "civilstand",
+                b
+            );
+
+        return totalB - totalA;
+    });
+
+    //----------------------------------
+    // Farveklasse pr. kategori
+    //----------------------------------
+
+    const categoryClasses =
+        new Map();
+
+    categories.forEach(
+        (category, index) => {
+            categoryClasses.set(
+                category,
+                `civil-status-color-${
+                    index % 8
+                }`
+            );
+        }
+    );
+
+    //----------------------------------
+    // Bjælker
+    //----------------------------------
+
+    const chart =
+        document.createElement("div");
+
+    chart.className =
+        "civil-status-chart";
+
+    estates.forEach(estate => {
+        chart.appendChild(
+            createCivilStatusEstateRow(
+                estate,
+                categories,
+                categoryClasses
+            )
+        );
+    });
+
+    section.appendChild(chart);
+
+    //----------------------------------
+    // Forklaring
+    //----------------------------------
+
+    section.appendChild(
+        createCivilStatusLegend(
+            estates,
+            categories,
+            categoryClasses
+        )
+    );
+
+    return section;
+}
+function createCivilStatusEstateRow(
+    estate,
+    categories,
+    categoryClasses
+) {
+    const wrapper =
+        document.createElement("article");
+
+    wrapper.className =
+        "civil-status-estate";
+
+    const title =
+        document.createElement("h4");
+
+    title.textContent =
+        estate.herregaard;
+
+    wrapper.appendChild(title);
+
+    const total =
+        estate.civilstand?.reduce(
+            (sum, item) =>
+                sum +
+                (Number(item.count) || 0),
+            0
+        ) || 0;
+
+    const bar =
+        document.createElement("div");
+
+    bar.className =
+        "civil-status-stacked-bar";
+
+    bar.setAttribute(
+        "aria-label",
+        `Civilstandsfordeling for ${estate.herregaard}`
+    );
+
+    categories.forEach(category => {
+        const count =
+            getCategoryCount(
+                estate,
+                "civilstand",
+                category
+            );
+
+        if (count === 0 || total === 0) {
+            return;
+        }
+
+        const percentage =
+            count / total * 100;
+
+        const segment =
+            document.createElement("div");
+
+        segment.className = `
+            civil-status-segment
+            ${categoryClasses.get(category)}
+        `;
+
+        segment.style.width =
+            `${percentage}%`;
+
+        segment.title =
+            `${category}: ${formatNumber(count)} personer (${formatPercentage(percentage)})`;
+
+        if (percentage >= 9) {
+            const text =
+                document.createElement("span");
+
+            text.textContent =
+                formatPercentage(
+                    percentage
+                );
+
+            segment.appendChild(text);
+        }
+
+        bar.appendChild(segment);
+    });
+
+    wrapper.appendChild(bar);
+
+    const totalText =
+        document.createElement("p");
+
+    totalText.className =
+        "civil-status-total";
+
+    totalText.textContent =
+        `${formatNumber(total)} personer med registreret civilstand`;
+
+    wrapper.appendChild(totalText);
+
+    return wrapper;
+}
+function createCivilStatusLegend(
+    estates,
+    categories,
+    categoryClasses
+) {
+    const legend =
+        document.createElement("div");
+
+    legend.className =
+        "civil-status-legend";
+
+    categories.forEach(category => {
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "civil-status-legend-item";
+
+        const header =
+            document.createElement("div");
+
+        header.className =
+            "civil-status-legend-header";
+
+        header.innerHTML = `
+            <span
+                class="civil-status-swatch
+                ${categoryClasses.get(category)}">
+            </span>
+
+            <strong></strong>
+        `;
+
+        header.querySelector("strong")
+            .textContent =
+                category;
+
+        item.appendChild(header);
+
+        estates.forEach(estate => {
+            const count =
+                getCategoryCount(
+                    estate,
+                    "civilstand",
+                    category
+                );
+
+            const total =
+                estate.civilstand?.reduce(
+                    (sum, row) =>
+                        sum +
+                        (
+                            Number(
+                                row.count
+                            ) || 0
+                        ),
+                    0
+                ) || 0;
+
+            const percentage =
+                total > 0
+                    ? count / total * 100
+                    : 0;
+
+            const value =
+                document.createElement("div");
+
+            value.className =
+                "civil-status-legend-value";
+
+            const estateName =
+                document.createElement("span");
+
+            estateName.textContent =
+                estate.herregaard;
+
+            const numbers =
+                document.createElement("span");
+
+            numbers.textContent =
+                `${formatNumber(count)} · ${formatPercentage(percentage)}`;
+
+            value.append(
+                estateName,
+                numbers
+            );
+
+            item.appendChild(value);
+        });
+
+        legend.appendChild(item);
+    });
+
+    return legend;
+}
+function getCategoryCount(
+    estate,
+    key,
+    category
+) {
+    return Number(
+        estate[key]
+            ?.find(
+                item =>
+                    String(item.label) ===
+                    String(category)
+            )
+            ?.count
+    ) || 0;
+}
+
+function getCombinedCategoryCount(
+    estates,
+    key,
+    category
+) {
+    return estates.reduce(
+        (sum, estate) =>
+            sum +
+            getCategoryCount(
+                estate,
+                key,
+                category
+            ),
+        0
+    );
+}
+
+function formatPercentage(value) {
+    return `${value.toLocaleString(
+        "da-DK",
+        {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 1
+        }
+    )} %`;
+}
+
