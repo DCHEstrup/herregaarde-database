@@ -432,6 +432,8 @@ function createPopulationPyramid(
         Array.isArray(estate.demografi)
             ? [...estate.demografi]
             : [];
+        const totalPeople =
+        Number(estate.total) || 1;
 
     if (data.length === 0) {
         const empty =
