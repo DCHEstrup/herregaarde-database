@@ -481,11 +481,17 @@ function createPopulationPyramid(
         const women =
             Number(item.kvinder) || 0;
 
-        const menWidth =
-            men / maximum * 100;
+const menWidth =
+    Math.min(
+        100,
+        men / totalPeople * 200
+    );
 
-        const womenWidth =
-            women / maximum * 100;
+const womenWidth =
+    Math.min(
+        100,
+        women / totalPeople * 200
+    );
 
         const row =
             document.createElement("div");
