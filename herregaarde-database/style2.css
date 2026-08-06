@@ -2253,6 +2253,160 @@ input + chips + dropdown
 .population-count{
     text-align:left;
 }
+/* ==================================================
+   CIVILSTAND
+================================================== */
+
+.civil-status-comparison{
+    margin-top:28px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+}
+
+.civil-status-comparison > h3{
+    margin:0 0 6px;
+    color:var(--primary);
+}
+
+.civil-status-description{
+    margin:0 0 22px;
+    color:var(--muted);
+}
+
+.civil-status-chart{
+    display:grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap:24px;
+}
+
+.civil-status-estate{
+    min-width:0;
+    padding:18px;
+    border:1px solid var(--border);
+    background:var(--surface);
+}
+
+.civil-status-estate h4{
+    margin:0 0 14px;
+    color:var(--primary);
+}
+
+.civil-status-stacked-bar{
+    width:100%;
+    min-height:38px;
+    display:flex;
+    overflow:hidden;
+    border:1px solid var(--border);
+    background:#edf1ef;
+}
+
+.civil-status-segment{
+    min-width:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    transition:
+        filter .15s ease,
+        opacity .15s ease;
+}
+
+.civil-status-segment:hover{
+    filter:brightness(.92);
+}
+
+.civil-status-segment span{
+    padding:0 5px;
+    color:white;
+    font-size:.75rem;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.civil-status-total{
+    margin:9px 0 0;
+    color:var(--muted);
+    font-size:.82rem;
+}
+.civil-status-color-0{
+    background:#355c4a;
+}
+
+.civil-status-color-1{
+    background:#718f80;
+}
+
+.civil-status-color-2{
+    background:#9a7658;
+}
+
+.civil-status-color-3{
+    background:#677d8a;
+}
+
+.civil-status-color-4{
+    background:#968e68;
+}
+
+.civil-status-color-5{
+    background:#765f6b;
+}
+
+.civil-status-color-6{
+    background:#68837d;
+}
+
+.civil-status-color-7{
+    background:#858585;
+}
+.civil-status-legend{
+    display:grid;
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(210px, 1fr)
+        );
+    gap:12px;
+    margin-top:20px;
+}
+
+.civil-status-legend-item{
+    padding:12px;
+    border:1px solid var(--border);
+    background:#fafbfa;
+}
+
+.civil-status-legend-header{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:8px;
+    color:var(--primary);
+}
+
+.civil-status-swatch{
+    width:12px;
+    height:12px;
+    flex:0 0 auto;
+}
+
+.civil-status-legend-value{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:4px 0;
+    color:var(--muted);
+    font-size:.85rem;
+}
+
+.civil-status-legend-value span:last-child{
+    color:var(--text);
+    font-weight:600;
+    white-space:nowrap;
+}
+
 
 /* ==================================================
    PAGINATION
@@ -2403,6 +2557,9 @@ input + chips + dropdown
             minmax(90px, 130px)
             minmax(70px, 1fr)
             55px;
+    }
+        .civil-status-chart{
+        grid-template-columns:1fr;
     }
 }
 @media (max-width:700px){
