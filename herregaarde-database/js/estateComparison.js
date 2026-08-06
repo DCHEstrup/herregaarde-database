@@ -209,6 +209,11 @@ container.appendChild(
         estates
     )
 );
+    container.appendChild(
+    createFunctionComparison(
+        estates
+    )
+);
 }
 
 function createComparisonChart(
@@ -2232,4 +2237,363 @@ function getCombinedReligionCount(
             ),
         0
     );
+}
+
+function createFunctionComparison(
+    estates
+) {
+    const section =
+        document.createElement("section");
+
+    section.className =
+        "function-comparison";
+
+    const heading =
+        document.createElement("h3");
+
+    heading.textContent =
+        "Arbejdstitler og positioner i husstanden";
+
+    section.appendChild(heading);
+
+    const description =
+        document.createElement("p");
+
+    description.className =
+        "function-comparison-description";
+
+    description.textContent =
+        "Betegnelser fra arbejdstitel og position i husstanden er samlet. Hvis samme betegnelse står i begge felter for én person, tælles den kun én gang.";
+
+    section.appendChild(description);
+
+    const chart =
+        document.createElement("div");
+
+    chart.className =
+        "function-butterfly";
+
+    section.appendChild(chart);
+
+    renderFunctionButterfly(
+        chart,
+        estates,
+        {
+            limit: 15
+        }
+    );
+
+    return section;
+}
+function renderFunctionButterfly(
+    container,
+    estates,
+    {
+        limit = 15
+    } = {}
+) {
+    container.innerHTML = "";
+
+    if (estates.length !== 2) {
+        container.textContent =
+            "Der skal være valgt præcis to herregårde.";
+        return;
+    }
+
+    const [leftEstate, rightEstate] =
+        estates;
+
+    const categories = [
+        ...new Set(
+            estates.flatMap(
+                estate =>
+                    estate.funktioner
+                        ?.map(
+                            item =>
+                                String(item.label)
+                        ) || []
+            )
+        )
+    ];
+
+    categories.sort((a, b) => {
+        const totalA =
+            getFunctionCount(
+                leftEstate,
+                a
+            ) +
+            getFunctionCount(
+                rightEstate,
+                a
+            );
+
+        const totalB =
+            getFunctionCount(
+                leftEstate,
+                b
+            ) +
+            getFunctionCount(
+                rightEstate,
+                b
+            );
+
+        return totalB - totalA;
+    });
+
+    const visibleCategories =
+        categories.slice(0, limit);
+
+    const maximum =
+        Math.max(
+            1,
+            ...visibleCategories.flatMap(
+                category => [
+                    getFunctionCount(
+                        leftEstate,
+                        category
+                    ),
+                    getFunctionCount(
+                        rightEstate,
+                        category
+                    )
+                ]
+            )
+        );
+
+    //----------------------------------
+    // Overskrifter
+    //----------------------------------
+
+    const header =
+        document.createElement("div");
+
+    header.className =
+        "function-butterfly-header";
+
+    const leftTitle =
+        document.createElement("strong");
+
+    leftTitle.textContent =
+        leftEstate.herregaard;
+
+    const middleTitle =
+        document.createElement("span");
+
+    middleTitle.textContent =
+        "Funktion";
+
+    const rightTitle =
+        document.createElement("strong");
+
+    rightTitle.textContent =
+        rightEstate.herregaard;
+
+    header.append(
+        leftTitle,
+        middleTitle,
+        rightTitle
+    );
+
+    container.appendChild(header);
+
+    //----------------------------------
+    // Rækker
+    //----------------------------------
+
+    const rows =
+        document.createElement("div");
+
+    rows.className =
+        "function-butterfly-rows";
+
+    visibleCategories.forEach(
+        category => {
+            rows.appendChild(
+                createFunctionButterflyRow({
+                    category,
+                    leftEstate,
+                    rightEstate,
+                    maximum
+                })
+            );
+        }
+    );
+
+    container.appendChild(rows);
+
+    //----------------------------------
+    // Total
+    //----------------------------------
+
+    const totalRow =
+        document.createElement("div");
+
+    totalRow.className =
+        "function-butterfly-total";
+
+    const leftTotal =
+        sumFunctionCounts(
+            leftEstate
+        );
+
+    const rightTotal =
+        sumFunctionCounts(
+            rightEstate
+        );
+
+    totalRow.innerHTML = `
+        <strong>
+            ${formatNumber(leftTotal)}
+        </strong>
+
+        <span>Total</span>
+
+        <strong>
+            ${formatNumber(rightTotal)}
+        </strong>
+    `;
+
+    container.appendChild(totalRow);
+}
+
+function createFunctionButterflyRow({
+    category,
+    leftEstate,
+    rightEstate,
+    maximum
+}) {
+    const row =
+        document.createElement("div");
+
+    row.className =
+        "function-butterfly-row";
+
+    const leftCount =
+        getFunctionCount(
+            leftEstate,
+            category
+        );
+
+    const rightCount =
+        getFunctionCount(
+            rightEstate,
+            category
+        );
+
+    const leftSide =
+        document.createElement("div");
+
+    leftSide.className =
+        "function-side function-side-left";
+
+    const leftNumber =
+        document.createElement("span");
+
+    leftNumber.className =
+        "function-count";
+
+    leftNumber.textContent =
+        formatNumber(leftCount);
+
+    const leftTrack =
+        document.createElement("div");
+
+    leftTrack.className =
+        "function-track";
+
+    const leftFill =
+        document.createElement("div");
+
+    leftFill.className =
+        "function-fill function-fill-left";
+
+    leftFill.style.width =
+        `${leftCount / maximum * 100}%`;
+
+    leftTrack.appendChild(leftFill);
+
+    leftSide.append(
+        leftNumber,
+        leftTrack
+    );
+
+    const label =
+        document.createElement("div");
+
+    label.className =
+        "function-label";
+
+    label.textContent =
+        category;
+
+    const rightSide =
+        document.createElement("div");
+
+    rightSide.className =
+        "function-side function-side-right";
+
+    const rightTrack =
+        document.createElement("div");
+
+    rightTrack.className =
+        "function-track";
+
+    const rightFill =
+        document.createElement("div");
+
+    rightFill.className =
+        "function-fill function-fill-right";
+
+    rightFill.style.width =
+        `${rightCount / maximum * 100}%`;
+
+    rightTrack.appendChild(rightFill);
+
+    const rightNumber =
+        document.createElement("span");
+
+    rightNumber.className =
+        "function-count";
+
+    rightNumber.textContent =
+        formatNumber(rightCount);
+
+    rightSide.append(
+        rightTrack,
+        rightNumber
+    );
+
+    row.append(
+        leftSide,
+        label,
+        rightSide
+    );
+
+    return row;
+}
+function getFunctionCount(
+    estate,
+    category
+) {
+    return Number(
+        estate.funktioner
+            ?.find(
+                item =>
+                    String(item.label) ===
+                    String(category)
+            )
+            ?.count
+    ) || 0;
+}
+
+function sumFunctionCounts(
+    estate
+) {
+    return estate.funktioner
+        ?.reduce(
+            (sum, item) =>
+                sum +
+                (Number(item.count) || 0),
+            0
+        ) || 0;
 }
