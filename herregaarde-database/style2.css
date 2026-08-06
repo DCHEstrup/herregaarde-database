@@ -2505,6 +2505,9 @@ input + chips + dropdown
 .birthplace-subgroup-list{
     display:flex;
     flex-direction:column;
+    max-height:540px;
+    overflow-y:auto;
+    scrollbar-gutter:stable;
 }
 
 .birthplace-group-row{
@@ -2618,6 +2621,35 @@ input + chips + dropdown
 .birthplace-subgroup-label{
     font-weight:600;
     color:var(--text);
+}
+.birthplace-group-list::-webkit-scrollbar,
+.birthplace-subgroup-list::-webkit-scrollbar{
+    width:10px;
+}
+
+.birthplace-group-list::-webkit-scrollbar-track,
+.birthplace-subgroup-list::-webkit-scrollbar-track{
+    background:#f3f5f4;
+}
+
+.birthplace-group-list::-webkit-scrollbar-thumb,
+.birthplace-subgroup-list::-webkit-scrollbar-thumb{
+    background:var(--primary);
+    border-radius:999px;
+    border:2px solid #f3f5f4;
+}
+
+.birthplace-group-list::-webkit-scrollbar-thumb:hover,
+.birthplace-subgroup-list::-webkit-scrollbar-thumb:hover{
+    background:var(--primary-hover);
+}
+
+.birthplace-group-list,
+.birthplace-subgroup-list{
+    scrollbar-width:thin;
+    scrollbar-color:
+        var(--primary)
+        #f3f5f4;
 }
 /* ==================================================
    PAGINATION
