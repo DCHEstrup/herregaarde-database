@@ -1983,7 +1983,7 @@ function createReligionComparison(
         "religion-description";
 
     description.textContent =
-        "Trossamfund er registreret fra folketællingen 1860 og frem. Tallene viser antal personer.";
+        "Trossamfund er registreret fra folketællingen 1855 og frem. Tallene viser antal personer.";
 
     section.appendChild(description);
 
