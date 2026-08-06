@@ -2275,22 +2275,16 @@ function createFunctionComparison(
 
     section.appendChild(chart);
 
-    renderFunctionButterfly(
-        chart,
-        estates,
-        {
-            limit: 15
-        }
-    );
+renderFunctionButterfly(
+    chart,
+    estates
+);
 
     return section;
 }
 function renderFunctionButterfly(
     container,
-    estates,
-    {
-        limit = 15
-    } = {}
+    estates
 ) {
     container.innerHTML = "";
 
@@ -2340,8 +2334,8 @@ function renderFunctionButterfly(
         return totalB - totalA;
     });
 
-    const visibleCategories =
-        categories.slice(0, limit);
+const visibleCategories =
+    categories;
 
     const maximum =
         Math.max(
