@@ -204,6 +204,11 @@ container.appendChild(
         estates
     )
 );
+    container.appendChild(
+    createReligionComparison(
+        estates
+    )
+);
 }
 
 function createComparisonChart(
@@ -1953,4 +1958,278 @@ function formatDistance(value) {
             maximumFractionDigits: 1
         }
     )} km`;
+}
+function createReligionComparison(
+    estates
+) {
+    const section =
+        document.createElement("section");
+
+    section.className =
+        "religion-comparison";
+
+    const heading =
+        document.createElement("h3");
+
+    heading.textContent =
+        "Trossamfund";
+
+    section.appendChild(heading);
+
+    const description =
+        document.createElement("p");
+
+    description.className =
+        "religion-description";
+
+    description.textContent =
+        "Trossamfund er registreret fra folketællingen 1860 og frem. Tallene viser antal personer.";
+
+    section.appendChild(description);
+
+    section.appendChild(
+        createReligionCoverage(
+            estates
+        )
+    );
+
+    const chart =
+        document.createElement("div");
+
+    chart.className =
+        "religion-chart";
+
+    const categories = [
+        ...new Set(
+            estates.flatMap(
+                estate =>
+                    estate.trossamfund
+                        ?.map(
+                            item =>
+                                String(
+                                    item.label
+                                )
+                        ) || []
+            )
+        )
+    ];
+
+    categories.sort((a, b) => {
+        const totalA =
+            getCombinedReligionCount(
+                estates,
+                a
+            );
+
+        const totalB =
+            getCombinedReligionCount(
+                estates,
+                b
+            );
+
+        return totalB - totalA;
+    });
+
+    estates.forEach(estate => {
+        chart.appendChild(
+            createReligionEstate(
+                estate,
+                categories
+            )
+        );
+    });
+
+    section.appendChild(chart);
+
+    return section;
+}
+function createReligionCoverage(
+    estates
+) {
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.className =
+        "religion-coverage";
+
+    estates.forEach(estate => {
+        const coverage =
+            estate.trossamfundDaekning || {};
+
+        const eligible =
+            Number(coverage.eligible) || 0;
+
+        const registered =
+            Number(coverage.registered) || 0;
+
+        const percentage =
+            eligible > 0
+                ? registered / eligible * 100
+                : 0;
+
+        const card =
+            document.createElement("article");
+
+        card.className =
+            "religion-coverage-card";
+
+        const title =
+            document.createElement("h4");
+
+        title.textContent =
+            estate.herregaard;
+
+        const text =
+            document.createElement("p");
+
+        text.textContent =
+            eligible > 0
+                ? `${formatNumber(
+                    registered
+                )} af ${formatNumber(
+                    eligible
+                )} relevante personer (${formatPercentage(
+                    percentage
+                )}).`
+                : "Ingen relevante registreringer fra 1860 eller senere.";
+
+        card.append(
+            title,
+            text
+        );
+
+        wrapper.appendChild(card);
+    });
+
+    return wrapper;
+}
+function createReligionEstate(
+    estate,
+    categories
+) {
+    const article =
+        document.createElement("article");
+
+    article.className =
+        "religion-estate";
+
+    const title =
+        document.createElement("h4");
+
+    title.textContent =
+        estate.herregaard;
+
+    article.appendChild(title);
+
+    const maximum =
+        Math.max(
+            1,
+            ...categories.map(
+                category =>
+                    getReligionCount(
+                        estate,
+                        category
+                    )
+            )
+        );
+
+    const list =
+        document.createElement("div");
+
+    list.className =
+        "religion-dot-list";
+
+    categories.forEach(category => {
+        const count =
+            getReligionCount(
+                estate,
+                category
+            );
+
+        const row =
+            document.createElement("div");
+
+        row.className =
+            "religion-dot-row";
+
+        const label =
+            document.createElement("span");
+
+        label.className =
+            "religion-dot-label";
+
+        label.textContent =
+            category;
+
+        const track =
+            document.createElement("div");
+
+        track.className =
+            "religion-dot-track";
+
+        const line =
+            document.createElement("div");
+
+        line.className =
+            "religion-dot-line";
+
+        line.style.width =
+            `${count / maximum * 100}%`;
+
+        const dot =
+            document.createElement("span");
+
+        dot.className =
+            "religion-dot-marker";
+
+        line.appendChild(dot);
+        track.appendChild(line);
+
+        const number =
+            document.createElement("strong");
+
+        number.textContent =
+            formatNumber(count);
+
+        row.append(
+            label,
+            track,
+            number
+        );
+
+        list.appendChild(row);
+    });
+
+    article.appendChild(list);
+
+    return article;
+}
+function getReligionCount(
+    estate,
+    category
+) {
+    return Number(
+        estate.trossamfund
+            ?.find(
+                item =>
+                    String(item.label) ===
+                    String(category)
+            )
+            ?.count
+    ) || 0;
+}
+
+function getCombinedReligionCount(
+    estates,
+    category
+) {
+    return estates.reduce(
+        (sum, estate) =>
+            sum +
+            getReligionCount(
+                estate,
+                category
+            ),
+        0
+    );
 }
