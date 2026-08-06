@@ -199,6 +199,11 @@ container.appendChild(
         estates
     )
 );
+    container.appendChild(
+    createTransportSummary(
+        estates
+    )
+);
 }
 
 function createComparisonChart(
@@ -1793,4 +1798,159 @@ function getCombinedBirthplaceSubgroupCount(
             ),
         0
     );
+}
+function createTransportSummary(
+    estates
+) {
+    const section =
+        document.createElement("section");
+
+    section.className =
+        "transport-summary";
+
+    const heading =
+        document.createElement("h3");
+
+    heading.textContent =
+        "Afstand fra fødested til herregård";
+
+    section.appendChild(heading);
+
+    const description =
+        document.createElement("p");
+
+    description.className =
+        "transport-summary-description";
+
+    description.textContent =
+        "Afstanden er beregnet for personer med registreret fødested fra folketællingerne 1850 og 1860. Alle afstande vises i kilometer.";
+
+    section.appendChild(description);
+
+    const grid =
+        document.createElement("div");
+
+    grid.className =
+        "transport-summary-grid";
+
+    estates.forEach(estate => {
+        grid.appendChild(
+            createTransportCard(
+                estate
+            )
+        );
+    });
+
+    section.appendChild(grid);
+
+    return section;
+}
+function createTransportCard(
+    estate
+) {
+    const stats =
+        estate.transportStatistik || {};
+
+    const card =
+        document.createElement("article");
+
+    card.className =
+        "transport-summary-card";
+
+    const title =
+        document.createElement("h4");
+
+    title.textContent =
+        estate.herregaard;
+
+    card.appendChild(title);
+
+    const metrics = [
+        [
+            "Korteste afstand",
+            formatDistance(stats.minimum)
+        ],
+        [
+            "1. kvartil",
+            formatDistance(
+                stats.firstQuartile
+            )
+        ],
+        [
+            "Median",
+            formatDistance(stats.median)
+        ],
+        [
+            "Gennemsnit",
+            formatDistance(stats.average)
+        ],
+        [
+            "3. kvartil",
+            formatDistance(
+                stats.thirdQuartile
+            )
+        ],
+        [
+            "Længste afstand",
+            formatDistance(stats.maximum)
+        ],
+        [
+            "Gyldige afstande",
+            formatNumber(
+                stats.validCount
+            )
+        ],
+        [
+            "Manglende værdier",
+            formatNumber(
+                stats.naCount
+            )
+        ]
+    ];
+
+    const list =
+        document.createElement("dl");
+
+    list.className =
+        "transport-summary-list";
+
+    metrics.forEach(
+        ([label, value]) => {
+            const row =
+                document.createElement("div");
+
+            const dt =
+                document.createElement("dt");
+
+            const dd =
+                document.createElement("dd");
+
+            dt.textContent = label;
+            dd.textContent = value;
+
+            row.append(dt, dd);
+            list.appendChild(row);
+        }
+    );
+
+    card.appendChild(list);
+
+    return card;
+}
+function formatDistance(value) {
+    if (
+        value === null ||
+        value === undefined ||
+        Number.isNaN(Number(value))
+    ) {
+        return "Ikke beregnet";
+    }
+
+    return `${Number(value).toLocaleString(
+        "da-DK",
+        {
+            minimumFractionDigits: 1,
+            maximumFractionDigits: 1
+        }
+    )} km`;
 }
