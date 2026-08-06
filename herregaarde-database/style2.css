@@ -2838,7 +2838,158 @@ input + chips + dropdown
     text-align:right;
     font-size:.85rem;
 }
+/* ==================================================
+   ARBEJDSFUNKTIONER – BUTTERFLY CHART
+================================================== */
 
+.function-comparison{
+    margin-top:28px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+}
+
+.function-comparison > h3{
+    margin:0 0 6px;
+    color:var(--primary);
+}
+
+.function-comparison-description{
+    max-width:900px;
+    margin:0 0 20px;
+    color:var(--muted);
+    line-height:1.5;
+}
+
+.function-butterfly{
+    border:1px solid var(--border);
+    background:var(--surface);
+}
+
+.function-butterfly-header,
+.function-butterfly-row,
+.function-butterfly-total{
+    display:grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(130px, 190px)
+        minmax(0, 1fr);
+
+    align-items:center;
+    gap:12px;
+}
+
+.function-butterfly-header{
+    min-height:52px;
+    padding:10px 16px;
+
+    border-bottom:1px solid var(--border);
+    background:#f5f8f6;
+
+    color:var(--primary);
+}
+
+.function-butterfly-header strong:first-child{
+    text-align:right;
+}
+
+.function-butterfly-header span{
+    text-align:center;
+}
+
+.function-butterfly-row{
+    min-height:42px;
+    padding:6px 16px;
+    border-bottom:1px solid #e8ecea;
+}
+
+.function-label{
+    overflow:hidden;
+    color:var(--text);
+    font-size:.85rem;
+    font-weight:600;
+    text-align:center;
+    text-overflow:ellipsis;
+}
+
+.function-side{
+    min-width:0;
+    display:grid;
+    align-items:center;
+    gap:8px;
+}
+
+.function-side-left{
+    grid-template-columns:
+        48px
+        minmax(0, 1fr);
+}
+
+.function-side-right{
+    grid-template-columns:
+        minmax(0, 1fr)
+        48px;
+}
+
+.function-count{
+    font-size:.82rem;
+    font-weight:600;
+}
+
+.function-side-left
+.function-count{
+    text-align:right;
+}
+
+.function-side-right
+.function-count{
+    text-align:left;
+}
+
+.function-track{
+    height:20px;
+    overflow:hidden;
+    background:#e5ebe8;
+}
+
+.function-side-left
+.function-track{
+    display:flex;
+    justify-content:flex-end;
+}
+
+.function-fill{
+    height:100%;
+    min-width:0;
+}
+
+.function-fill-left{
+    background:#83aaa0;
+}
+
+.function-fill-right{
+    background:var(--primary);
+}
+
+.function-butterfly-total{
+    min-height:48px;
+    padding:10px 16px;
+
+    background:#edf3f0;
+    color:var(--primary);
+}
+
+.function-butterfly-total strong:first-child{
+    text-align:right;
+}
+
+.function-butterfly-total span{
+    font-weight:700;
+    text-align:center;
+}
+
+.function-butterfly-total strong:last-child{
+    text-align:left;
+}
 
 
 
@@ -3029,7 +3180,35 @@ input + chips + dropdown
     }
 }
 @media (max-width:700px){
+    .function-butterfly-header,
+    .function-butterfly-row,
+    .function-butterfly-total{
+        grid-template-columns:
+            minmax(0, 1fr)
+            100px
+            minmax(0, 1fr);
 
+        gap:6px;
+        padding-left:8px;
+        padding-right:8px;
+    }
+
+    .function-side-left{
+        grid-template-columns:
+            34px
+            minmax(0, 1fr);
+    }
+
+    .function-side-right{
+        grid-template-columns:
+            minmax(0, 1fr)
+            34px;
+    }
+
+    .function-label,
+    .function-count{
+        font-size:.7rem;
+    }
     .filter-grid{
         grid-template-columns:1fr;
     }
