@@ -7,20 +7,7 @@ export async function loadFilters() {
 
     const { data, error } =
         await getFilters();
-console.log(
-    "getFilters data:",
-    data
-);
 
-console.log(
-    "Herregårde:",
-    data.herregaarde
-);
-
-console.log(
-    "Første herregård:",
-    data.herregaarde?.[0]
-);
     if (error) {
         console.error(error);
         return;
@@ -103,6 +90,10 @@ console.log(
             estate
         );
     });
+    console.log(
+    "estateGroups:",
+    estateGroups
+);
 
     //----------------------------------
     // Sortér herregårde inden for region
