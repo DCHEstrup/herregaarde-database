@@ -65,6 +65,7 @@ class MultiSelect {
         this.values = values;
         this.placeholder = placeholder;
         this.onChange = onChange;
+        this.groups = groups;
         this.groupHeaders = [];
 
         this.selected =
