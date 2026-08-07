@@ -47,7 +47,8 @@ class MultiSelect {
         containerId,
         values = [],
         placeholder = "Vælg...",
-        onChange = () => {}
+        onChange = () => {},
+        groups = null
     }) {
         this.container =
             document.getElementById(
@@ -64,6 +65,7 @@ class MultiSelect {
         this.values = values;
         this.placeholder = placeholder;
         this.onChange = onChange;
+        this.groupHeaders = [];
 
         this.selected =
             new Set();
@@ -331,8 +333,15 @@ class MultiSelect {
     // Byg muligheder
     //--------------------------------------------------
 
-    createOptions() {
-        this.options = [];
+createOptions() {
+    this.options = [];
+    this.groupHeaders = [];
+
+    //----------------------------------
+    // Almindelig multiselect
+    //----------------------------------
+
+    if (!this.groups) {
 
         this.values.forEach(value => {
             const option =
@@ -344,7 +353,111 @@ class MultiSelect {
                 option.element
             );
         });
+
+        return;
     }
+
+    //----------------------------------
+    // Grupperet multiselect
+    //----------------------------------
+
+    const sortedGroups =
+        Object.entries(this.groups)
+            .sort(
+                ([groupA], [groupB]) =>
+                    groupA.localeCompare(
+                        groupB,
+                        "da"
+                    )
+            );
+
+    sortedGroups.forEach(
+        ([groupName, groupValues]) => {
+
+            const group =
+                document.createElement(
+                    "div"
+                );
+
+            group.className =
+                "multiselect-group";
+
+            //----------------------------------
+            // Sortér herregårde alfabetisk
+            //----------------------------------
+
+            const sortedValues =
+                [...groupValues]
+                    .sort(
+                        (a, b) =>
+                            String(a)
+                                .localeCompare(
+                                    String(b),
+                                    "da"
+                                )
+                    );
+
+            //----------------------------------
+            // Gruppeoverskrift
+            //----------------------------------
+
+            const groupHeader =
+                this.createGroupHeader(
+                    groupName,
+                    sortedValues
+                );
+
+            group.appendChild(
+                groupHeader.element
+            );
+
+            //----------------------------------
+            // Gruppens muligheder
+            //----------------------------------
+
+            const groupOptions =
+                document.createElement(
+                    "div"
+                );
+
+            groupOptions.className =
+                "multiselect-group-options";
+
+            sortedValues.forEach(value => {
+                const option =
+                    this.createOption(value);
+
+                option.groupName =
+                    groupName;
+
+                this.options.push(
+                    option
+                );
+
+                groupOptions.appendChild(
+                    option.element
+                );
+            });
+
+            group.appendChild(
+                groupOptions
+            );
+
+            this.optionsContainer.appendChild(
+                group
+            );
+
+            groupHeader.groupElement =
+                group;
+
+            this.groupHeaders.push(
+                groupHeader
+            );
+        }
+    );
+
+    this.updateGroupHeaders();
+}
 
     //--------------------------------------------------
     // Én mulighed
