@@ -319,6 +319,7 @@ class MultiSelect {
 
                 this.updateHeader();
                 this.updateSelectAll();
+                this.updateGroupHeaders();
                 this.notifyChange();
             }
         );
@@ -458,7 +459,113 @@ createOptions() {
 
     this.updateGroupHeaders();
 }
+//--------------------------------------------------
+// Gruppeoverskrift
+//--------------------------------------------------
 
+createGroupHeader(
+    groupName,
+    groupValues
+) {
+    const element =
+        document.createElement("div");
+
+    element.className =
+        "multiselect-group-header";
+
+    const checkbox =
+        document.createElement("input");
+
+    checkbox.type =
+        "checkbox";
+
+    checkbox.setAttribute(
+        "aria-label",
+        `Vælg alle herregårde i ${groupName}`
+    );
+
+    const name =
+        document.createElement("span");
+
+    name.className =
+        "multiselect-group-name";
+
+    name.textContent =
+        groupName;
+
+    const count =
+        document.createElement("span");
+
+    count.className =
+        "multiselect-group-count";
+
+    count.textContent =
+        groupValues.length
+            .toLocaleString("da-DK");
+
+    element.append(
+        checkbox,
+        name,
+        count
+    );
+
+    //----------------------------------
+    // Klik på region
+    //----------------------------------
+
+    element.addEventListener(
+        "click",
+        event => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const allSelected =
+                groupValues.every(
+                    value =>
+                        this.selected.has(
+                            value
+                        )
+                );
+
+            const shouldSelect =
+                !allSelected;
+
+            groupValues.forEach(value => {
+
+                const option =
+                    this.options.find(
+                        item =>
+                            String(
+                                item.value
+                            ) ===
+                            String(value)
+                    );
+
+                if (!option) {
+                    return;
+                }
+
+                option.setChecked(
+                    shouldSelect,
+                    false
+                );
+            });
+
+            this.updateHeader();
+            this.updateSelectAll();
+            this.updateGroupHeaders();
+            this.notifyChange();
+        }
+    );
+
+    return {
+        element,
+        checkbox,
+        groupName,
+        groupValues,
+        groupElement: null
+    };
+}
     //--------------------------------------------------
     // Én mulighed
     //--------------------------------------------------
@@ -505,6 +612,7 @@ createOptions() {
             }
 
             this.updateSelectAll();
+            this.updateGroupHeaders();
 
             if (notify) {
                 this.updateHeader();
@@ -542,6 +650,42 @@ createOptions() {
             }
         };
     }
+    //--------------------------------------------------
+// Opdater gruppe-checkboxes
+//--------------------------------------------------
+
+updateGroupHeaders() {
+
+    if (!this.groups) {
+        return;
+    }
+
+    this.groupHeaders.forEach(
+        group => {
+
+            const selectedCount =
+                group.groupValues
+                    .filter(
+                        value =>
+                            this.selected.has(
+                                value
+                            )
+                    )
+                    .length;
+
+            const total =
+                group.groupValues.length;
+
+            group.checkbox.checked =
+                total > 0 &&
+                selectedCount === total;
+
+            group.checkbox.indeterminate =
+                selectedCount > 0 &&
+                selectedCount < total;
+        }
+    );
+}
 
     //--------------------------------------------------
     // Opdater header
@@ -592,19 +736,64 @@ updateHeader() {
                 this.options.length;
     }
 
-    //--------------------------------------------------
-    // Filtrer muligheder
-    //--------------------------------------------------
+filterOptions(query) {
 
-    filterOptions(query) {
-        this.options.forEach(option => {
-            option.setVisible(
-                String(option.value)
-                    .toLowerCase()
-                    .includes(query)
-            );
-        });
+    //----------------------------------
+    // Filtrer muligheder
+    //----------------------------------
+
+    this.options.forEach(option => {
+
+        const matches =
+            String(option.value)
+                .toLowerCase()
+                .includes(query);
+
+        option.setVisible(
+            matches
+        );
+    });
+
+    //----------------------------------
+    // Almindelig multiselect
+    //----------------------------------
+
+    if (!this.groups) {
+        return;
     }
+
+    //----------------------------------
+    // Skjul grupper uden matches
+    //----------------------------------
+
+    this.groupHeaders.forEach(
+        group => {
+
+            const groupOptions =
+                this.options.filter(
+                    option =>
+                        option.groupName ===
+                        group.groupName
+                );
+
+            const hasVisibleOptions =
+                groupOptions.some(
+                    option =>
+                        option.element
+                            .style.display
+                        !== "none"
+                );
+
+            if (group.groupElement) {
+                group.groupElement
+                    .style.display =
+                    hasVisibleOptions
+                        ? ""
+                        : "none";
+            }
+        }
+    );
+}
 
     //--------------------------------------------------
     // Åbn dropdown
@@ -685,6 +874,7 @@ updateHeader() {
 
         this.updateHeader();
         this.updateSelectAll();
+        this.updateGroupHeaders()
         this.notifyChange();
     }
 
@@ -704,6 +894,7 @@ updateHeader() {
 
         this.updateHeader();
         this.updateSelectAll();
+        this.updateGroupHeaders();
         this.notifyChange();
     }
 
