@@ -18,7 +18,9 @@ export async function loadFilters() {
     createMultiSelect({
         containerId: "herregaard",
         values: data.herregaarde,
-        placeholder: "Alle herregårde"
+        placeholder: "Alle herregårde",
+        groupBy: "region",
+        allowGroupSelection: true
     });
 
     //----------------------------------
