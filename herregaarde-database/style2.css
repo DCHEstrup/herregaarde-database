@@ -1844,6 +1844,21 @@ input + chips + dropdown
 .detail-info-popup[hidden]{
     display:none;
 }
+.detail-estate-link{
+    color:var(--primary);
+    font-weight:500;
+    text-decoration:none;
+    border-bottom:1px solid currentColor;
+}
+
+.detail-estate-link:hover{
+    color:var(--primary-hover);
+}
+
+.detail-estate-link .external-icon{
+    margin-left:3px;
+    font-size:.78em;
+}
 /* ==================================================
    HUSSTAND
 ================================================== */
