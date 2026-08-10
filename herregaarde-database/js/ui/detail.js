@@ -413,3 +413,25 @@ export function clearDetail() {
         </div>
     `;
 }
+function createEstateSlug(name) {
+    return String(name)
+        .trim()
+        .toLowerCase()
+
+        // danske bogstaver
+        .replace(/æ/g, "ae")
+        .replace(/ø/g, "oe")
+        .replace(/å/g, "aa")
+
+        // fjern parenteser
+        .replace(/[()]/g, "")
+
+        // mellemrum bliver til -
+        .replace(/\s+/g, "-")
+
+        // fjern evt. flere bindestreger
+        .replace(/-+/g, "-")
+
+        // fjern bindestreg i starten/slutningen
+        .replace(/^-|-$/g, "");
+}
