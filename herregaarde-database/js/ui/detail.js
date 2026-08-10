@@ -73,12 +73,38 @@ export async function showDetail(id) {
 
         const td =
             document.createElement("td");
+        //----------------------------------
+        // Link til herregård
+        //----------------------------------
+        if (key === "herregaard") {
+    th.textContent = label;
 
+    const slug =
+        createEstateSlug(
+            data[key]
+        );
+
+    td.innerHTML = `
+        <a
+            class="detail-estate-link"
+            href="https://www.danskeherregaarde.dk/nutid/${slug}"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Læs mere om ${data[key]} på Danske Herregårde"
+        >
+            ${data[key]}
+            <span class="external-icon">
+                ↗
+            </span>
+        </a>
+    `;
+}
+        
         //----------------------------------
         // Arbejde som link
         //----------------------------------
 
-        if (key === "arbejde_titel") {
+        else if (key === "arbejde_titel") {
             th.innerHTML = `
                 <a
                     class="detail-heading-link"
@@ -95,6 +121,7 @@ export async function showDetail(id) {
             `;
         }
 
+            
         //----------------------------------
         // Transport med info-knap
         //----------------------------------
@@ -134,9 +161,10 @@ export async function showDetail(id) {
 
         else {
             th.textContent = label;
+            td.textContent = data[key];
         }
 
-        td.textContent = data[key];
+
 
         row.append(
             th,
