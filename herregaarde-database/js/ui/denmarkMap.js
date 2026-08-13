@@ -194,6 +194,24 @@ async function loadMap(
 
                     path.dataset.region =
                         region;
+                    path.addEventListener(
+    "mouseenter",
+    () => {
+        highlightRegion(
+            container,
+            region
+        );
+    }
+);
+
+path.addEventListener(
+    "mouseleave",
+    () => {
+        clearRegionHighlight(
+            container
+        );
+    }
+);
 
                     const stats =
                         regionStatistics.get(
@@ -571,5 +589,77 @@ function getRegionOpacity(
         1,
         0.25 +
         percentage / 40
+    );
+}
+function highlightRegion(
+    container,
+    region
+) {
+    //----------------------------------
+    // Fremhæv kort
+    //----------------------------------
+
+    container
+        .querySelectorAll(
+            ".denmark-municipality"
+        )
+        .forEach(path => {
+
+            const sameRegion =
+                path.dataset.region ===
+                region;
+
+            path.classList.toggle(
+                "region-active",
+                sameRegion
+            );
+
+            path.classList.toggle(
+                "region-dimmed",
+                !sameRegion
+            );
+        });
+
+    //----------------------------------
+    // Fortæl resten af siden
+    //----------------------------------
+
+    document.dispatchEvent(
+        new CustomEvent(
+            "regionMapHover",
+            {
+                detail: {
+                    region
+                }
+            }
+        )
+    );
+}
+
+
+function clearRegionHighlight(
+    container
+) {
+    container
+        .querySelectorAll(
+            ".denmark-municipality"
+        )
+        .forEach(path => {
+
+            path.classList.remove(
+                "region-active",
+                "region-dimmed"
+            );
+        });
+
+    document.dispatchEvent(
+        new CustomEvent(
+            "regionMapHover",
+            {
+                detail: {
+                    region: null
+                }
+            }
+        )
     );
 }
