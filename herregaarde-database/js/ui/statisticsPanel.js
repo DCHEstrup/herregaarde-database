@@ -249,7 +249,84 @@ layout.appendChild(mapWrapper);
 
         wrapper.dataset.region =
             row.label;
+//----------------------------------
+// Hover fra kort → bjælker
+//----------------------------------
 
+const handleMapHover =
+    event => {
+
+        const region =
+            event.detail?.region;
+
+        chart
+            .querySelectorAll(
+                ".statistics-region-row"
+            )
+            .forEach(row => {
+
+                if (!region) {
+                    row.classList.remove(
+                        "region-active",
+                        "region-dimmed"
+                    );
+
+                    return;
+                }
+
+                const sameRegion =
+                    row.dataset.region ===
+                    region;
+
+                row.classList.toggle(
+                    "region-active",
+                    sameRegion
+                );
+
+                row.classList.toggle(
+                    "region-dimmed",
+                    !sameRegion
+                );
+            });
+    };
+
+document.addEventListener(
+    "regionMapHover",
+    handleMapHover
+);
+        wrapper.addEventListener(
+    "mouseenter",
+    () => {
+        document.dispatchEvent(
+            new CustomEvent(
+                "regionChartHover",
+                {
+                    detail: {
+                        region:
+                            row.label
+                    }
+                }
+            )
+        );
+    }
+);
+
+wrapper.addEventListener(
+    "mouseleave",
+    () => {
+        document.dispatchEvent(
+            new CustomEvent(
+                "regionChartHover",
+                {
+                    detail: {
+                        region: null
+                    }
+                }
+            )
+        );
+    }
+);
+        
         const label =
             document.createElement("div");
 
