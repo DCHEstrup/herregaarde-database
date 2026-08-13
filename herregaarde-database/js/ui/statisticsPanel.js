@@ -1,3 +1,4 @@
+import { createDenmarkRegionMap } from "./denmarkMap.js";
 let expanded = false;
 let initialized = false;
 
@@ -204,13 +205,21 @@ function createRegionDistribution(
     // Kortområde
     //----------------------------------
 
+const mapWrapper =
+    document.createElement("div");
+
+mapWrapper.className =
+    "statistics-region-map";
+
 const map =
     createDenmarkRegionMap(
         rows,
         total
     );
 
-layout.appendChild(map);
+mapWrapper.appendChild(map);
+
+layout.appendChild(mapWrapper);
 
     //----------------------------------
     // Søjler
