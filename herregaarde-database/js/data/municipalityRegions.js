@@ -154,4 +154,96 @@ export const municipalityRegions = {
 
     "Vejle":
         "Syddanmark; Syd- og Sønderjylland"
-};
+        };
+// ----------------------------------
+// Kommuner uden herregårde i datasættet
+// ----------------------------------
+
+municipalityRegions["København"] =
+    "Hovedstaden";
+
+municipalityRegions["Frederiksberg"] =
+    "Hovedstaden";
+
+municipalityRegions["Ballerup"] =
+    "Hovedstaden";
+
+municipalityRegions["Brøndby"] =
+    "Hovedstaden";
+
+municipalityRegions["Dragør"] =
+    "Hovedstaden";
+
+municipalityRegions["Gentofte"] =
+    "Hovedstaden";
+
+municipalityRegions["Gladsaxe"] =
+    "Hovedstaden";
+
+municipalityRegions["Glostrup"] =
+    "Hovedstaden";
+
+municipalityRegions["Herlev"] =
+    "Hovedstaden";
+
+municipalityRegions["Albertslund"] =
+    "Hovedstaden";
+
+municipalityRegions["Hvidovre"] =
+    "Hovedstaden";
+
+municipalityRegions["Rødovre"] =
+    "Hovedstaden";
+
+municipalityRegions["Tårnby"] =
+    "Hovedstaden";
+
+municipalityRegions["Vallensbæk"] =
+    "Hovedstaden";
+
+municipalityRegions["Allerød"] =
+    "Hovedstaden";
+
+municipalityRegions["Helsingør"] =
+    "Hovedstaden";
+
+municipalityRegions["Hillerød"] =
+    "Hovedstaden";
+
+municipalityRegions["Hørsholm"] =
+    "Hovedstaden";
+
+municipalityRegions["Gribskov"] =
+    "Hovedstaden";
+
+
+// ----------------------------------
+// Sjælland
+// ----------------------------------
+
+municipalityRegions["Solrød"] =
+    "Sjælland";
+
+
+// ----------------------------------
+// Bornholm
+// ----------------------------------
+
+municipalityRegions["Bornholm"] =
+    "Hovedstaden";
+
+
+// ----------------------------------
+// Syddanmark – øer
+// ----------------------------------
+
+municipalityRegions["Fanø"] =
+    "Syddanmark; Syd- og Sønderjylland";
+
+
+// ----------------------------------
+// Nordjylland
+// ----------------------------------
+
+municipalityRegions["Læsø"] =
+    "Nordjylland";
