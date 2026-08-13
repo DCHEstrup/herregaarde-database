@@ -35,13 +35,13 @@ export function createDenmarkRegionMap(
     return container;
 }
 
-
 async function loadMap(
     container,
     rows,
     total
 ) {
     try {
+
         //----------------------------------
         // Hent GeoJSON
         //----------------------------------
@@ -60,15 +60,6 @@ async function loadMap(
         const geojson =
             await response.json();
 
-        console.log(
-            "Danmark GeoJSON:",
-            geojson
-        );
-
-        //----------------------------------
-        // Kontroller features
-        //----------------------------------
-
         if (
             !Array.isArray(
                 geojson.features
@@ -80,14 +71,45 @@ async function loadMap(
         }
 
         //----------------------------------
-        // Fjern loading
+        // Statistik pr. region
         //----------------------------------
 
-        container.innerHTML = "";
+        const regionStatistics =
+            new Map();
+
+        rows.forEach(row => {
+
+            const count =
+                Number(row.count) || 0;
+
+            const percentage =
+                total > 0
+                    ? count / total * 100
+                    : 0;
+
+            regionStatistics.set(
+                row.label,
+                {
+                    count,
+                    percentage
+                }
+            );
+        });
+
+        //----------------------------------
+        // Find geografiske grænser
+        //----------------------------------
+
+        const bounds =
+            getGeoJSONBounds(
+                geojson
+            );
 
         //----------------------------------
         // SVG
         //----------------------------------
+
+        container.innerHTML = "";
 
         const svg =
             document.createElementNS(
@@ -114,39 +136,161 @@ async function loadMap(
             "Kort over den geografiske fordeling"
         );
 
+        //----------------------------------
+        // Tegn kommunerne
+        //----------------------------------
+
+        geojson.features.forEach(
+            feature => {
+
+                const municipalityName =
+                    feature.properties?.navn;
+
+                if (
+                    !municipalityName ||
+                    !feature.geometry
+                ) {
+                    return;
+                }
+
+                const region =
+                    municipalityRegions[
+                        municipalityName
+                    ] || null;
+
+                const pathData =
+                    geometryToPath(
+                        feature.geometry,
+                        bounds
+                    );
+
+                if (!pathData) {
+                    return;
+                }
+
+                const path =
+                    document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "path"
+                    );
+
+                path.setAttribute(
+                    "d",
+                    pathData
+                );
+
+                path.classList.add(
+                    "denmark-municipality"
+                );
+
+                path.dataset.municipality =
+                    municipalityName;
+
+                //----------------------------------
+                // Kommune med region
+                //----------------------------------
+
+                if (region) {
+
+                    path.dataset.region =
+                        region;
+
+                    const stats =
+                        regionStatistics.get(
+                            region
+                        );
+
+                    const percentage =
+                        stats?.percentage || 0;
+
+                    path.style.setProperty(
+                        "--region-opacity",
+                        getRegionOpacity(
+                            percentage
+                        )
+                    );
+
+                    const title =
+                        document.createElementNS(
+                            "http://www.w3.org/2000/svg",
+                            "title"
+                        );
+
+                    title.textContent =
+                        stats
+                            ? `${region}: ${stats.count.toLocaleString(
+                                "da-DK"
+                            )} personer (${stats.percentage.toLocaleString(
+                                "da-DK",
+                                {
+                                    maximumFractionDigits: 1
+                                }
+                            )} %)`
+                            : region;
+
+                    path.appendChild(
+                        title
+                    );
+                }
+
+                //----------------------------------
+                // Kommune uden mapping
+                //----------------------------------
+
+                else {
+                    path.classList.add(
+                        "denmark-municipality-unmapped"
+                    );
+
+                    const title =
+                        document.createElementNS(
+                            "http://www.w3.org/2000/svg",
+                            "title"
+                        );
+
+                    title.textContent =
+                        municipalityName;
+
+                    path.appendChild(
+                        title
+                    );
+                }
+
+                svg.appendChild(
+                    path
+                );
+            }
+        );
+
         container.appendChild(svg);
 
         //----------------------------------
-        // Midlertidig test af properties
+        // Debug: kommuner uden mapping
         //----------------------------------
+
+        const unmapped =
+            geojson.features
+                .map(
+                    feature =>
+                        feature.properties
+                            ?.navn
+                )
+                .filter(Boolean)
+                .filter(
+                    name =>
+                        !municipalityRegions[
+                            name
+                        ]
+                );
 
         console.log(
-            "Første kommune:",
-            geojson.features[0]
+            "Kommuner uden kortregion:",
+            unmapped
         );
 
-        console.log(
-            "Properties:",
-            geojson.features[0]
-                ?.properties
-        );
-
-        //----------------------------------
-        // Vi tegner kommunerne i næste trin
-        //----------------------------------
-
-        const info =
-            document.createElement("div");
-
-        info.className =
-            "denmark-map-debug";
-
-        info.textContent =
-            `${geojson.features.length} geografiske områder hentet`;
-
-        container.appendChild(info);
     }
     catch (error) {
+
         console.error(
             "Fejl ved Danmarkskort:",
             error
@@ -158,4 +302,274 @@ async function loadMap(
             </div>
         `;
     }
+}
+
+//==================================================
+// GEOGRAFISKE GRÆNSER
+//==================================================
+
+function getGeoJSONBounds(
+    geojson
+) {
+    let minX = Infinity;
+    let maxX = -Infinity;
+
+    let minY = Infinity;
+    let maxY = -Infinity;
+
+    geojson.features.forEach(
+        feature => {
+
+            visitCoordinates(
+                feature.geometry
+                    ?.coordinates,
+                coordinate => {
+
+                    const [
+                        longitude,
+                        latitude
+                    ] = coordinate;
+
+                    minX =
+                        Math.min(
+                            minX,
+                            longitude
+                        );
+
+                    maxX =
+                        Math.max(
+                            maxX,
+                            longitude
+                        );
+
+                    minY =
+                        Math.min(
+                            minY,
+                            latitude
+                        );
+
+                    maxY =
+                        Math.max(
+                            maxY,
+                            latitude
+                        );
+                }
+            );
+        }
+    );
+
+    return {
+        minX,
+        maxX,
+        minY,
+        maxY
+    };
+}
+
+function visitCoordinates(
+    coordinates,
+    callback
+) {
+    if (
+        !Array.isArray(
+            coordinates
+        )
+    ) {
+        return;
+    }
+
+    //----------------------------------
+    // Vi har fundet [lon, lat]
+    //----------------------------------
+
+    if (
+        typeof coordinates[0]
+            === "number" &&
+        typeof coordinates[1]
+            === "number"
+    ) {
+        callback(
+            coordinates
+        );
+
+        return;
+    }
+
+    //----------------------------------
+    // Gå længere ned
+    //----------------------------------
+
+    coordinates.forEach(
+        child => {
+            visitCoordinates(
+                child,
+                callback
+            );
+        }
+    );
+}
+
+//==================================================
+// GEOJSON → SVG
+//==================================================
+
+function geometryToPath(
+    geometry,
+    bounds
+) {
+    if (
+        geometry.type ===
+        "Polygon"
+    ) {
+        return polygonToPath(
+            geometry.coordinates,
+            bounds
+        );
+    }
+
+    if (
+        geometry.type ===
+        "MultiPolygon"
+    ) {
+        return geometry.coordinates
+            .map(
+                polygon =>
+                    polygonToPath(
+                        polygon,
+                        bounds
+                    )
+            )
+            .join(" ");
+    }
+
+    return "";
+}
+
+function polygonToPath(
+    polygon,
+    bounds
+) {
+    return polygon
+        .map(ring => {
+
+            if (!ring.length) {
+                return "";
+            }
+
+            const points =
+                ring.map(
+                    coordinate =>
+                        projectCoordinate(
+                            coordinate,
+                            bounds
+                        )
+                );
+
+            const [
+                first,
+                ...rest
+            ] = points;
+
+            let path =
+                `M ${first.x} ${first.y}`;
+
+            rest.forEach(point => {
+                path +=
+                    ` L ${point.x} ${point.y}`;
+            });
+
+            path += " Z";
+
+            return path;
+        })
+        .join(" ");
+}
+
+//==================================================
+// PROJEKTION
+//==================================================
+
+function projectCoordinate(
+    coordinate,
+    bounds
+) {
+    const [
+        longitude,
+        latitude
+    ] = coordinate;
+
+    const width =
+        400;
+
+    const height =
+        500;
+
+    const padding =
+        18;
+
+    const usableWidth =
+        width -
+        padding * 2;
+
+    const usableHeight =
+        height -
+        padding * 2;
+
+    const x =
+        padding +
+        (
+            longitude -
+            bounds.minX
+        ) /
+        (
+            bounds.maxX -
+            bounds.minX
+        ) *
+        usableWidth;
+
+    /*
+     * SVG går nedad på y-aksen,
+     * så latitude vendes om.
+     */
+    const y =
+        padding +
+        (
+            bounds.maxY -
+            latitude
+        ) /
+        (
+            bounds.maxY -
+            bounds.minY
+        ) *
+        usableHeight;
+
+    return {
+        x:
+            x.toFixed(2),
+
+        y:
+            y.toFixed(2)
+    };
+}
+
+//==================================================
+// FARVEINTENSITET
+//==================================================
+
+function getRegionOpacity(
+    percentage
+) {
+    if (percentage <= 0) {
+        return 0.12;
+    }
+
+    /*
+     * Minimum 25 % synlighed,
+     * maksimum 100 %.
+     */
+    return Math.min(
+        1,
+        0.25 +
+        percentage / 40
+    );
 }
