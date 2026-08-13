@@ -5,6 +5,7 @@ export const municipalityRegions = {
 
     "Egedal": "Hovedstaden",
     "Furesø": "Hovedstaden",
+    "Fredensborg": "Hovedstaden",
     "Ishøj": "Hovedstaden",
     "Lyngby-Taarbæk": "Hovedstaden",
     "Rudersdal": "Hovedstaden",
@@ -53,7 +54,6 @@ export const municipalityRegions = {
     //----------------------------------
 
     "Faxe": "Sjælland",
-    "Fredensborg": "Sjælland",
     "Frederikssund": "Sjælland",
     "Greve": "Sjælland",
     "Halsnæs": "Sjælland",
