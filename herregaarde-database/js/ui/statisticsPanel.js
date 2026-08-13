@@ -146,6 +146,171 @@ function createAgeChart(rows = []) {
     section.appendChild(chart);
     return section;
 }
+function createRegionDistribution(
+    rows = [],
+    total = 0
+) {
+    const section =
+        document.createElement("section");
+
+    section.className =
+        "statistics-section statistics-region-section";
+
+    const heading =
+        document.createElement("h3");
+
+    heading.textContent =
+        "Geografisk fordeling";
+
+    section.appendChild(heading);
+
+    const description =
+        document.createElement("p");
+
+    description.className =
+        "statistics-region-description";
+
+    description.textContent =
+        "Personernes fordeling efter herregårdens geografiske placering.";
+
+    section.appendChild(description);
+
+    if (!rows.length) {
+        const empty =
+            document.createElement("p");
+
+        empty.className =
+            "statistics-empty";
+
+        empty.textContent =
+            "Der er ingen regionsoplysninger for søgeresultatet.";
+
+        section.appendChild(empty);
+
+        return section;
+    }
+
+    //----------------------------------
+    // Layout
+    //----------------------------------
+
+    const layout =
+        document.createElement("div");
+
+    layout.className =
+        "statistics-region-layout";
+
+    //----------------------------------
+    // Kortområde
+    //----------------------------------
+
+    const map =
+        document.createElement("div");
+
+    map.className =
+        "statistics-region-map";
+
+    map.innerHTML = `
+        <div class="statistics-region-map-placeholder">
+            Danmarkskort kommer her
+        </div>
+    `;
+
+    layout.appendChild(map);
+
+    //----------------------------------
+    // Søjler
+    //----------------------------------
+
+    const chart =
+        document.createElement("div");
+
+    chart.className =
+        "statistics-region-chart";
+
+    rows.forEach(row => {
+
+        const count =
+            Number(row.count) || 0;
+
+        const percentage =
+            total > 0
+                ? count / total * 100
+                : 0;
+
+        const wrapper =
+            document.createElement("div");
+
+        wrapper.className =
+            "statistics-region-row";
+
+        wrapper.dataset.region =
+            row.label;
+
+        const label =
+            document.createElement("div");
+
+        label.className =
+            "statistics-region-label";
+
+        label.textContent =
+            row.label;
+
+        const barLine =
+            document.createElement("div");
+
+        barLine.className =
+            "statistics-region-bar-line";
+
+        const track =
+            document.createElement("div");
+
+        track.className =
+            "statistics-region-track";
+
+        const fill =
+            document.createElement("div");
+
+        fill.className =
+            "statistics-region-fill";
+
+        fill.style.width =
+            `${percentage}%`;
+
+        track.appendChild(fill);
+
+        const value =
+            document.createElement("div");
+
+        value.className =
+            "statistics-region-value";
+
+        value.textContent =
+            `${count.toLocaleString("da-DK")} (${Math.round(
+                percentage
+            )}%)`;
+
+        barLine.append(
+            track,
+            value
+        );
+
+        wrapper.append(
+            label,
+            barLine
+        );
+
+        chart.appendChild(
+            wrapper
+        );
+    });
+
+    layout.appendChild(chart);
+
+    section.appendChild(layout);
+
+    return section;
+}
 
 export function renderStatistics(data) {
     const title =
@@ -231,6 +396,12 @@ content.appendChild(
     content.appendChild(
     createAgeChart(
         data.alder || []
+    )
+);
+    content.appendChild(
+    createRegionDistribution(
+        data.region || [],
+        total
     )
 );
     updatePanel();
