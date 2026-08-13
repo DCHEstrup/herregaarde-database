@@ -1397,6 +1397,105 @@ input + chips + dropdown
     color:var(--muted);
     text-align:center;
 }
+/* ===========================
+   GEOGRAFISK FORDELING
+   =========================== */
+
+.statistics-region-section{
+    margin-top:28px;
+}
+
+.statistics-region-description{
+    margin:0 0 18px;
+    color:#666;
+    font-size:.9rem;
+}
+
+.statistics-region-layout{
+    display:grid;
+    grid-template-columns:
+        minmax(240px, .9fr)
+        minmax(340px, 1.1fr);
+    gap:32px;
+    align-items:center;
+}
+
+.statistics-region-map{
+    min-height:300px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.statistics-region-map-placeholder{
+    width:100%;
+    min-height:280px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:1px dashed #c7c7c7;
+
+    color:#777;
+}
+
+.statistics-region-chart{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.statistics-region-row{
+    display:grid;
+    gap:5px;
+}
+
+.statistics-region-label{
+    font-size:.85rem;
+    color:#444;
+}
+
+.statistics-region-bar-line{
+    display:grid;
+    grid-template-columns:
+        minmax(100px, 1fr)
+        auto;
+
+    align-items:center;
+    gap:10px;
+}
+
+.statistics-region-track{
+    height:9px;
+
+    overflow:hidden;
+
+    border-radius:999px;
+
+    background:#e5ebe8;
+}
+
+.statistics-region-fill{
+    height:100%;
+
+    border-radius:inherit;
+
+    background:var(--primary);
+}
+
+.statistics-region-value{
+    min-width:105px;
+
+    text-align:right;
+
+    font-size:.85rem;
+    font-weight:600;
+
+    white-space:nowrap;
+}
+
 /* ==================================================
    DATABASEFANER
 ================================================== */
@@ -3216,6 +3315,12 @@ input + chips + dropdown
     }
 }
 @media (max-width:800px){
+        .statistics-region-layout{
+        grid-template-columns:1fr;
+    }
+    .statistics-region-map{
+        min-height:240px;
+    }
         .birthplace-coverage{
         grid-template-columns:1fr;
     }
