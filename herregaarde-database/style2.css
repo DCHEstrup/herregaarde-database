@@ -1398,6 +1398,66 @@ input + chips + dropdown
     text-align:center;
 }
 /* ===========================
+   DANMARKSKORT
+   =========================== */
+
+.denmark-region-map{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.denmark-map-svg{
+    display:block;
+
+    width:100%;
+    max-width:400px;
+    height:auto;
+
+    overflow:visible;
+}
+
+.denmark-municipality{
+    fill:var(--primary);
+
+    fill-opacity:
+        var(--region-opacity, .2);
+
+    stroke:#fff;
+    stroke-width:.7;
+
+    vector-effect:
+        non-scaling-stroke;
+
+    transition:
+        fill-opacity .15s ease,
+        stroke .15s ease,
+        stroke-width .15s ease;
+}
+
+.denmark-municipality:hover{
+    fill-opacity:1;
+
+    stroke:var(--primary-hover);
+    stroke-width:1.5;
+}
+
+.denmark-municipality-unmapped{
+    fill:#e8ebe9;
+    fill-opacity:1;
+}
+
+.denmark-map-loading,
+.denmark-map-error{
+    min-height:280px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:var(--muted);
+}
+/* ===========================
    GEOGRAFISK FORDELING
    =========================== */
 
