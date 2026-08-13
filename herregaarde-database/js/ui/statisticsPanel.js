@@ -204,19 +204,13 @@ function createRegionDistribution(
     // Kortområde
     //----------------------------------
 
-    const map =
-        document.createElement("div");
+const map =
+    createDenmarkRegionMap(
+        rows,
+        total
+    );
 
-    map.className =
-        "statistics-region-map";
-
-    map.innerHTML = `
-        <div class="statistics-region-map-placeholder">
-            Danmarkskort kommer her
-        </div>
-    `;
-
-    layout.appendChild(map);
+layout.appendChild(map);
 
     //----------------------------------
     // Søjler
