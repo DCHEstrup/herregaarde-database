@@ -210,10 +210,31 @@ container.appendChild(
                         region;
                     path.addEventListener(
     "mouseenter",
-    () => {
+    event => {
+
         highlightRegion(
             container,
             region
+        );
+
+        showRegionTooltip(
+            event,
+            tooltip,
+            region,
+            regionStatistics,
+            total
+        );
+    }
+);
+
+path.addEventListener(
+    "mousemove",
+    event => {
+
+        moveRegionTooltip(
+            event,
+            container,
+            tooltip
         );
     }
 );
@@ -221,8 +242,13 @@ container.appendChild(
 path.addEventListener(
     "mouseleave",
     () => {
+
         clearRegionHighlight(
             container
+        );
+
+        hideRegionTooltip(
+            tooltip
         );
     }
 );
