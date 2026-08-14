@@ -1555,6 +1555,42 @@ input + chips + dropdown
 
     white-space:nowrap;
 }
+/* ===========================
+   HOVER – KORT
+   =========================== */
+
+.denmark-municipality.region-active{
+    fill-opacity:1;
+    stroke:var(--primary-hover);
+    stroke-width:1.4;
+}
+
+.denmark-municipality.region-dimmed{
+    fill-opacity:.12;
+}
+
+/* ===========================
+   HOVER – BJÆLKER
+   =========================== */
+
+.statistics-region-row{
+    transition:
+        opacity .15s ease,
+        transform .15s ease;
+}
+
+.statistics-region-row.region-active{
+    transform:translateX(4px);
+}
+
+.statistics-region-row.region-active
+.statistics-region-fill{
+    background:var(--primary-hover);
+}
+
+.statistics-region-row.region-dimmed{
+    opacity:.35;
+}
 
 /* ==================================================
    DATABASEFANER
