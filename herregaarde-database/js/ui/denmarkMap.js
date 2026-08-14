@@ -281,7 +281,47 @@ path.addEventListener(
         );
 
         container.appendChild(svg);
+const handleChartHover =
+    event => {
 
+        const region =
+            event.detail?.region;
+
+        svg
+            .querySelectorAll(
+                ".denmark-municipality"
+            )
+            .forEach(path => {
+
+                if (!region) {
+                    path.classList.remove(
+                        "region-active",
+                        "region-dimmed"
+                    );
+
+                    return;
+                }
+
+                const sameRegion =
+                    path.dataset.region ===
+                    region;
+
+                path.classList.toggle(
+                    "region-active",
+                    sameRegion
+                );
+
+                path.classList.toggle(
+                    "region-dimmed",
+                    !sameRegion
+                );
+            });
+    };
+
+document.addEventListener(
+    "regionChartHover",
+    handleChartHover
+);
         //----------------------------------
         // Debug: kommuner uden mapping
         //----------------------------------
