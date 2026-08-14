@@ -268,28 +268,7 @@ path.addEventListener(
                         )
                     );
 
-                    const title =
-                        document.createElementNS(
-                            "http://www.w3.org/2000/svg",
-                            "title"
-                        );
-
-                    title.textContent =
-                        stats
-                            ? `${region}: ${stats.count.toLocaleString(
-                                "da-DK"
-                            )} personer (${stats.percentage.toLocaleString(
-                                "da-DK",
-                                {
-                                    maximumFractionDigits: 1
-                                }
-                            )} %)`
-                            : region;
-
-                    path.appendChild(
-                        title
-                    );
-                }
+                   
 
                 //----------------------------------
                 // Kommune uden mapping
