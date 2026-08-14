@@ -1591,6 +1591,52 @@ input + chips + dropdown
 .statistics-region-row.region-dimmed{
     opacity:.35;
 }
+/* ===========================
+   DANMARKSKORT TOOLTIP
+   =========================== */
+
+.denmark-region-map{
+    position:relative;
+}
+
+.denmark-map-tooltip{
+    position:absolute;
+    z-index:20;
+
+    min-width:155px;
+
+    padding:10px 12px;
+
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:4px;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.12);
+
+    pointer-events:none;
+
+    font-size:.85rem;
+    line-height:1.4;
+}
+
+.denmark-map-tooltip[hidden]{
+    display:none;
+}
+
+.denmark-map-tooltip strong{
+    display:block;
+
+    margin-bottom:4px;
+
+    color:var(--primary);
+    font-size:.9rem;
+}
+
+.denmark-map-tooltip span{
+    display:block;
+    color:var(--text);
+}
 
 /* ==================================================
    DATABASEFANER
