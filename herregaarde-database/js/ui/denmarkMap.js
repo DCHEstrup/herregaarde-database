@@ -110,7 +110,21 @@ async function loadMap(
         //----------------------------------
 
         container.innerHTML = "";
+//----------------------------------
+// Tooltip
+//----------------------------------
 
+const tooltip =
+    document.createElement("div");
+
+tooltip.className =
+    "denmark-map-tooltip";
+
+tooltip.hidden = true;
+
+container.appendChild(
+    tooltip
+);
         const svg =
             document.createElementNS(
                 "http://www.w3.org/2000/svg",
