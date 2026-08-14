@@ -743,3 +743,90 @@ function clearRegionHighlight(
         )
     );
 }
+
+//==================================================
+// TOOLTIP
+//==================================================
+
+function showRegionTooltip(
+    event,
+    tooltip,
+    region,
+    regionStatistics,
+    total
+) {
+    const stats =
+        regionStatistics.get(
+            region
+        );
+
+    const count =
+        stats?.count || 0;
+
+    const percentage =
+        total > 0
+            ? count / total * 100
+            : 0;
+
+    tooltip.innerHTML = `
+        <strong>
+            ${region}
+        </strong>
+
+        <span>
+            ${count.toLocaleString("da-DK")}
+            personer
+        </span>
+
+        <span>
+            ${percentage.toLocaleString(
+                "da-DK",
+                {
+                    maximumFractionDigits: 1
+                }
+            )} % af søgeresultatet
+        </span>
+    `;
+
+    tooltip.hidden = false;
+
+    moveRegionTooltip(
+        event,
+        tooltip.parentElement,
+        tooltip
+    );
+}
+
+
+function moveRegionTooltip(
+    event,
+    container,
+    tooltip
+) {
+    const rect =
+        container.getBoundingClientRect();
+
+    const offset =
+        14;
+
+    tooltip.style.left =
+        `${
+            event.clientX -
+            rect.left +
+            offset
+        }px`;
+
+    tooltip.style.top =
+        `${
+            event.clientY -
+            rect.top +
+            offset
+        }px`;
+}
+
+
+function hideRegionTooltip(
+    tooltip
+) {
+    tooltip.hidden = true;
+}
