@@ -267,7 +267,7 @@ path.addEventListener(
                             percentage
                         )
                     );
-
+                }
                    
 
                 //----------------------------------
