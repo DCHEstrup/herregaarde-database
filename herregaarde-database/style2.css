@@ -638,6 +638,7 @@ input + chips + dropdown
 
     font-size:.72rem;
     color:var(--muted);
+    line-height: 1;
 }
 
 .work-sort-toggle{
@@ -696,6 +697,19 @@ input + chips + dropdown
 
 .work-sort-label.active{
     font-weight:700;
+}
+.work-filter-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}
+.work-filter-header .label-with-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: auto;
+    margin: 0;
 }
 /* ==================================================
    filter-control 
