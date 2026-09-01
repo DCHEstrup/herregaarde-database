@@ -3584,6 +3584,32 @@ input + chips + dropdown
         max-height:none;
     }
 }
+@media (max-width:850px){
+
+    .work-filter-header{
+        gap:5px;
+    }
+
+    .work-sort-control{
+        gap:3px;
+        font-size:.68rem;
+    }
+
+    .work-sort-toggle{
+        width:30px;
+        height:16px;
+    }
+
+    .work-sort-knob{
+        width:10px;
+        height:10px;
+    }
+
+    .work-sort-toggle.count-mode
+    .work-sort-knob{
+        transform:translateX(14px);
+    }
+}
 @media (max-width:800px){
         .statistics-region-layout{
         grid-template-columns:1fr;
@@ -3787,6 +3813,18 @@ input + chips + dropdown
         text-align:left;
     }
 }
+@media (max-width:620px){
+
+    .filter-grid{
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .filter-group.autosuggest{
+        grid-column:1 / -1;
+    }
+}
+
 @media (max-width:520px){
     .population-pyramid{
         padding:12px;
@@ -3805,6 +3843,16 @@ input + chips + dropdown
     .population-age,
     .population-count{
         font-size:.7rem;
+    }
+}
+@media (max-width:450px){
+
+    .filter-grid{
+        grid-template-columns:1fr;
+    }
+
+    .filter-group.autosuggest{
+        grid-column:auto;
     }
 }
 /* ==================================================
