@@ -1,5 +1,12 @@
 import { renderChips } from "./chips.js";
 
+
+function normalizeDanishSearch(value) {
+    return String(value ?? "")
+        .toLowerCase()
+        .replaceAll("å", "aa");
+}
+
 let instance = null;
 
 export function createArbejdeAutocomplete({
@@ -172,13 +179,17 @@ sortToggle?.addEventListener(
 
 if (text) {
 
-    matches =
-        state.data.filter(
-            item =>
+matches =
+    state.data.filter(
+        item =>
+            normalizeDanishSearch(
                 item.værdi
-                    .toLowerCase()
-                    .includes(text)
-        );
+            ).includes(
+                normalizeDanishSearch(
+                    text
+                )
+            )
+    );
 
 }
 else {
