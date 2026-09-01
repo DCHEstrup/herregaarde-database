@@ -3553,7 +3553,8 @@ input + chips + dropdown
 
 }
 
-@media (max-width:1050px){
+
+@media (max-width:620px){
 
     .filter-grid{
         grid-template-columns:
@@ -3698,9 +3699,7 @@ input + chips + dropdown
     .function-count{
         font-size:.7rem;
     }
-    .filter-grid{
-        grid-template-columns:1fr;
-    }
+
      .filter-group.autosuggest{
         grid-column:auto;
     }
@@ -3813,17 +3812,7 @@ input + chips + dropdown
         text-align:left;
     }
 }
-@media (max-width:620px){
 
-    .filter-grid{
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-    .filter-group.autosuggest{
-        grid-column:1 / -1;
-    }
-}
 
 @media (max-width:520px){
     .population-pyramid{
