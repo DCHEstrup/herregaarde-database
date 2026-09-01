@@ -71,6 +71,10 @@ sortToggle?.addEventListener(
             state.sortMode ===
             "count"
         ) {
+            //----------------------------------
+            // A–Å
+            //----------------------------------
+
             state.sortMode =
                 "alphabetical";
 
@@ -82,8 +86,20 @@ sortToggle?.addEventListener(
                 "aria-pressed",
                 "false"
             );
+
+            sortAlphabetical?.classList.add(
+                "active"
+            );
+
+            sortCount?.classList.remove(
+                "active"
+            );
         }
         else {
+            //----------------------------------
+            // Antal
+            //----------------------------------
+
             state.sortMode =
                 "count";
 
@@ -95,9 +111,17 @@ sortToggle?.addEventListener(
                 "aria-pressed",
                 "true"
             );
+
+            sortAlphabetical?.classList.remove(
+                "active"
+            );
+
+            sortCount?.classList.add(
+                "active"
+            );
         }
 
-        // Kun opdater dropdownens rækkefølge
+        // Kun dropdownen skal opdateres
         render();
     }
 );
