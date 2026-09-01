@@ -3580,7 +3580,6 @@ input + chips + dropdown
 
     .work-filter-header label{
         white-space:nowrap;
-        font-size:.9rem;
     }
 
     .work-filter-header .info-button{
@@ -3611,32 +3610,7 @@ input + chips + dropdown
         transform:translateX(13px);
     }
 }
-@media (max-width:850px){
 
-    .work-filter-header{
-        gap:5px;
-    }
-
-    .work-sort-control{
-        gap:3px;
-        font-size:.68rem;
-    }
-
-    .work-sort-toggle{
-        width:30px;
-        height:16px;
-    }
-
-    .work-sort-knob{
-        width:10px;
-        height:10px;
-    }
-
-    .work-sort-toggle.count-mode
-    .work-sort-knob{
-        transform:translateX(14px);
-    }
-}
 @media (max-width:800px){
         .statistics-region-layout{
         grid-template-columns:1fr;
