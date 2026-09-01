@@ -19,7 +19,10 @@ const suggestions =
     document.getElementById(
         "workSortToggle"
     );
-
+const sortCount =
+    document.getElementById(
+        "workSortCount"
+    );
 // Opret komponent-wrapper
 const wrapper =
     document.createElement("div");
