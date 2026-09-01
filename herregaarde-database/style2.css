@@ -3697,6 +3697,20 @@ input + chips + dropdown
     .range-filter{
         grid-template-columns:1fr;
     }
+        .status-panel{
+        flex-direction:column;
+        align-items:stretch;
+        gap:16px;
+    }
+
+    .status-left{
+        width:100%;
+    }
+
+    .status-right{
+        width:100%;
+        justify-content:flex-start;
+    }
 }
 @media (max-width:700px){
     .filter-actions{
@@ -3780,7 +3794,7 @@ input + chips + dropdown
         text-align:left;
     }
 }
-@media (max-width:620px){
+@media (max-width:760px){
 
     .filter-grid{
         grid-template-columns:
@@ -3793,12 +3807,14 @@ input + chips + dropdown
 
     .filter-group.autosuggest
     .filter-control{
-        width:240px;
-        max-width:100%;
+        width:100%;
+        max-width:240px;
     }
 
     .work-filter-header{
-        flex-wrap:wrap;
+        flex-wrap:nowrap;
+        width:100%;
+        max-width:360px;
     }
 }
 
@@ -3821,10 +3837,7 @@ input + chips + dropdown
     .population-count{
         font-size:.7rem;
     }
-}
-@media (max-width:450px){
-
-    .filter-grid{
+        .filter-grid{
         grid-template-columns:1fr;
     }
 
@@ -3837,7 +3850,20 @@ input + chips + dropdown
         width:100%;
         max-width:none;
     }
+        .work-filter-header{
+        flex-wrap:wrap;
+        max-width:none;
+    }
+        .status-right{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .status-right .btn{
+        width:100%;
+    }
 }
+
 /* ==================================================
    FOKUS OG TILGÆNGELIGHED
 ================================================== */
