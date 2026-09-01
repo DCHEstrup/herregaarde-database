@@ -747,10 +747,14 @@ filterOptions(query) {
 
     this.options.forEach(option => {
 
-        const matches =
-            String(option.value)
-                .toLowerCase()
-                .includes(query);
+const matches =
+    normalizeDanishSearch(
+        option.value
+    ).includes(
+        normalizeDanishSearch(
+            query
+        )
+    );
 
         option.setVisible(
             matches
