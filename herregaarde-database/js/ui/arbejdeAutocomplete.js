@@ -64,12 +64,10 @@ sortToggle?.addEventListener(
         event.preventDefault();
         event.stopPropagation();
 
-        const countMode =
+        if (
             state.sortMode ===
-            "count";
-
-        if (countMode) {
-
+            "count"
+        ) {
             state.sortMode =
                 "alphabetical";
 
@@ -81,10 +79,8 @@ sortToggle?.addEventListener(
                 "aria-pressed",
                 "false"
             );
-
         }
         else {
-
             state.sortMode =
                 "count";
 
@@ -98,6 +94,7 @@ sortToggle?.addEventListener(
             );
         }
 
+        // Kun opdater dropdownens rækkefølge
         render();
     }
 );
