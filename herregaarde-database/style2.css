@@ -691,6 +691,11 @@ input + chips + dropdown
 
 .work-sort-label{
     white-space:nowrap;
+    font-weight:400;
+}
+
+.work-sort-label.active{
+    font-weight:700;
 }
 /* ==================================================
    filter-control 
