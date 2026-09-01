@@ -23,6 +23,10 @@ const sortCount =
     document.getElementById(
         "workSortCount"
     );
+    const sortAlphabetical =
+    document.getElementById(
+        "workSortAlphabetical"
+    );
 // Opret komponent-wrapper
 const wrapper =
     document.createElement("div");
