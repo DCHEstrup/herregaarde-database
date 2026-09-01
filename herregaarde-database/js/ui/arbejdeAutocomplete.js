@@ -15,6 +15,10 @@ const input =
 
 const suggestions =
     document.getElementById(suggestionId);
+    const sortToggle =
+    document.getElementById(
+        "workSortToggle"
+    );
 
 // Opret komponent-wrapper
 const wrapper =
@@ -45,11 +49,83 @@ wrapper.appendChild(suggestions);
 
         data,
         selected: [],
-        text: ""
+        text: "",
+        sortMode: "count"
 
     };
+//----------------------------------
+// Sorterings-switch
+//----------------------------------
 
-    
+sortToggle?.addEventListener(
+    "click",
+    event => {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const countMode =
+            state.sortMode ===
+            "count";
+
+        if (countMode) {
+
+            state.sortMode =
+                "alphabetical";
+
+            sortToggle.classList.remove(
+                "count-mode"
+            );
+
+            sortToggle.setAttribute(
+                "aria-pressed",
+                "false"
+            );
+
+        }
+        else {
+
+            state.sortMode =
+                "count";
+
+            sortToggle.classList.add(
+                "count-mode"
+            );
+
+            sortToggle.setAttribute(
+                "aria-pressed",
+                "true"
+            );
+        }
+
+        render();
+    }
+);
+    function sortItems(items) {
+
+    const sorted =
+        [...items];
+
+    if (
+        state.sortMode ===
+        "alphabetical"
+    ) {
+        return sorted.sort(
+            (a, b) =>
+                String(a.værdi)
+                    .localeCompare(
+                        String(b.værdi),
+                        "da"
+                    )
+        );
+    }
+
+    return sorted.sort(
+        (a, b) =>
+            Number(b.antal) -
+            Number(a.antal)
+    );
+}
 
     //----------------------------------
     // Rendering
@@ -66,35 +142,27 @@ wrapper.appendChild(suggestions);
 
         let matches;
 
-        if (text) {
+if (text) {
 
-            matches = state.data
+    matches =
+        state.data.filter(
+            item =>
+                item.værdi
+                    .toLowerCase()
+                    .includes(text)
+        );
 
-                .filter(item =>
-                    item.værdi
-                        .toLowerCase()
-                        .includes(text)
-                )
+}
+else {
 
-                .sort(
-                    (a, b) => b.antal - a.antal
-                )
+    matches =
+        [...state.data];
 
-                .slice(0, 50);
+}
 
-        }
-
-        else {
-
-            matches = [...state.data]
-
-                .sort(
-                    (a, b) => b.antal - a.antal
-                )
-
-                .slice(0, 50);
-
-        }
+matches =
+    sortItems(matches)
+        .slice(0, 50);
 
         if (matches.length === 0) {
 
