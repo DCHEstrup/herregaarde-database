@@ -1,3 +1,5 @@
+import { normalizeDanishSearch } from "../utils/searchNormalization.js";
+
 const instances = new Map();
 
 export function createMultiSelect(config) {
