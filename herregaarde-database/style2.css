@@ -620,6 +620,78 @@ input + chips + dropdown
     margin:0 0 0 auto;
     accent-color:var(--primary);
 }
+/* ===========================
+   ARBEJDE - SORTERING
+   =========================== */
+
+.work-label-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+}
+
+.work-sort-control{
+    display:flex;
+    align-items:center;
+    gap:5px;
+
+    font-size:.72rem;
+    color:var(--muted);
+}
+
+.work-sort-toggle{
+    position:relative;
+
+    width:34px;
+    height:18px;
+
+    padding:0;
+
+    border:1px solid var(--primary);
+    border-radius:999px;
+
+    background:#e5ebe8;
+
+    cursor:pointer;
+
+    transition:
+        background .15s ease;
+}
+
+.work-sort-knob{
+    position:absolute;
+
+    top:2px;
+    left:2px;
+
+    width:12px;
+    height:12px;
+
+    border-radius:50%;
+
+    background:var(--primary);
+
+    transition:
+        transform .15s ease,
+        background .15s ease;
+}
+
+/* Antal valgt */
+
+.work-sort-toggle.count-mode{
+    background:var(--primary);
+}
+
+.work-sort-toggle.count-mode
+.work-sort-knob{
+    transform:translateX(16px);
+    background:white;
+}
+
+.work-sort-label{
+    white-space:nowrap;
+}
 /* ==================================================
    filter-control 
 ================================================== */
