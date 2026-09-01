@@ -3552,6 +3552,24 @@ input + chips + dropdown
     }
 
 }
+
+@media (max-width:1050px){
+
+    .filter-grid{
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .filter-group.autosuggest{
+        grid-column:1 / -1;
+    }
+
+    .filter-group.autosuggest
+    .filter-control{
+        width:240px;
+        max-width:100%;
+    }
+}
 @media (max-width:900px){
 
     .content{
@@ -3656,6 +3674,19 @@ input + chips + dropdown
     }
     .filter-grid{
         grid-template-columns:1fr;
+    }
+     .filter-group.autosuggest{
+        grid-column:auto;
+    }
+
+    .filter-group.autosuggest
+    .filter-control{
+        width:100%;
+        max-width:none;
+    }
+
+    .work-filter-header{
+        flex-wrap:wrap;
     }
 
     .advanced-grid{
