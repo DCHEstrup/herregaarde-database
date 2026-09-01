@@ -1,11 +1,6 @@
 import { renderChips } from "./chips.js";
+import { normalizeDanishSearch } from "../utils/searchNormalization.js";
 
-
-function normalizeDanishSearch(value) {
-    return String(value ?? "")
-        .toLowerCase()
-        .replaceAll("å", "aa");
-}
 
 let instance = null;
 
