@@ -423,7 +423,7 @@ input.addEventListener(
         event.preventDefault();
 
         document
-            .getElementById("searchButton")
+            .getElementById("searchBtn")
             ?.click();
     }
 );
