@@ -412,15 +412,21 @@ const api = {
         );
     }
 };
-    input.addEventListener("keydown", event => {
-    if (event.key === "Enter") {
+input.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key !== "Enter") {
+            return;
+        }
+
         event.preventDefault();
 
-        document.dispatchEvent(
-            new CustomEvent("submitSearch")
-        );
+        document
+            .getElementById("searchButton")
+            ?.click();
     }
-});
+);
 
 instance = api;
 
