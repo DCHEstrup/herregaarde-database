@@ -412,6 +412,15 @@ const api = {
         );
     }
 };
+    input.addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+        event.preventDefault();
+
+        document.dispatchEvent(
+            new CustomEvent("submitSearch")
+        );
+    }
+});
 
 instance = api;
 
