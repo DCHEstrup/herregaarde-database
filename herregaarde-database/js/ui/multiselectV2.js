@@ -583,11 +583,18 @@ createGroupHeader(
         element.dataset.value =
             value;
 
-        const checkbox =
-            document.createElement("input");
+const checkbox =
+    document.createElement("input");
 
-        checkbox.type =
-            "checkbox";
+checkbox.type = "checkbox";
+
+const safeId =
+    `multiselect-${this.container.id}-${String(value)
+        .toLowerCase()
+        .replace(/[^a-z0-9æøå]+/gi, "-")}`;
+
+checkbox.id = safeId;
+checkbox.name = this.container.id;
 
         const label =
             document.createElement("span");
