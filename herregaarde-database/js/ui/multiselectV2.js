@@ -596,8 +596,11 @@ const safeId =
 checkbox.id = safeId;
 checkbox.name = this.container.id;
 
-        const label =
-            document.createElement("span");
+const label =
+    document.createElement("label");
+
+label.htmlFor = safeId;
+label.textContent = value;
 
         label.textContent =
             value;
