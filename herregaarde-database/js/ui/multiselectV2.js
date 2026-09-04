@@ -252,23 +252,26 @@ class MultiSelect {
     const searchId =
         `${this.container.id}-search`;
 
+    //----------------------------------
+    // Grundlæggende attributter
+    //----------------------------------
+
     input.type = "text";
     input.id = searchId;
     input.name = searchId;
-    input.placeholder = "Søg...";
+
+    input.placeholder =
+        "Søg...";
+
     input.className =
         "multiselect-search";
-    input.autocomplete = "off";
 
-    //--------------------------------------------------
-    // Skjult label til browser og skærmlæser
-    //--------------------------------------------------
+    input.autocomplete =
+        "off";
 
-    const label =
-        document.createElement("label");
-
-    label.htmlFor = searchId;
-    label.className = "sr-only";
+    //----------------------------------
+    // Tilgængeligt navn
+    //----------------------------------
 
     const labelElementId =
         this.container.getAttribute(
@@ -288,8 +291,14 @@ class MultiSelect {
             ?.trim()
             || "filter";
 
-    label.textContent =
-        `Søg i ${filterName}`;
+    input.setAttribute(
+        "aria-label",
+        `Søg i ${filterName}`
+    );
+
+    //----------------------------------
+    // Klik
+    //----------------------------------
 
     input.addEventListener(
         "click",
@@ -297,6 +306,10 @@ class MultiSelect {
             event.stopPropagation();
         }
     );
+
+    //----------------------------------
+    // Filtrering
+    //----------------------------------
 
     input.addEventListener(
         "input",
@@ -307,18 +320,7 @@ class MultiSelect {
         }
     );
 
-    const wrapper =
-        document.createElement("div");
-
-    wrapper.className =
-        "multiselect-search-wrapper";
-
-    wrapper.append(
-        label,
-        input
-    );
-
-    return wrapper;
+    return input;
 }
 
     //--------------------------------------------------
