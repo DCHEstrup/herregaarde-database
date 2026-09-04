@@ -245,35 +245,81 @@ class MultiSelect {
     // Søgefelt
     //--------------------------------------------------
 
-    createSearch() {
-        const input =
-            document.createElement("input");
+   createSearch() {
+    const input =
+        document.createElement("input");
 
-        input.type = "text";
-        input.placeholder = "Søg...";
-        input.className =
-            "multiselect-search";
+    const searchId =
+        `${this.container.id}-search`;
 
-        input.addEventListener(
-            "click",
-            event => {
-                event.stopPropagation();
-            }
+    input.type = "text";
+    input.id = searchId;
+    input.name = searchId;
+    input.placeholder = "Søg...";
+    input.className =
+        "multiselect-search";
+    input.autocomplete = "off";
+
+    //--------------------------------------------------
+    // Skjult label til browser og skærmlæser
+    //--------------------------------------------------
+
+    const label =
+        document.createElement("label");
+
+    label.htmlFor = searchId;
+    label.className = "sr-only";
+
+    const labelElementId =
+        this.container.getAttribute(
+            "aria-labelledby"
         );
 
-        input.addEventListener(
-            "input",
-            () => {
-                this.filterOptions(
-                    input.value
-                        .trim()
-                        .toLowerCase()
-                );
-            }
-        );
+    const labelElement =
+        labelElementId
+            ? document.getElementById(
+                labelElementId
+            )
+            : null;
 
-        return input;
-    }
+    const filterName =
+        labelElement
+            ?.textContent
+            ?.trim()
+            || "filter";
+
+    label.textContent =
+        `Søg i ${filterName}`;
+
+    input.addEventListener(
+        "click",
+        event => {
+            event.stopPropagation();
+        }
+    );
+
+    input.addEventListener(
+        "input",
+        () => {
+            this.filterOptions(
+                input.value.trim()
+            );
+        }
+    );
+
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.className =
+        "multiselect-search-wrapper";
+
+    wrapper.append(
+        label,
+        input
+    );
+
+    return wrapper;
+}
 
     //--------------------------------------------------
     // Vælg alle
