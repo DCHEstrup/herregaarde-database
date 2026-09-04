@@ -249,10 +249,56 @@ createSearch() {
     const input =
         document.createElement("input");
 
+    const searchId =
+        `${this.container.id}-search`;
+
+    //----------------------------------
+    // Grundlæggende attributter
+    //----------------------------------
+
     input.type = "text";
-    input.placeholder = "Søg...";
+    input.id = searchId;
+    input.name = searchId;
+
+    input.placeholder =
+        "Søg...";
+
     input.className =
         "multiselect-search";
+
+    input.autocomplete =
+        "off";
+
+    //----------------------------------
+    // Tilgængeligt navn
+    //----------------------------------
+
+    const labelElementId =
+        this.container.getAttribute(
+            "aria-labelledby"
+        );
+
+    const labelElement =
+        labelElementId
+            ? document.getElementById(
+                labelElementId
+            )
+            : null;
+
+    const filterName =
+        labelElement
+            ?.textContent
+            ?.trim()
+            || "filter";
+
+    input.setAttribute(
+        "aria-label",
+        `Søg i ${filterName}`
+    );
+
+    //----------------------------------
+    // Klik
+    //----------------------------------
 
     input.addEventListener(
         "click",
@@ -261,13 +307,15 @@ createSearch() {
         }
     );
 
+    //----------------------------------
+    // Filtrering
+    //----------------------------------
+
     input.addEventListener(
         "input",
         () => {
             this.filterOptions(
-                input.value
-                    .trim()
-                    .toLowerCase()
+                input.value.trim()
             );
         }
     );
