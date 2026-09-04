@@ -191,23 +191,32 @@
 
 <label id="kommuneLabel">Herregårdens Kommune</label>
 <div id="kommune" class="filter-control" aria-labelledby="kommuneLabel"></div>
-    <label>Alder</label>
-    <div class="range-filter">
+  
+    <div id="alderLabel">
+    Alder
+</div>
+            
+    <div class="range-filter" aria-labelledby="alderLabel">
     <input
         type="number"
         id="alderFra"
-        placeholder="Fra">
-    <span>–</span>
+        name="alderFra"
+        placeholder="Fra"
+        aria-label="Alder fra">
+    <span aria-hidden="true">–</span>
     <input
         type="number"
         id="alderTil"
-        placeholder="Til">
+        name="alderTil"
+        placeholder="Til"
+        aria-label="Alder til">
 </div>
  <div class="advanced-filter-label">
    <div class="label-with-info">
-    <label for="transportFra">
-        Transport (km)
-    </label>
+<div
+    id="transportLabel">
+    Transport (km)
+</div>
 
     <button
         type="button"
@@ -239,18 +248,23 @@
     </p>
 </div>
      </div>
-    <div class="range-filter">
+    <div class="range-filter"
+        aria-labelledby="transportLabel">
     <input
-        type="number"
+   type="number"
         id="transportFra"
+        name="transportFra"
         placeholder="Fra"
-        step="0.1">
-    <span>–</span>
+        step="0.1"
+        aria-label="Transport fra kilometer">
+    <span aria-hidden="true">–</span>
     <input
         type="number"
         id="transportTil"
+        name="transportTil"
         placeholder="Til"
-        step="0.1">
+        step="0.1"
+        aria-label="Transport til kilometer">
 </div>
         </div>
     </div>
