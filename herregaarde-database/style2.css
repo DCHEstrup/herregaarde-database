@@ -251,7 +251,10 @@ input{
     margin:0;
     accent-color:var(--primary);
 }
-
+.multiselect-option > input[type="checkbox"] {
+    order: 2;
+    margin-left: 12px;
+}
 .multiselect-option:hover{
     background:#f4f7f5;
 }
@@ -280,6 +283,11 @@ input{
 .multiselect-options::-webkit-scrollbar-thumb:hover,
 #arbejdeSuggestions::-webkit-scrollbar-thumb:hover{
     background:#888;
+}
+.multiselect-option > label {
+    flex: 1;
+    order: 1;
+    text-align: left;
 }
 
 .multiselect-arrow{
