@@ -216,6 +216,52 @@ export async function showDetail(id) {
         });
 
     detail.appendChild(table);
+    //----------------------------------
+// Link til livsforløb i Link-Lives
+//----------------------------------
+
+if (data.life_course_id !== null && data.life_course_id !== undefined) {
+
+    const lifeCourseSection =
+        document.createElement("div");
+
+    lifeCourseSection.className =
+        "life-course-section";
+
+    const lifeCourseLink =
+        document.createElement("a");
+
+    lifeCourseLink.className =
+        "life-course-link";
+
+    lifeCourseLink.href =
+        `https://link-lives.dk/#/life-course/3.0-${data.life_course_id}`;
+
+    lifeCourseLink.target =
+        "_blank";
+
+    lifeCourseLink.rel =
+        "noopener noreferrer";
+
+    lifeCourseLink.innerHTML = `
+        <span>Se livsforløb</span>
+        <span class="external-icon">↗</span>
+    `;
+
+    lifeCourseSection.appendChild(
+        lifeCourseLink
+    );
+
+    detail.appendChild(
+        lifeCourseSection
+    );
+}
+
+
+//----------------------------------
+// Husstand
+//----------------------------------
+
     const householdSection =
     document.createElement("section");
 
