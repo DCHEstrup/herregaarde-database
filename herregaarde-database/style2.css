@@ -2254,6 +2254,82 @@ input + chips + dropdown
 .life-course-link:hover {
     background: #f5f7f5;
 }
+.occurrence-section {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid #ccc;
+}
+
+.occurrence-title {
+    margin: 0 0 10px;
+    font-size: 1rem;
+    color: #355c4a;
+}
+
+.occurrence-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.occurrence-item {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 55px 1fr auto;
+    gap: 10px;
+    align-items: center;
+
+    padding: 9px 10px;
+
+    background: transparent;
+    border: 1px solid #ddd;
+
+    text-align: left;
+    cursor: pointer;
+}
+
+.occurrence-item:hover:not(:disabled) {
+    background: #f5f7f5;
+}
+
+.occurrence-item.current {
+    border-color: #355c4a;
+}
+
+.occurrence-item:disabled {
+    cursor: default;
+    opacity: 1;
+}
+
+.occurrence-year {
+    font-weight: 700;
+    color: #355c4a;
+}
+
+.occurrence-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.occurrence-estate {
+    font-weight: 600;
+}
+
+.occurrence-job {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.occurrence-current-label {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.occurrence-arrow {
+    font-size: 1.4rem;
+    color: #355c4a;
+}
 /* ==================================================
    HUSSTAND
 ================================================== */
