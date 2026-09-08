@@ -244,7 +244,7 @@ if (data.life_course_id !== null && data.life_course_id !== undefined) {
         "noopener noreferrer";
 
     lifeCourseLink.innerHTML = `
-        <span>Se livsforløb</span>
+        <span>Se livsforløb på Link-Lives</span>
         <span class="external-icon">↗</span>
     `;
 
