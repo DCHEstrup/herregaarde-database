@@ -8,6 +8,14 @@ export const supabase = window.supabase.createClient(
 export async function getStatistics() {
     return await supabase.rpc("get_statistics");
 }
+export async function getLifeCourseOccurrences(lifeCourseId) {
+    return await supabase.rpc(
+        "get_life_course_occurrences",
+        {
+            p_life_course_id: lifeCourseId
+        }
+    );
+}
 
 export async function getPersonCount() {
     const { count, error } = await supabase
