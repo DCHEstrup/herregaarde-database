@@ -2230,6 +2230,30 @@ input + chips + dropdown
     margin-left:3px;
     font-size:.78em;
 }
+.life-course-section {
+    margin-top: 18px;
+}
+
+.life-course-link {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 14px;
+
+    border: 1px solid #355c4a;
+    color: #355c4a;
+
+    text-decoration: none;
+    font-weight: 600;
+
+    box-sizing: border-box;
+}
+
+.life-course-link:hover {
+    background: #f5f7f5;
+}
 /* ==================================================
    HUSSTAND
 ================================================== */
