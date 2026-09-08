@@ -1,4 +1,4 @@
-import { getPerson,getHousehold } from "../supabase.js";
+import { getPerson,getHousehold, getLifeCourseOccurrences } from "../supabase.js";
 
 const fields = [
     ["navn", "Navn"],
@@ -256,7 +256,163 @@ if (data.life_course_id !== null && data.life_course_id !== undefined) {
         lifeCourseSection
     );
 }
+//----------------------------------
+// Forekomster i andre folketællinger
+//----------------------------------
 
+if (data.life_course_id !== null && data.life_course_id !== undefined) {
+
+    const {
+        data: occurrences,
+        error: occurrencesError
+    } = await getLifeCourseOccurrences(
+        data.life_course_id
+    );
+
+    if (occurrencesError) {
+        console.error(
+            "Kunne ikke hente livsforløb:",
+            occurrencesError
+        );
+    }
+
+    if (
+        !occurrencesError &&
+        Array.isArray(occurrences) &&
+        occurrences.length > 1
+    ) {
+
+        const occurrenceSection =
+            document.createElement("section");
+
+        occurrenceSection.className =
+            "occurrence-section";
+
+        const occurrenceTitle =
+            document.createElement("h3");
+
+        occurrenceTitle.className =
+            "occurrence-title";
+
+        occurrenceTitle.textContent =
+            "Forekomster i databasen";
+
+        occurrenceSection.appendChild(
+            occurrenceTitle
+        );
+
+
+        const occurrenceList =
+            document.createElement("div");
+
+        occurrenceList.className =
+            "occurrence-list";
+
+
+        occurrences.forEach(occurrence => {
+
+            const item =
+                document.createElement("button");
+
+            item.type = "button";
+
+            item.className =
+                "occurrence-item";
+
+
+            //----------------------------------
+            // Marker den person man står på
+            //----------------------------------
+
+            const isCurrent =
+                String(occurrence.id) ===
+                String(data.id);
+
+            if (isCurrent) {
+                item.classList.add("current");
+            }
+
+
+            //----------------------------------
+            // Arbejde / position
+            //----------------------------------
+
+            const job =
+                occurrence.arbejde_titel ||
+                occurrence.position_i_husstanden ||
+                "Ingen betegnelse";
+
+
+            //----------------------------------
+            // Indhold
+            //----------------------------------
+
+            item.innerHTML = `
+                <span class="occurrence-year">
+                    ${occurrence.aar ?? "Ukendt år"}
+                </span>
+
+                <span class="occurrence-info">
+
+                    <span class="occurrence-estate">
+                        ${occurrence.herregaard ?? "Ukendt herregård"}
+                    </span>
+
+                    <span class="occurrence-job">
+                        ${job}
+                    </span>
+
+                </span>
+
+                ${
+                    isCurrent
+                        ? `<span class="occurrence-current-label">
+                            Aktuel
+                           </span>`
+                        : `<span class="occurrence-arrow">
+                            ›
+                           </span>`
+                }
+            `;
+
+
+            //----------------------------------
+            // Klik til anden folketælling
+            //----------------------------------
+
+            if (!isCurrent) {
+
+                item.addEventListener(
+                    "click",
+                    () => {
+                        showDetail(
+                            occurrence.id
+                        );
+                    }
+                );
+
+            } else {
+
+                item.disabled = true;
+
+            }
+
+
+            occurrenceList.appendChild(
+                item
+            );
+        });
+
+
+        occurrenceSection.appendChild(
+            occurrenceList
+        );
+
+        detail.appendChild(
+            occurrenceSection
+        );
+    }
+}
 
 //----------------------------------
 // Husstand
