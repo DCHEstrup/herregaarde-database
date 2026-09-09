@@ -119,6 +119,7 @@ export async function showDetail(id) {
                     </span>
                 </a>
             `;
+            td.textContent = data[key];
         }
 
             
@@ -153,6 +154,7 @@ export async function showDetail(id) {
                     </span>
                 </span>
             `;
+            td.textContent = data[key];
         }
 
         //----------------------------------
