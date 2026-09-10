@@ -1,4 +1,4 @@
-import { getPerson,getHousehold, getLifeCourseOccurrences } from "../supabase.js";
+import { getPerson,getHousehold,getPersonalHousehold, getLifeCourseOccurrences } from "../supabase.js";
 
 const fields = [
     ["navn", "Navn"],
