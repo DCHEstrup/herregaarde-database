@@ -16,7 +16,17 @@ export async function getLifeCourseOccurrences(lifeCourseId) {
         }
     );
 }
-
+export async function getPersonalHousehold(
+    herregaard,
+    aar,
+    husstandsFamilienr
+) {
+    return await supabase.rpc("get_personal_household", {
+        p_herregaard: herregaard,
+        p_aar: aar,
+        p_husstands_familienr: husstandsFamilienr
+    });
+}
 export async function getPersonCount() {
     const { count, error } = await supabase
         .from("Tjenestefolk")
