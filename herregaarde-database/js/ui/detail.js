@@ -419,7 +419,7 @@ if (data.life_course_id !== null && data.life_course_id !== undefined) {
 // PERSONLIG HUSSTAND
 // ===========================
 
-if (
+/*if (
     data.husstands_familienr !== null &&
     data.husstands_familienr !== undefined &&
     data.husstands_familienr !== ""
@@ -561,7 +561,7 @@ if (
     personalHouseholdSection.appendChild(personalContent);
 
     detail.appendChild(personalHouseholdSection);
-}
+}*/
 //----------------------------------
 // Husstand
 //----------------------------------
