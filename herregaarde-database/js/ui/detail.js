@@ -578,7 +578,7 @@ householdSection.innerHTML = `
         class="household-toggle"
         aria-expanded="false"
     >
-        <span>+ Se herregårdens fulde husstand</span>
+        <span>+ Se husstand</span>
         <span aria-hidden="true">▼</span>
     </button>
 
@@ -635,7 +635,7 @@ householdButton.addEventListener(
         householdButton
             .querySelector("span")
             .textContent =
-            "− Skjul herregårdens fulde husstand";
+            "− Skjul husstand";
 
         householdContent.hidden = false;
 
