@@ -415,7 +415,153 @@ if (data.life_course_id !== null && data.life_course_id !== undefined) {
         );
     }
 }
+// ===========================
+// PERSONLIG HUSSTAND
+// ===========================
 
+if (
+    data.husstands_familienr !== null &&
+    data.husstands_familienr !== undefined &&
+    data.husstands_familienr !== ""
+) {
+    const personalHouseholdSection = document.createElement("div");
+    personalHouseholdSection.className = "household-section personal-household";
+
+    const personalButton = document.createElement("button");
+    personalButton.className = "household-toggle";
+
+    personalButton.innerHTML = `
+        <span>+ Se personlig husstand</span>
+        <span class="household-arrow">▼</span>
+    `;
+
+    const personalContent = document.createElement("div");
+    personalContent.className = "household-content";
+    personalContent.style.display = "none";
+
+    let personalLoaded = false;
+
+    personalButton.addEventListener("click", async () => {
+
+        const isOpen = personalContent.style.display !== "none";
+
+        if (isOpen) {
+            personalContent.style.display = "none";
+
+            personalButton.innerHTML = `
+                <span>+ Se personlig husstand</span>
+                <span class="household-arrow">▼</span>
+            `;
+
+            return;
+        }
+
+        personalContent.style.display = "block";
+
+        personalButton.innerHTML = `
+            <span>− Skjul personlig husstand</span>
+            <span class="household-arrow">▲</span>
+        `;
+
+        if (personalLoaded) return;
+
+        personalContent.innerHTML = `
+            <div class="household-loading">
+                Henter husstand...
+            </div>
+        `;
+
+        const { data: household, error } =
+            await getPersonalHousehold(
+                data.herregaard,
+                data.folketaelling_aar,
+                data.husstands_familienr
+            );
+
+        if (error) {
+            console.error(error);
+
+            personalContent.innerHTML = `
+                <div class="household-error">
+                    Kunne ikke hente husstanden.
+                </div>
+            `;
+
+            return;
+        }
+
+        personalContent.innerHTML = "";
+
+        const header = document.createElement("div");
+        header.className = "household-header";
+
+        header.textContent =
+            `${household.length} personer i personlig husstand`;
+
+        personalContent.appendChild(header);
+
+        const list = document.createElement("div");
+        list.className = "household-list";
+
+        household.forEach(person => {
+
+            const item = document.createElement("button");
+            item.className = "household-person";
+
+            // Marker den person vi allerede ser på
+            if (person.id === data.id) {
+                item.classList.add("current-person");
+            }
+
+            const age =
+                person.alder !== null &&
+                person.alder !== undefined
+                    ? `${person.alder} år`
+                    : "";
+
+            const gender =
+                person.koen
+                    ? person.koen
+                    : "";
+
+            const job =
+                person.arbejde_titel ||
+                person.position_i_husstanden ||
+                "";
+
+            item.innerHTML = `
+                <div class="household-person-top">
+                    <strong>${person.navn ?? ""}</strong>
+
+                    <span class="household-person-meta">
+                        ${age}${age && gender ? " · " : ""}${gender}
+                    </span>
+                </div>
+
+                ${
+                    job
+                        ? `<div class="household-person-job">${job}</div>`
+                        : ""
+                }
+            `;
+
+            item.addEventListener("click", () => {
+                showDetail(person.id);
+            });
+
+            list.appendChild(item);
+        });
+
+        personalContent.appendChild(list);
+
+        personalLoaded = true;
+    });
+
+    personalHouseholdSection.appendChild(personalButton);
+    personalHouseholdSection.appendChild(personalContent);
+
+    detail.appendChild(personalHouseholdSection);
+}
 //----------------------------------
 // Husstand
 //----------------------------------
