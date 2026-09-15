@@ -264,44 +264,125 @@ export async function downloadPeople(filters = {}) {
         p_herregaard: filters.herregaard?.length
             ? filters.herregaard
             : null,
+
         p_aar: filters.aar?.length
             ? filters.aar.map(Number)
             : null,
+
         p_koen: filters.koen?.length
             ? filters.koen
             : null,
+
         p_trossamfund: filters.trossamfund?.length
             ? filters.trossamfund
             : null,
+
         p_region: filters.region?.length
             ? filters.region
             : null,
+
         p_kommune: filters.kommune?.length
             ? filters.kommune
             : null,
-        p_arbejde: filters.arbejde || null,
+
+        p_arbejde:
+            filters.arbejde || null,
+
         p_arbejde_valgt:
             filters.arbejdeValgt?.length
-            ? filters.arbejdeValgt
-            : null,
-        p_civilstand: filters.civilstand?.length
-            ? filters.civilstand
-            : null,
-        p_handicap: filters.handicap?.length
-            ? filters.handicap
-            : null,
-        p_alder_fra: filters.alderFra,
-        p_alder_til: filters.alderTil,
-        p_transport_fra: filters.transportFra,
-        p_transport_til: filters.transportTil,
-        p_global_soegning: filters.globalSoegning || null,
+                ? filters.arbejdeValgt
+                : null,
+
+        p_civilstand:
+            filters.civilstand?.length
+                ? filters.civilstand
+                : null,
+
+        p_handicap:
+            filters.handicap?.length
+                ? filters.handicap
+                : null,
+
+        p_alder_fra:
+            filters.alderFra,
+
+        p_alder_til:
+            filters.alderTil,
+
+        p_transport_fra:
+            filters.transportFra,
+
+        p_transport_til:
+            filters.transportTil,
+
+        p_global_soegning:
+            filters.globalSoegning || null
     };
 
-    console.log("RPC params:", params);
 
-    const result = await supabase.rpc("download_people", params);
+    // ---------------------------------------------
+    // Hent alle rækker i batches
+    // ---------------------------------------------
 
-    console.log("RPC result:", result);
+    const batchSize = 1000;
 
-    return result;
+    let from = 0;
+    let allData = [];
+
+    while (true) {
+
+        const to = from + batchSize - 1;
+
+        console.log(
+            `Downloader række ${from + 1} - ${to + 1}`
+        );
+
+        const { data, error } = await supabase
+            .rpc("download_people", params)
+            .range(from, to);
+
+        if (error) {
+            console.error(
+                "Fejl ved download:",
+                error
+            );
+
+            return {
+                data: null,
+                error
+            };
+        }
+
+        if (!data || data.length === 0) {
+            break;
+        }
+
+        allData.push(...data);
+
+        console.log(
+            `Hentet i alt: ${allData.length}`
+        );
+
+
+        // Hvis vi får mindre end 1000,
+        // er vi nået til sidste batch.
+
+        if (data.length < batchSize) {
+            break;
+        }
+
+        from += batchSize;
+    }
+
+
+    console.log(
+        "Download færdig. Antal personer:",
+        allData.length
+    );
+
+
+    return {
+        data: allData,
+        error: null
+    };
 }
