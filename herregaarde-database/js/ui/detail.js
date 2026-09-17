@@ -578,7 +578,7 @@ householdSection.innerHTML = `
         class="household-toggle"
         aria-expanded="false"
     >
-        <span>+ Se husstand</span>
+        <span>+ Se herregårdens husstand</span>
         <span aria-hidden="true">▼</span>
     </button>
 
