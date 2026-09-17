@@ -424,143 +424,192 @@ if (
     data.household_census_id !== undefined &&
     data.household_census_id !== ""
 ) {
-    const personalHouseholdSection = document.createElement("div");
-    personalHouseholdSection.className =
-        "household-section personal-household";
+    // Hent både personlig husstand og hele herregårdens husstand
+    // så vi kan sammenligne størrelsen.
+    const [
+        { data: personalHousehold, error: personalError },
+        { data: estateHousehold, error: estateError }
+    ] = await Promise.all([
+        getPersonalHousehold(
+            data.household_census_id
+        ),
+        getHousehold(
+            data.herregaard_id,
+            data.folketaelling_aar
+        )
+    ]);
 
-    const personalButton = document.createElement("button");
-    personalButton.className = "household-toggle";
+    if (personalError) {
+        console.error(
+            "Kunne ikke hente personlig husstand:",
+            personalError
+        );
+    }
 
-    personalButton.innerHTML = `
-        <span>+ Se personlig husstand</span>
-        <span class="household-arrow">▼</span>
-    `;
+    if (estateError) {
+        console.error(
+            "Kunne ikke hente herregårdens husstand:",
+            estateError
+        );
+    }
 
-    const personalContent = document.createElement("div");
-    personalContent.className = "household-content";
-    personalContent.style.display = "none";
+    // Vis kun personlig husstand hvis den er mindre
+    // end herregårdens samlede husstand.
+    const showPersonalHousehold =
+        !personalError &&
+        !estateError &&
+        Array.isArray(personalHousehold) &&
+        Array.isArray(estateHousehold) &&
+        personalHousehold.length < estateHousehold.length;
 
-    let personalLoaded = false;
+    if (showPersonalHousehold) {
 
-    personalButton.addEventListener("click", async () => {
+        const personalHouseholdSection =
+            document.createElement("div");
 
-        const isOpen =
-            personalContent.style.display !== "none";
+        personalHouseholdSection.className =
+            "household-section personal-household";
 
-        if (isOpen) {
-            personalContent.style.display = "none";
+        const personalButton =
+            document.createElement("button");
 
-            personalButton.innerHTML = `
-                <span>+ Se personlig husstand</span>
-                <span class="household-arrow">▼</span>
-            `;
-
-            return;
-        }
-
-        personalContent.style.display = "block";
+        personalButton.className =
+            "household-toggle";
 
         personalButton.innerHTML = `
-            <span>− Skjul personlig husstand</span>
-            <span class="household-arrow">▲</span>
+            <span>+ Se personlig husstand</span>
+            <span class="household-arrow">▼</span>
         `;
 
-        if (personalLoaded) return;
+        const personalContent =
+            document.createElement("div");
 
-        personalContent.innerHTML = `
-            <div class="household-loading">
-                Henter husstand...
-            </div>
-        `;
+        personalContent.className =
+            "household-content";
 
-        const { data: household, error } =
-            await getPersonalHousehold(
-                data.household_census_id
-            );
+        personalContent.style.display = "none";
 
-        if (error) {
-            console.error(error);
+        personalButton.addEventListener(
+            "click",
+            () => {
 
-            personalContent.innerHTML = `
-                <div class="household-error">
-                    Kunne ikke hente husstanden.
-                </div>
-            `;
+                const isOpen =
+                    personalContent.style.display !== "none";
 
-            return;
-        }
+                if (isOpen) {
+                    personalContent.style.display = "none";
 
-        personalContent.innerHTML = "";
+                    personalButton.innerHTML = `
+                        <span>+ Se personlig husstand</span>
+                        <span class="household-arrow">▼</span>
+                    `;
 
-        const header = document.createElement("div");
-        header.className = "household-header";
-
-        header.textContent =
-            `${household.length} personer i personlig husstand`;
-
-        personalContent.appendChild(header);
-
-        const list = document.createElement("div");
-        list.className = "household-list";
-
-        household.forEach(person => {
-
-            const item = document.createElement("button");
-            item.className = "household-person";
-
-            // Marker den person vi allerede ser på
-            if (person.id === data.id) {
-                item.classList.add("current-person");
-            }
-
-            const age =
-                person.alder !== null &&
-                person.alder !== undefined
-                    ? `${person.alder} år`
-                    : "";
-
-            const gender =
-                person.koen
-                    ? person.koen
-                    : "";
-
-            const job =
-                person.arbejde_titel ||
-                person.position_i_husstanden ||
-                "";
-
-            item.innerHTML = `
-                <div class="household-person-top">
-                    <strong>${person.navn ?? ""}</strong>
-
-                    <span class="household-person-meta">
-                        ${age}${age && gender ? " · " : ""}${gender}
-                    </span>
-                </div>
-
-                ${
-                    job
-                        ? `<div class="household-person-job">${job}</div>`
-                        : ""
+                    return;
                 }
-            `;
 
-            item.addEventListener("click", () => {
-                showDetail(person.id);
-            });
+                personalContent.style.display = "block";
 
-            list.appendChild(item);
-        });
+                personalButton.innerHTML = `
+                    <span>− Skjul personlig husstand</span>
+                    <span class="household-arrow">▲</span>
+                `;
 
-        personalContent.appendChild(list);
+                // Husstanden er allerede hentet,
+                // så vi kan vise den med det samme.
+                personalContent.innerHTML = "";
 
-        personalLoaded = true;
-    });
+                const header =
+                    document.createElement("div");
 
-    personalHouseholdSection.appendChild(personalButton);
-    personalHouseholdSection.appendChild(personalContent);
+                header.className =
+                    "household-header";
 
-    detail.appendChild(personalHouseholdSection);
+                header.textContent =
+                    `${personalHousehold.length} personer i personlig husstand`;
+
+                personalContent.appendChild(header);
+
+                const list =
+                    document.createElement("div");
+
+                list.className =
+                    "household-list";
+
+                personalHousehold.forEach(person => {
+
+                    const item =
+                        document.createElement("button");
+
+                    item.className =
+                        "household-person";
+
+                    if (
+                        String(person.id) ===
+                        String(data.id)
+                    ) {
+                        item.classList.add(
+                            "current-person"
+                        );
+                    }
+
+                    const age =
+                        person.alder !== null &&
+                        person.alder !== undefined
+                            ? `${person.alder} år`
+                            : "";
+
+                    const gender =
+                        person.koen || "";
+
+                    const job =
+                        person.arbejde_titel ||
+                        person.position_i_husstanden ||
+                        "";
+
+                    item.innerHTML = `
+                        <div class="household-person-top">
+                            <strong>
+                                ${person.navn ?? ""}
+                            </strong>
+
+                            <span class="household-person-meta">
+                                ${age}${age && gender ? " · " : ""}${gender}
+                            </span>
+                        </div>
+
+                        ${
+                            job
+                                ? `<div class="household-person-job">${job}</div>`
+                                : ""
+                        }
+                    `;
+
+                    item.addEventListener(
+                        "click",
+                        () => {
+                            showDetail(person.id);
+                        }
+                    );
+
+                    list.appendChild(item);
+                });
+
+                personalContent.appendChild(list);
+            }
+        );
+
+        personalHouseholdSection.appendChild(
+            personalButton
+        );
+
+        personalHouseholdSection.appendChild(
+            personalContent
+        );
+
+        detail.appendChild(
+            personalHouseholdSection
+        );
+    }
 }
 //----------------------------------
 // Husstand
