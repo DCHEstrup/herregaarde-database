@@ -16,15 +16,9 @@ export async function getLifeCourseOccurrences(lifeCourseId) {
         }
     );
 }
-export async function getPersonalHousehold(
-    herregaard,
-    aar,
-    husstandsFamilienr
-) {
+export async function getPersonalHousehold(householdCensusId) {
     return await supabase.rpc("get_personal_household", {
-        p_herregaard: herregaard,
-        p_aar: aar,
-        p_husstands_familienr: husstandsFamilienr
+        p_household_census_id: householdCensusId
     });
 }
 export async function getPersonCount() {
