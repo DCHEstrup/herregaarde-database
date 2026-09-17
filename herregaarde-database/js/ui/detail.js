@@ -419,13 +419,14 @@ if (data.life_course_id !== null && data.life_course_id !== undefined) {
 // PERSONLIG HUSSTAND
 // ===========================
 
-/*if (
-    data.husstands_familienr !== null &&
-    data.husstands_familienr !== undefined &&
-    data.husstands_familienr !== ""
+if (
+    data.household_census_id !== null &&
+    data.household_census_id !== undefined &&
+    data.household_census_id !== ""
 ) {
     const personalHouseholdSection = document.createElement("div");
-    personalHouseholdSection.className = "household-section personal-household";
+    personalHouseholdSection.className =
+        "household-section personal-household";
 
     const personalButton = document.createElement("button");
     personalButton.className = "household-toggle";
@@ -443,7 +444,8 @@ if (data.life_course_id !== null && data.life_course_id !== undefined) {
 
     personalButton.addEventListener("click", async () => {
 
-        const isOpen = personalContent.style.display !== "none";
+        const isOpen =
+            personalContent.style.display !== "none";
 
         if (isOpen) {
             personalContent.style.display = "none";
@@ -473,9 +475,7 @@ if (data.life_course_id !== null && data.life_course_id !== undefined) {
 
         const { data: household, error } =
             await getPersonalHousehold(
-                data.herregaard,
-                data.folketaelling_aar,
-                data.husstands_familienr
+                data.household_census_id
             );
 
         if (error) {
@@ -561,7 +561,7 @@ if (data.life_course_id !== null && data.life_course_id !== undefined) {
     personalHouseholdSection.appendChild(personalContent);
 
     detail.appendChild(personalHouseholdSection);
-}*/
+}
 //----------------------------------
 // Husstand
 //----------------------------------
