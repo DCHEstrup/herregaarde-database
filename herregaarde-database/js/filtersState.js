@@ -27,6 +27,8 @@ export function getCurrentFilters() {
             getSelectedValues("kommune"),
         handicap:
             getSelectedValues("handicap"),
+     militaertjeneste:
+            getSelectedValues("militaertjeneste"),
         arbejde:
             document.getElementById("arbejde")
             ?.value
