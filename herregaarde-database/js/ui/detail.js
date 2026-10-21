@@ -8,6 +8,7 @@ const fields = [
     ["koen", "Køn"],
     ["arbejde_titel", "Arbejde"],
     ["position_i_husstanden", "Position i husstanden"],
+    ["militaertjeneste", "Militærtjeneste"],
     ["civilstand", "Civilstand"],
     ["foedested", "Fødested"],
     ["trossamfund", "Trossamfund"],
@@ -58,12 +59,14 @@ export async function showDetail(id) {
         "detail-table";
 
     for (const [key, label] of fields) {
-        if (
-            data[key] === null ||
-            data[key] === ""
-        ) {
-            continue;
-        }
+if (
+    data[key] === null ||
+    data[key] === undefined ||
+    data[key] === "" ||
+    (key === "militaertjeneste" && data[key] === "Ingen")
+) {
+    continue;
+}
 
         const row =
             document.createElement("tr");
