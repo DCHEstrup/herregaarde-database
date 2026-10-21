@@ -2,6 +2,13 @@ import { normalizeDanishSearch } from "../utils/searchNormalization.js";
 
 const instances = new Map();
 
+const selectAllExclusions = {
+    trossamfund: ["Ukendt"],
+    civilstand: ["Ukendt"],
+    handicap: ["Intet"],
+    militaertjeneste: ["Ingen"]
+};
+
 export function createMultiSelect(config) {
     const multiselect =
         new MultiSelect(config);
@@ -63,7 +70,8 @@ class MultiSelect {
             );
             return;
         }
-
+        
+        this.containerId = containerId;
         this.values = values;
         this.placeholder = placeholder;
         this.onChange = onChange;
@@ -359,14 +367,22 @@ createSearch() {
                 const checked =
                     !checkbox.checked;
 
-                this.options.forEach(
-                    option => {
-                        option.setChecked(
-                            checked,
-                            false
-                        );
-                    }
-                );
+const excludedValues =
+    selectAllExclusions[this.containerId] ?? [];
+
+this.options.forEach(option => {
+
+    const isExcluded = excludedValues.some(
+        value =>
+            String(value).trim().toLowerCase() ===
+            String(option.value).trim().toLowerCase()
+    );
+
+    option.setChecked(
+        checked && !isExcluded,
+        false
+    );
+});
 
                 this.updateHeader();
                 this.updateSelectAll();
@@ -786,16 +802,29 @@ updateHeader() {
     // Opdater "Vælg alle"
     //--------------------------------------------------
 
-    updateSelectAll() {
-        if (!this.selectAll?.checkbox) {
-            return;
-        }
-
-        this.selectAll.checkbox.checked =
-            this.options.length > 0 &&
-            this.selected.size ===
-                this.options.length;
+updateSelectAll() {
+    if (!this.selectAll?.checkbox) {
+        return;
     }
+
+    const excludedValues =
+        selectAllExclusions[this.containerId] ?? [];
+
+    const selectableOptions = this.options.filter(
+        option =>
+            !excludedValues.some(
+                value =>
+                    String(value).trim().toLowerCase() ===
+                    String(option.value).trim().toLowerCase()
+            )
+    );
+
+    this.selectAll.checkbox.checked =
+        selectableOptions.length > 0 &&
+        selectableOptions.every(
+            option => this.selected.has(option.value)
+        );
+}
 
 filterOptions(query) {
 
