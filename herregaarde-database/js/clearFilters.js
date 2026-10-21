@@ -18,6 +18,7 @@ export function clearFilters() {
     clearMultiSelect("region");
     clearMultiSelect("kommune");
     clearMultiSelect("handicap");
+    clearMultiSelect("militaertjeneste");
     clearMultiSelect("alderFra");
     clearMultiSelect("alderTil");
     clearMultiSelect("transportFra");
