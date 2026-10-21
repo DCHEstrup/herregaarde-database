@@ -43,6 +43,7 @@ export async function getJobSuggestions(query) {
 }
 
 export async function searchPeople(filters) {
+    console.log("Filtre sendt til søgning:", filters);
 
     return await supabase.rpc("search_people", {
 
@@ -261,7 +262,7 @@ export async function compareEstates(
 }
 
 export async function downloadPeople(filters = {}) {
-
+console.log("Filtre sendt til download:", filters);
     const params = {
         p_herregaard: filters.herregaard?.length
             ? filters.herregaard
