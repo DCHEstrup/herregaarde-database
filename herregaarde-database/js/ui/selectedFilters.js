@@ -52,6 +52,10 @@ const filterConfig = {
         label: "Herregårdens kommune",
         type: "multiselect"
     },
+    militaertjeneste: {
+    label: "Militærtjeneste",
+    type: "multiselect"
+},
 
     handicap: {
         label: "Handicap",
