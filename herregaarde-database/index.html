@@ -187,8 +187,57 @@
 <label id="handicapLabel">Handicap</label>
 <div id="handicap" class="filter-control" aria-labelledby="handicapLabel"></div>
 
-<label id="militaertjenesteLabel">Militærtjeneste</label>   
-<div id="militaertjeneste" class="filter-control" aria-labelledby="militaertjenesteLabel"></div>
+<div class="advanced-filter-label">
+    <div class="label-with-info">
+
+        <label id="militaertjenesteLabel">
+            Militærtjeneste
+        </label>
+
+        <button
+            type="button"
+            class="info-button"
+            aria-label="Læs mere om filteret Militærtjeneste"
+            aria-expanded="false"
+            aria-controls="infoMilitaertjeneste"
+            data-info-target="infoMilitaertjeneste"
+        >
+            i
+        </button>
+
+    </div>
+
+    <div
+        id="infoMilitaertjeneste"
+        class="filter-info"
+        hidden
+    >
+        <strong>Militærtjeneste</strong>
+
+        <p>
+            Filteret viser oplysninger om militær tilknytning,
+            som er registreret i folketællingerne.
+        </p>
+
+        <p>
+            Oplysningerne kan blandt andet omfatte militære
+            grader og betegnelser. De er samlet fra
+            folketællingernes oplysninger om arbejde og
+            position i husstanden.
+        </p>
+
+        <p>
+            Vælg en eller flere betegnelser for at finde
+            personer med den pågældende militære tilknytning.
+        </p>
+    </div>
+</div>
+
+<div
+    id="militaertjeneste"
+    class="filter-control"
+    aria-labelledby="militaertjenesteLabel">
+</div>
 
             
 <label id="regionLabel">Herregårdens Region</label>
