@@ -305,6 +305,11 @@ console.log("Filtre sendt til download:", filters);
             filters.handicap?.length
                 ? filters.handicap
                 : null,
+        
+        p_militaertjeneste:
+    filters.militaertjeneste?.length
+        ? filters.militaertjeneste
+        : null,
 
         p_alder_fra:
             filters.alderFra,
