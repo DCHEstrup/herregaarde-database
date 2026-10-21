@@ -15,6 +15,13 @@ import {
 
 const MAX_VISIBLE = 7;
 
+const selectAllExclusions = {
+    trossamfund: ["Ukendt"],
+    civilstand: ["Ukendt"],
+    handicap: ["Intet"],
+    militaertjeneste: ["Ingen"]
+};
+
 let initialized = false;
 
 const filterConfig = {
@@ -207,21 +214,43 @@ export function renderSelectedFilters() {
                 return;
             }
 
-            const optionCount =
-                getMultiSelectOptionCount(key);
+const optionCount =
+    getMultiSelectOptionCount(key);
 
-            const allSelected =
-                optionCount > 0 &&
-                values.length === optionCount;
+const exclusions =
+    selectAllExclusions[key] ?? [];
 
-            content.appendChild(
-                createMultiSelectGroup({
-                    key,
-                    label: config.label,
-                    values,
-                    allSelected
-                })
-            );
+const excludedSelectedCount =
+    values.filter(value =>
+        exclusions.some(excluded =>
+            String(value).trim().toLowerCase() ===
+            String(excluded).trim().toLowerCase()
+        )
+    ).length;
+
+const expectedCount =
+    optionCount - exclusions.length;
+
+const allExceptExcluded =
+    exclusions.length > 0 &&
+    expectedCount > 0 &&
+    values.length === expectedCount &&
+    excludedSelectedCount === 0;
+
+const allSelected =
+    optionCount > 0 &&
+    values.length === optionCount;
+
+content.appendChild(
+    createMultiSelectGroup({
+        key,
+        label: config.label,
+        values,
+        allSelected,
+        allExceptExcluded,
+        exclusions
+    })
+);
 
             selectedCount += values.length;
             visibleGroups += 1;
@@ -400,7 +429,9 @@ function createMultiSelectGroup({
     key,
     label,
     values,
-    allSelected
+    allSelected,
+    allExceptExcluded = false,
+    exclusions = []
 }) {
     const group =
         createGroup(label);
@@ -408,16 +439,20 @@ function createMultiSelectGroup({
     const valuesContainer =
         createValuesContainer();
 
-    if (allSelected) {
-        valuesContainer.appendChild(
-            createChip(
-                "Alle",
-                () => {
-                    clearMultiSelect(key);
-                    notifyFiltersChanged();
-                }
-            )
-        );
+if (allSelected || allExceptExcluded) {
+    const chipText = allExceptExcluded
+        ? `Alle undtagen ${exclusions.join(", ")}`
+        : "Alle";
+
+    valuesContainer.appendChild(
+        createChip(
+            chipText,
+            () => {
+                clearMultiSelect(key);
+                notifyFiltersChanged();
+            }
+        )
+    );
 
         group.appendChild(
             valuesContainer
