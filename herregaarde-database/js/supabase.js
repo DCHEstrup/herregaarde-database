@@ -77,6 +77,10 @@ export async function searchPeople(filters) {
             filters.handicap?.length
             ? filters.handicap
             : null,
+        p_militaertjeneste:
+        filters.militaertjeneste?.length
+        ? filters.militaertjeneste
+        : null,
         p_arbejde:
             filters.arbejde || null,
         p_arbejde_valgt:
@@ -152,6 +156,10 @@ export async function getSearchStatistics(filters) {
         p_handicap:
             filters.handicap?.length
                 ? filters.handicap
+                : null,
+        p_militaertjeneste:
+            filters.militaertjeneste?.length
+                ? filters.militaertjeneste
                 : null,
         p_arbejde:
             filters.arbejde || null,
