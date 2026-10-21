@@ -211,6 +211,16 @@ export async function loadFilters() {
         values: data.handicap,
         placeholder: "Alle handicap"
     });
+    
+//----------------------------------
+// Militærtjeneste
+//----------------------------------
+
+createMultiSelect({
+    containerId: "militaertjeneste",
+    values: data.militaertjeneste ?? [],
+    placeholder: "Alle militærtjenester"
+});
 
 
     //----------------------------------
